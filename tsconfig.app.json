@@ -20,7 +20,12 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "src/class"
+    "outDir": "src/class",
+    "baseUrl": ".",
+    "paths":{
+          "@/*":["src/*"],
+          "@v/*":["src/views/*"]
+        }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]
 }
