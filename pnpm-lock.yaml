@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@xizeyoupan/meting':
+    specifier: ^2.0.7
+    version: 2.0.7
   aplayer:
     specifier: ^1.10.1
     version: 1.10.1
@@ -659,6 +662,12 @@ packages:
       - vue
     dev: false
 
+  /@xizeyoupan/meting@2.0.7:
+    resolution: {integrity: sha512-WQ13Ex3Z01XZHqp9XdKwOersqF7o3nYrVsrymlN0HJt8HC5VzDtyuDUetG2qFdDUdDQSi3+wSAAV8VE7HclKFA==}
+    dependencies:
+      fetch-jsonp: 1.3.0
+    dev: false
+
   /acorn@8.12.1:
     resolution: {integrity: sha512-tcpGyI9zbizT9JbV6oYE477V6mTlXvvi0T0G3SNIYE2apm/G5huBa1+K89VGeovbg+jycCrfhl3ADxErOuO6Jg==}
     engines: {node: '>=0.4.0'}
@@ -851,6 +860,10 @@ packages:
     dependencies:
       reusify: 1.0.4
     dev: true
+
+  /fetch-jsonp@1.3.0:
+    resolution: {integrity: sha512-hxCYGvmANEmpkHpeWY8Kawfa5Z1t2csTpIClIDG/0S92eALWHRU1RnGaj86Tf5Cc0QF+afSa4SQ4pFB2rFM5QA==}
+    dev: false
 
   /fill-range@7.1.1:
     resolution: {integrity: sha512-YsGpe3WHLK8ZYi4tWDg2Jy3ebRz2rXowDxnld4bkQB00cc/1Zw9AWnC0i9ztDJitivtQvaI9KaLyKrc+hBW0yg==}

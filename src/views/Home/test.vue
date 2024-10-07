@@ -2,7 +2,10 @@
 </script>
 <template>
   <div>
+    测试1
+
     测试
+
   </div>
 </template>
 
