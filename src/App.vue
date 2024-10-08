@@ -1,7 +1,19 @@
 <script setup lang="ts">
 import { loadOml2d } from "oh-my-live2d";
+import { onMounted } from "vue";
+import something from "./something.vue";
+onMounted(() => {
+  const theme = localStorage.getItem("theme");
+  if (theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+  }
+});
 loadOml2d({
-  dockedPosition: "right",
+  dockedPosition: "left",
+  menus: {
+    disable: true,
+    items: [],
+  },
 });
 </script>
 
@@ -9,25 +21,28 @@ loadOml2d({
   <div>
     <el-container style="min-height: 100vh">
       <el-header>
-        <el-menu mode="horizontal">
-          <el-menu-item index="1">文章</el-menu-item>
-          <el-menu-item index="1">归档</el-menu-item>
-          <el-menu-item index="1">力扣</el-menu-item>
-          <el-menu-item index="1">随想</el-menu-item>
-        </el-menu>
+        <div class="navbar bg-base-100">
+          <div class="flex-1">
+            <a class="btn btn-ghost normal-case text-xl">筑乐</a>
+          </div>
+
+          <ul class="menu menu-horizontal bg-base-100">
+            <li>
+              <button class="btn btn-outline"><something></something></button>
+            </li>
+            <li><button class="btn btn-outline">文章</button></li>
+            <li><button class="btn btn-outline">力扣</button></li>
+            <li><button class="btn btn-outline">归档</button></li>
+            <li><button class="btn btn-outline">留言</button></li>
+            <li><button class="btn btn-outline">随想</button></li>
+          </ul>
+        </div>
       </el-header>
-      <el-main style="text-align: center">
-        <meting-js
-          server="netease"
-          type="playlist"
-          id="12696492979"
-          list-folded="true"
-          fixed="true"
-          theme="#FF0000"
-        >
-        </meting-js>
+
+      <el-main style="width: 75%; margin: 0 auto">
         <RouterView />
       </el-main>
+
       <el-footer
         style="position: absolute; width: 100%; bottom: 0; text-align: center"
         >Footer</el-footer
