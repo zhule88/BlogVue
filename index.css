@@ -1,14 +1,7 @@
-/* :root {
-  --my-color: #fff;
-
-}
-[data-theme="dark"] {
-  --my-color: #000;
-}
-[data-theme="pink"] {
-  --my-color: #ffabc8;
-}
-hi {
-  color: blue;
+/* body {
+  background-image: url("");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
  */
