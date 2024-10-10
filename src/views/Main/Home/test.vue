@@ -1,5 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import inmage from "@v/Main/Home/image.vue";
+</script>
 <template>
+  <inmage></inmage>
   <el-row>
     <el-col :span="8"
       ><div
