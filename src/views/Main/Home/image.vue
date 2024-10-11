@@ -6,6 +6,9 @@ const imageList: Ref<string[]> = ref([
   "/src/assets/凯文1.webp",
   "/src/assets/凯文2.webp",
   "/src/assets/凯文3.webp",
+  "/src/assets/英桀1.jpg",
+  "/src/assets/英桀2.webp",
+  "/src/assets/英桀3.jpg",
 ]);
 </script>
 <template>
@@ -44,8 +47,6 @@ const imageList: Ref<string[]> = ref([
     opacity: 0;
     // 一张图片 6s
     animation: imageAnimation 30s linear infinite 0s;
-    backface-visibility: hidden;
-    transform-style: preserve-3d;
 
     &:nth-child(2) {
       animation-delay: 6s;
@@ -67,48 +68,19 @@ const imageList: Ref<string[]> = ref([
       animation-delay: 30s;
     }
   }
-
-  &::before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.2);
-    transition: all 0.2s ease-in-out 0s;
-  }
 }
 
 @keyframes imageAnimation {
   0% {
     opacity: 0;
-    animation-timing-function: ease-in;
   }
-
-  2% {
-    opacity: 1;
-  }
-
-  8% {
+  10% {
     opacity: 1;
     transform: scale(1.05);
-    animation-timing-function: ease-out;
   }
-
-  17% {
-    opacity: 1;
-    transform: scale(1.1);
-  }
-
   25% {
     opacity: 0;
     transform: scale(1.1);
-  }
-
-  100% {
-    opacity: 0;
   }
 }
 </style>
