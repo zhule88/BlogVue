@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import '../tailwind.css'
 import '../index.css'
+import 'animate.css';
 createApp(App)
 .use(router)
 .mount('#app')

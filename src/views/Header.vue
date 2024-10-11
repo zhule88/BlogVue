@@ -15,9 +15,15 @@ addEventListener("wheel", (event) => {
 });
 </script>
 <template>
-  <transition name="el-header">
+  <!-- Animate.css 实现 -->
+  <transition
+    enter-active-class="animate__animated animate__fadeInDown"
+    leave-active-class="animate__animated animate__fadeOutUp"
+  >
+    <!-- 第二种实现菜单滑入滑出的方法 name="el-zoom-in-top" element-plus实现 -->
     <el-header v-show="isHeader">
       <p>筑乐</p>
+
       <el-menu
         style="width: 100%; border: none"
         mode="horizontal"
@@ -61,8 +67,12 @@ addEventListener("wheel", (event) => {
     }
   }
 }
-// 头部缩回去的动画
-.el-header-enter-active,
+/* .el-zoom-in-top-enter-active,
+.el-zoom-in-top-leave-active {
+  transition: all 0.5s;
+} */
+// 头部缩回去的动画 放弃使用，不会实现滑出
+/* .el-header-enter-active,
 .el-header-leave-active {
   transition: all 0.8s;
 }
@@ -70,5 +80,5 @@ addEventListener("wheel", (event) => {
 .el-header-leave-from,
 .el-header-leave-to {
   transform: translateY(-100%);
-}
+} */
 </style>

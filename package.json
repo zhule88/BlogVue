@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@xizeyoupan/meting": "^2.0.7",
+    "animate.css": "^4.1.1",
     "aplayer": "^1.10.1",
     "daisyui": "^4.12.12",
     "element-plus": "^2.8.4",

@@ -2,6 +2,7 @@
 import { loadOml2d } from "oh-my-live2d";
 import Header from "@v/Header.vue";
 import Main from "@v/Main/Main.vue";
+
 loadOml2d({
   dockedPosition: "left",
   initialStatus: "sleep",
