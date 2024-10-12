@@ -1,8 +1,12 @@
 <script setup lang="ts">
-import inmage from "@v/Main/Home/image.vue";
+import inmage from "@m/Home/image.vue";
+import brand from "@m/Home/brand.vue";
+import wave from "@m/Home/wave.vue";
 </script>
 <template>
   <inmage></inmage>
+  <brand></brand>
+  <wave></wave>
   <el-row>
     <el-col :span="8"
       ><div

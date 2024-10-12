@@ -3,9 +3,10 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
+
   ],
   daisyui: {
-    themes: true
+    themes:  false,
   },
   plugins: [require('daisyui')],
 }

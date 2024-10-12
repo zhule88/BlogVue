@@ -10,6 +10,7 @@ import {resolve} from 'path'
 export default defineConfig({
   plugins: [
     vue(),
+
     AutoImport({
       resolvers: [ElementPlusResolver()],
     }),
@@ -31,7 +32,6 @@ export default defineConfig({
           }
         }
       ],
-
       tips: {
         idleTips: {
           wordTheDay: (wordTheDayData) => {
@@ -41,6 +41,14 @@ export default defineConfig({
       }
     })
   ],
+  /* 屏蔽没用的sass警告 */
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler'
+      }
+    }
+  },
   resolve: {
     alias: [
       {
@@ -48,13 +56,17 @@ export default defineConfig({
       replacement: resolve(__dirname,'./src')
       },
       {
-        find: '@v',
-        replacement: resolve(__dirname,'./src/views')
-        },
-        {
-          find: '@a',
-          replacement: resolve(__dirname,'./src/assets')
-          },
+      find: '@v',
+      replacement: resolve(__dirname,'./src/views')
+      },
+      {
+      find: '@a',
+      replacement: resolve(__dirname,'./src/assets')
+      },
+      {
+      find: '@m',
+      replacement: resolve(__dirname,'./src/views/Main')
+      },
   ]
   }
 })

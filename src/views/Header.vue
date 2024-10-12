@@ -71,7 +71,7 @@ addEventListener("wheel", (event) => {
 .el-zoom-in-top-leave-active {
   transition: all 0.5s;
 } */
-// 头部缩回去的动画 放弃使用，不会实现滑出
+// 头部缩回去的动画 放弃使用
 /* .el-header-enter-active,
 .el-header-leave-active {
   transition: all 0.8s;
