@@ -22,8 +22,7 @@ addEventListener("wheel", (event) => {
   >
     <!-- 第二种实现菜单滑入滑出的方法 name="el-zoom-in-top" element-plus实现 -->
     <el-header v-show="isHeader">
-      <p>筑乐</p>
-
+      <button style="height: 100%;"><img src="../assets/logo (2).png" style="height: 100%;"></img></button>
       <el-menu
         style="width: 100%; border: none"
         mode="horizontal"

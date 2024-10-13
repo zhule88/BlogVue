@@ -1,6 +1,6 @@
 <script setup lang="ts"></script>
 <template>
-  <el-main style="width: 75%; margin: 0 auto">
+  <el-main style="padding: 0">
     <RouterView />
   </el-main>
 </template>
