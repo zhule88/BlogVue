@@ -1,6 +1,25 @@
 <script setup lang="ts"></script>
 <template>
-  <div></div>
+  <p style="font-size: 70px; text-align: center">筑乐</p>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+.brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: fixed;
+  z-index: -1;
+  top: 15em;
+}
+/* p {
+  text-align: center;
+  background-image: url("../../../../assets/logo\ \(2\).png");
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 70px;
+  text-align: left;
+} */
+</style>

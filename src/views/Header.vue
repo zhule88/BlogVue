@@ -21,10 +21,13 @@ addEventListener("wheel", (event) => {
     leave-active-class="animate__animated animate__fadeOutUp"
   >
     <!-- 第二种实现菜单滑入滑出的方法 name="el-zoom-in-top" element-plus实现 -->
-    <el-header v-show="isHeader">
-      <button style="height: 100%;"><img src="../assets/logo (2).png" style="height: 100%;"></img></button>
+    <el-header v-show="isHeader" style="padding: 0">
+      <button style="height: 66.6%; width: 20%">
+        <p>筑乐</p>
+        <!-- <img src="../assets/logo (2).png" style="height: 100%;"></img> -->
+      </button>
       <el-menu
-        style="width: 100%; border: none"
+        style="width: 80%; border: none"
         mode="horizontal"
         :ellipsis="false"
       >
@@ -65,6 +68,14 @@ addEventListener("wheel", (event) => {
       margin: 0;
     }
   }
+}
+p {
+  background-image: url("../assets/logo.png");
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 30px;
+  text-align: left;
 }
 /* .el-zoom-in-top-enter-active,
 .el-zoom-in-top-leave-active {

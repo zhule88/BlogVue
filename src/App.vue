@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import { loadOml2d } from "oh-my-live2d";
+/* import { loadOml2d } from "oh-my-live2d"; */
 import Header from "@v/Header.vue";
 import Main from "@v/Main/Main.vue";
+import Footer from "@v/Footer.vue";
 
-loadOml2d({
+/* loadOml2d({
   dockedPosition: "left",
   initialStatus: "sleep",
   menus: {
     disable: true,
     items: [],
   },
-});
+}); */
 </script>
-
 <template>
-  <el-container style="min-height: 100vh">
+  <el-container>
     <Header></Header>
     <Main></Main>
-    <el-footer
-      style="position: absolute; width: 100%; bottom: 0; text-align: center"
-      >Footer</el-footer
-    >
+    <Footer></Footer>
+    <!-- <el-footer style="width: 100%; bottom: 0; text-align: center">
+      Footer
+    </el-footer> -->
   </el-container>
 </template>
 

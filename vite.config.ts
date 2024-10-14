@@ -17,7 +17,7 @@ export default defineConfig({
     Components({
       resolvers: [ElementPlusResolver()],
     }),
-    oml2d({
+   /*  oml2d({
       models: [
         {
           path: 'https://registry.npmmirror.com/oml2d-models/latest/files/models/Senko_Normals/senko.model3.json',
@@ -39,7 +39,7 @@ export default defineConfig({
           }
         }
       }
-    })
+    }) */
   ],
   /* 屏蔽没用的sass警告 */
   css: {
