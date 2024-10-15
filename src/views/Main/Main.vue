@@ -1,8 +1,8 @@
 <script setup lang="ts"></script>
 <template>
-  <el-main style="padding: 0">
+  <main style="padding: 0">
     <RouterView />
-  </el-main>
+  </main>
 </template>
 
 <style lang="scss" scoped>

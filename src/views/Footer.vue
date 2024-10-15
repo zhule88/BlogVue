@@ -1,10 +1,16 @@
 <script setup lang="ts"></script>
 <template>
-  <div>
-    <el-footer style="width: 100%; bottom: 0; text-align: center"
-      >Footer</el-footer
-    >
-  </div>
+  <footer>Footer</footer>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+footer {
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 100px;
+  // 渐变底部
+  background: var(--mao-bg-footer);
+}
+</style>

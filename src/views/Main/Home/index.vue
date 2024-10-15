@@ -12,28 +12,10 @@ import mmain from "@/views/Main/Home/down/main.vue";
     <wave></wave>
   </div>
   <div class="down">
-    <div style="width: 70%; display: flex">
-      <mmain style="width: 70%"></mmain>
-      <sidebar style="width: 30%"></sidebar>
+    <div style="width: 80%; display: flex">
+      <mmain class="mmain"></mmain>
+      <sidebar class="sidebar" style=""></sidebar>
     </div>
-    <!--  <el-row>
-      <el-col :span="8"
-        ><div
-          class="card card-compact w-96 bg-base-100 shadow-xl card-bordered"
-          style="margin: 0 auto; height: 200px; width: 150px"
-        >
-          <figure>
-            <div class="avatar">
-              <div class="w-24 rounded-full">
-                <img src="@/assets/xiubi.jpg" />
-              </div>
-            </div>
-          </figure>
-          <div class="card-body" style="text-align: center">正在路上</div>
-        </div></el-col
-      >
-      <el-col :span="16"> </el-col>
-    </el-row> -->
   </div>
 </template>
 
@@ -51,16 +33,25 @@ import mmain from "@/views/Main/Home/down/main.vue";
 }
 .down {
   // 过渡效果
-  transition: margin 0.5s;
-  margin: 0 0;
+  margin: 0;
   //border: red 1px solid;
   display: flex;
+  position: relative;
   justify-content: center;
   padding-bottom: 2rem;
   background-color: var(--mao-background-color);
   width: 100%;
-  @media screen and (max-width: 1200px) {
-    margin: 0;
+}
+.mmain {
+  width: 80%;
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+  }
+}
+.sidebar {
+  width: 20%;
+  @media screen and (max-width: 1000px) {
+    display: none;
   }
 }
 </style>

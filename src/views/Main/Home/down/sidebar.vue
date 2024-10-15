@@ -1,11 +1,23 @@
 <script setup lang="ts"></script>
 <template>
   <div>
-    <el-card shadow="hover">
-      <el-avatar src="../../../../assets/xiubi.jpg" />
-      <img src="../../../../assets/xiubi.jpg" />
+    <el-card
+      shadow="hover"
+      body-style="
+
+"
+    >
+      <div class="ccard">
+        <img src="../../../../assets/xiubi.jpg" alt="" />
+        <div style="border-radius: 20px">
+          <p
+            style="text-align: center; color: bisque; writing-mode: vertical-lr"
+          >
+            正在路上
+          </p>
+        </div>
+      </div>
     </el-card>
-    <el-avatar src="../../../../assets/xiubi.jpg" />
   </div>
 </template>
 
@@ -16,10 +28,25 @@ img {
   border-radius: 50%;
   border: 2px solid black;
   transition: transform 0.5s;
+  text-align: center;
   &:hover {
     cursor: pointer;
     transform: rotate(360deg);
   }
+}
+/* .el-card {
+  border-radius: 20px;
+  @media screen and (max-width: 1000px) {
+    display: none;
+  }
+} */
+.ccard {
+  background: url("../../../../assets/你的名字.jpg");
+  background-size: 150%;
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  display: flex;
 }
 
 /* <div class="box"></div> 第二种实现头像旋转的方式*/
