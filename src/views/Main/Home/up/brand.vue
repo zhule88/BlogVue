@@ -1,6 +1,8 @@
 <script setup lang="ts"></script>
 <template>
-  <p style="font-size: 70px; text-align: center">筑乐</p>
+  <div class="brand">
+    <p style="font-size: 70px; text-align: center">筑乐</p>
+  </div>
 </template>
 
 <style scoped lang="scss">

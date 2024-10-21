@@ -1,45 +1,57 @@
 <script setup lang="ts"></script>
 <template>
   <div>
-    <el-card
-      shadow="hover"
-      body-style="
-
-"
-    >
+    <div class="card">
       <div class="ccard">
-        <img src="../../../../assets/xiubi.jpg" alt="" />
-        <div style="border-radius: 20px">
-          <p
-            style="text-align: center; color: bisque; writing-mode: vertical-lr"
-          >
-            正在路上
-          </p>
+        <img class="avatar" src="../../../../assets/xiubi.jpg" alt="" />
+        <div
+          style="
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+          "
+        >
+          <p id="geyan">正在路上</p>
         </div>
       </div>
-    </el-card>
+      <div style="display: flex">
+        <div class="bo">
+          <p>文章</p>
+          <p>114514</p>
+        </div>
+        <div class="bo">
+          <p>评论</p>
+          <p>1919810</p>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="padding: 20px">
+      <img src="../../../../assets/014_通知-35.svg" style="height: 30px" />
+      <p>宣传下自己的qq群，主聊米游和ba</p>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-img {
+.avatar {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  border: 2px solid black;
   transition: transform 0.5s;
-  text-align: center;
   &:hover {
     cursor: pointer;
     transform: rotate(360deg);
   }
 }
-/* .el-card {
+.card {
+  background-color: var(--el-bg-color);
   border-radius: 20px;
-  @media screen and (max-width: 1000px) {
-    display: none;
-  }
-} */
+  width: 100%;
+  margin: 20px 0;
+  box-shadow: 1px 1px 1px 0px #625e5e;
+}
 .ccard {
   background: url("../../../../assets/你的名字.jpg");
   background-size: 150%;
@@ -47,6 +59,21 @@ img {
   width: 100%;
   height: 100%;
   display: flex;
+}
+
+#geyan {
+  text-align: center;
+  color: bisque;
+  writing-mode: vertical-lr;
+}
+
+.bo {
+  width: 50%;
+  padding-bottom: 2rem;
+  p {
+    font-size: 20px;
+    text-align: center;
+  }
 }
 
 /* <div class="box"></div> 第二种实现头像旋转的方式*/

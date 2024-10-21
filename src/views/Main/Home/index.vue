@@ -14,7 +14,7 @@ import mmain from "@/views/Main/Home/down/main.vue";
   <div class="down">
     <div style="width: 80%; display: flex">
       <mmain class="mmain"></mmain>
-      <sidebar class="sidebar" style=""></sidebar>
+      <sidebar class="sidebar"></sidebar>
     </div>
   </div>
 </template>

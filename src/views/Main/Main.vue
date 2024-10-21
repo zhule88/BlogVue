@@ -6,7 +6,7 @@
 </template>
 
 <style lang="scss" scoped>
-.el-main {
+main {
   // 浏览器宽度 - 滚动条宽度，设置为100vw首页底部会出现滚动条
   width: 100%;
   // 屏幕小910

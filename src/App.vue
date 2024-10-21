@@ -14,14 +14,9 @@ import Footer from "@v/Footer.vue";
 }); */
 </script>
 <template>
-  <!-- <el-container> -->
   <Header></Header>
   <Main></Main>
   <Footer></Footer>
-  <!-- <el-footer style="width: 100%; bottom: 0; text-align: center">
-      Footer
-    </el-footer> -->
-  <!--  </el-container> -->
 </template>
 
 <style scoped></style>

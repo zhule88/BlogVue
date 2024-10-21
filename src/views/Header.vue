@@ -31,11 +31,18 @@ addEventListener("wheel", (event) => {
         mode="horizontal"
         :ellipsis="false"
       >
-        <el-menu-item index="1">文章</el-menu-item>
-        <el-menu-item index="1">力扣</el-menu-item>
-        <el-menu-item index="1">归档</el-menu-item>
-        <el-menu-item index="1">留言</el-menu-item>
-        <el-menu-item index="1">随想</el-menu-item>
+        <el-menu-item index="1"
+          ><img src="../assets/single.svg" />文章</el-menu-item
+        >
+        <el-menu-item index="1"
+          ><img src="../assets/category.svg" />归档</el-menu-item
+        >
+        <el-menu-item index="1"
+          ><img src="../assets/014_聊天对话-38.svg" />留言</el-menu-item
+        >
+        <el-menu-item index="1"
+          ><img src="../assets/heart.svg" />随想</el-menu-item
+        >
       </el-menu>
     </header>
   </transition>
@@ -76,6 +83,9 @@ p {
   color: transparent;
   font-size: 30px;
   text-align: left;
+}
+img {
+  height: 25px;
 }
 /* .el-zoom-in-top-enter-active,
 .el-zoom-in-top-leave-active {
