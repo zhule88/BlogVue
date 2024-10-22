@@ -1,13 +1,14 @@
 import {createRouter , createWebHistory} from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
+import user from "@/router/user"
+import admin from "@/router/admin"
 
 
 const routes : Array<RouteRecordRaw> = [
-  {
-    path: '/',
-    name: 'home',
-    component: () => import('@/views/Main/Home/index.vue')
-  }
+  {path:'/',
+    redirect: '/user/home',},
+ ...user,
+ ...admin
 ]
 
 const router = createRouter({
