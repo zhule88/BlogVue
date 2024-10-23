@@ -22,26 +22,26 @@ addEventListener("wheel", (event) => {
   >
     <!-- 第二种实现菜单滑入滑出的方法 name="el-zoom-in-top" element-plus实现 -->
     <header v-show="isHeader">
-      <button style="height: 66.6%; width: 20%">
-        <p>筑乐</p>
-        <!-- <img src="../assets/logo (2).png" style="height: 100%;"></img> -->
-      </button>
+      <router-link to="/" style="text-decoration: none; width: 80%"
+        ><p>筑乐</p></router-link
+      >
+
       <el-menu
         style="width: 80%; border: none"
         mode="horizontal"
         :ellipsis="false"
       >
         <el-menu-item index="1"
-          ><img src="../assets/single.svg" />文章</el-menu-item
+          ><img src="../../assets/single.svg" />文章</el-menu-item
         >
         <el-menu-item index="1"
-          ><img src="../assets/category.svg" />归档</el-menu-item
+          ><img src="../../assets/category.svg" />归档</el-menu-item
         >
         <el-menu-item index="1"
-          ><img src="../assets/014_聊天对话-38.svg" />留言</el-menu-item
+          ><img src="../../assets/014_聊天对话-38.svg" />留言</el-menu-item
         >
         <el-menu-item index="1"
-          ><img src="../assets/heart.svg" />随想</el-menu-item
+          ><img src="../../assets/heart.svg" />随想</el-menu-item
         >
       </el-menu>
     </header>
@@ -77,7 +77,7 @@ header {
   }
 }
 p {
-  background-image: url("../assets/logo.png");
+  background-image: url("../../assets/logo.png");
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;

@@ -2,12 +2,21 @@
 import Header from "@/layout/admin/Header.vue";
 </script>
 <template>
-  <el-container style="height: 100vh">
-    <el-container>
-      <el-aside width="200px">Aside</el-aside>
-      <el-main>Main</el-main>
-    </el-container>
-  </el-container>
+  <Header></Header>
+  <RouterView />
 </template>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.mmain {
+  width: 80%;
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+  }
+}
+.sidebar {
+  width: 20%;
+  @media screen and (max-width: 1000px) {
+    display: none;
+  }
+}
+</style>

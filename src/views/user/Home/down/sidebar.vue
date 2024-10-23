@@ -29,7 +29,7 @@
     </div>
     <div class="card" style="padding: 20px">
       <img src="../../../../assets/014_通知-35.svg" style="height: 30px" />
-      <p>宣传下自己的qq群，主聊米游和ba</p>
+      <p>宣传下自己的qq群，主聊米游</p>
     </div>
   </div>
 </template>

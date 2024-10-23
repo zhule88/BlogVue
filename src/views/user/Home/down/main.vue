@@ -2,9 +2,9 @@
 import { onMounted, ref } from "vue";
 import { MdPreview } from "md-editor-v3";
 import "md-editor-v3/lib/preview.css";
-import { articleList } from "@/api/article";
+import { articlePage } from "@/api/article";
 onMounted(() => {
-  articleList(1, 5).then((res) => {
+  articlePage(1, 5).then((res) => {
     console.log(res.data.data);
   });
 });

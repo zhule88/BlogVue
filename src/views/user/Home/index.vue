@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import inmage from "@/views/Main/Home/image.vue";
-import brand from "@/views/Main/Home/up/brand.vue";
-import wave from "@/views/Main/Home/up/wave.vue";
-import sidebar from "@/views/Main/Home/down/sidebar.vue";
-import mmain from "@/views/Main/Home/down/main.vue";
+import inmage from "@/views/user/Home/image.vue";
+import brand from "@/views/user/Home/up/brand.vue";
+import wave from "@/views/user/Home/up/wave.vue";
+import sidebar from "@/views/user/Home/down/sidebar.vue";
+import mmain from "@/views/user/Home/down/main.vue";
 </script>
 <template>
   <inmage></inmage>
