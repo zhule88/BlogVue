@@ -21,7 +21,7 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   function (response) {
     if (response.data.code == 1) {
-      return response
+      return response.data
     }
     return Promise.reject(response.data)
   },
