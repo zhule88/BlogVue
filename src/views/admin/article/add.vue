@@ -3,11 +3,17 @@ import { ref, onMounted } from "vue";
 import { MdEditor } from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
 import type { UploadInstance } from "element-plus";
-import { articleAdd, articleUpdate, articleGet } from "@/api/article";
+import {
+  articleAdd,
+  articleUpdate,
+  articleGet,
+  imageDelete,
+} from "@/api/article";
 import { useRoute, useRouter } from "vue-router";
 const uploadRef = ref<UploadInstance>();
 const route = useRoute();
 const router = useRouter();
+const isupload = ref(true);
 const tableData = ref({
   id: 0,
   title: "",
@@ -17,26 +23,24 @@ const tableData = ref({
   top: 0,
 });
 const isTop = ref(false);
-const submitUpload = () => {
-  uploadRef.value!.submit();
-};
 onMounted(async () => {
-  if (!isNaN(route.query.id)) {
-    const res = await articleGet(route.query.id);
+  if (!isNaN(route.query.id as any)) {
+    const res = await articleGet(route.query.id as any);
     tableData.value = res.data;
     isTop.value = tableData.value.top == 1 ? true : false;
   }
 });
-const articleadd = async () => {
-  submitUpload();
+const tablesubmit = async () => {
+  uploadRef.value!.submit();
   tableData.value.top = isTop.value ? 1 : 0;
-  while (tableData.value.image == "") {
+  while (isupload.value) {
     await new Promise((resolve) => setTimeout(resolve, 1000));
   }
+
   if (tableData.value.id == 0) {
     await articleAdd(tableData.value);
   } else {
-    await await articleUpdate(tableData.value);
+    await articleUpdate(tableData.value);
   }
   tableData.value = {
     id: 0,
@@ -46,11 +50,12 @@ const articleadd = async () => {
     state: 0,
     top: 0,
   };
+  isTop.value = false;
   uploadRef.value!.clearFiles();
 };
 </script>
 <template>
-  <div>
+  <div style="height: 100vh">
     <div style="display: flex">
       <el-input
         v-model="tableData.title"
@@ -65,6 +70,7 @@ const articleadd = async () => {
         :limit="1"
         :on-success="(res:any)=>{
           tableData.image = res.data;
+          isupload = false;
     }"
       >
         <template #trigger>
@@ -78,13 +84,13 @@ const articleadd = async () => {
       </div>
 
       <div style="margin-left: auto" v-if="tableData.id == 0">
-        <el-button type="primary" @click="articleadd()">保存草稿</el-button>
+        <el-button type="primary" @click="tablesubmit()">保存草稿</el-button>
         <el-button
           type="primary"
           @click="
             () => {
               tableData.state = 2;
-              articleadd();
+              tablesubmit();
             }
           "
           >发布</el-button
@@ -95,9 +101,13 @@ const articleadd = async () => {
         <el-button
           type="primary"
           @click="
-            () => {
+            async () => {
+              const cp = tableData.image;
               tableData.state = 2;
-              articleadd();
+              await tablesubmit();
+              if (cp != tableData.image) {
+                await imageDelete(cp);
+              }
             }
           "
           >修改</el-button
@@ -106,7 +116,7 @@ const articleadd = async () => {
     </div>
     <MdEditor
       v-model="tableData.content"
-      style="bottom: 0; position: absolute"
+      style="bottom: 0; position: relative; height: 100%"
     />
   </div>
 </template>

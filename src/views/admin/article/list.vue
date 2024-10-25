@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import type { Ref } from "vue";
-import { articleList, articleDelete } from "@/api/article";
+import { articleList, articleDelete, imageDelete } from "@/api/article";
 import { ElMessage } from "element-plus";
 import "element-plus/theme-chalk/el-message.css";
-import { S } from "node_modules/vite/dist/node/types.d-aGj9QkWt";
+
 const state: Ref = ref(3);
 const tableData = ref([]);
 onMounted(() => {
@@ -44,7 +44,16 @@ const imgGet = (img: string) => {
         <router-link :to="`/admin/add?id=${scope.row.id}`">
           <el-button size="small" type="primary"> 修改 </el-button>
         </router-link>
-        <el-button size="small" type="danger" @click="articleDel(scope.row.id)">
+        <el-button
+          size="small"
+          type="danger"
+          @click="
+            async () => {
+              articleDel(scope.row.id);
+              await imageDelete(scope.row.image);
+            }
+          "
+        >
           删除
         </el-button>
       </template>
