@@ -43,13 +43,14 @@ import mmain from "@/views/user/Home/down/main.vue";
   width: 100%;
 }
 .mmain {
-  width: 80%;
+  width: 70%;
   @media screen and (max-width: 1000px) {
     width: 100%;
   }
 }
 .sidebar {
   width: 20%;
+  margin-left: auto;
   @media screen and (max-width: 1000px) {
     display: none;
   }

@@ -10,7 +10,6 @@ import {resolve} from 'path'
 export default defineConfig({
   plugins: [
     vue(),
-
     AutoImport({
       resolvers: [ElementPlusResolver()],
     }),
@@ -18,6 +17,7 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
     }),
    /*  oml2d({
+      dockedPosition: "right",
       models: [
         {
           path: 'https://registry.npmmirror.com/oml2d-models/latest/files/models/Senko_Normals/senko.model3.json',
@@ -45,7 +45,8 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        api: 'modern-compiler'
+        additionalData: '@import "@/styles/mixin.scss";',
+        javascriptEnabled: true
       }
     }
   },

@@ -28,13 +28,33 @@
       </div>
     </div>
     <div class="card" style="padding: 20px">
-      <img src="../../../../assets/014_通知-35.svg" style="height: 30px" />
+      <div style="display: flex; justify-content: center">
+        <img
+          class="lingdang"
+          src="../../../../assets/014_通知-35.svg"
+          style="height: 30px"
+        />
+      </div>
       <p>宣传下自己的qq群，主聊米游</p>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
+.lingdang {
+  animation: rotate 0.75s linear infinite;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(-10deg);
+  }
+}
 .avatar {
   width: 100px;
   height: 100px;

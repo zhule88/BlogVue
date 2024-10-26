@@ -5,10 +5,10 @@ import Main from "@/layout/user/Main.vue";
 import Footer from "@/layout/user/Footer.vue";
 
 /* loadOml2d({
-  dockedPosition: "left",
+  dockedPosition: "right",
   initialStatus: "sleep",
   menus: {
-    disable: true,
+    disable: false,
     items: [],
   },
 }); */

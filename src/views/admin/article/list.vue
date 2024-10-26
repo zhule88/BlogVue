@@ -6,7 +6,12 @@ import { ElMessage } from "element-plus";
 import "element-plus/theme-chalk/el-message.css";
 
 const state: Ref = ref(3);
+const dialogVisible = ref(false);
 const tableData = ref([]);
+const rowdata = ref({
+  id: 0,
+  image: "",
+});
 onMounted(() => {
   articlelist();
   ElMessage.success("因为几乎只有自己会看，所以一切从简了。面向自己编程");
@@ -16,8 +21,11 @@ const articlelist = async () => {
     tableData.value = res.data;
   });
 };
-const articleDel = async (id: number) => {
-  await articleDelete(id);
+
+const articleDel = async () => {
+  await articleDelete(rowdata.value.id);
+  await imageDelete(rowdata.value.image);
+  dialogVisible.value = false;
   articlelist();
 };
 const imgGet = (img: string) => {
@@ -48,9 +56,10 @@ const imgGet = (img: string) => {
           size="small"
           type="danger"
           @click="
-            async () => {
-              articleDel(scope.row.id);
-              await imageDelete(scope.row.image);
+            () => {
+              dialogVisible = true;
+              rowdata.id = scope.row.id;
+              rowdata.image = scope.row.image;
             }
           "
         >
@@ -59,6 +68,14 @@ const imgGet = (img: string) => {
       </template>
     </el-table-column>
   </el-table>
+
+  <el-dialog v-model="dialogVisible" title="提示" width="500">
+    <span>确认删除</span>
+    <template #footer>
+      <el-button @click="dialogVisible = false">取消</el-button>
+      <el-button type="primary" @click="articleDel()"> 确认 </el-button>
+    </template>
+  </el-dialog>
 </template>
 
 <style scoped></style>
