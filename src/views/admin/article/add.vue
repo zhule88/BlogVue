@@ -3,7 +3,7 @@ import { ref, onMounted } from "vue";
 import { MdEditor } from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
 import type { UploadInstance } from "element-plus";
-import { imageDelete } from "@/api/article";
+import { imageDelete } from "@/api/";
 import { useRoute, useRouter } from "vue-router";
 import { useCategoryList, useArticle } from "@/stores";
 const categoryListS = useCategoryList();
@@ -47,7 +47,7 @@ const tablesubmit = async () => {
       />
       <el-upload
         ref="uploadRef"
-        action="http://localhost:8000/cover/upload"
+        action="http://localhost:8000/image/cover/upload"
         :auto-upload="false"
         :limit="1"
         @click="isupload = true"
@@ -73,10 +73,10 @@ const tablesubmit = async () => {
           :value="item.id"
         />
       </el-select>
-
-      是否置顶:
-      <el-switch v-model="articleS.data.top" />
-
+      <div>
+        是否置顶:
+        <el-switch v-model="articleS.data.top" />
+      </div>
       <div
         style="margin-left: auto"
         v-if="articleS.data.id == 0 || articleS.data.state == 0"

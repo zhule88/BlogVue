@@ -31,10 +31,4 @@ export const articleGet = (id:number) =>{
     }
   })
 }
-export const imageDelete = (filename:string) =>{
-  return request.delete('/cover/delete',{
-    params:{
-      filename
-    }
-  })
-}
+

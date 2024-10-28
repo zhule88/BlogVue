@@ -2,7 +2,7 @@
 import { onMounted, ref } from "vue";
 import { MdPreview } from "md-editor-v3";
 import "md-editor-v3/lib/preview.css";
-import { articlePage } from "@/api/article";
+import { articlePage } from "@/api";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";

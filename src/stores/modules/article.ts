@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type { Ref } from "vue";
-import article from '@/types/article.ts'
-import {articleGet, articleAdd, articleList, articleDelete, imageDelete, articleUpdate } from "@/api/article";
+import type {article} from '@/types'
+import {articleGet, articleAdd, articleList, articleDelete, imageDelete, articleUpdate } from "@/api";
 
 export const useArticleList =  defineStore('articleTable', ()=>{
   const data = ref<article[]>([])
