@@ -1,47 +1,35 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import type { Ref } from "vue";
-import { articleList, articleDelete, imageDelete } from "@/api/article";
-import { ElMessage } from "element-plus";
-import "element-plus/theme-chalk/el-message.css";
 
-const state: Ref = ref(3);
+import article from "@/types/article.ts";
+import { useArticleList, useArticle } from "@/stores/modules/article.ts";
+const articleListS = useArticleList();
+const articleS = useArticle();
 const dialogVisible = ref(false);
-const tableData = ref([]);
 const rowdata = ref({
   id: 0,
   image: "",
 });
 onMounted(() => {
-  articlelist();
-  ElMessage.success("因为几乎只有自己会看，所以一切从简了。面向自己编程");
+  articleListS.get();
 });
-const articlelist = async () => {
-  await articleList(state.value).then((res) => {
-    tableData.value = res.data;
-  });
-};
-
 const articleDel = async () => {
-  await articleDelete(rowdata.value.id);
-  await imageDelete(rowdata.value.image);
+  articleS.del(rowdata.value.id, rowdata.value.image);
   dialogVisible.value = false;
-  articlelist();
-};
-const imgGet = (img: string) => {
-  const bef = "../../../../public/image/";
-  return bef + img;
+  articleListS.get();
 };
 </script>
 
 <template>
-  <el-table :data="tableData" stripe>
+  <el-table :data="articleListS.data" stripe>
     <el-table-column prop="title" label="标题" />
     <el-table-column label="封面">
       <template #default="scope">
-        <img :src="imgGet(scope.row.image)" style="width: 50%" />
+        <img :src="articleS.imgGet(scope.row.image)" style="width: 50%" />
       </template>
     </el-table-column>
+    <el-table-column prop="categoryId" label="分类" />
     <el-table-column prop="state" label="状态" />
     <el-table-column prop="visitCount" label="浏览量" />
     <el-table-column prop="top" label="是否置顶" />

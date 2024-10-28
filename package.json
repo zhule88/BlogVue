@@ -16,6 +16,7 @@
     "element-plus": "^2.8.4",
     "md-editor-v3": "^4.21.0",
     "oh-my-live2d": "^0.19.3",
+    "pinia": "^2.2.4",
     "swiper": "^11.1.14",
     "theme-change": "^2.5.0",
     "vite-plugin-oh-my-live2d": "^0.19.3",

@@ -3,6 +3,7 @@ import { ref, onMounted } from "vue";
 import { MdEditor } from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
 import type { UploadInstance } from "element-plus";
+import category from "@/types/category";
 import {
   articleAdd,
   articleUpdate,
@@ -11,14 +12,12 @@ import {
 } from "@/api/article";
 import { categoryList } from "@/api/category";
 import { useRoute, useRouter } from "vue-router";
+import { useCategoryList } from "@/stores/modules/category";
+const categoryListS = useCategoryList();
 const uploadRef = ref<UploadInstance>();
 const route = useRoute();
 const router = useRouter();
-const isupload = ref(true);
-interface category {
-  id: number;
-  name: string;
-}
+const isupload = ref(false);
 const categoryNums = ref<category[]>([]);
 const tableData = ref({
   id: 0,
@@ -32,6 +31,7 @@ const tableData = ref({
 const isTop = ref(false);
 onMounted(async () => {
   categoryNums.value = (await categoryList()).data;
+  categoryListS.get();
   if (!isNaN(route.query.id as any)) {
     const res = await articleGet(route.query.id as any);
     tableData.value = res.data;
@@ -41,6 +41,7 @@ onMounted(async () => {
 const tablesubmit = async () => {
   if (tableData.value.image == "") {
     uploadRef.value!.submit();
+  } else {
   }
   tableData.value.top = isTop.value ? 1 : 0;
   while (isupload.value) {
@@ -78,6 +79,7 @@ const tablesubmit = async () => {
         action="http://localhost:8000/cover/upload"
         :auto-upload="false"
         :limit="1"
+        @click="isupload = true"
         :on-success="(res:any)=>{
           tableData.image = res.data;
           isupload = false;
@@ -94,7 +96,7 @@ const tablesubmit = async () => {
         style="width: 240px"
       >
         <el-option
-          v-for="item in categoryNums"
+          v-for="item in categoryListS.data"
           :key="item.id"
           :label="item.name"
           :value="item.id"
@@ -105,7 +107,10 @@ const tablesubmit = async () => {
         <el-switch v-model="isTop" />
       </div>
 
-      <div style="margin-left: auto" v-if="tableData.id == 0">
+      <div
+        style="margin-left: auto"
+        v-if="tableData.id == 0 || tableData.state == 0"
+      >
         <el-button type="primary" @click="tablesubmit()">保存草稿</el-button>
         <el-button
           type="primary"
@@ -124,9 +129,7 @@ const tablesubmit = async () => {
           type="primary"
           @click="
             async () => {
-              isupload = false;
               const cp = tableData.image;
-              tableData.state = 2;
               await tablesubmit();
               if (cp != tableData.image) {
                 await imageDelete(cp);
