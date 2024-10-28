@@ -6,7 +6,7 @@
   content: string,
   state: number,
   top: number,
-  visitCount:number,
-  createTime:string,
-  updateTime:string
+  visitCount?:number,
+  createTime?:string,
+  updateTime?:string
 }

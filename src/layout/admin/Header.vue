@@ -7,7 +7,11 @@
         <el-menu-item index="/admin/list">总览</el-menu-item>
         <el-menu-item index="/admin/add">新增</el-menu-item>
       </el-sub-menu>
-      <el-menu-item>接口文档</el-menu-item>
+      <el-menu-item
+        ><a href="http://localhost:8000/doc.html#/home" target="_blank"
+          >接口文档</a
+        ></el-menu-item
+      >
     </el-menu>
   </header>
 </template>

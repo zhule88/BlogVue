@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import type { Ref } from "vue";
-
-import article from "@/types/article.ts";
-import { useArticleList, useArticle } from "@/stores/modules/article.ts";
+import { useArticleList, useArticle } from "@/stores";
 const articleListS = useArticleList();
 const articleS = useArticle();
 const dialogVisible = ref(false);
@@ -15,7 +12,7 @@ onMounted(() => {
   articleListS.get();
 });
 const articleDel = async () => {
-  articleS.del(rowdata.value.id, rowdata.value.image);
+  await articleS.del(rowdata.value.id, rowdata.value.image);
   dialogVisible.value = false;
   articleListS.get();
 };

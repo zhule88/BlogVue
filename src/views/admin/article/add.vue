@@ -3,73 +3,44 @@ import { ref, onMounted } from "vue";
 import { MdEditor } from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
 import type { UploadInstance } from "element-plus";
-import category from "@/types/category";
-import {
-  articleAdd,
-  articleUpdate,
-  articleGet,
-  imageDelete,
-} from "@/api/article";
-import { categoryList } from "@/api/category";
+import { imageDelete } from "@/api/article";
 import { useRoute, useRouter } from "vue-router";
-import { useCategoryList } from "@/stores/modules/category";
+import { useCategoryList, useArticle } from "@/stores";
 const categoryListS = useCategoryList();
+const articleS = useArticle();
 const uploadRef = ref<UploadInstance>();
 const route = useRoute();
 const router = useRouter();
 const isupload = ref(false);
-const categoryNums = ref<category[]>([]);
-const tableData = ref({
-  id: 0,
-  category_id: 1,
-  title: "",
-  image: "",
-  content: "",
-  state: 0,
-  top: 0,
-});
-const isTop = ref(false);
 onMounted(async () => {
-  categoryNums.value = (await categoryList()).data;
   categoryListS.get();
   if (!isNaN(route.query.id as any)) {
-    const res = await articleGet(route.query.id as any);
-    tableData.value = res.data;
-    isTop.value = tableData.value.top == 1 ? true : false;
+    articleS.get(route.query.id as any);
   }
 });
 const tablesubmit = async () => {
-  if (tableData.value.image == "") {
+  if (articleS.data.image == "") {
     uploadRef.value!.submit();
-  } else {
   }
-  tableData.value.top = isTop.value ? 1 : 0;
+  articleS.data.top = (articleS.data.top as unknown) == true ? 1 : 0;
+  console.log(articleS.data.top);
   while (isupload.value) {
     await new Promise((resolve) => setTimeout(resolve, 1000));
   }
-  if (tableData.value.id == 0) {
-    await articleAdd(tableData.value);
+  if (articleS.data.id == 0) {
+    articleS.add();
   } else {
-    await articleUpdate(tableData.value);
+    articleS.update();
   }
-  tableData.value = {
-    id: 0,
-    category_id: 0,
-    title: "",
-    image: "",
-    content: "",
-    state: 0,
-    top: 0,
-  };
-  isTop.value = false;
   uploadRef.value!.clearFiles();
+  articleS.clear();
 };
 </script>
 <template>
   <div style="height: 100vh">
     <div style="display: flex">
       <el-input
-        v-model="tableData.title"
+        v-model="articleS.data.title"
         placeholder="标题"
         clearable
         style="height: 40px; width: 200px"
@@ -81,7 +52,7 @@ const tablesubmit = async () => {
         :limit="1"
         @click="isupload = true"
         :on-success="(res:any)=>{
-          tableData.image = res.data;
+          articleS.data.image = res.data;
           isupload = false;
     }"
       >
@@ -90,7 +61,7 @@ const tablesubmit = async () => {
         </template>
       </el-upload>
       <el-select
-        v-model="tableData.category_id"
+        v-model="articleS.data.categoryId"
         placeholder="Select"
         size="large"
         style="width: 240px"
@@ -102,21 +73,20 @@ const tablesubmit = async () => {
           :value="item.id"
         />
       </el-select>
-      <div>
-        是否置顶:
-        <el-switch v-model="isTop" />
-      </div>
+
+      是否置顶:
+      <el-switch v-model="articleS.data.top" />
 
       <div
         style="margin-left: auto"
-        v-if="tableData.id == 0 || tableData.state == 0"
+        v-if="articleS.data.id == 0 || articleS.data.state == 0"
       >
         <el-button type="primary" @click="tablesubmit()">保存草稿</el-button>
         <el-button
           type="primary"
           @click="
             () => {
-              tableData.state = 2;
+              articleS.data.state = 2;
               tablesubmit();
             }
           "
@@ -129,9 +99,9 @@ const tablesubmit = async () => {
           type="primary"
           @click="
             async () => {
-              const cp = tableData.image;
+              const cp = articleS.data.image;
               await tablesubmit();
-              if (cp != tableData.image) {
+              if (cp != articleS.data.image) {
                 await imageDelete(cp);
               }
             }
@@ -141,7 +111,7 @@ const tablesubmit = async () => {
       </div>
     </div>
     <MdEditor
-      v-model="tableData.content"
+      v-model="articleS.data.content"
       style="bottom: 0; position: relative; height: 100%"
     />
   </div>
