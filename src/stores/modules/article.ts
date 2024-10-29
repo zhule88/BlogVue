@@ -54,7 +54,7 @@ export const useArticle =  defineStore('article', ()=>{
   }
 
   const imgGet = (img:string)=>{
-    const bef = "../../../../public/image/";
+    const bef = "../../../../public/image/cover/";
     return bef + img;
   }
   return{

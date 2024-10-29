@@ -6,12 +6,16 @@ import type { UploadInstance } from "element-plus";
 import { imageDelete } from "@/api/";
 import { useRoute, useRouter } from "vue-router";
 import { useCategoryList, useArticle } from "@/stores";
+import { articleUpload } from "@/api";
+import { AxiosRequestConfig } from "axios";
 const categoryListS = useCategoryList();
 const articleS = useArticle();
 const uploadRef = ref<UploadInstance>();
 const route = useRoute();
 const router = useRouter();
 const isupload = ref(false);
+const url = ref("../../../../public/image/article/");
+const fileList = ref([]);
 onMounted(async () => {
   categoryListS.get();
   if (!isNaN(route.query.id as any)) {
@@ -19,21 +23,28 @@ onMounted(async () => {
   }
 });
 const tablesubmit = async () => {
-  if (articleS.data.image == "") {
+  if (fileList.value.length == 0) {
     uploadRef.value!.submit();
   }
   articleS.data.top = (articleS.data.top as unknown) == true ? 1 : 0;
-  console.log(articleS.data.top);
   while (isupload.value) {
     await new Promise((resolve) => setTimeout(resolve, 1000));
   }
   if (articleS.data.id == 0) {
     articleS.add();
   } else {
+    const cp = articleS.data.image;
     articleS.update();
+    if (cp != articleS.data.image) {
+      imageDelete(cp);
+    }
   }
   uploadRef.value!.clearFiles();
   articleS.clear();
+};
+const onUploadImg = async (file: AxiosRequestConfig<any> | undefined) => {
+  const res = await articleUpload(file);
+  url.value = url.value + res.data;
 };
 </script>
 <template>
@@ -51,6 +62,7 @@ const tablesubmit = async () => {
         :auto-upload="false"
         :limit="1"
         @click="isupload = true"
+        :file-list="fileList"
         :on-success="(res:any)=>{
           articleS.data.image = res.data;
           isupload = false;
@@ -95,19 +107,7 @@ const tablesubmit = async () => {
       </div>
       <div style="margin-left: auto" v-else>
         <el-button type="primary" @click="router.back()">取消</el-button>
-        <el-button
-          type="primary"
-          @click="
-            async () => {
-              const cp = articleS.data.image;
-              await tablesubmit();
-              if (cp != articleS.data.image) {
-                await imageDelete(cp);
-              }
-            }
-          "
-          >修改</el-button
-        >
+        <el-button type="primary" @click="tablesubmit()">修改</el-button>
       </div>
     </div>
     <MdEditor

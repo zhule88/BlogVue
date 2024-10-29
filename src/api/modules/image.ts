@@ -1,4 +1,5 @@
-import request from '@/utils/request'
+import request from '@/api/request'
+import { AxiosRequestConfig } from 'axios'
 
 export const imageDelete = (filename:string) =>{
   return request.delete('/image/cover/delete',{
@@ -6,4 +7,7 @@ export const imageDelete = (filename:string) =>{
       filename
     }
   })
+}
+export const articleUpload = (file: AxiosRequestConfig<any> | undefined) =>{
+  return request.post('/image/article/upload',file)
 }

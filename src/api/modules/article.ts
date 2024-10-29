@@ -1,4 +1,4 @@
-import request from '@/utils/request'
+import request from '@/api/request'
 
 export const articlePage = (current : number, size : number) =>{
 return request.get('/article/page',{params:{
