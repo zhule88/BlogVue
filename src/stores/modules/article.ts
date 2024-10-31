@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type { Ref } from "vue";
 import type {article} from '@/types'
-import {articleGet, articleAdd, articleList, articleDelete, imageDelete, articleUpdate } from "@/api";
+import {articleGet, articleAdd, articleList, articleDel,  articleUpdate ,mkdirDel} from "@/api";
 
 export const useArticleList =  defineStore('articleTable', ()=>{
   const data = ref<article[]>([])
@@ -18,33 +18,28 @@ export const useArticleList =  defineStore('articleTable', ()=>{
 })
 export const useArticle =  defineStore('article', ()=>{
   const data = ref<article>({
-    id:0,
-    categoryId:1,
     title:'',
     image:'',
     content:'',
     state:0,
     top:0,
-
   })
   const get  = async(id:number)=>{
     const res = await articleGet(id );
     data.value = res.data
   }
-  const add  = ()=>{
-     articleAdd(data.value);
+  const add  = async ()=>{
+     await articleAdd(data.value);
   }
   const update = ()=>{
     articleUpdate(data.value);
   }
-  const del = async (id:number,image:string)=>{
-  await articleDelete(id);
-   imageDelete(image);
+  const del = async (id:number)=>{
+  await articleDel(id);
+   mkdirDel(id)
   }
   const clear = ()=>{
     data.value = {
-      id:0,
-      categoryId:1,
       title:'',
       image:'',
       content:'',
@@ -53,8 +48,8 @@ export const useArticle =  defineStore('article', ()=>{
     }
   }
 
-  const imgGet = (img:string)=>{
-    const bef = "../../../../public/image/cover/";
+  const imgGet = (img:string,id:number)=>{
+    const bef = "../../../../public/image/article/"+id+"/";
     return bef + img;
   }
   return{

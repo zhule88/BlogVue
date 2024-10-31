@@ -24,8 +24,8 @@ onMounted(async () => {
   console.log("初始化");
   b.value = true;
 });
-const imgGet = (img: string) => {
-  const bef = "../../../../public/image/";
+const imgGet = (img: string, id: number) => {
+  const bef = "../../../../../public/image/article/" + id + "/";
   return bef + img;
 };
 </script>
@@ -55,7 +55,7 @@ const imgGet = (img: string) => {
             {{ item.createTime }}
           </div>
         </div>
-        <el-image :src="imgGet(item.image)" />
+        <el-image :src="imgGet(item.image, item.id)" />
       </swiper-slide>
       <div class="swiper-pagination"></div>
     </swiper>

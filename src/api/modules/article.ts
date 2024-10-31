@@ -17,7 +17,7 @@ export const articleAdd = (data:any) =>{
 export const articleUpdate = (data:any) =>{
   return request.put('/article/update',data)
 }
-export const articleDelete= (id:number) =>{
+export const articleDel= (id:number) =>{
   return request.delete('/article/delete',{
     params:{
       id
@@ -25,10 +25,12 @@ export const articleDelete= (id:number) =>{
   })
 }
 export const articleGet = (id:number) =>{
-  return request.get('/article/get',{
-    params:{
+  return request.get('/article/get',{params:{
       id
     }
   })
+}
+export const newIdGet = () =>{
+  return request.get('/article/idGet')
 }
 

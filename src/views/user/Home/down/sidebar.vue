@@ -35,7 +35,7 @@
           style="height: 30px"
         />
       </div>
-      <p>宣传下自己的qq群，主聊米游</p>
+      <p>没有公告</p>
     </div>
   </div>
 </template>

@@ -12,7 +12,7 @@ onMounted(() => {
   articleListS.get();
 });
 const articleDel = async () => {
-  await articleS.del(rowdata.value.id, rowdata.value.image);
+  await articleS.del(rowdata.value.id);
   dialogVisible.value = false;
   articleListS.get();
 };
@@ -20,10 +20,14 @@ const articleDel = async () => {
 
 <template>
   <el-table :data="articleListS.data" stripe>
+    <el-table-column prop="id" label="id" />
     <el-table-column prop="title" label="标题" />
     <el-table-column label="封面">
       <template #default="scope">
-        <img :src="articleS.imgGet(scope.row.image)" style="width: 50%" />
+        <img
+          :src="articleS.imgGet(scope.row.image, scope.row.id)"
+          style="width: 50%"
+        />
       </template>
     </el-table-column>
     <el-table-column prop="categoryId" label="分类" />
