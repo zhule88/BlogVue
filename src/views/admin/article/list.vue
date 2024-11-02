@@ -24,10 +24,7 @@ const articleDel = async () => {
     <el-table-column prop="title" label="标题" />
     <el-table-column label="封面">
       <template #default="scope">
-        <img
-          :src="articleS.imgGet(scope.row.image, scope.row.id)"
-          style="width: 50%"
-        />
+        <img :src="scope.row.image" style="width: 60%" />
       </template>
     </el-table-column>
     <el-table-column prop="categoryId" label="分类" />

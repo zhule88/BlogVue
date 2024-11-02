@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-import { oml2d } from 'vite-plugin-oh-my-live2d';
+
 import {resolve} from 'path'
 
 // https://vitejs.dev/config/

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { MdPreview } from "md-editor-v3";
-import "md-editor-v3/lib/preview.css";
+
 import { articlePage } from "@/api";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
@@ -24,10 +23,6 @@ onMounted(async () => {
   console.log("初始化");
   b.value = true;
 });
-const imgGet = (img: string, id: number) => {
-  const bef = "../../../../../public/image/article/" + id + "/";
-  return bef + img;
-};
 </script>
 
 <template>
@@ -55,7 +50,7 @@ const imgGet = (img: string, id: number) => {
             {{ item.createTime }}
           </div>
         </div>
-        <el-image :src="imgGet(item.image, item.id)" />
+        <el-image :src="item.image" />
       </swiper-slide>
       <div class="swiper-pagination"></div>
     </swiper>

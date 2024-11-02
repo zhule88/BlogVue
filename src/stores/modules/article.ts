@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type { Ref } from "vue";
 import type {article} from '@/types'
-import {articleGet, articleAdd, articleList, articleDel,  articleUpdate ,mkdirDel} from "@/api";
+import {articleGet, articleAdd, articleList, articleDel,  articleUpdate,fileDelAll} from "@/api";
 
 export const useArticleList =  defineStore('articleTable', ()=>{
   const data = ref<article[]>([])
@@ -21,7 +21,6 @@ export const useArticle =  defineStore('article', ()=>{
     title:'',
     image:'',
     content:'',
-    state:0,
     top:0,
   })
   const get  = async(id:number)=>{
@@ -36,7 +35,8 @@ export const useArticle =  defineStore('article', ()=>{
   }
   const del = async (id:number)=>{
   await articleDel(id);
-   mkdirDel(id)
+   fileDelAll(id)
+
   }
   const clear = ()=>{
     data.value = {
@@ -48,14 +48,10 @@ export const useArticle =  defineStore('article', ()=>{
     }
   }
 
-  const imgGet = (img:string,id:number)=>{
-    const bef = "../../../../public/image/article/"+id+"/";
-    return bef + img;
-  }
+
   return{
     data,
     del,
-    imgGet,
     get,
     add,
     update,

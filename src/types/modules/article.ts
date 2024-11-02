@@ -4,7 +4,7 @@
   title: string,
   image: string,
   content: string,
-  state: number,
+  state?: number,
   top: number,
   visitCount?:number,
   createTime?:string,

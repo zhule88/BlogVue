@@ -3,39 +3,40 @@ import { ref, onMounted } from "vue";
 import { MdEditor } from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
 import type { UploadInstance } from "element-plus";
-import { imageDelete } from "@/api/";
 import { useRoute, useRouter } from "vue-router";
 import { useCategoryList, useArticle } from "@/stores";
-import { articleUpload } from "@/api";
-import { init, mkdirChange, newIdGet, list } from "@/api";
 import { useClipboard } from "@vueuse/core";
+import { fileList, fileUpload, fileDel } from "@/api";
+import type { file } from "@/types";
 
 const categoryListS = useCategoryList();
-
 const articleS = useArticle();
 const uploadRef = ref<UploadInstance>();
 const route = useRoute();
 const router = useRouter();
-const url = ref('<img src="../../../../public/image/article/stage/');
-const fileList = ref([]);
-const imgNameList = ref([]);
-const imgName = ref("");
+const filelist = ref<file[]>([]);
+
+const filename = ref("");
 const { copy } = useClipboard();
 onMounted(async () => {
-  init();
   categoryListS.get();
   if (!isNaN(route.query.id as any)) {
     await articleS.get(route.query.id as any);
-    imgNameList.value = (await list(articleS.data.id)).data;
+    filelistGet();
   }
 });
+
+const filelistGet = async () => {
+  const res = await fileList(articleS.data.id);
+  console.log(res);
+  filelist.value = res.data;
+};
+
 const tablesubmit = async () => {
   articleS.data.top = (articleS.data.top as unknown) == true ? 1 : 0;
   /* 封面延迟提交的废案  await new Promise((resolve) => setTimeout(resolve, 1000)); */
   if (articleS.data.id == undefined) {
     await articleS.add();
-    const res = await newIdGet();
-    mkdirChange(res.data);
   } else {
     articleS.update();
   }
@@ -45,16 +46,13 @@ const tablesubmit = async () => {
 const onUploadImg = async (file: any) => {
   const formData = new FormData();
   formData.append("file", file[0]);
-  if (articleS.data.id == undefined) {
-    const res = await articleUpload(formData);
-    url.value = url.value + res.data + ">";
-  } else {
-    const res = await articleUpload(formData, articleS.data.id);
-    url.value = url.value + res.data + '">';
-  }
-  imgNameList.value = (await list(articleS.data.id)).data;
+  const res = await fileUpload(formData, articleS.data.id);
+  console.log(res.data);
+  copy(res.data);
+  filelistGet();
 };
 </script>
+
 <template>
   <div style="height: 100vh">
     <div style="display: flex">
@@ -66,10 +64,12 @@ const onUploadImg = async (file: any) => {
       />
       <el-upload
         ref="uploadRef"
-        action="http://localhost:8000/image/cover/upload"
+        action="http://localhost:8000/file/add"
         :limit="1"
-        :file-list="fileList"
-        :on-success="(res:any)=>{
+        :on-success="(res:any) =>{
+          if(articleS.data.image != ''){
+            fileDel(articleS.data.image);
+          }
           articleS.data.image = res.data;
     }"
       >
@@ -77,24 +77,26 @@ const onUploadImg = async (file: any) => {
           <el-button type="primary">选择封面</el-button>
         </template>
       </el-upload>
-      <el-button type="primary" @click="copy(url)"> 复制图片</el-button>
       <div v-if="articleS.data.id != undefined">
         <el-select
-          v-model="imgName"
-          placeholder="删除图片"
+          v-model="filename"
+          placeholder="删除文件"
           size="large"
           style="width: 240px"
         >
-          <el-option v-for="item in imgNameList" :label="item" :value="item" />
+          <el-option
+            v-for="item in filelist"
+            :label="item.filename"
+            :value="item.filename"
+          />
         </el-select>
         <el-button
           type="primary"
           @click="
-            imageDelete(imgName, articleS.data.id).then(() => {
-              list(articleS.data.id).then((res) => {
-                imgNameList = res.data;
-              });
-            })
+            () => {
+              fileDel(filename);
+              filelistGet();
+            }
           "
           >删除</el-button
         >
@@ -112,33 +114,25 @@ const onUploadImg = async (file: any) => {
           :value="item.id"
         />
       </el-select>
+      <el-select
+        v-model="articleS.data.state"
+        placeholder="选择状态"
+        size="large"
+        style="width: 240px"
+      >
+        <el-option v-for="item in 3" :label="item - 1" :value="item - 1" />
+      </el-select>
       <div>
         是否置顶:
         <el-switch v-model="articleS.data.top" />
       </div>
-
-      <div
-        style="margin-left: auto"
-        v-if="articleS.data.id == undefined || articleS.data.state == 0"
-      >
-        <el-button type="primary" @click="tablesubmit()">保存草稿</el-button>
-        <el-button
-          type="primary"
-          @click="
-            () => {
-              articleS.data.state = 2;
-              tablesubmit();
-            }
-          "
-          >发布</el-button
-        >
-      </div>
-      <div style="margin-left: auto" v-else>
+      <div style="margin-left: auto">
         <el-button type="primary" @click="router.back()">取消</el-button>
-        <el-button type="primary" @click="tablesubmit()">修改</el-button>
+        <el-button type="primary" @click="tablesubmit()">保存</el-button>
       </div>
     </div>
     <MdEditor
+      v-if="articleS.data.id != undefined"
       v-model="articleS.data.content"
       style="bottom: 0; position: relative; height: 100%"
       :onUploadImg="onUploadImg"

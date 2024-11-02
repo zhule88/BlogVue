@@ -167,12 +167,8 @@ button {
 select {
   text-indent: .01px;
   text-overflow: '';
-
   border: 0;
   border-radius: 0;
-
-  -webkit-appearance: none;
-  -moz-appearance: none;
 }
 
 select::-ms-expand {

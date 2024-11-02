@@ -18,7 +18,7 @@ export const articleUpdate = (data:any) =>{
   return request.put('/article/update',data)
 }
 export const articleDel= (id:number) =>{
-  return request.delete('/article/delete',{
+  return request.delete('/article/del',{
     params:{
       id
     }
