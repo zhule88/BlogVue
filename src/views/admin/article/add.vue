@@ -15,9 +15,9 @@ const uploadRef = ref<UploadInstance>();
 const route = useRoute();
 const router = useRouter();
 const filelist = ref<file[]>([]);
-
 const filename = ref("");
 const { copy } = useClipboard();
+
 onMounted(async () => {
   categoryListS.get();
   if (!isNaN(route.query.id as any)) {
@@ -47,7 +47,7 @@ const onUploadImg = async (file: any) => {
   const formData = new FormData();
   formData.append("file", file[0]);
   const res = await fileUpload(formData, articleS.data.id);
-  console.log(res.data);
+  const R = "<img src='" + res.data + "'>";
   copy(res.data);
   filelistGet();
 };
@@ -126,6 +126,7 @@ const onUploadImg = async (file: any) => {
         是否置顶:
         <el-switch v-model="articleS.data.top" />
       </div>
+
       <div style="margin-left: auto">
         <el-button type="primary" @click="router.back()">取消</el-button>
         <el-button type="primary" @click="tablesubmit()">保存</el-button>

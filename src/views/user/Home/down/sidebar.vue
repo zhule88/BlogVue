@@ -1,33 +1,27 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import card from "@/components/card.vue";
+</script>
 <template>
   <div>
-    <div class="card">
-      <div class="ccard">
+    <card>
+      <div class="card-up">
         <img class="avatar" src="../../../../assets/xiubi.jpg" alt="" />
-        <div
-          style="
-            border-radius: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-          "
-        >
-          <p id="geyan">正在路上</p>
+        <div class="maxim">
+          <p>正在路上</p>
         </div>
       </div>
       <div style="display: flex">
-        <div class="bo">
+        <div class="card-down">
           <p>文章</p>
           <p>114514</p>
         </div>
-        <div class="bo">
+        <div class="card-down">
           <p>评论</p>
           <p>1919810</p>
         </div>
       </div>
-    </div>
-    <div class="card" style="padding: 20px">
+    </card>
+    <card style="padding: 20px">
       <div style="display: flex; justify-content: center">
         <img
           class="lingdang"
@@ -36,7 +30,7 @@
         />
       </div>
       <p>没有公告</p>
-    </div>
+    </card>
   </div>
 </template>
 
@@ -65,53 +59,28 @@
     transform: rotate(360deg);
   }
 }
-.card {
-  background-color: var(--el-bg-color);
-  border-radius: 20px;
-  width: 100%;
-  margin: 20px 0;
-  box-shadow: 1px 1px 1px 0px #625e5e;
-}
-.ccard {
+.card-up {
   background: url("../../../../assets/你的名字.jpg");
   background-size: 150%;
-  border-radius: 20px;
+  border-radius: $border-radius;
   width: 100%;
   height: 100%;
   display: flex;
 }
-
-#geyan {
+.maxim {
+  border-radius: $border-radius;
+  @extend center;
+  width: 100%;
   text-align: center;
   color: bisque;
   writing-mode: vertical-lr;
 }
-
-.bo {
+.card-down {
   width: 50%;
   padding-bottom: 2rem;
   p {
     font-size: 20px;
     text-align: center;
   }
-}
-
-/* <div class="box"></div> 第二种实现头像旋转的方式*/
-.box {
-  transition: 0.5s; /* 定义移出回去原来样子的时间 */
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background: url("../../assets/xiubi.jpg") center no-repeat; /* 用自己的图片的路径哈!!! */
-  background-size: 100%;
-}
-.box:hover {
-  transition: 0.5s; /* 定义旋转过渡时间 */
-  transform: rotate(-180deg); /* 定义旋转的角度 */
-  /* 下面是兼容处理 */
-  -ms-transform: rotate(-180deg); /* IE 9 */
-  -moz-transform: rotate(-180deg); /* Firefox */
-  -webkit-transform: rotate(-180deg); /* Safari and Chrome */
-  -o-transform: rotate(-180deg); /* Opera */
 }
 </style>

@@ -4,7 +4,7 @@ import router from "./router";
 import pinia from "./stores";
 import "@/styles/reset.scss";
 import "@/styles/theme.scss";
-
+import 'element-plus/theme-chalk/dark/css-vars.css'
 
 
 import "animate.css";

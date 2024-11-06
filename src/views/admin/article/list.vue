@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { useArticleList, useArticle } from "@/stores";
+
 const articleListS = useArticleList();
 const articleS = useArticle();
 const dialogVisible = ref(false);
@@ -9,6 +10,7 @@ const rowdata = ref({
   image: "",
 });
 onMounted(() => {
+  articleListS.state = 3;
   articleListS.get();
 });
 const articleDel = async () => {

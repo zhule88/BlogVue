@@ -124,7 +124,6 @@ body {
 blockquote,
 q {
   quotes: none;
-
   &:before,
   &:after {
     content: '';
@@ -179,4 +178,13 @@ code,
 pre {
   font-family: monospace, monospace;
   font-size: 1em;
+}
+
+@font-face{
+  font-family: cartoon;
+  src: url('../styles/SourceHanSansCN-VF-2.otf')
+}
+// 全局字体
+body {
+  font-family: cartoon;
 }

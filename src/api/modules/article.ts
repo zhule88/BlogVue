@@ -1,14 +1,15 @@
 import request from '@/api/request'
 
-export const articlePage = (current : number, size : number) =>{
+export const articlePage = (current : number, size : number,state:number) =>{
 return request.get('/article/page',{params:{
-  current,size
+  current,size,state
 }})
 }
 
-export const articleList = (state : number) =>{
+export const articleList = (state ?: number,top ?:number) =>{
   return request.get('/article/list',{params:{
-    state
+    state,
+    top
   }})
 }
 export const articleAdd = (data:any) =>{

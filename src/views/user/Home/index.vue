@@ -12,7 +12,7 @@ import mmain from "@/views/user/Home/down/main.vue";
     <wave></wave>
   </div>
   <div class="down">
-    <div style="width: 80%; display: flex">
+    <div style="width: 70%; display: flex">
       <mmain class="mmain"></mmain>
       <sidebar class="sidebar"></sidebar>
     </div>
@@ -22,14 +22,11 @@ import mmain from "@/views/user/Home/down/main.vue";
 <style scoped lang="scss">
 .up {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  @extend center;
   position: relative;
   width: 100%;
   height: 100vh;
   min-height: 10rem;
-  color: var(--header-text-color);
 }
 .down {
   // 过渡效果
@@ -39,7 +36,7 @@ import mmain from "@/views/user/Home/down/main.vue";
   position: relative;
   justify-content: center;
   padding-bottom: 2rem;
-  background-color: var(--mao-background-color);
+  background-color: var(--color-background);
   width: 100%;
 }
 .mmain {

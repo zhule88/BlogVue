@@ -1,7 +1,15 @@
 <script setup lang="ts">
-import { ref } from "vue";
-
+import { onMounted, ref } from "vue";
+import DayNightToggleButton from "@/layout/user/Header/DayNightToggle";
+import { useColorMode } from "@vueuse/core";
 const isHeader = ref(true);
+const mode = useColorMode();
+onMounted(() => {
+  customElements.define("toggle-button", DayNightToggleButton);
+});
+function changeToggle({ detail }: any) {
+  mode.value = detail;
+}
 addEventListener("wheel", (event) => {
   if (event.deltaY > 0) {
     // 向下滚动
@@ -25,33 +33,35 @@ addEventListener("wheel", (event) => {
       <router-link to="/" style="text-decoration: none; width: 80%"
         ><p>筑乐</p></router-link
       >
-
       <el-menu
         style="width: 80%; border: none"
         mode="horizontal"
         :ellipsis="false"
       >
         <el-menu-item index="1"
-          ><img src="../../assets/single.svg" />文章</el-menu-item
+          ><img src="../../../assets/single.svg" />文章</el-menu-item
         >
         <el-menu-item index="1"
-          ><img src="../../assets/category.svg" />归档</el-menu-item
+          ><img src="../../../assets/category.svg" />归档</el-menu-item
         >
         <el-menu-item index="1"
-          ><img src="../../assets/014_聊天对话-38.svg" />留言</el-menu-item
+          ><img src="../../../assets/014_聊天对话-38.svg" />留言</el-menu-item
         >
         <el-menu-item index="1"
-          ><img src="../../assets/heart.svg" />随想</el-menu-item
+          ><img src=".../../../assets/heart.svg" />随想</el-menu-item
         >
+
+        <!-- 日夜切换 -->
       </el-menu>
+      <div style="margin-right: 4.5rem; margin-top: -0.2rem">
+        <toggle-button @change="changeToggle" size="1"></toggle-button>
+      </div>
     </header>
   </transition>
 </template>
 
 <style lang="scss" scoped>
 header {
-  background-color: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
   height: 45px;
@@ -65,7 +75,7 @@ header {
     display: flex;
     justify-content: flex-end;
     font-weight: bold;
-    background-color: rgba(248, 249, 250, 0);
+    background-color: rgba(125, 142, 159, 0);
     height: 45px;
     @media screen and (max-width: 910px) {
       display: none;

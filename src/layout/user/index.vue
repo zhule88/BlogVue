@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /* import { loadOml2d } from "oh-my-live2d"; */
-import Header from "@/layout/user/Header.vue";
+import Header from "@/layout/user/Header/Header.vue";
 import Main from "@/layout/user/Main.vue";
 import Footer from "@/layout/user/Footer.vue";
 

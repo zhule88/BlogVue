@@ -34,25 +34,25 @@
             xlink:href="#gentle-wave"
             x="48"
             y="0"
-            fill="var(--mao-bg-wave01)"
+            fill="var(--color-wave01)"
           />
           <use
             xlink:href="#gentle-wave"
             x="48"
             y="3"
-            fill="var(--mao-bg-wave02)"
+            fill="var(--color-wave02)"
           />
           <use
             xlink:href="#gentle-wave"
             x="48"
             y="5"
-            fill="var(--mao-bg-wave03)"
+            fill="var(--color-wave03)"
           />
           <use
             xlink:href="#gentle-wave"
             x="48"
             y="7"
-            fill="var(--mao-bg-wave04)"
+            fill="var(--color-wave04)"
           />
         </g>
       </svg>
