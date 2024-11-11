@@ -55,7 +55,6 @@ import card from "@/components/card.vue";
   border-radius: 50%;
   transition: transform 0.5s;
   &:hover {
-    cursor: pointer;
     transform: rotate(360deg);
   }
 }

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { useArticleList, useArticle } from "@/stores";
-
+import { useArticleList, useArticle, useCategoryList } from "@/stores";
+const categoryListS = useCategoryList();
 const articleListS = useArticleList();
 const articleS = useArticle();
 const dialogVisible = ref(false);
@@ -10,6 +10,7 @@ const rowdata = ref({
   image: "",
 });
 onMounted(() => {
+  categoryListS.mapGet();
   articleListS.state = 3;
   articleListS.get();
 });
@@ -29,7 +30,11 @@ const articleDel = async () => {
         <img :src="scope.row.image" style="width: 60%" />
       </template>
     </el-table-column>
-    <el-table-column prop="categoryId" label="分类" />
+    <el-table-column label="分类">
+      <template #default="scope">
+        <p>{{ categoryListS.nameGet(scope.row.categoryId) }}</p>
+      </template>
+    </el-table-column>
     <el-table-column prop="state" label="状态" />
     <el-table-column prop="visitCount" label="浏览量" />
     <el-table-column prop="top" label="是否置顶" />

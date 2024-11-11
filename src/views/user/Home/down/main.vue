@@ -2,17 +2,20 @@
 import { onMounted, ref } from "vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import { useArticleList } from "@/stores";
+import { useArticleList, useCategoryList } from "@/stores";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import card from "@/components/card.vue";
+
+const categoryListS = useCategoryList();
 const articlelistS = useArticleList();
 const articlelistswiperS = useArticleList();
 const modules = ref([Navigation, Pagination, Autoplay]);
 
 const isSwiper = ref(false);
 onMounted(async () => {
+  categoryListS.mapGet();
   await articlelistS.page();
   articlelistswiperS.top = 1;
   articlelistswiperS.get();
@@ -54,14 +57,27 @@ const handleCurrentChange = () => {
     </swiper>
     <card
       v-for="(article, index) in articlelistS.data"
-      :class="[(index & 1) == 0 ? 'cardright' : 'cardleft', 'cardsize']"
+      :class="[(index & 1) == 0 ? 'cardright' : 'cardleft']"
     >
-      <div style="width: 60%; height: 100%"></div>
-      <div style="width: 40%; height: 100%">
-        <el-image :src="article.image" style="width: 100%; height: 100%" />
+      <div class="text">
+        <div style="font-size: 25px">
+          {{ article.title }}
+        </div>
+        <div style="font-size: 15px">
+          <P
+            >{{ categoryListS.nameGet(article.categoryId) }}|浏览量:{{
+              article.visitCount
+            }}</P
+          >
+        </div>
+        <div style="font-size: 15px">
+          <p>发布于{{ article.createTime }}|更新于{{ article.updateTime }}</p>
+        </div>
+      </div>
+      <div style="width: 40%; height: 100%; overflow: hidden">
+        <el-image :src="article.image" />
       </div>
     </card>
-    <div style="height: 400px; background-color: aquamarine"></div>
     <el-pagination
       background
       layout="prev, pager, next"
@@ -88,7 +104,6 @@ const handleCurrentChange = () => {
   position: absolute;
   width: 100%;
   height: 100%;
-  // 文字上下居中
   @extend center;
   flex-direction: column;
   color: #fff;
@@ -98,19 +113,34 @@ const handleCurrentChange = () => {
   z-index: 1;
   line-height: 30px;
 }
-.cardsize {
+.card {
   display: flex;
   height: 250px;
+  .text {
+    flex-direction: column;
+    width: 60%;
+    height: 100%;
+    @extend center;
+  }
+  .el-image {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+    object-fit: cover;
+  }
+  &:hover .el-image {
+    transform: scale(1.1);
+  }
 }
 .cardleft {
   .el-image {
-    border-radius: $border-radius 0 0 $border-radius;
+    border-radius: 0 $border-radius $border-radius 0;
   }
 }
 .cardright {
   flex-direction: row-reverse;
   .el-image {
-    border-radius: 0 $border-radius $border-radius 0;
+    border-radius: $border-radius 0 0 $border-radius;
   }
 }
 </style>

@@ -19,7 +19,7 @@ const filename = ref("");
 const { copy } = useClipboard();
 
 onMounted(async () => {
-  categoryListS.get();
+  categoryListS.list();
   if (!isNaN(route.query.id as any)) {
     await articleS.get(route.query.id as any);
     filelistGet();
@@ -48,7 +48,7 @@ const onUploadImg = async (file: any) => {
   formData.append("file", file[0]);
   const res = await fileUpload(formData, articleS.data.id);
   const R = "<img src='" + res.data + "'>";
-  copy(res.data);
+  copy(R);
   filelistGet();
 };
 </script>
