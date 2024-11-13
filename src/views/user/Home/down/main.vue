@@ -65,7 +65,7 @@ const handleCurrentChange = () => {
         </div>
         <div style="font-size: 15px">
           <P
-            >{{ categoryListS.nameGet(article.categoryId) }}|浏览量:{{
+            >{{ categoryListS.nameGet(article.categoryId as any) }}|浏览量:{{
               article.visitCount
             }}</P
           >

@@ -1,13 +1,13 @@
 import request from '@/api/request'
 
-export const fileList = (id:number|undefined) =>{
+export const fileList = (id:number) =>{
   return request.get('/file/list',{
     params:{
       id
     }
   })
 }
-export const fileUpload = (file: any,id?:number) =>{
+export const fileUpload = (file: any,id:number) =>{
   return request.post('/file/add',file,{
     headers: {
       'Content-Type': 'multipart/form-data'

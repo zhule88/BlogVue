@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { useArticleList, useArticle, useCategoryList } from "@/stores";
+import { useArticleList, useArticle, useCategoryList, useFile } from "@/stores";
+
 const categoryListS = useCategoryList();
 const articleListS = useArticleList();
 const articleS = useArticle();
+const fileS = useFile();
+
 const dialogVisible = ref(false);
 const rowdata = ref({
   id: 0,
@@ -13,9 +16,14 @@ onMounted(() => {
   categoryListS.mapGet();
   articleListS.state = 3;
   articleListS.get();
+  fileS.articleId = rowdata.value.id;
 });
-const articleDel = async () => {
-  await articleS.del(rowdata.value.id);
+
+const articleDel = () => {
+  articleS.del(rowdata.value.id);
+  fileS.del(rowdata.value.image.substring(30, 70));
+  fileS.articleId = rowdata.value.id;
+  fileS.delall();
   dialogVisible.value = false;
   articleListS.get();
 };

@@ -1,13 +1,12 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { Ref } from "vue";
 import type {article} from '@/types'
-import {articleGet, articleAdd, articleList, articleDel,  articleUpdate,fileDelAll, articlePage} from "@/api";
+import {articleGet, articleAdd, articleList, articleDel,  articleUpdate,articlePage} from "@/api";
 
 export const useArticleList =  defineStore('articleTable', ()=>{
   const data = ref<article[]>([])
-  const state: Ref = ref(2);
-  const top: Ref = ref(3);
+  const state = ref(2);
+  const top= ref(3);
   const total = ref(0)
   const current = ref(1);
   const size = ref(5);
@@ -42,15 +41,14 @@ export const useArticle =  defineStore('article', ()=>{
     const res = await articleGet(id );
     data.value = res.data
   }
-  const add  = async ()=>{
-     await articleAdd(data.value);
+  const add  =  ()=>{
+     articleAdd(data.value);
   }
   const update = ()=>{
     articleUpdate(data.value);
   }
-  const del = async (id:number)=>{
-  await articleDel(id);
-   fileDelAll(id)
+  const del = (id:number)=>{
+   articleDel(id);
   }
   const clear = ()=>{
     data.value = {
@@ -60,8 +58,6 @@ export const useArticle =  defineStore('article', ()=>{
       top:0,
     }
   }
-
-
   return{
     data,
     del,

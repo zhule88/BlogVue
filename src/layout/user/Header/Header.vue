@@ -87,9 +87,9 @@ header {
   }
 }
 p {
-  background-image: url("../../assets/logo.png");
+  /*  background-image: url("../../assets/logo.png");
   background-clip: text;
-  -webkit-background-clip: text;
+  -webkit-background-clip: text; */
   color: transparent;
   font-size: 30px;
   text-align: left;
