@@ -13,8 +13,6 @@ import {
 } from "@/stores";
 import { useClipboard } from "@vueuse/core";
 
-import type { file } from "@/types";
-
 const categoryListS = useCategoryList();
 const articleS = useArticle();
 const tagS = useTag();
@@ -23,16 +21,19 @@ const fileS = useFile();
 const uploadRef = ref<UploadInstance>();
 const route = useRoute();
 const router = useRouter();
-const filelist = ref<file[]>([]);
-const filename = ref("");
+
 const { copy } = useClipboard();
 
 onMounted(async () => {
+  clear();
+
   await tagS.mapGet();
   categoryListS.list();
-  if (!isNaN(route.query.id as any)) {
-    await articleS.get(route.query.id as any);
-    fileS.articleId = route.query.id as any;
+  const articleId = route.query.id as any;
+  if (!isNaN(articleId)) {
+    await articleS.get(articleId);
+    fileS.articleId = articleId;
+    articletagS.get(articleId);
     fileS.list();
   }
 });
@@ -45,9 +46,8 @@ const tablesubmit = async () => {
   } else {
     articleS.update();
   }
+  articletagS.articleTagDel(articleS.data.id as any);
   articletagS.add(articleS.data.id as any);
-  uploadRef.value!.clearFiles();
-  articleS.clear();
 };
 const onUploadImg = async (file: any) => {
   const res = await fileS.upload(file[0]);
@@ -57,6 +57,11 @@ const onUploadImg = async (file: any) => {
 };
 const tagClose = (tagId: number) => {
   articletagS.list = articletagS.list.filter((obj) => obj !== tagId);
+};
+const clear = () => {
+  articletagS.list = [];
+  uploadRef.value!.clearFiles();
+  articleS.clear();
 };
 </script>
 
@@ -75,7 +80,8 @@ const tagClose = (tagId: number) => {
         :limit="1"
         :on-success="(res:any) =>{
           if(articleS.data.image != ''){
-          fileS.del(articleS.data.image);
+            fileS.filename = articleS.data.image;
+          fileS.del();
           }
           articleS.data.image = res.data;
     }"
@@ -85,9 +91,9 @@ const tagClose = (tagId: number) => {
         </template>
       </el-upload>
       <div v-if="articleS.data.id != undefined">
-        <el-select v-model="filename" placeholder="删除文件" size="large">
+        <el-select v-model="fileS.filename" placeholder="删除文件" size="large">
           <el-option
-            v-for="item in filelist"
+            v-for="item in fileS.data"
             :label="item.filename"
             :value="item.filename"
           />
@@ -96,7 +102,7 @@ const tagClose = (tagId: number) => {
           type="primary"
           @click="
             () => {
-              fileS.del(filename);
+              fileS.del();
               fileS.list();
             }
           "

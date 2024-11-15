@@ -47,8 +47,8 @@ export const useArticle =  defineStore('article', ()=>{
   const update = ()=>{
     articleUpdate(data.value);
   }
-  const del = (id:number)=>{
-   articleDel(id);
+  const del = async ()=>{
+   await articleDel(data.value.id as any)
   }
   const clear = ()=>{
     data.value = {
@@ -64,6 +64,7 @@ export const useArticle =  defineStore('article', ()=>{
     get,
     add,
     update,
-    clear
+    clear,
+
   }
 })

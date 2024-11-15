@@ -1,29 +1,37 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { useArticleList, useArticle, useCategoryList, useFile } from "@/stores";
-
+import {
+  useArticleList,
+  useArticle,
+  useCategoryList,
+  useFile,
+  useTag,
+  useArticleTag,
+} from "@/stores";
+import tag from "@/components/tag.vue";
 const categoryListS = useCategoryList();
 const articleListS = useArticleList();
 const articleS = useArticle();
 const fileS = useFile();
+const articletagS = useArticleTag();
+const tagS = useTag();
 
 const dialogVisible = ref(false);
-const rowdata = ref({
-  id: 0,
-  image: "",
-});
+
 onMounted(() => {
+  tagS.mapGet();
   categoryListS.mapGet();
   articleListS.state = 3;
   articleListS.get();
-  fileS.articleId = rowdata.value.id;
 });
 
-const articleDel = () => {
-  articleS.del(rowdata.value.id);
-  fileS.del(rowdata.value.image.substring(30, 70));
-  fileS.articleId = rowdata.value.id;
+const articleDel = async () => {
+  await articleS.del();
+  fileS.filename = articleS.data.image.substring(30, 70);
+  fileS.del();
+  fileS.articleId = articleS.data.id as any;
   fileS.delall();
+  articletagS.articleTagDel(articleS.data.id as any);
   dialogVisible.value = false;
   articleListS.get();
 };
@@ -43,6 +51,11 @@ const articleDel = () => {
         <p>{{ categoryListS.nameGet(scope.row.categoryId) }}</p>
       </template>
     </el-table-column>
+    <el-table-column label="标签">
+      <template #default="scope">
+        <tag v-model:id="scope.row.id"></tag>
+      </template>
+    </el-table-column>
     <el-table-column prop="state" label="状态" />
     <el-table-column prop="visitCount" label="浏览量" />
     <el-table-column prop="top" label="是否置顶" />
@@ -59,8 +72,8 @@ const articleDel = () => {
           @click="
             () => {
               dialogVisible = true;
-              rowdata.id = scope.row.id;
-              rowdata.image = scope.row.image;
+              articleS.data.id = scope.row.id;
+              articleS.data.image = scope.row.image;
             }
           "
         >

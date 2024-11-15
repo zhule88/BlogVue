@@ -8,6 +8,7 @@ import type { file } from "@/types";
 export const useFile =  defineStore('file', ()=>{
   const data = ref<file[]>([]);
   const articleId = ref(0);
+  const filename = ref("");
   const list = async () =>{
     const res = await fileList(articleId.value);
     data.value = res.data;
@@ -17,11 +18,10 @@ export const useFile =  defineStore('file', ()=>{
     formData.append("file", file);
     return await fileUpload(formData,  articleId.value);
   }
-  const del = (filename:string)=>{
-    fileDel(filename);
+  const del = ()=>{
+    fileDel(filename.value);
   }
   const delall= ()=>{
-
     fileDelAll(articleId.value);
   }
    return{
@@ -30,6 +30,7 @@ export const useFile =  defineStore('file', ()=>{
     upload ,
     del,
     delall,
-    articleId
+    articleId,
+    filename
    }
  })

@@ -3,6 +3,7 @@ import { onMounted, ref } from "vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { useArticleList, useCategoryList } from "@/stores";
+
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -60,18 +61,20 @@ const handleCurrentChange = () => {
       :class="[(index & 1) == 0 ? 'cardright' : 'cardleft']"
     >
       <div class="text">
-        <div style="font-size: 25px">
-          {{ article.title }}
-        </div>
-        <div style="font-size: 15px">
-          <P
-            >{{ categoryListS.nameGet(article.categoryId as any) }}|浏览量:{{
-              article.visitCount
-            }}</P
-          >
-        </div>
-        <div style="font-size: 15px">
-          <p>发布于{{ article.createTime }}|更新于{{ article.updateTime }}</p>
+        <div>
+          <div style="font-size: 25px">
+            {{ article.title }}
+          </div>
+          <div style="font-size: 15px">
+            <P
+              >{{ categoryListS.nameGet(article.categoryId as any) }}|浏览量:{{
+                article.visitCount
+              }}</P
+            >
+          </div>
+          <div style="font-size: 15px">
+            <p>发布于{{ article.createTime }}|更新于{{ article.updateTime }}</p>
+          </div>
         </div>
       </div>
       <div style="width: 40%; height: 100%; overflow: hidden">
