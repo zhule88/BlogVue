@@ -34,6 +34,8 @@ export const useArticleTag =  defineStore('articletag', ()=>{
   const get = async (id:number) =>{
    const res = await articleTagGet(id)
    list.value = res.data;
+
+
  }
  const add =  (id:number) =>{
   const data:articletag[] = [];

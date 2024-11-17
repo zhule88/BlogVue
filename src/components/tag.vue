@@ -1,30 +1,25 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
-import {
-  useArticleTag,
-  useTag
-} from "@/stores";
-import { onMounted} from "vue";
-const articletagS = useArticleTag();
-const tagS = useTag();
-const props = defineProps<{
- id:number
-}>();
+import { defineProps } from "vue";
+import { ArticleTag } from "@/service";
+import { onMounted } from "vue";
+import type { Tag } from "@/service/index";
 
-onMounted(() => {
-  articletagS.get(props.id)
-})
+const articletagS = new ArticleTag();
+const props = defineProps<{
+  id: number | undefined;
+  tagS: Tag;
+}>();
+onMounted(async () => {
+  articletagS.init(props.id!);
+});
 </script>
 
 <template>
   <div>
-    <el-tag type="primary" v-for="item in articletagS.list"  >
-          {{ tagS.nameGet(item) }}
-        </el-tag -->
+    <el-tag type="primary" v-for="item in articletagS.list.value">
+      {{ tagS.map.get(item) }}
+    </el-tag>
   </div>
 </template>
 
-
-<style scoped>
-
-</style>
+<style scoped></style>

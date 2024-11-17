@@ -34,9 +34,7 @@ addEventListener("wheel", (event) => {
       <router-link to="/" style="text-decoration: none"
         ><p>筑乐</p>
       </router-link>
-      <div style="height: 100%; width: 100px">
-        <toggle-button @change="changeToggle" size="1"></toggle-button>
-      </div>
+
       <el-menu style="border: none" mode="horizontal" :ellipsis="false">
         <el-menu-item index="1">
           <el-icon><Document /></el-icon><img />文章</el-menu-item
@@ -49,6 +47,9 @@ addEventListener("wheel", (event) => {
         >
 
         <!-- 日夜切换 -->
+        <div style="margin-right: 4.5rem; margin-top: -0.2rem">
+          <toggle-button @change="changeToggle" size="1"></toggle-button>
+        </div>
       </el-menu>
     </header>
   </transition>

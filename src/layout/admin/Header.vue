@@ -22,15 +22,16 @@ header {
   box-sizing: border-box;
   z-index: 999;
   top: 0;
-  background-color: rgba(60, 58, 58, 0.4);
+  background-color: rgba(28, 124, 220, 0.926);
   display: flex;
   align-items: center;
   height: 45px;
   .el-menu {
     display: flex;
     justify-content: flex-end;
+    background-color: rgba(28, 124, 220, 0.926);
     font-weight: bold;
-    background-color: rgba(248, 249, 250, 0);
+
     height: 45px;
   }
 }

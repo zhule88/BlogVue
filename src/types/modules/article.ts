@@ -5,7 +5,7 @@
   image: string,
   content: string,
   state?: number,
-  top: number,
+  top: number | boolean,
   visitCount?:number,
   createTime?:string,
   updateTime?:string

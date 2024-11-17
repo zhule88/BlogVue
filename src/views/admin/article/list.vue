@@ -1,44 +1,44 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import {
-  useArticleList,
-  useArticle,
-  useCategoryList,
-  useFile,
-  useTag,
-  useArticleTag,
-} from "@/stores";
+  CategoryList,
+  Article,
+  Tag,
+  File,
+  ArticleTag,
+  ArticleList,
+} from "@/service";
 import tag from "@/components/tag.vue";
-const categoryListS = useCategoryList();
-const articleListS = useArticleList();
-const articleS = useArticle();
-const fileS = useFile();
-const articletagS = useArticleTag();
-const tagS = useTag();
+
+const articleListS = new ArticleList();
+const categoryListS = new CategoryList();
+const articleS = new Article();
+const tagS = new Tag();
+const fileS = new File();
+const articletagS = new ArticleTag();
 
 const dialogVisible = ref(false);
 
 onMounted(() => {
-  tagS.mapGet();
-  categoryListS.mapGet();
-  articleListS.state = 3;
-  articleListS.get();
+  tagS.init();
+  categoryListS.init();
+  articleListS.state.value = 3;
+  articleListS.init();
 });
 
 const articleDel = async () => {
   await articleS.del();
-  fileS.filename = articleS.data.image.substring(30, 70);
-  fileS.del();
-  fileS.articleId = articleS.data.id as any;
-  fileS.delall();
-  articletagS.articleTagDel(articleS.data.id as any);
+  const article = articleS.item.value;
+  fileS.del(article.image.substring(30, 70));
+  fileS.delAll(article.id);
+  articletagS.update(article.id!);
   dialogVisible.value = false;
-  articleListS.get();
+  articleListS.init();
 };
 </script>
 
 <template>
-  <el-table :data="articleListS.data" stripe>
+  <el-table :data="articleListS.list.value" stripe>
     <el-table-column prop="id" label="id" />
     <el-table-column prop="title" label="标题" />
     <el-table-column label="封面">
@@ -48,12 +48,12 @@ const articleDel = async () => {
     </el-table-column>
     <el-table-column label="分类">
       <template #default="scope">
-        <p>{{ categoryListS.nameGet(scope.row.categoryId) }}</p>
+        <p>{{ categoryListS.map.get(scope.row.categoryId) }}</p>
       </template>
     </el-table-column>
     <el-table-column label="标签">
       <template #default="scope">
-        <tag v-model:id="scope.row.id"></tag>
+        <tag v-model:id="scope.row.id" v-model:tagS="tagS"></tag>
       </template>
     </el-table-column>
     <el-table-column prop="state" label="状态" />
@@ -72,8 +72,8 @@ const articleDel = async () => {
           @click="
             () => {
               dialogVisible = true;
-              articleS.data.id = scope.row.id;
-              articleS.data.image = scope.row.image;
+              articleS.item.value.id = scope.row.id;
+              articleS.item.value.image = scope.row.image;
             }
           "
         >
