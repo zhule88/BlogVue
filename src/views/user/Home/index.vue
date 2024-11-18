@@ -12,7 +12,7 @@ import mmain from "@/views/user/Home/down/main.vue";
     <wave></wave>
   </div>
   <div class="down">
-    <div style="width: 70%; display: flex">
+    <div style="width: 75%; display: flex">
       <mmain class="mmain"></mmain>
       <sidebar class="sidebar"></sidebar>
     </div>
@@ -40,13 +40,13 @@ import mmain from "@/views/user/Home/down/main.vue";
   width: 100%;
 }
 .mmain {
-  width: 70%;
+  width: 73%;
   @media screen and (max-width: 1000px) {
     width: 100%;
   }
 }
 .sidebar {
-  width: 20%;
+  width: 25%;
   margin-left: auto;
   @media screen and (max-width: 1000px) {
     display: none;
