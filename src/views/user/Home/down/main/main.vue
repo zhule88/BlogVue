@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { CategoryList, Tag, ArticleList } from "@/service";
-import swiper from "./main/swiper.vue";
+import swiper from "./swiper.vue";
 import tag from "@/components/tag.vue";
 import card from "@/components/card.vue";
 
@@ -46,21 +46,22 @@ const handleCurrentChange = (value: number) => {
             <tag v-model:id="article.id" v-model:tagS="tagS"></tag>
           </div>
           <div class="text">
-            <img src="../../../../assets/svg/火.svg" />
+            <img src="../../../../../assets/svg/火.svg" />
             浏览量:{{ article.visitCount }}
           </div>
           <div class="text">
-            <img src="../../../../assets/svg/日历.svg" />
+            <img src="../../../../../assets/svg/日历.svg" />
             发布于:{{ article.createTime }}
           </div>
           <div class="text">
-            <img src="../../../../assets/svg/日历更新.svg" />
+            <img src="../../../../../assets/svg/日历更新.svg" />
             更新于:{{ article.updateTime }}
           </div>
         </div>
         <div v-show="isShow[index]" class="content-text">
           {{
-            article.content.replace(/<[^>]*>|#/g, "").substring(0, 100) + "..."
+            article.content.replace(/<[^>]*>|#|>/g, "").substring(0, 100) +
+            "..."
           }}
         </div>
       </div>
@@ -68,16 +69,16 @@ const handleCurrentChange = (value: number) => {
         <el-image :src="article.image" />
       </div>
     </card>
-
-    <el-pagination
-      background
-      layout="prev, pager, next"
-      :total="articleListS.total.value"
-      :current-page="articleListS.current.value"
-      :page-size="articleListS.size.value"
-      @current-change="handleCurrentChange"
-      style="width: 100%"
-    />
+    <div style="display: flex; justify-content: center; align-items: center">
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        :total="articleListS.total.value"
+        :current-page="articleListS.current.value"
+        :page-size="articleListS.size.value"
+        @current-change="handleCurrentChange"
+      />
+    </div>
   </div>
 </template>
 

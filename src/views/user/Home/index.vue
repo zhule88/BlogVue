@@ -2,8 +2,8 @@
 import inmage from "@/views/user/Home/image.vue";
 import brand from "@/views/user/Home/up/brand.vue";
 import wave from "@/views/user/Home/up/wave.vue";
-import sidebar from "@/views/user/Home/down/sidebar.vue";
-import mmain from "@/views/user/Home/down/main.vue";
+import sidebar from "@/views/user/Home/down/sidebar/sidebar.vue";
+import mmain from "@/views/user/Home/down/main/main.vue";
 </script>
 <template>
   <inmage></inmage>
@@ -48,8 +48,8 @@ import mmain from "@/views/user/Home/down/main.vue";
 .sidebar {
   width: 25%;
   margin-left: auto;
-  @media screen and (max-width: 1000px) {
+  /*  @media screen and (max-width: 1000px) {
     display: none;
-  }
+  } */
 }
 </style>

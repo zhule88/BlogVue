@@ -1,31 +1,15 @@
 <script setup lang="ts">
 import card from "@/components/card.vue";
+import info from "@/views/user/Home/down/sidebar/info.vue";
 </script>
 <template>
   <div>
-    <card>
-      <div class="card-up">
-        <img class="avatar" src="../../../../assets/xiubi.jpg" alt="" />
-        <div class="maxim">
-          <p>正在路上</p>
-        </div>
-      </div>
-      <div style="display: flex">
-        <div class="card-down">
-          <p>文章</p>
-          <p>114514</p>
-        </div>
-        <div class="card-down">
-          <p>评论</p>
-          <p>1919810</p>
-        </div>
-      </div>
-    </card>
+    <info></info>
     <card style="padding: 20px">
       <div style="display: flex; justify-content: center">
         <img
-          class="lingdang"
-          src="../../../../assets/014_通知-35.svg"
+          class="small-bell"
+          src="../../../../../assets/svg/铃铛.svg"
           style="height: 30px"
         />
       </div>
@@ -35,7 +19,7 @@ import card from "@/components/card.vue";
 </template>
 
 <style scoped lang="scss">
-.lingdang {
+.small-bell {
   animation: rotate 0.75s linear infinite;
 }
 @keyframes rotate {
@@ -57,14 +41,6 @@ import card from "@/components/card.vue";
   &:hover {
     transform: rotate(360deg);
   }
-}
-.card-up {
-  background: url("../../../../assets/你的名字.jpg");
-  background-size: 150%;
-  border-radius: $border-radius;
-  width: 100%;
-  height: 100%;
-  display: flex;
 }
 .maxim {
   border-radius: $border-radius;
