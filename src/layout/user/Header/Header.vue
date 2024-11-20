@@ -3,6 +3,7 @@ import { onMounted, ref } from "vue";
 import DayNightToggleButton from "@/layout/user/Header/DayNightToggle";
 import { useColorMode } from "@vueuse/core";
 import { Document, Files, ChatLineSquare } from "@element-plus/icons-vue";
+import "animate.css";
 const isHeader = ref(true);
 const mode = useColorMode();
 onMounted(() => {
@@ -47,7 +48,7 @@ addEventListener("wheel", (event) => {
         >
 
         <!-- 日夜切换 -->
-        <div style="margin-right: 4.5rem; margin-top: -0.2rem">
+        <div style="margin-left: 5rem">
           <toggle-button @change="changeToggle" size="1"></toggle-button>
         </div>
       </el-menu>

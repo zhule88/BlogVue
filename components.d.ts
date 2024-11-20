@@ -26,6 +26,7 @@ declare module 'vue' {
     ElUpload: typeof import('element-plus/es')['ElUpload']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SvgIcon: typeof import('./src/components/svgIcon.vue')['default']
     Tag: typeof import('./src/components/tag.vue')['default']
   }
 }

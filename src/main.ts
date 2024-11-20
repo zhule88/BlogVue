@@ -5,10 +5,10 @@ import pinia from "./stores";
 import "@/styles/reset.scss";
 import "@/styles/theme.scss";
 import 'element-plus/theme-chalk/dark/css-vars.css'
+import 'virtual:svg-icons-register'
 
 
 
-import "animate.css";
 createApp(App).use(router).use(pinia).
 
 mount("#app");

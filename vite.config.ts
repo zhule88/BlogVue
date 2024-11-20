@@ -3,7 +3,8 @@ import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import path from 'path'
 import {resolve} from 'path'
 
 // https://vitejs.dev/config/
@@ -16,6 +17,22 @@ export default defineConfig({
     Components({
       resolvers: [ElementPlusResolver()],
     }),
+    createSvgIconsPlugin({
+      // Specify the icon folder to be cached
+      iconDirs: [path.resolve(process.cwd(), 'src/assets/icons')],
+      // Specify symbolId format
+      symbolId: 'icon-[dir]-[name]',
+
+      /**
+       * custom insert position
+       * @default: body-last
+       */
+      /**
+       * custom dom id
+       * @default: __svg__icons__dom__
+       */
+      customDomId: '__svg__icons__dom__',
+    })
    /*  oml2d({
       dockedPosition: "right",
       models: [
@@ -45,7 +62,8 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: '@import "@/styles/common.scss";',
+        additionalData: '@use "@/styles/common.scss" as *;',
+        silenceDeprecations: ['legacy-js-api'],
         javascriptEnabled: true
       }
     }

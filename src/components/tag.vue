@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from "vue";
 import { ArticleTag } from "@/service";
 import { onMounted } from "vue";
 import type { Tag } from "@/service/index";

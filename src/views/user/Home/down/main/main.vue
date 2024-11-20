@@ -4,11 +4,13 @@ import { CategoryList, Tag, ArticleList } from "@/service";
 import swiper from "./swiper.vue";
 import tag from "@/components/tag.vue";
 import card from "@/components/card.vue";
+import color from "@/utils/color";
+import svgIcon from "@/components/svgIcon.vue";
 
 const articleListS = new ArticleList();
 const categoryListS = new CategoryList();
 const tagS = new Tag();
-
+const colorI = new color();
 const isShow = ref<boolean[]>([]);
 
 onMounted(async () => {
@@ -40,21 +42,21 @@ const handleCurrentChange = (value: number) => {
             {{ article.title }}
           </div>
           <div style="margin: 10px; display: flex">
-            <div class="category">
+            <div class="category" :style="colorI.random('backgroundColor')">
               {{ categoryListS.map.get(article.categoryId!) }}
             </div>
             <tag v-model:id="article.id" v-model:tagS="tagS"></tag>
           </div>
           <div class="text">
-            <img src="../../../../../assets/svg/火.svg" />
+            <svgIcon name="火" />
             浏览量:{{ article.visitCount }}
           </div>
           <div class="text">
-            <img src="../../../../../assets/svg/日历.svg" />
+            <svgIcon name="日历" />
             发布于:{{ article.createTime }}
           </div>
           <div class="text">
-            <img src="../../../../../assets/svg/日历更新.svg" />
+            <svgIcon name="日历更新" />
             更新于:{{ article.updateTime }}
           </div>
         </div>
@@ -119,7 +121,7 @@ const handleCurrentChange = (value: number) => {
       color: var(--color-card);
     }
     .category {
-      background-color: $sky-blue;
+      /* background-color: $sky-blue; */
       color: rgba(255, 254, 255, 0.938);
       border-radius: $border-radius;
       width: 5rem;

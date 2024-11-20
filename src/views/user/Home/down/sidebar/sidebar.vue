@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import card from "@/components/card.vue";
 import info from "@/views/user/Home/down/sidebar/info.vue";
+import svgIcon from "@/components/svgIcon.vue";
 </script>
 <template>
   <div>
@@ -9,7 +10,7 @@ import info from "@/views/user/Home/down/sidebar/info.vue";
       <div style="display: flex; justify-content: center">
         <img
           class="small-bell"
-          src="../../../../../assets/svg/铃铛.svg"
+          src="../../../../../assets/icons/铃铛.svg"
           style="height: 30px"
         />
       </div>
@@ -31,31 +32,6 @@ import info from "@/views/user/Home/down/sidebar/info.vue";
   }
   100% {
     transform: rotate(-10deg);
-  }
-}
-.avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  transition: transform 0.5s;
-  &:hover {
-    transform: rotate(360deg);
-  }
-}
-.maxim {
-  border-radius: $border-radius;
-  @extend center;
-  width: 100%;
-  text-align: center;
-  color: bisque;
-  writing-mode: vertical-lr;
-}
-.card-down {
-  width: 50%;
-  padding-bottom: 2rem;
-  p {
-    font-size: 20px;
-    text-align: center;
   }
 }
 </style>
