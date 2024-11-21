@@ -31,7 +31,10 @@ export const articleGet = (id:number) =>{
     }
   })
 }
-export const newIdGet = () =>{
-  return request.get('/article/idGet')
-}
 
+export const articleCount = (id:number)=>{
+  return request.get('/article/count',{params:{
+    id
+  }
+})
+}

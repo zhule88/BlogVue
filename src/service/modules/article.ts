@@ -1,6 +1,6 @@
 import { ref} from 'vue'
 import type {article} from '@/types'
-import {articleGet, articleAdd, articleList, articleDel,  articleUpdate,articlePage} from "@/api";
+import {articleGet, articleAdd, articleList, articleDel,  articleUpdate,articlePage,articleCount} from "@/api";
 
 export class ArticleList {
   list = ref<article[]>([]);
@@ -18,6 +18,11 @@ export class ArticleList {
     const res = await articlePage(this.current.value, this.size.value,this.state.value);
     this.total.value = res.data.total;
     this.list.value = res.data.records;
+  }
+  async count(id:number){
+
+    const res = await articleCount(id)
+    return res.data
   }
 }
 

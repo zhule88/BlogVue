@@ -32,7 +32,7 @@
   width: 100%;
   margin: $margin 0;
   height: 300px;
-
+  box-shadow: $box-shadow;
   border-radius: $border-radius;
   background: var(--color-card);
 }

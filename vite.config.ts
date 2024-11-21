@@ -12,9 +12,13 @@ export default defineConfig({
   plugins: [
     vue(),
     AutoImport({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [ElementPlusResolver(),
+      ],
+      imports: ["vue", "vue-router", "@vueuse/core"],
+      dts: 'src/types/lib/auto-imports.d.ts',
     }),
     Components({
+      dts: 'src/types/lib/components.d.ts',
       resolvers: [ElementPlusResolver()],
     }),
     createSvgIconsPlugin({

@@ -42,7 +42,7 @@ const handleCurrentChange = (value: number) => {
             {{ article.title }}
           </div>
           <div style="margin: 10px; display: flex">
-            <div class="category" :style="colorI.random('backgroundColor')">
+            <div class="category" :style="colorI.normal('backgroundColor')">
               {{ categoryListS.map.get(article.categoryId!) }}
             </div>
             <tag v-model:id="article.id" v-model:tagS="tagS"></tag>
