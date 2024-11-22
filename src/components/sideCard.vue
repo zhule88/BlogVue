@@ -14,7 +14,11 @@ defineProps<{
         <span style="margin-left: 10px">{{ title }}</span>
       </div>
     </div>
-    <slot></slot>
+    <div class="content">
+      <div style="width: 80%">
+        <slot></slot>
+      </div>
+    </div>
   </card>
 </template>
 
@@ -30,6 +34,11 @@ defineProps<{
     display: flex;
     align-items: center;
   }
+}
+.content {
+  width: 100%;
+  padding-bottom: 20px;
+  @extend center;
 }
 .scale {
   animation: scale 1s infinite;

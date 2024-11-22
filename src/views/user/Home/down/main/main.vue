@@ -28,12 +28,12 @@ const handleCurrentChange = (value: number) => {
   <div>
     <swiper></swiper>
     <card
-      @mouseover="isShow[index] = true"
-      @mouseout="isShow[index] = false"
+      @mouseenter="isShow[index] = true"
+      @mouseleave="isShow[index] = false"
       v-for="(article, index) in articleListS.list.value"
       :class="[(index & 1) == 0 ? 'cardright' : 'cardleft']"
     >
-      <div class="content" style="width: 55%; height: 100%">
+      <div class="content" :style="{ '--color': colorI.random() }">
         <div
           style="display: flex; flex-direction: column"
           v-show="!isShow[index]"
@@ -67,7 +67,7 @@ const handleCurrentChange = (value: number) => {
           }}
         </div>
       </div>
-      <div style="width: 45%; height: 100%; overflow: hidden">
+      <div class="img">
         <el-image :src="article.image" />
       </div>
     </card>
@@ -88,7 +88,11 @@ const handleCurrentChange = (value: number) => {
 .card {
   display: flex;
   height: 250px;
-
+  .img {
+    width: 45%;
+    height: 100%;
+    overflow: hidden;
+  }
   .el-image {
     width: 100%;
     height: 100%;
@@ -107,6 +111,8 @@ const handleCurrentChange = (value: number) => {
     display: flex;
     position: relative;
     background-color: var(--color-card);
+    width: 55%;
+    height: 100%;
     border-radius: $border-radius;
     text-decoration: none;
     z-index: 0;
@@ -121,7 +127,6 @@ const handleCurrentChange = (value: number) => {
       color: var(--color-card);
     }
     .category {
-      /* background-color: $sky-blue; */
       color: rgba(255, 254, 255, 0.938);
       border-radius: $border-radius;
       width: 5rem;
@@ -132,16 +137,14 @@ const handleCurrentChange = (value: number) => {
       font-size: 15px;
       margin: 10px;
     }
-    img {
-      height: 15px;
-    }
 
     &:before {
       content: "";
       position: absolute;
       z-index: -1;
       top: -16px;
-      background: $sky-blue;
+      background: var(--color);
+      /* background: $sky-blue; */
       height: 32px;
       width: 32px;
       border-radius: 32px;
@@ -151,27 +154,29 @@ const handleCurrentChange = (value: number) => {
     }
   }
 }
+$open-left: $border-radius 0 0 $border-radius;
+$open-right: 0 $border-radius $border-radius 0;
 .cardleft {
-  .el-image {
-    border-radius: 0 $border-radius $border-radius 0;
+  .el-image .img {
+    border-radius: $open-right;
   }
   .content:before {
     left: -16px;
   }
   .content {
-    border-radius: $border-radius 0 0 $border-radius;
+    border-radius: $open-left;
   }
 }
 .cardright {
   flex-direction: row-reverse;
-  .el-image {
-    border-radius: $border-radius 0 0 $border-radius;
+  .el-image .img {
+    border-radius: $open-left;
   }
   .content:before {
     right: -16px;
   }
   .content {
-    border-radius: 0 $border-radius $border-radius 0;
+    border-radius: $open-right;
   }
 }
 </style>

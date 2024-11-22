@@ -54,6 +54,7 @@ onMounted(async () => {
   border-radius: $border-radius;
   margin: 20px 0;
   width: 100%;
+  box-shadow: $box-shadow;
   .swiper-item {
     @extend center;
     width: 100%;

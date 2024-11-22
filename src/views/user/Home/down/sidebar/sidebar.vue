@@ -2,15 +2,17 @@
 import card from "@/components/card.vue";
 import info from "@/views/user/Home/down/sidebar/info.vue";
 import sideCard from "@/components/sideCard.vue";
-import { CategoryList, ArticleList } from "@/service";
+import { CategoryList, ArticleList, Tag } from "@/service";
 import color from "@/utils/color";
 
 const colorI = new color();
 const categoryListS = new CategoryList();
 const articleListS = new ArticleList();
+const tagS = new Tag();
 const count = ref<number[]>([]);
 onMounted(async () => {
   await categoryListS.init();
+  tagS.init();
   categoryListS.list.value.forEach(async (item) => {
     count.value.push(await articleListS.count(item.id));
   });
@@ -30,10 +32,20 @@ onMounted(async () => {
       <p>没有公告</p>
     </card>
     <sideCard title="分类" icon="分类">
-      <div class="category">
+      <div class="category" :style="{ '--color': colorI.random() }">
         <div v-for="(item, index) in categoryListS.list.value" class="text">
           <span class="right">{{ item.name }}</span>
           <span class="left">{{ count[index] }}</span>
+        </div>
+      </div>
+    </sideCard>
+
+    <sideCard title="标签" icon="标签">
+      <div class="tag">
+        <div v-for="item in tagS.list.value">
+          <div class="test" :style="{ '--color': colorI.random() }">
+            {{ item.name }}
+          </div>
         </div>
       </div>
     </sideCard>
@@ -59,13 +71,12 @@ onMounted(async () => {
 .category {
   @extend center;
   flex-direction: column;
-  padding-bottom: 20px;
   .text {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 80%;
     height: 3rem;
+    width: 100%;
     font-size: 17px;
     border-radius: 10px;
     .right {
@@ -75,13 +86,29 @@ onMounted(async () => {
       transition: transform 0.3s ease;
     }
     &:hover {
-      background: $sky-blue;
+      background: var(--color);
+      /* background: $sky-blue; */
     }
     &:hover .right {
       transform: translateX(10px);
     }
     &:hover .left {
       transform: translateX(-10px);
+    }
+  }
+}
+.tag {
+  display: flex;
+
+  .test {
+    @extend center;
+    margin: 0.5rem;
+    border-radius: $border-radius;
+    height: 2rem;
+    padding: 0 0.5rem;
+    &:hover {
+      color: white;
+      background: var(--color);
     }
   }
 }
