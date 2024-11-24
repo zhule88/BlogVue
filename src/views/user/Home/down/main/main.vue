@@ -12,6 +12,7 @@ const categoryListS = new CategoryList();
 const tagS = new Tag();
 const colorI = new color();
 const isShow = ref<boolean[]>([]);
+const router = useRouter();
 
 onMounted(async () => {
   categoryListS.init();
@@ -30,6 +31,7 @@ const handleCurrentChange = (value: number) => {
     <card
       @mouseenter="isShow[index] = true"
       @mouseleave="isShow[index] = false"
+      @click="router.push(`/user/article?id=${article.id}`)"
       v-for="(article, index) in articleListS.list.value"
       :class="[(index & 1) == 0 ? 'cardright' : 'cardleft']"
     >
@@ -48,15 +50,15 @@ const handleCurrentChange = (value: number) => {
             <tag v-model:id="article.id" v-model:tagS="tagS"></tag>
           </div>
           <div class="text">
-            <svgIcon name="火" />
+            <svgIcon name="火" class="svg" />
             浏览量:{{ article.visitCount }}
           </div>
           <div class="text">
-            <svgIcon name="日历" />
+            <svgIcon name="日历" class="svg" />
             发布于:{{ article.createTime }}
           </div>
           <div class="text">
-            <svgIcon name="日历更新" />
+            <svgIcon name="日历更新" class="svg" />
             更新于:{{ article.updateTime }}
           </div>
         </div>
@@ -118,7 +120,9 @@ const handleCurrentChange = (value: number) => {
     z-index: 0;
     overflow: hidden;
     @extend center;
-
+    .svg {
+      transform: translateY(10%);
+    }
     .content-text {
       @extend center;
       max-width: 30ch;

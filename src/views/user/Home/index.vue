@@ -1,55 +1,32 @@
 <script setup lang="ts">
-import inmage from "@/views/user/Home/image.vue";
+import iimage from "@/views/user/Home/image.vue";
 import brand from "@/views/user/Home/up/brand.vue";
 import wave from "@/views/user/Home/up/wave.vue";
 import sidebar from "@/views/user/Home/down/sidebar/sidebar.vue";
 import mmain from "@/views/user/Home/down/main/main.vue";
+import dualL from "@/components/layout/dualL.vue";
 </script>
 <template>
-  <inmage></inmage>
+  <iimage></iimage>
   <div class="up">
     <brand></brand>
     <wave></wave>
   </div>
-  <div class="down">
-    <div style="width: 75%; display: flex">
-      <mmain class="mmain"></mmain>
-      <sidebar class="sidebar"></sidebar>
-    </div>
-  </div>
+  <dualL>
+    <template #main>
+      <mmain></mmain>
+    </template>
+    <template #sidebar>
+      <sidebar></sidebar>
+    </template>
+  </dualL>
 </template>
 
 <style scoped lang="scss">
 .up {
-  display: flex;
   @extend center;
-  position: relative;
   width: 100%;
   height: 100vh;
   min-height: 10rem;
-}
-.down {
-  // 过渡效果
-  margin: 0;
-  //border: red 1px solid;
-  display: flex;
-  position: relative;
-  justify-content: center;
-  padding-bottom: 2rem;
-  background-color: var(--color-background);
-  width: 100%;
-}
-.mmain {
-  width: 73%;
-  @media screen and (max-width: 1000px) {
-    width: 100%;
-  }
-}
-.sidebar {
-  width: 25%;
-  margin-left: auto;
-  /*  @media screen and (max-width: 1000px) {
-    display: none;
-  } */
 }
 </style>

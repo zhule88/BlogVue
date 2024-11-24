@@ -1,8 +1,7 @@
 <script setup lang="ts">
 /* import { loadOml2d } from "oh-my-live2d"; */
-import Header from "@/layout/user/Header/Header.vue";
-import Main from "@/layout/user/Main.vue";
-import Footer from "@/layout/user/Footer.vue";
+import Header from "../user/Header/Header.vue";
+import Footer from "../user/Footer.vue";
 
 /* loadOml2d({
   dockedPosition: "right",
@@ -15,7 +14,7 @@ import Footer from "@/layout/user/Footer.vue";
 </script>
 <template>
   <Header></Header>
-  <Main></Main>
+  <RouterView />
   <Footer></Footer>
 </template>
 

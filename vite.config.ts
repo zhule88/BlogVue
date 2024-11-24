@@ -85,11 +85,7 @@ export default defineConfig({
       {
       find: '@a',
       replacement: resolve(__dirname,'./src/assets')
-      },
-      {
-      find: '@m',
-      replacement: resolve(__dirname,'./src/views/Main')
-      },
+      }
   ]
   }
 })

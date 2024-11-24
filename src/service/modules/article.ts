@@ -8,7 +8,7 @@ export class ArticleList {
   top= ref(3);
   total = ref(0)
   current = ref(1);
-  size = ref(5);
+  size = ref(10);
 
   async init (){
     const res = await articleList(this.state.value,this.top.value);

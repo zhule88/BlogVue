@@ -21,7 +21,7 @@ onMounted(async () => {
 <template>
   <div>
     <info></info>
-    <card style="padding: 20px">
+    <card style="padding: 20px" v-view-request="{}">
       <div style="display: flex; justify-content: center">
         <img
           class="small-bell"

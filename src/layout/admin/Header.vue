@@ -2,7 +2,7 @@
 <template>
   <header>
     <el-menu border:true mode="horizontal" :ellipsis="false" :router="true">
-      <el-sub-menu>
+      <el-sub-menu index="1">
         <template #title>文章</template>
         <el-menu-item index="/admin/list">总览</el-menu-item>
         <el-menu-item index="/admin/add">新增</el-menu-item>

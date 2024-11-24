@@ -26,7 +26,6 @@
           "@/*":["src/*"],
           "@v/*":["src/views/*"],
           "@a/*":["src/assets/*"],
-          "@m/*":["src/views/Main/*"]
         }
   },
 

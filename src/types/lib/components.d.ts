@@ -8,6 +8,8 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Card: typeof import('./../../components/card.vue')['default']
+    DualL: typeof import('./../../components/layout/dualL.vue')['default']
+    DualLayout: typeof import('./../../components/layout/dualLayout.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElDialog: typeof import('element-plus/es')['ElDialog']
     ElIcon: typeof import('element-plus/es')['ElIcon']
@@ -27,6 +29,7 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SideCard: typeof import('./../../components/sideCard.vue')['default']
+    SingleL: typeof import('./../../components/layout/singleL.vue')['default']
     SvgIcon: typeof import('./../../components/svgIcon.vue')['default']
     Tag: typeof import('./../../components/tag.vue')['default']
   }
