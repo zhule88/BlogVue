@@ -2,31 +2,22 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type {tag,articletag} from '@/types'
 import {tagList,articleTagGet,articleTagAdd,articleTagDel} from '@/api'
-
+import nameMap from "@/utils/nameMap"
 
 export const useTag =  defineStore('tag', ()=>{
  const list = ref<tag[]>([])
+ const map = new nameMap();
 
- const map = new Map();
- const listGet = async () =>{
+ const init = async () =>{
   const res = await tagList()
   list.value = res.data
-
+  map.init(res.data)
   }
-  const mapGet = async ()=>{
-    await listGet()
-    for (let i of list.value) {
-      map.set(i.id,i.name);
-    }
-}
-const nameGet = (id:number) =>{
-  return map.get(id);
-}
+
   return{
     list,
-    listGet,
-    mapGet ,
-    nameGet
+    init,
+    map
   }
 })
 export const useArticleTag =  defineStore('articletag', ()=>{
@@ -54,3 +45,4 @@ export const useArticleTag =  defineStore('articletag', ()=>{
      add,articleTagDel
    }
  })
+

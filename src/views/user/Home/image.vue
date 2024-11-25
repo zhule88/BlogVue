@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import type { Ref } from "vue";
-
 const imageList: Ref<string[]> = ref([
   "/src/assets/凯文1.webp",
   "/src/assets/凯文2.webp",

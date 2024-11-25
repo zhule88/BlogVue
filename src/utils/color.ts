@@ -15,7 +15,6 @@ export default class color{
   normal(key:string){
     const css:css = {}
     css[key] =  this.random();
-
     return css;
   }
 

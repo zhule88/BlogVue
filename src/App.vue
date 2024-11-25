@@ -1,4 +1,12 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useTag, useCategoryList } from "@/stores";
+const tagS = useTag();
+const categoryListS = useCategoryList();
+onMounted(() => {
+  tagS.init();
+  categoryListS.init();
+});
+</script>
 <template>
   <!-- <Suspense>
     <template #default>

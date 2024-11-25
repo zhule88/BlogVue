@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
 import DayNightToggleButton from "@/layout/user/Header/DayNightToggle";
 import { useColorMode } from "@vueuse/core";
 import { Document, Files, ChatLineSquare } from "@element-plus/icons-vue";
@@ -33,7 +32,7 @@ addEventListener("wheel", (event) => {
     <!-- 第二种实现菜单滑入滑出的方法 name="el-zoom-in-top" element-plus实现 -->
     <header v-show="isHeader">
       <router-link to="/" style="text-decoration: none"
-        ><p>筑乐</p>
+        ><div class="name">筑乐</div>
       </router-link>
 
       <el-menu style="border: none" mode="horizontal" :ellipsis="false">
@@ -67,6 +66,16 @@ header {
   z-index: 999;
   width: 100vw;
   padding: 0;
+  .name {
+    font-size: 30px;
+    text-align: left;
+    margin: 20px;
+    font-weight: 500;
+    color: aliceblue;
+    &:hover {
+      color: $sky-blue;
+    }
+  }
   .el-menu {
     display: flex;
     justify-content: flex-end;
@@ -82,12 +91,5 @@ header {
       font-size: 15px;
     }
   }
-}
-p {
-  /*  background-image: url("../../assets/logo.png");
-  background-clip: text;
-  -webkit-background-clip: text; */
-  font-size: 30px;
-  text-align: left;
 }
 </style>

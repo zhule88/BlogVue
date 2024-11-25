@@ -2,18 +2,17 @@
 import card from "@/components/card.vue";
 import info from "@/views/user/Home/down/sidebar/info.vue";
 import sideCard from "@/components/sideCard.vue";
-import { CategoryList, ArticleList, Tag } from "@/service";
+import { ArticleList } from "@/service";
 import color from "@/utils/color";
-
+import { useTag, useCategoryList } from "@/stores";
+const tagS = useTag();
+const categoryListS = useCategoryList();
 const colorI = new color();
-const categoryListS = new CategoryList();
 const articleListS = new ArticleList();
-const tagS = new Tag();
 const count = ref<number[]>([]);
+
 onMounted(async () => {
-  await categoryListS.init();
-  tagS.init();
-  categoryListS.list.value.forEach(async (item) => {
+  categoryListS.list.forEach(async (item) => {
     count.value.push(await articleListS.count(item.id));
   });
 });
@@ -33,7 +32,7 @@ onMounted(async () => {
     </card>
     <sideCard title="分类" icon="分类">
       <div class="category" :style="{ '--color': colorI.random() }">
-        <div v-for="(item, index) in categoryListS.list.value" class="text">
+        <div v-for="(item, index) in categoryListS.list" class="text">
           <span class="right">{{ item.name }}</span>
           <span class="left">{{ count[index] }}</span>
         </div>
@@ -42,7 +41,7 @@ onMounted(async () => {
 
     <sideCard title="标签" icon="标签">
       <div class="tag">
-        <div v-for="item in tagS.list.value">
+        <div v-for="item in tagS.list">
           <div class="test" :style="{ '--color': colorI.random() }">
             {{ item.name }}
           </div>

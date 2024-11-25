@@ -2,29 +2,20 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type {category} from '@/types'
 import {categoryList} from "@/api"
+import nameMap from "@/utils/nameMap"
 export const useCategoryList =  defineStore('categoryList', ()=>{
-  const data = ref<category[]>([])
-  const map = new Map();
+  const list = ref<category[]>([])
+  const map = new nameMap();
 
-  const list= async () =>{
+  const init = async () =>{
     const res = await categoryList();
-    data.value = res.data
+    list .value = res.data
+    map.init(res.data)
   }
-  const mapGet = async () =>{
-    await list();
-    for (let i of data.value) {
-      map.set(i.id,i.name);
-    }
-  }
-  const nameGet = (id:number) =>{
-    return map.get(id);
-  }
-  return{
-    data,
-    list,
-    mapGet,
-    nameGet,
-    map,
 
+  return{
+    list,
+    init,
+    map,
   }
 })

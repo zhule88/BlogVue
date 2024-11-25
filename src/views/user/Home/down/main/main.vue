@@ -1,22 +1,16 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
-import { CategoryList, Tag, ArticleList } from "@/service";
+import { ArticleList } from "@/service";
 import swiper from "./swiper.vue";
-import tag from "@/components/tag.vue";
-import card from "@/components/card.vue";
 import color from "@/utils/color";
-import svgIcon from "@/components/svgIcon.vue";
+import { useCategoryList } from "@/stores";
 
+const categoryListS = useCategoryList();
 const articleListS = new ArticleList();
-const categoryListS = new CategoryList();
-const tagS = new Tag();
 const colorI = new color();
 const isShow = ref<boolean[]>([]);
 const router = useRouter();
 
 onMounted(async () => {
-  categoryListS.init();
-  tagS.init();
   articleListS.page();
 });
 const handleCurrentChange = (value: number) => {
@@ -47,18 +41,18 @@ const handleCurrentChange = (value: number) => {
             <div class="category" :style="colorI.normal('backgroundColor')">
               {{ categoryListS.map.get(article.categoryId!) }}
             </div>
-            <tag v-model:id="article.id" v-model:tagS="tagS"></tag>
+            <tag v-model:id="article.id"></tag>
           </div>
           <div class="text">
             <svgIcon name="火" class="svg" />
             浏览量:{{ article.visitCount }}
           </div>
           <div class="text">
-            <svgIcon name="日历" class="svg" />
+            <svgIcon name="日历更新" class="svg" />
             发布于:{{ article.createTime }}
           </div>
           <div class="text">
-            <svgIcon name="日历更新" class="svg" />
+            <svgIcon name="更新" class="svg" />
             更新于:{{ article.updateTime }}
           </div>
         </div>
@@ -161,7 +155,8 @@ const handleCurrentChange = (value: number) => {
 $open-left: $border-radius 0 0 $border-radius;
 $open-right: 0 $border-radius $border-radius 0;
 .cardleft {
-  .el-image .img {
+  .el-image,
+  .img {
     border-radius: $open-right;
   }
   .content:before {
@@ -173,7 +168,8 @@ $open-right: 0 $border-radius $border-radius 0;
 }
 .cardright {
   flex-direction: row-reverse;
-  .el-image .img {
+  .el-image,
+  .img {
     border-radius: $open-left;
   }
   .content:before {

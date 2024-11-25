@@ -1,17 +1,16 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
 import { MdEditor } from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
 import type { UploadInstance } from "element-plus";
 import { useRoute, useRouter } from "vue-router";
-import { CategoryList, Article, Tag, File, ArticleTag } from "@/service";
-import { useClipboard } from "@vueuse/core";
+import { Article, File, ArticleTag } from "@/service";
 import { ElMessage } from "element-plus";
 import "element-plus/theme-chalk/index.css";
+import { useTag, useCategoryList } from "@/stores";
 
-const categoryListS = new CategoryList();
+const tagS = useTag();
+const categoryListS = useCategoryList();
 const articleS = new Article();
-const tagS = new Tag();
 const fileS = new File();
 const articletagS = new ArticleTag();
 
@@ -23,8 +22,6 @@ const { copy } = useClipboard();
 
 onMounted(async () => {
   clear();
-  tagS.init();
-  categoryListS.init();
   const articleId = route.query.id as any;
   if (!isNaN(articleId)) {
     articleS.init(articleId);
@@ -117,7 +114,7 @@ const clear = () => {
         size="large"
       >
         <el-option
-          v-for="item in categoryListS.list.value"
+          v-for="item in categoryListS.list"
           :key="item.id"
           :label="item.name"
           :value="item.id"
@@ -132,7 +129,7 @@ const clear = () => {
         size="large"
       >
         <el-option
-          v-for="item in tagS.list.value"
+          v-for="item in tagS.list"
           :key="item.id"
           :label="item.name"
           :value="item.id"

@@ -1,27 +1,17 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
-import {
-  CategoryList,
-  Article,
-  Tag,
-  File,
-  ArticleTag,
-  ArticleList,
-} from "@/service";
-import tag from "@/components/tag.vue";
+import { Article, File, ArticleTag, ArticleList } from "@/service";
+import { useTag, useCategoryList } from "@/stores";
 
+const tagS = useTag();
+const categoryListS = useCategoryList();
 const articleListS = new ArticleList();
-const categoryListS = new CategoryList();
 const articleS = new Article();
-const tagS = new Tag();
 const fileS = new File();
 const articletagS = new ArticleTag();
 
 const dialogVisible = ref(false);
 
 onMounted(() => {
-  tagS.init();
-  categoryListS.init();
   articleListS.state.value = 3;
   articleListS.init();
 });
