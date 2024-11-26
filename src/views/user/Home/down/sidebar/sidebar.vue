@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import card from "@/components/card.vue";
-import info from "@/views/user/Home/down/sidebar/info.vue";
-import sideCard from "@/components/sideCard.vue";
+import card from "@/components/data/card.vue";
+import info from "@/components/view/infoCard.vue";
+import sideCard from "@/components/data/sideCard.vue";
 import { ArticleList } from "@/service";
 import color from "@/utils/color";
 import { useTag, useCategoryList } from "@/stores";
@@ -20,16 +20,7 @@ onMounted(async () => {
 <template>
   <div>
     <info></info>
-    <card style="padding: 20px" v-view-request="{}">
-      <div style="display: flex; justify-content: center">
-        <img
-          class="small-bell"
-          src="../../../../../assets/icons/铃铛.svg"
-          style="height: 30px"
-        />
-      </div>
-      <p>没有公告</p>
-    </card>
+    <notice></notice>
     <sideCard title="分类" icon="分类">
       <div class="category" :style="{ '--color': colorI.random() }">
         <div v-for="(item, index) in categoryListS.list" class="text">
@@ -52,21 +43,6 @@ onMounted(async () => {
 </template>
 
 <style scoped lang="scss">
-/* :style="colorI.high('background')" */
-.small-bell {
-  animation: rotate 0.75s linear infinite;
-}
-@keyframes rotate {
-  0% {
-    transform: rotate(-10deg);
-  }
-  50% {
-    transform: rotate(10deg);
-  }
-  100% {
-    transform: rotate(-10deg);
-  }
-}
 .category {
   @extend center;
   flex-direction: column;

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, reactive } from "vue";
 import EasyTyper from "easy-typer-js";
-import svgIcon from "@/components/svgIcon.vue";
+import svgIcon from "@/components/data/svgIcon.vue";
 
 const obj = reactive({
   output: "",

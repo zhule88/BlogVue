@@ -25,7 +25,7 @@ const handleCurrentChange = (value: number) => {
     <card
       @mouseenter="isShow[index] = true"
       @mouseleave="isShow[index] = false"
-      @click="router.push(`/user/article?id=${article.id}`)"
+      @click="router.push(`/user/article/${article.id}`)"
       v-for="(article, index) in articleListS.list.value"
       :class="[(index & 1) == 0 ? 'cardright' : 'cardleft']"
     >
@@ -114,9 +114,7 @@ const handleCurrentChange = (value: number) => {
     z-index: 0;
     overflow: hidden;
     @extend center;
-    .svg {
-      transform: translateY(10%);
-    }
+
     .content-text {
       @extend center;
       max-width: 30ch;
@@ -142,7 +140,6 @@ const handleCurrentChange = (value: number) => {
       z-index: -1;
       top: -16px;
       background: var(--color);
-      /* background: $sky-blue; */
       height: 32px;
       width: 32px;
       border-radius: 32px;

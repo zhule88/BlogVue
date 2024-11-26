@@ -31,40 +31,20 @@ export const useArticleList =  defineStore('articleTable', ()=>{
   }
 })
 export const useArticle =  defineStore('article', ()=>{
-  const data = ref<article>({
+  const item = ref<article>({
     title:'',
     image:'',
     content:'',
     top:0,
   })
-  const get  = async(id:number)=>{
+  const init = async(id:number)=>{
     const res = await articleGet(id );
-    data.value = res.data
+    item.value = res.data
   }
-  const add  =  ()=>{
-     articleAdd(data.value);
-  }
-  const update = ()=>{
-    articleUpdate(data.value);
-  }
-  const del = async ()=>{
-   await articleDel(data.value.id as any)
-  }
-  const clear = ()=>{
-    data.value = {
-      title:'',
-      image:'',
-      content:'',
-      top:0,
-    }
-  }
-  return{
-    data,
-    del,
-    get,
-    add,
-    update,
-    clear,
 
+
+  return{
+    item ,
+    init,
   }
 })

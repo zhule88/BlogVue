@@ -22,7 +22,7 @@ const { copy } = useClipboard();
 
 onMounted(async () => {
   clear();
-  const articleId = route.query.id as any;
+  const articleId = route.params.id as any;
   if (!isNaN(articleId)) {
     articleS.init(articleId);
     articletagS.init(articleId);

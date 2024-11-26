@@ -53,7 +53,7 @@ const articleDel = async () => {
     <el-table-column prop="updateTime" label="修改时间" />
     <el-table-column label="操作">
       <template #default="scope">
-        <router-link :to="`/admin/add?id=${scope.row.id}`">
+        <router-link :to="`/admin/add/${scope.row.id}`">
           <el-button size="small" type="primary"> 修改 </el-button>
         </router-link>
         <el-button

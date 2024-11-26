@@ -1,123 +1,107 @@
 <script setup lang="ts">
-import dualL from "@/components/layout/dualL.vue";
-import { Article, File, ArticleTag } from "@/service";
-import { useTag, useCategoryList } from "@/stores";
-const tagS = useTag();
-const categoryListS = useCategoryList();
-const route = useRoute();
+import showcase from "./showcase.vue";
+import { MdPreview } from "md-editor-v3";
+import { MdCatalog } from "md-editor-v3";
+import "md-editor-v3/lib/style.css";
+import { useArticle } from "@/stores";
 
-const articleS = new Article();
-const fileS = new File();
-const articletagS = new ArticleTag();
-const articleLength = ref<number>(0);
-const articleLLength = ref<string | number>(0);
-onMounted(async () => {
-  const articleId = route.query.id as any;
-  await articleS.init(articleId);
-  articletagS.init(articleId);
-  fileS.init(articleId);
-  articleLength.value = articleS.item.value.content.replace(
-    /<[^>]*>|#|>/g,
-    ""
-  ).length;
-  if (articleLength.value >= 1000) {
-    articleLLength.value = (articleLength.value / 1000).toFixed(1) + "k";
-  } else {
-    articleLLength.value = articleLength.value;
-  }
+const articleS = useArticle();
+const route = useRoute();
+const id = "article";
+const mode = useColorMode() as any;
+const env = import.meta.env;
+const scrollElement = document.documentElement;
+
+onMounted(() => {
+  const articleId = route.params.id as any;
+  articleS.init(articleId);
 });
 </script>
 <template>
-  <!-- <dualL> </dualL> -->
-  <div class="contain">
-    <div class="content">
-      <div style="display: flex; flex-direction: column">
-        <div class="text">
-          <div class="category">
-            {{ categoryListS.map.get(articleS.item.value.categoryId!) }}
-          </div>
-          <div v-for="item in tagS.list" style="margin: 0 0 0 20px">
-            #{{ item.name }}
-          </div>
-        </div>
-        <div class="text" style="font-size: 45px; font-weight: 800">
-          {{ articleS.item.value.title }}
-        </div>
-        <div class="text">
-          <div class="item">
-            <svgIcon name="火" color="white" class="svg" />
+  <showcase></showcase>
+  <dualL>
+    <template #main>
+      <card>
+        <MdPreview
+          :editorId="id"
+          v-model:model-value="articleS.item.content"
+          :theme="mode"
+          style="border-radius: 10px"
+        />
 
-            {{ articleS.item.value.visitCount }}
+        <div class="copyright">
+          <div>
+            <strong>本文作者：筑乐</strong>
           </div>
-          <div class="item">
-            <svgIcon name="文章" color="white" class="svg" />
-            {{ articleLLength }}字
+          <div>
+            <strong>本文链接： </strong>
+            <a :href="env.VITE_FRONTEND_URL + route.path">{{
+              env.VITE_FRONTEND_URL + route.path
+            }}</a>
           </div>
-          <div class="item">
-            <svgIcon name="时间" color="white" class="svg" />
-            {{ Math.ceil(articleLength / 250) }}分钟
+          <div>
+            <strong>版权声明： </strong>
+            本站所有文章除特别声明外，均采用 &nbsp;
+            <a
+              href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"
+              target="_blank"
+            >
+              CC BY-NC-SA 4.0
+            </a>
+            &nbsp; 许可协议。转载请注明文章出处！
           </div>
         </div>
-
-        <div class="text">
-          <div class="item">
-            <svgIcon name="日历更新" color="white" class="svg" />
-            {{ articleS.item.value.createTime?.substring(0, 10) }}
-          </div>
-          <div class="item">
-            <svgIcon name="更新" color="white" class="svg" />
-            {{ articleS.item.value.updateTime?.substring(0, 10) }}
-          </div>
-        </div>
-      </div>
-    </div>
-    <img :src="articleS.item.value.image" class="img" />
-  </div>
+      </card>
+    </template>
+    <template #sidebar>
+      <infoCard></infoCard>
+      <notice></notice>
+      <SideCard title="目录" icon="目录" class="directory">
+        <MdCatalog :editorId="id" :scrollElement="scrollElement" />
+      </SideCard>
+    </template>
+  </dualL>
 </template>
 
 <style scoped lang="scss">
-.contain {
-  width: 100%;
-  height: 50vh;
-  overflow: hidden;
-  position: relative;
-  @extend center;
-  .category {
-    @extend center;
-    color: rgba(255, 254, 255, 0.938);
-    border-radius: $border-radius;
-    backdrop-filter: blur(10px);
-    background: rgba(255, 255, 255, 0.4);
-    font-weight: 700;
-    padding: 0 0.5rem;
-    height: 2rem;
-  }
-  .svg {
-    transform: translateY(10%);
-  }
-  .img {
-    z-index: -5;
-    width: 100%;
-    height: auto;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    filter: brightness(50%);
-  }
-  .content {
-    position: relative;
-    @extend center;
-    .text {
-      color: #ffffff;
-      font-size: 15px;
-      margin: 10px;
-      display: flex;
-      align-items: center;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-      .item {
-        margin: 0 10px 0 0;
+.copyright {
+  width: 90%;
+  border-radius: 0.625rem;
+  border: 1px dashed black;
+  font-size: 0.8em;
+  display: flex;
+  flex-direction: column;
+  margin: 4rem auto;
+  & > div {
+    font-size: 15px;
+    margin: 10px;
+    & > a {
+      text-decoration: none;
+      color: #a9a9a9;
+      &:hover {
+        text-decoration: underline;
+        color: $sky-blue;
       }
     }
+  }
+}
+.directory {
+  position: sticky;
+  top: 20px;
+  padding: 10px;
+}
+:deep(.md-editor-catalog-active) {
+  & > span {
+    background: rgba(59, 130, 246, 0.1);
+    color: $sky-blue;
+    border-radius: $border-radius;
+    font-weight: bold;
+    padding: 0.5rem 0 0.5rem 0.5rem;
+  }
+}
+:deep(.md-editor-catalog) {
+  span:hover {
+    color: $sky-blue;
   }
 }
 </style>

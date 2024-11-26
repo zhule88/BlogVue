@@ -1,14 +1,14 @@
 <script setup lang="ts"></script>
 <template>
-  <div class="card">
+  <card style="height: 300px; position: relative">
     <div
       style="height: 210px; width: 100%; display: flex; justify-content: center"
     >
       <div class="card__img">
-        <img src="../../../../../assets/你的名字.jpg" />
+        <img src="../../assets/你的名字.jpg" />
       </div>
       <div class="card__avatar">
-        <img src="../../../../../assets/xiubi.jpg" />
+        <img src="../../assets/xiubi.jpg" />
       </div>
     </div>
     <div
@@ -22,21 +22,10 @@
       <div class="card__title">筑乐</div>
       <div class="card__subtitle">正在路上</div>
     </div>
-  </div>
+  </card>
 </template>
 
 <style scoped lang="scss">
-/* From Uiverse.io by andrew-demchenk0 */
-.card {
-  position: relative;
-  width: 100%;
-  margin: $margin 0;
-  height: 300px;
-  box-shadow: $box-shadow;
-  border-radius: $border-radius;
-  background: var(--color-card);
-}
-
 .card__img {
   position: absolute;
   top: 0;
