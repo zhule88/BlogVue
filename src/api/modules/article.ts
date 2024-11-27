@@ -38,3 +38,9 @@ export const articleCount = (id:number)=>{
   }
 })
 }
+export const articleAround = (id:number)=>{
+  return request.get('/article/around',{params:{
+    id
+  }
+})
+}

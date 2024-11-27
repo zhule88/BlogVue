@@ -1,6 +1,6 @@
 import { ref} from 'vue'
 import type {article} from '@/types'
-import {articleGet, articleAdd, articleList, articleDel,  articleUpdate,articlePage,articleCount} from "@/api";
+import {articleGet, articleAdd, articleList, articleDel,  articleUpdate,articlePage,articleCount,articleAround} from "@/api";
 
 export class ArticleList {
   list = ref<article[]>([]);
@@ -20,9 +20,13 @@ export class ArticleList {
     this.list.value = res.data.records;
   }
   async count(id:number){
-
     const res = await articleCount(id)
     return res.data
+  }
+  async around(id:number){
+    const res = await articleAround(id)
+    this.list.value = res.data;
+
   }
 }
 
@@ -46,7 +50,8 @@ export class Article{
   async del() {
    await articleDel(this.item .value.id! )
   }
-    clear(){
+
+  clear(){
   this.item .value = {
       title:'',
       image:'',
