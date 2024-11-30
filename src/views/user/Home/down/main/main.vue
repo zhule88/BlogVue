@@ -37,7 +37,7 @@ const handleCurrentChange = (value: number) => {
           <div style="font-size: 25px; margin: 10px">
             {{ article.title }}
           </div>
-          <div style="margin: 10px; display: flex">
+          <div style="margin: 10px; display: flex; height: 25px">
             <div class="category" :style="colorI.normal('backgroundColor')">
               {{ categoryListS.map.get(article.categoryId!) }}
             </div>
@@ -64,7 +64,8 @@ const handleCurrentChange = (value: number) => {
         </div>
       </div>
       <div class="img">
-        <el-image :src="article.image" />
+        <img v-lazy="article.image" />
+        <!-- <el-image :src="article.image" /> -->
       </div>
     </card>
     <div style="display: flex; justify-content: center; align-items: center">
@@ -83,20 +84,26 @@ const handleCurrentChange = (value: number) => {
 <style scoped lang="scss">
 .card {
   display: flex;
-  height: 250px;
+  height: 300px;
   .img {
-    width: 45%;
+    width: 43%;
+    position: relative;
+
     height: 100%;
     overflow: hidden;
+    /* .el-image  */
+    img {
+      width: 100%;
+      height: 100%;
+
+      object-position: center;
+      transition: transform 0.5s;
+      object-fit: cover;
+    }
   }
-  .el-image {
-    width: 100%;
-    height: 100%;
-    transition: transform 0.5s;
-    object-fit: cover;
-  }
+
   &:hover {
-    .el-image {
+    img {
       transform: scale(1.1);
     }
     .content:before {
@@ -107,7 +114,7 @@ const handleCurrentChange = (value: number) => {
     display: flex;
     position: relative;
     background-color: var(--color-card);
-    width: 55%;
+    width: 57%;
     height: 100%;
     border-radius: $border-radius;
     text-decoration: none;
@@ -126,6 +133,7 @@ const handleCurrentChange = (value: number) => {
       color: rgba(255, 254, 255, 0.938);
       border-radius: $border-radius;
       width: 5rem;
+
       font-size: 15px;
       @extend center;
     }

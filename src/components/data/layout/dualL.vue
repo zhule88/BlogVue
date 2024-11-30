@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 <template>
   <div class="layout">
-    <div style="width: 75%; display: flex">
+    <div style="width: 77%; display: flex">
       <div class="main">
         <slot name="main"></slot>
       </div>
@@ -22,13 +22,13 @@
   width: 100%;
 }
 .main {
-  width: 73%;
+  width: 75%;
   /*  @media screen and (max-width: 1000px) {
     width: 100%;
   } */
 }
 .sidebar {
-  width: 25%;
+  width: 23%;
   margin-left: auto;
   /*  @media screen and (max-width: 1000px) {
     display: none;

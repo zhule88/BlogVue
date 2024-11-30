@@ -23,9 +23,7 @@ export default class color{
     const color1 = this.random();
     const color2 = this.random();
     const angle = Math.floor(Math.random() * 360);
-
     css[key] =  `linear-gradient(${angle}deg, ${color1}, ${color2})`
-
     return  css;
   }
 }

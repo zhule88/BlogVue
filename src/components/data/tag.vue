@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ArticleTag } from "@/service";
-import { useTag } from "@/stores";
+import { useTag } from "@/stores/modules/tag";
 import color from "@/utils/color";
 
 const tagS = useTag();

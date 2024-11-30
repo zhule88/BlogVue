@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import type {category} from '@/types'
-import {categoryList} from "@/api"
+import {categoryList} from "@/api/modules/category"
 import nameMap from "@/utils/nameMap"
 export class CategoryList{
   list= ref<category[]>([])

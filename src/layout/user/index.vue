@@ -13,9 +13,17 @@ import Footer from "../user/Footer.vue";
 }); */
 </script>
 <template>
-  <Header></Header>
-  <RouterView />
-  <Footer></Footer>
+  <div class="body">
+    <Header></Header>
+    <RouterView style="flex-grow: 1" />
+    <Footer></Footer>
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+</style>

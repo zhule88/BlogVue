@@ -9,7 +9,7 @@ import "swiper/css/pagination";
 
 const articleListS = new ArticleList();
 const modules = ref([Navigation, Pagination, Autoplay]);
-
+const router = useRouter();
 const isSwiper = ref(false);
 onMounted(async () => {
   articleListS.top.value = 1;
@@ -31,6 +31,7 @@ onMounted(async () => {
     <swiper-slide
       v-for="item in articleListS.list.value"
       :key="item.id"
+      @click="router.push(`/user/tag/${item.id}`)"
       class="swiper-item"
     >
       <div class="item_text">

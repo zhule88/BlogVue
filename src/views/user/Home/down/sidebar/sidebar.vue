@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import card from "@/components/data/card.vue";
 import info from "@/components/view/infoCard.vue";
 import sideCard from "@/components/data/sideCard.vue";
 import { ArticleList } from "@/service";
@@ -10,7 +9,7 @@ const categoryListS = useCategoryList();
 const colorI = new color();
 const articleListS = new ArticleList();
 const count = ref<number[]>([]);
-
+const router = useRouter();
 onMounted(async () => {
   categoryListS.list.forEach(async (item) => {
     count.value.push(await articleListS.count(item.id));
@@ -32,7 +31,10 @@ onMounted(async () => {
 
     <sideCard title="标签" icon="标签">
       <div class="tag">
-        <div v-for="item in tagS.list">
+        <div
+          v-for="item in tagS.list"
+          @click="router.push(`/user/tag/${item.id}`)"
+        >
           <div class="test" :style="{ '--color': colorI.random() }">
             {{ item.name }}
           </div>

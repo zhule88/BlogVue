@@ -10,7 +10,7 @@ defineProps<{
   <card>
     <div class="title">
       <div class="title_text">
-        <svgIcon :name="icon" width="30" height="30" class="scale" />
+        <svgIcon :name="icon" width="30" height="30" class="animation" />
         <span style="margin-left: 10px">{{ title }}</span>
       </div>
     </div>
@@ -40,7 +40,7 @@ defineProps<{
   padding-bottom: 20px;
   @extend center;
 }
-.scale {
+.animation {
   animation: scale 1s infinite;
   transform-origin: center;
 

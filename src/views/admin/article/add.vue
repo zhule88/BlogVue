@@ -6,8 +6,8 @@ import { useRoute, useRouter } from "vue-router";
 import { Article, File, ArticleTag } from "@/service";
 import { ElMessage } from "element-plus";
 import "element-plus/theme-chalk/index.css";
-import { useTag, useCategoryList } from "@/stores";
 
+import { useTag, useCategoryList } from "@/stores";
 const tagS = useTag();
 const categoryListS = useCategoryList();
 const articleS = new Article();
@@ -22,7 +22,7 @@ const { copy } = useClipboard();
 
 onMounted(async () => {
   clear();
-  const articleId = route.params.id as any;
+  const articleId = route.query.id as any;
   if (!isNaN(articleId)) {
     articleS.init(articleId);
     articletagS.init(articleId);

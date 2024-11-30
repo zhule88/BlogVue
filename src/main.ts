@@ -7,8 +7,11 @@ import "@/styles/theme.scss";
 import 'element-plus/theme-chalk/dark/css-vars.css'
 import 'virtual:svg-icons-register'
 
+import lazyPlugin from 'vue3-lazy'
 
 
-createApp(App).use(router).use(pinia).
+createApp(App).use(router).use(pinia).use(lazyPlugin, {
+  loading: './assets/image/小埋.gif'
+}).
 
 mount("#app");

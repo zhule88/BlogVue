@@ -4,6 +4,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+/* import { oml2d } from 'vite-plugin-oh-my-live2d'; */
 import path from 'path'
 import {resolve} from 'path'
 
@@ -36,8 +37,8 @@ export default defineConfig({
        * @default: __svg__icons__dom__
        */
       customDomId: '__svg__icons__dom__',
-    })
-   /*  oml2d({
+    }),
+  /*   oml2d({
       dockedPosition: "right",
       models: [
         {

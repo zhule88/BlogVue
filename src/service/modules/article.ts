@@ -1,6 +1,7 @@
 import { ref} from 'vue'
 import type {article} from '@/types'
-import {articleGet, articleAdd, articleList, articleDel,  articleUpdate,articlePage,articleCount,articleAround} from "@/api";
+import {articleGet, articleAdd, articleList, articleDel,
+   articleUpdate,articlePage,articleCount,articleAround} from "@/api/modules/article";
 
 export class ArticleList {
   list = ref<article[]>([]);

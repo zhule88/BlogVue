@@ -1,6 +1,6 @@
 
 import { ref } from 'vue'
-import { fileList, fileUpload, fileDel,fileDelAll } from "@/api";
+import { fileList, fileUpload, fileDel,fileDelAll } from "@/api/modules/file";
 import type { file } from "@/types";
 
 export class File{

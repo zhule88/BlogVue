@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import type {tag,articletag} from '@/types'
-import {tagList,articleTagGet,articleTagAdd,articleTagDel} from '@/api'
+import {tagList,articleTagGet,articleTagAdd,articleTagDel} from '@/api/modules/tag'
 import nameMap from "@/utils/nameMap"
 
 export class Tag{
