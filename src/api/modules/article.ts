@@ -32,14 +32,19 @@ export const articleGet = (id:number) =>{
   })
 }
 
-export const articleCount = (id:number)=>{
-  return request.get('/article/count',{params:{
+
+export const articleAround = (id:number)=>{
+  return request.get('/article/around',{params:{
     id
   }
 })
 }
-export const articleAround = (id:number)=>{
-  return request.get('/article/around',{params:{
+
+export const articleListByIds = (ids:number[])=>{
+  return request.post('/article/list/byIds',ids)
+}
+export const articleListByCateId= (id:number)=>{
+  return request.get('/article/list/byCateId',{params:{
     id
   }
 })

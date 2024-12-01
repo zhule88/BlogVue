@@ -1,7 +1,8 @@
 import { ref} from 'vue'
 import type {article} from '@/types'
 import {articleGet, articleAdd, articleList, articleDel,
-   articleUpdate,articlePage,articleCount,articleAround} from "@/api/modules/article";
+   articleUpdate,articlePage,articleAround,
+   articleListByIds,articleListByCateId} from "@/api/modules/article";
 
 export class ArticleList {
   list = ref<article[]>([]);
@@ -20,14 +21,18 @@ export class ArticleList {
     this.total.value = res.data.total;
     this.list.value = res.data.records;
   }
-  async count(id:number){
-    const res = await articleCount(id)
-    return res.data
-  }
+
   async around(id:number){
     const res = await articleAround(id)
     this.list.value = res.data;
-
+  }
+  async listByIds(ids:number[]){
+    const res = await articleListByIds(ids)
+    this.list.value = res.data;
+  }
+  async listByCateId(id:number){
+    const res = await articleListByCateId(id)
+    this.list.value = res.data;
   }
 }
 

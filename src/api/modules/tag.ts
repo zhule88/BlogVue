@@ -16,7 +16,7 @@ export const  articleTagAdd  = (data:articletag[]) =>{
   return request.post('/tag/articleTag/add',data)
 }
 export const  articleTagDel  = (id:number) =>{
-  return request.delete('/tag/articleTagdel',{
+  return request.delete('/tag/articleTag/del',{
     params:{
       id
     }
@@ -24,7 +24,7 @@ export const  articleTagDel  = (id:number) =>{
 }
 
 export const articleGet = (id:number) =>{
-  return request.get('/tag/article/get',{
+  return request.get('/tag/article/list',{
     params:{
       id
     }

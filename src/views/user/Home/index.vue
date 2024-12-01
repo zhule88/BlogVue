@@ -11,14 +11,16 @@ import mmain from "@/views/user/Home/down/main/main.vue";
     <brand></brand>
     <wave></wave>
   </div>
-  <dualL>
+  <Layout>
     <template #main>
       <mmain></mmain>
     </template>
     <template #sidebar>
-      <sidebar></sidebar>
+      <infoCard></infoCard>
+      <notice></notice>
+      <cateTag></cateTag>
     </template>
-  </dualL>
+  </Layout>
 </template>
 
 <style scoped lang="scss">

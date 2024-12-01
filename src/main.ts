@@ -11,7 +11,8 @@ import lazyPlugin from 'vue3-lazy'
 
 
 createApp(App).use(router).use(pinia).use(lazyPlugin, {
-  loading: './assets/image/小埋.gif'
+  loading: './assets/image/小埋.gif',
+  error:'./assets/xiubi.jpg'
 }).
 
 mount("#app");
