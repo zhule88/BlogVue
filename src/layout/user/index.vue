@@ -15,7 +15,7 @@ import Footer from "../user/Footer.vue";
 <template>
   <div class="body">
     <Header></Header>
-    <RouterView style="flex-grow: 1" />
+    <RouterView />
     <Footer></Footer>
   </div>
 </template>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useTag, useCategoryList } from "@/stores";
 import { ArticleTag, ArticleList } from "@/service";
+import color from "@/utils/color";
 const route = useRoute();
 const tagS = useTag();
 const categoryListS = useCategoryList();
@@ -8,6 +9,7 @@ const Id = ref(0);
 const type = ref("");
 const articleTagS = new ArticleTag();
 const articleListS = new ArticleList();
+const colorI = new color();
 const router = useRouter();
 
 onMounted(() => {
@@ -17,6 +19,7 @@ watch(route, () => {
   init();
 });
 const init = async () => {
+  window.scrollTo(0, 0);
   Id.value = Number(route.params.id);
   type.value = route.params.type as string;
   if (type.value == "tag") {
@@ -30,16 +33,16 @@ const init = async () => {
 <template>
   <Layout>
     <template #main>
-      <Card style="margin-top: 45px"
-        ><div class="header" v-if="type == 'tag'">
-          {{ tagS.map.get(Id) }}
+      <div style="margin-top: 45px">
+        <div class="header" :style="colorI.normal('backgroundColor')">
+          <span v-if="type == 'tag'">{{ tagS.map.get(Id) }}</span>
+
+          <span v-else> {{ categoryListS.map.get(Id) }}</span>
         </div>
-        <div class="header" v-else>
-          {{ categoryListS.map.get(Id) }}
-        </div>
-        <div class="divider"></div>
+
         <div class="contain">
           <card
+            v-animate
             v-for="article in articleListS.list.value"
             @click="router.push(`/user/article/${article.id}`)"
           >
@@ -65,7 +68,7 @@ const init = async () => {
             </div>
           </card>
         </div>
-      </Card>
+      </div>
     </template>
     <template #sidebar>
       <div style="margin-top: 45px">
@@ -83,12 +86,9 @@ const init = async () => {
   width: 100%;
   font-size: 25px;
   font-weight: 500;
+  color: rgba(255, 254, 255, 0.938);
+  border-radius: $border-radius;
   @extend center;
-}
-.divider {
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(to left, #fff 5%, gainsboro 50%, #fff 85%);
 }
 .contain {
   width: 100%;

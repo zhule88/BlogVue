@@ -16,13 +16,13 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
+/* router.beforeEach((to, from, next) => {
   if (to.name == 'article' ) {
   router.afterEach(() => {
     window.scrollTo(0, 0)
 })
   }
   next(); // 确保要调用 next()
-});
+}); */
 
 export default router

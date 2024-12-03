@@ -21,6 +21,7 @@ watch(route, () => {
   init();
 });
 const init = () => {
+  window.scrollTo(0, 0);
   const articleId = route.params.id as any;
   articleS.init(articleId);
   articleListS.around(articleId);

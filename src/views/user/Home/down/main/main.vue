@@ -27,6 +27,7 @@ const handleCurrentChange = (value: number) => {
       @mouseleave="isShow[index] = false"
       @click="router.push(`/user/article/${article.id}`)"
       v-for="(article, index) in articleListS.list.value"
+      v-animate
       :class="[(index & 1) == 0 ? 'cardright' : 'cardleft']"
     >
       <div class="content" :style="{ '--color': colorI.random() }">
@@ -127,10 +128,11 @@ const handleCurrentChange = (value: number) => {
       max-width: 30ch;
       overflow-wrap: break-word;
       font-size: 20px;
-      color: var(--color-card);
+      /*  color: var(--color-card); */
+      color: rgba(255, 254, 255);
     }
     .category {
-      color: rgba(255, 254, 255, 0.938);
+      color: rgba(255, 254, 255);
       border-radius: $border-radius;
       width: 5rem;
 

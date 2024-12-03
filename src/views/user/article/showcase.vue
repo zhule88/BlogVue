@@ -5,14 +5,17 @@ import { useTag, useCategoryList, useArticle } from "@/stores";
 const articleS = useArticle();
 const tagS = useTag();
 const categoryListS = useCategoryList();
-const route = useRoute();
 const articletagS = new ArticleTag();
 const articleLength = ref<number>(0);
 const articleLLength = ref<string | number>(0);
-onMounted(async () => {
-  const articleId = route.params.id as any;
-  await articleS.init(articleId);
-  articletagS.init(articleId);
+onMounted(() => {
+  init();
+});
+watch(articleS, () => {
+  init();
+});
+const init = () => {
+  articletagS.init(articleS.item.id!);
   articleLength.value = articleS.item.content.replace(
     /<[^>]*>|#|>/g,
     ""
@@ -22,7 +25,7 @@ onMounted(async () => {
   } else {
     articleLLength.value = articleLength.value;
   }
-});
+};
 </script>
 <template>
   <div class="contain">
@@ -32,8 +35,11 @@ onMounted(async () => {
           <div class="category">
             {{ categoryListS.map.get(articleS.item.categoryId!) }}
           </div>
-          <div v-for="item in tagS.list" style="margin: 0 0 0 20px">
-            #{{ item.name }}
+          <div
+            v-for="item in articletagS.list.value"
+            style="margin: 0 0 0 20px"
+          >
+            #{{ tagS.map.get(item) }}
           </div>
         </div>
         <div class="text" style="font-size: 45px; font-weight: 800">
@@ -41,25 +47,25 @@ onMounted(async () => {
         </div>
         <div class="text">
           <div>
-            <svgIcon name="火" color="white" />
+            <svgIcon name="火" color1="white" />
             {{ articleS.item.visitCount }}
           </div>
           <div>
-            <svgIcon name="文章" color="white" />
+            <svgIcon name="文章" color1="white" />
             {{ articleLLength }}字
           </div>
           <div>
-            <svgIcon name="时间" color="white" />
+            <svgIcon name="时间" color1="white" />
             {{ Math.ceil(articleLength / 250) }}分钟
           </div>
         </div>
         <div class="text">
           <div>
-            <svgIcon name="日历更新" color="white" />
+            <svgIcon name="日历更新" color1="white" />
             {{ articleS.item.createTime?.substring(0, 10) }}
           </div>
           <div>
-            <svgIcon name="更新" color="white" />
+            <svgIcon name="更新" color1="white" />
             {{ articleS.item.updateTime?.substring(0, 10) }}
           </div>
         </div>

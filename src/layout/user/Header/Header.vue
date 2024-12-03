@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import DayNightToggleButton from "@/layout/user/Header/DayNightToggle";
-import { useColorMode } from "@vueuse/core";
 import { Document, Files, ChatLineSquare } from "@element-plus/icons-vue";
 import "animate.css";
 const isHeader = ref(true);
@@ -71,7 +70,7 @@ header {
     text-align: left;
     margin: 20px;
     font-weight: 500;
-    color: aliceblue;
+    color: var(--text-color);
     &:hover {
       color: $sky-blue;
     }

@@ -31,7 +31,7 @@ onMounted(async () => {
     <swiper-slide
       v-for="item in articleListS.list.value"
       :key="item.id"
-      @click="router.push(`/user/tag/${item.id}`)"
+      @click="router.push(`/user/article/${item.id}`)"
       class="swiper-item"
     >
       <div class="item_text">

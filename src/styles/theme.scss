@@ -10,6 +10,8 @@
    --color-wave04: rgba(240, 248, 255,1);
    //阴影
    --color-box-shadow: 2px 2px 10px 2px#6a6666;
+
+   --text-color: #333333;
     // footer
   --color-footer: linear-gradient(135deg,#f6ceec,#d939cd);
 }
@@ -26,6 +28,8 @@ html.dark {
   --color-wave04: rgba(70, 70, 70, 1);
    //阴影
    --color-box-shadow: 2px 2px 10px 2px#6f6f6f;
+
+   --text-color: #A0A0A0;
   //footer
   --color-footer: linear-gradient(135deg,#000c40,#607d8b);
 }

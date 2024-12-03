@@ -1,12 +1,3 @@
-<template>
-  <!-- svg：图标外层容器节点，内部需要与 use 标签结合使用 -->
-  <svg :style="{ width, height }" class="svg">
-    <!-- xlink:href执行用哪一个图标，属性值务必#icon-图标名字 -->
-    <!-- use 标签 fill 属性可以设置图标的颜色 -->
-    <use :xlink:href="prefix + name" :fill="color"></use>
-  </svg>
-</template>
-
 <script setup lang="ts">
 // 接收父组件传递过来的参数
 defineProps({
@@ -18,7 +9,7 @@ defineProps({
   // 提供使用的图标的名字
   name: String,
   // 接收父组件传递的颜色
-  color: {
+  color1: {
     type: String,
     default: "",
   },
@@ -33,7 +24,26 @@ defineProps({
     default: "16px",
   },
 });
+const isDark = useDark();
+const color2 = ref("");
+onMounted(() => {
+  color2.value = isDark ? "#808080" : "";
+});
+watch(isDark, (newValue) => {
+  color2.value = newValue ? "#808080" : "";
+});
 </script>
+<template>
+  <!-- svg：图标外层容器节点，内部需要与 use 标签结合使用 -->
+  <svg :style="{ width, height }" class="svg">
+    <!-- xlink:href执行用哪一个图标，属性值务必#icon-图标名字 -->
+    <!-- use 标签 fill 属性可以设置图标的颜色 -->
+    <use
+      :xlink:href="prefix + name"
+      :fill="color1 == '' ? color2 : color1"
+    ></use>
+  </svg>
+</template>
 
 <style scoped lang="scss">
 .svg {
