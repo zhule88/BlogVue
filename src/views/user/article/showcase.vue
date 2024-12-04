@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import { ArticleTag } from "@/service";
-import { useTag, useCategoryList, useArticle } from "@/stores";
-
+import { timeFilter } from "@/utils/filter";
 const articleS = useArticle();
 const tagS = useTag();
 const categoryListS = useCategoryList();
 const articletagS = new ArticleTag();
 const articleLength = ref<number>(0);
-const articleLLength = ref<string | number>(0);
+
 onMounted(() => {
   init();
 });
@@ -16,15 +14,7 @@ watch(articleS, () => {
 });
 const init = () => {
   articletagS.init(articleS.item.id!);
-  articleLength.value = articleS.item.content.replace(
-    /<[^>]*>|#|>/g,
-    ""
-  ).length;
-  if (articleLength.value >= 1000) {
-    articleLLength.value = (articleLength.value / 1000).toFixed(1) + "k";
-  } else {
-    articleLLength.value = articleLength.value;
-  }
+  articleLength.value = contentFilter(articleS.item.content).length;
 };
 </script>
 <template>
@@ -52,7 +42,13 @@ const init = () => {
           </div>
           <div>
             <svgIcon name="文章" color1="white" />
-            {{ articleLLength }}字
+            <span v-if="articleLength >= 1000">
+              {{ (articleLength / 1000).toFixed(1) }}k
+            </span>
+            <span v-else>
+              {{ articleLength }}
+            </span>
+            字
           </div>
           <div>
             <svgIcon name="时间" color1="white" />
@@ -62,11 +58,11 @@ const init = () => {
         <div class="text">
           <div>
             <svgIcon name="日历更新" color1="white" />
-            {{ articleS.item.createTime?.substring(0, 10) }}
+            {{ timeFilter(articleS.item.createTime) }}
           </div>
           <div>
             <svgIcon name="更新" color1="white" />
-            {{ articleS.item.updateTime?.substring(0, 10) }}
+            {{ timeFilter(articleS.item.updateTime) }}
           </div>
         </div>
       </div>

@@ -57,6 +57,8 @@ export class Article{
    await articleDel(this.item .value.id! )
   }
 
+
+
   clear(){
   this.item .value = {
       title:'',

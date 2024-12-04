@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import sideCard from "@/components/data/sideCard.vue";
-import { CategoryList } from "@/service";
-import color from "@/utils/color";
-import { useTag, useCategoryList } from "@/stores";
 const tagS = useTag();
 const categoryListS = useCategoryList();
 const categoryListI = new CategoryList();

@@ -1,20 +1,16 @@
 <script setup lang="ts">
 import { MdEditor } from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
-import type { UploadInstance } from "element-plus";
-import { useRoute, useRouter } from "vue-router";
-import { Article, File, ArticleTag } from "@/service";
+import { File } from "@/service";
 import { ElMessage } from "element-plus";
 import "element-plus/theme-chalk/index.css";
-
-import { useTag, useCategoryList } from "@/stores";
 const tagS = useTag();
 const categoryListS = useCategoryList();
 const articleS = new Article();
 const fileS = new File();
 const articletagS = new ArticleTag();
 
-const uploadRef = ref<UploadInstance>();
+const uploadRef = ref();
 const route = useRoute();
 const router = useRouter();
 

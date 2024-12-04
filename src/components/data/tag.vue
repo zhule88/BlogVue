@@ -1,11 +1,7 @@
 <script setup lang="ts">
-import { ArticleTag } from "@/service";
-import { useTag } from "@/stores/modules/tag";
-import color from "@/utils/color";
-
 const tagS = useTag();
 const articletagS = new ArticleTag();
-const colorI = new color();
+
 const props = defineProps<{
   id: number | undefined;
 }>();

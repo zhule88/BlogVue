@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { Article, File, ArticleTag, ArticleList } from "@/service";
-
-import { useTag, useCategoryList } from "@/stores";
+import { File } from "@/service";
 
 const tagS = useTag();
 const categoryListS = useCategoryList();

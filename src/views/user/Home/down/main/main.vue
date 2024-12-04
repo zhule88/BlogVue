@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import { ArticleList } from "@/service";
 import swiper from "./swiper.vue";
-import color from "@/utils/color";
-import { useCategoryList } from "@/stores";
+import { contentFilter } from "@/utils/filter";
 
 const categoryListS = useCategoryList();
 const articleListS = new ArticleList();
+
 const colorI = new color();
 const isShow = ref<boolean[]>([]);
 const router = useRouter();
-
 onMounted(async () => {
   articleListS.page();
 });
@@ -58,10 +56,7 @@ const handleCurrentChange = (value: number) => {
           </div>
         </div>
         <div v-show="isShow[index]" class="content-text">
-          {{
-            article.content.replace(/<[^>]*>|#|>/g, "").substring(0, 100) +
-            "..."
-          }}
+          {{ contentFilter(article.content).substring(0, 100) + "..." }}
         </div>
       </div>
       <div class="img">

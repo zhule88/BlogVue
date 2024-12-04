@@ -9,7 +9,6 @@ declare module 'vue' {
   export interface GlobalComponents {
     Card: typeof import('./../../components/data/card.vue')['default']
     CateTag: typeof import('./../../components/view/cateTag.vue')['default']
-    DualL: typeof import('./../../components/data/layout/dualL.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElDialog: typeof import('element-plus/es')['ElDialog']
     ElDivider: typeof import('element-plus/es')['ElDivider']
@@ -33,7 +32,6 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SideCard: typeof import('./../../components/data/sideCard.vue')['default']
-    SingleL: typeof import('./../../components/data/layout/singleL.vue')['default']
     SvgIcon: typeof import('./../../components/data/svgIcon.vue')['default']
     Tag: typeof import('./../../components/data/tag.vue')['default']
     Taxonomy: typeof import('../../components/view/cateTag.vue')['default']

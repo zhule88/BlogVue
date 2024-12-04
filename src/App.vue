@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useTag, useCategoryList } from "@/stores";
 const tagS = useTag();
 const categoryListS = useCategoryList();
 onMounted(() => {

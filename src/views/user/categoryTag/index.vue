@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { useTag, useCategoryList } from "@/stores";
-import { ArticleTag, ArticleList } from "@/service";
-import color from "@/utils/color";
 const route = useRoute();
 const tagS = useTag();
 const categoryListS = useCategoryList();
@@ -98,9 +95,9 @@ const init = async () => {
     width: 45%;
     margin: 20px auto;
     height: 250px;
-    transition: transform 0.5s;
+
     &:hover {
-      transform: translateY(-10px);
+      transform: scale(1.1);
     }
     .title {
       position: absolute;

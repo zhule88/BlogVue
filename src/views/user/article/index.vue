@@ -3,8 +3,6 @@ import showcase from "./showcase.vue";
 import { MdPreview } from "md-editor-v3";
 import { MdCatalog } from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
-import { useArticle } from "@/stores";
-import { ArticleList } from "@/service";
 const articleS = useArticle();
 const route = useRoute();
 const router = useRouter();
