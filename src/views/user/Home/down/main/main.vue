@@ -21,6 +21,7 @@ const handleCurrentChange = (value: number) => {
   <div>
     <swiper></swiper>
     <card
+      style="z-index: 2"
       @mouseenter="isShow[index] = true"
       @mouseleave="isShow[index] = false"
       @click="router.push(`/user/article/${article.id}`)"
@@ -123,6 +124,7 @@ const handleCurrentChange = (value: number) => {
       max-width: 30ch;
       overflow-wrap: break-word;
       font-size: 20px;
+      line-height: 1.5;
       /*  color: var(--color-card); */
       color: rgba(255, 254, 255);
     }

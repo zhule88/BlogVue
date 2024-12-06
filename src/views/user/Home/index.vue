@@ -4,26 +4,41 @@ import brand from "@/views/user/Home/up/brand.vue";
 import wave from "@/views/user/Home/up/wave.vue";
 import sidebar from "@/views/user/Home/down/sidebar/sidebar.vue";
 import mmain from "@/views/user/Home/down/main/main.vue";
+import { throttle } from "lodash";
+const el = ref<HTMLElement | null>(null);
+
+const { y } = useWindowScroll();
+const Scroll = () => {
+  console.log(y);
+};
+const onScroll = throttle(Scroll, 300);
+onMounted(() => {
+  window.addEventListener("scroll", onScroll);
+});
 </script>
 <template>
   <iimage></iimage>
   <div class="up">
     <brand></brand>
-    <wave></wave>
+    <!-- <wave></wave> -->
   </div>
-  <Layout>
+  <Layout Two>
     <template #main>
       <mmain></mmain>
     </template>
     <template #sidebar>
       <infoCard></infoCard>
-      <notice></notice>
+      <notice> </notice>
       <cateTag></cateTag>
     </template>
   </Layout>
 </template>
 
 <style scoped lang="scss">
+:deep(.layout) {
+  background-image: none !important;
+}
+
 .up {
   @extend center;
   width: 100%;

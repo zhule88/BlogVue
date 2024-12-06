@@ -27,7 +27,7 @@ const init = () => {
 </script>
 <template>
   <showcase></showcase>
-  <layout>
+  <Layout Two>
     <template #main>
       <card style="display: flex; flex-direction: column">
         <MdPreview
@@ -116,7 +116,7 @@ const init = () => {
         <MdCatalog :editorId="id" :scrollElement="scrollElement" />
       </SideCard>
     </template>
-  </layout>
+  </Layout>
 </template>
 
 <style scoped lang="scss">

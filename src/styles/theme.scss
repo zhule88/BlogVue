@@ -10,7 +10,7 @@
    --color-wave04: rgba(240, 248, 255,1);
    //阴影
    --color-box-shadow: 2px 2px 10px 2px#6a6666;
-
+   //字体
    --text-color: #333333;
     // footer
   --color-footer: linear-gradient(135deg,#f6ceec,#d939cd);
@@ -18,17 +18,16 @@
 
 // 暗色模式下的主题色
 html.dark {
-  --color-background: #424242;
+  --color-background: #111111;
   //卡片
   --color-card: rgb(34, 34, 42);
-  //波浪
-  --color-wave01: rgba(70, 70, 70, 0.7);
-  --color-wave02: rgba(70, 70, 70, 0.5);
-  --color-wave03: rgba(70, 70, 70, 0.3);
-  --color-wave04: rgba(70, 70, 70, 1);
+  --color-wave01: rgba(0, 0, 0, 0.7);
+  --color-wave02: rgba(0, 0, 0, 0.5);
+  --color-wave03: rgba(0, 0, 0, 0.3);
+  --color-wave04: rgb(13, 11, 11);
    //阴影
    --color-box-shadow: 2px 2px 10px 2px#6f6f6f;
-
+   //字体
    --text-color: #A0A0A0;
   //footer
   --color-footer: linear-gradient(135deg,#000c40,#607d8b);

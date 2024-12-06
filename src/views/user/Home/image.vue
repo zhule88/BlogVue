@@ -30,7 +30,7 @@ const imageList: Ref<string[]> = ref([
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -9;
+  z-index: -2;
   background-color: #363636;
   overflow: hidden;
 

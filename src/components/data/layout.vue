@@ -1,13 +1,33 @@
-<script setup lang="ts"></script>
-<template>
-  <div class="layout">
-    <div style="width: 77%; display: flex">
-      <div class="main">
-        <slot name="main"></slot>
-      </div>
+<script setup lang="ts">
+import darkk from "../../assets/image/莫娜.jpg";
+import light from "../../assets/image/蓝天.jpg";
+defineProps<{
+  Two?: boolean;
+}>();
+const bg = ref();
+const isDark = useDark({
+  onChanged(dark: boolean) {
+    bg.value = dark ? darkk : light;
+  },
+});
+onMounted(() => {
+  bg.value = isDark.value ? darkk : light;
+});
+</script>
 
-      <div class="sidebar">
-        <slot name="sidebar"></slot>
+<template>
+  <div style="width: 100%">
+    <div class="layout" :style="{ 'background-image': 'url(' + bg + ')' }">
+      <div style="width: 77%; display: flex" v-if="Two">
+        <div class="main">
+          <slot name="main"></slot>
+        </div>
+        <div class="sidebar">
+          <slot name="sidebar"></slot>
+        </div>
+      </div>
+      <div style="width: 80%" v-else>
+        <slot></slot>
       </div>
     </div>
   </div>
@@ -17,8 +37,10 @@
 .layout {
   display: flex;
   justify-content: center;
-  padding-bottom: 2rem;
-  background-color: var(--color-background);
+
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
   width: 100%;
 }
 .main {

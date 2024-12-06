@@ -24,13 +24,14 @@ defineProps({
     default: "16px",
   },
 });
-const isDark = useDark();
 const color2 = ref("");
-onMounted(() => {
-  color2.value = isDark ? "#808080" : "";
+const isDark = useDark({
+  onChanged(dark: boolean) {
+    color2.value = dark ? "#808080" : "";
+  },
 });
-watch(isDark, (newValue) => {
-  color2.value = newValue ? "#808080" : "";
+onMounted(() => {
+  color2.value = isDark.value ? "#808080" : "";
 });
 </script>
 <template>

@@ -14,7 +14,7 @@ export default defineConfig({
       resolvers: [ElementPlusResolver(),
       ],
       imports: ["vue", "vue-router", "@vueuse/core"],
-      dirs: ["./src/utils","./src/stores","./src/service"],
+      dirs: ["./src/utils","./src/stores","./src/service","./src/types"],
       dts: 'src/types/lib/auto-imports.d.ts',
     }),
     Components({

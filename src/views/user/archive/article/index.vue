@@ -1,27 +1,27 @@
 <script setup lang="ts">
-import { ArticleList } from "@/service";
+import { article } from "@/types";
+
 const articleListS = new ArticleList();
-function handleData(data: any[]) {
+const handleData = (data: article[]) => {
   // 过滤内容
-  const groupedArticles = computed(() => {
-    return data.reduce((groups: any[], article: any) => {
-      const year = new Date(article.createTime).getFullYear();
-      if (!groups[year]) {
-        groups[year] = [];
-      }
-      groups[year].push(article);
-      return groups;
-    }, {});
+  data.forEach((item) => {
+    item.content = contentFilter(item.content).substring(0, 100);
+    const year = new Date(item.createTime as string).getFullYear();
+    if (!items.value.has(year)) {
+      items.value.set(year, []);
+    }
+    const num = items.value.get(year);
+    num.push(item);
+    items.value.set(year, num);
   });
-  return groupedArticles.value;
-}
+};
 
 const shellRef = ref();
-const items = ref([]);
 
+const items = ref(new Map());
 onMounted(async () => {
   await articleListS.init();
-  items.value = handleData(articleListS.list.value);
+  handleData(articleListS.list.value);
   await nextTick(() => {
     const shell = shellRef.value;
     const itemElements = shell.querySelectorAll(".item");
@@ -64,34 +64,27 @@ onMounted(async () => {
 });
 </script>
 <template>
-  <!--  <div>
-    <Main only-father-container>
-      <template #banner>
-        <Banner title="时间轴" subtitle="TimeLine" />
-      </template>
-      <template #content>
-        <div class="shell" ref="shellRef">
-          <div class="timeline">
-            <template v-for="(item, year) in items" :key="item.id">
-              <div class="year">--{{ year }}--</div>
-              <div
-                class="item"
-                @click="$router.push(`/article/${i.id}`)"
-                :data-text="i.createTime"
-                v-for="i in item"
-              >
-                <div class="content">
-                  <img class="img" :src="i.articleCover" />
-                  <h2 class="content-title">{{ i.articleTitle }}</h2>
-                  <p class="content-desc">{{ i.articleContent }}</p>
-                </div>
-              </div>
-            </template>
+  <layout>
+    <div class="shell" ref="shellRef">
+      <div class="timeline">
+        <div v-for="[key, value] in Array.from(items.entries())">
+          <div class="year">--{{ key }}--</div>
+          <div
+            class="item"
+            @click="$router.push(`/article/${i.id}`)"
+            :data-text="i.createTime"
+            v-for="i in value"
+          >
+            <div class="content">
+              <img class="img" :src="i.image" />
+              <h2 class="content-title">{{ i.title }}</h2>
+              <p class="content-desc">{{ i.content }}</p>
+            </div>
           </div>
         </div>
-      </template>
-    </Main>
-  </div> -->
+      </div>
+    </div>
+  </layout>
 </template>
 
 <style lang="scss" scoped>

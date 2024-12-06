@@ -34,11 +34,11 @@ addEventListener("wheel", (event) => {
         ><div class="name">筑乐</div>
       </router-link>
 
-      <el-menu style="border: none" mode="horizontal" :ellipsis="false">
+      <el-menu style="border: none" mode="horizontal" :ellipsis="false" router>
         <el-menu-item index="1">
           <el-icon><Document /></el-icon><img />文章</el-menu-item
         >
-        <el-menu-item index="1"
+        <el-menu-item index="archive/article"
           ><el-icon><Files /></el-icon>归档</el-menu-item
         >
         <el-menu-item index="1">

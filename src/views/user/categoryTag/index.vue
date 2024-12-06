@@ -28,7 +28,7 @@ const init = async () => {
 };
 </script>
 <template>
-  <Layout>
+  <Layout Two>
     <template #main>
       <div style="margin-top: 45px">
         <div class="header" :style="colorI.normal('backgroundColor')">
@@ -95,9 +95,8 @@ const init = async () => {
     width: 45%;
     margin: 20px auto;
     height: 250px;
-
     &:hover {
-      transform: scale(1.1);
+      transform: scale(1.1) !important;
     }
     .title {
       position: absolute;
