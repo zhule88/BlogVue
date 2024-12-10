@@ -1,106 +1,117 @@
 <script setup lang="ts">
 import { article } from "@/types";
-
-const articleListS = new ArticleList();
-const handleData = (data: article[]) => {
-  // 过滤内容
-  data.forEach((item) => {
-    item.content = contentFilter(item.content).substring(0, 100);
-    const year = new Date(item.createTime as string).getFullYear();
-    if (!items.value.has(year)) {
-      items.value.set(year, []);
-    }
-    const num = items.value.get(year);
-    num.push(item);
-    items.value.set(year, num);
-  });
-};
-
-const shellRef = ref();
-
-const items = ref(new Map());
+const router = useRouter();
+const articleS = new ArticleList();
+const list = ref(new Map<number, article[]>());
+const years = ref();
 onMounted(async () => {
-  await articleListS.init();
-  handleData(articleListS.list.value);
-  await nextTick(() => {
-    const shell = shellRef.value;
-    const itemElements = shell.querySelectorAll(".item");
-    const itemsArray: any[] = Array.from(itemElements);
-
-    // 将第一个时间轴项目激活，并设置时间轴背景图片为第一个项目的图片
-    itemsArray[0].classList.add("item--active");
-    shell.style.backgroundImage = `url(${
-      itemsArray[0].querySelector(".img").src
-    })`;
-
-    // 当页面滚动时，触发滚动事件
-    window.addEventListener("scroll", () => {
-      const pos = window.scrollY;
-      itemsArray.forEach((item, i) => {
-        const min = item.offsetTop;
-        const max = item.offsetHeight + item.offsetTop;
-
-        // 如果滚动到最后一个项目，并且超过了当前项目高度的一半，
-        // 则将最后一个项目设置为激活状态，并设置背景图片为最后一个项目的图片
-        if (i === itemsArray.length - 2 && pos > min + item.offsetHeight / 2) {
-          itemsArray.forEach((item) => item.classList.remove("item--active"));
-          shell.style.backgroundImage = `url(${
-            itemsArray[itemsArray.length - 1].querySelector(".img").src
-          })`;
-          itemsArray[itemsArray.length - 1].classList.add("item--active");
-        }
-        // 如果当前滚动位置在当前项目的最小和最大高度之间，
-        // 则将当前项目设置为激活状态，并设置背景图片为当前项目的图片
-        else if (pos <= max - 10 && pos >= min) {
-          shell.style.backgroundImage = `url(${
-            item.querySelector(".img").src
-          })`;
-          itemsArray.forEach((item) => item.classList.remove("item--active"));
-          item.classList.add("item--active");
-        }
-      });
-    });
+  await articleS.init();
+  articleS.list.value.forEach((item) => {
+    const year = new Date(item.createTime!).getFullYear();
+    if (list.value.has(year)) {
+      list.value.get(year)!.push(item);
+    } else {
+      list.value.set(year, [item]);
+    }
+  });
+  years.value = Array.from(list.value.keys()).sort((a, b) => b - a);
+  list.value.forEach((articles) => {
+    articles.sort(
+      (a, b) =>
+        new Date(b.createTime!).getTime() - new Date(a.createTime!).getTime()
+    );
   });
 });
 </script>
 <template>
-  <layout>
-    <div class="shell" ref="shellRef">
+  <layout Title="文章">
+    <card>
       <div class="timeline">
-        <div v-for="[key, value] in Array.from(items.entries())">
-          <div class="year">--{{ key }}--</div>
+        <div
+          style="width: 100%; height: 75px; font-size: 30px; font-weight: 600"
+        >
+          全部文章—— {{ articleS.list.value.length }}
+        </div>
+        <div v-for="year in years">
           <div
-            class="item"
-            @click="$router.push(`/article/${i.id}`)"
-            :data-text="i.createTime"
-            v-for="i in value"
+            style="width: 100%; height: 75px; font-size: 25px; font-weight: 500"
           >
-            <div class="content">
-              <img class="img" :src="i.image" />
-              <h2 class="content-title">{{ i.title }}</h2>
-              <p class="content-desc">{{ i.content }}</p>
+            {{ year }}
+          </div>
+          <div
+            class="timeline-item"
+            v-for="item in list.get(year)"
+            @click="router.push(`/user/article/${item.id}`)"
+          >
+            <div class="img">
+              <img
+                :src="item.image"
+                style="height: 100%; width: 100%; object-fit: cover"
+              />
+            </div>
+            <div style="width: 100%">
+              <div class="item-content">{{ item.title }}</div>
+              <div class="item-content">
+                {{ item.createTime }}
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </card>
   </layout>
 </template>
 
 <style lang="scss" scoped>
-@import "index.scss";
-
-.year {
-  background-color: white;
-  position: sticky;
-  top: 5rem;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: bold;
-  margin: 1rem 0;
-  color: grey;
-  border-radius: $border-radius;
-  // 背景透明度
-  opacity: 0.8;
+.timeline {
+  position: relative;
+  padding: 20px 60px 0;
+  list-style: none;
+  &::before {
+    content: "";
+    position: absolute;
+    left: 25px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: var(--text-color);
+  }
+  .timeline-item {
+    width: 100%;
+    height: 75px;
+    display: flex;
+    position: relative;
+    padding: 10px 0;
+    background: var(--color-card);
+    .img {
+      height: 100%;
+      width: 100px;
+      overflow: hidden;
+      border-radius: $border-radius;
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      left: -39px;
+      top: 45%;
+      width: 10px;
+      height: 10px;
+      background-color: var(--text-color);
+      border-radius: 50%;
+    }
+    &:hover {
+      filter: brightness(70%);
+      color: $sky-blue;
+      &::before {
+        background-color: $sky-blue;
+      }
+    }
+    .item-content {
+      height: 50%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+  }
 }
 </style>

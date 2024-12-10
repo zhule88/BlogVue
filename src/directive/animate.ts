@@ -24,7 +24,6 @@ export default {
    beforeUnmount(el: HTMLElement) {
     (el as any)._observer .unobserve(el);
   }
-
 };
 
 

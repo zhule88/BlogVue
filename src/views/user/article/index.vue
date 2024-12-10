@@ -144,7 +144,6 @@ const init = () => {
 .directory {
   position: sticky;
   top: 20px;
-  padding: 10px;
 }
 :deep(.md-editor-catalog-active) {
   & > span {
@@ -160,6 +159,10 @@ const init = () => {
     color: $sky-blue;
   }
 }
+:deep(.md-editor-preview-wrapper) {
+  background: var(--color-card);
+}
+
 :deep(.md-editor-preview) {
   h2:hover,
   h1:hover,

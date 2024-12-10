@@ -81,9 +81,9 @@ const handleCurrentChange = (value: number) => {
 <style scoped lang="scss">
 .card {
   display: flex;
-  height: 300px;
+  height: 250px;
   .img {
-    width: 43%;
+    width: 47%;
     position: relative;
 
     height: 100%;
@@ -92,7 +92,6 @@ const handleCurrentChange = (value: number) => {
     img {
       width: 100%;
       height: 100%;
-
       object-position: center;
       transition: transform 0.5s;
       object-fit: cover;
@@ -111,7 +110,7 @@ const handleCurrentChange = (value: number) => {
     display: flex;
     position: relative;
     background-color: var(--color-card);
-    width: 57%;
+    width: 53%;
     height: 100%;
     border-radius: $border-radius;
     text-decoration: none;
@@ -150,7 +149,7 @@ const handleCurrentChange = (value: number) => {
       height: 32px;
       width: 32px;
       border-radius: 32px;
-      transform: scale(1);
+
       transform-origin: 50% 50%;
       transition: transform 0.35s ease-out;
     }

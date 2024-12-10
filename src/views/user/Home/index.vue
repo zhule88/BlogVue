@@ -5,20 +5,18 @@ import wave from "@/views/user/Home/up/wave.vue";
 import sidebar from "@/views/user/Home/down/sidebar/sidebar.vue";
 import mmain from "@/views/user/Home/down/main/main.vue";
 import { throttle } from "lodash";
-const el = ref<HTMLElement | null>(null);
-
-const { y } = useWindowScroll();
-const Scroll = () => {
-  console.log(y);
-};
-const onScroll = throttle(Scroll, 300);
+const { height } = useWindowSize();
+const isShow = ref(true);
+const onScroll = throttle(() => {
+  isShow.value = window.scrollY > (height.value / 3) * 2 ? false : true;
+}, 300);
 onMounted(() => {
   window.addEventListener("scroll", onScroll);
 });
 </script>
 <template>
   <iimage></iimage>
-  <div class="up">
+  <div class="up" :style="{ opacity: isShow ? 1 : 0 }">
     <brand></brand>
     <!-- <wave></wave> -->
   </div>
@@ -44,5 +42,6 @@ onMounted(() => {
   width: 100%;
   height: 100vh;
   min-height: 10rem;
+  transition: all 1.5s ease-out;
 }
 </style>

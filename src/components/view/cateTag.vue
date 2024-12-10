@@ -19,7 +19,7 @@ onMounted(async () => {
 });
 </script>
 <template>
-  <div>
+  <div style="position: sticky; top: 20px">
     <sideCard title="分类" icon="分类">
       <div class="category" :style="{ '--color': colorI.random() }">
         <div
