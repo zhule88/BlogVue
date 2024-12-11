@@ -91,8 +91,6 @@ const fetchData = () => {
   top: 15em;
 
   .artboard {
-    font-family: "Fredericka the Great", Mulish, -apple-system, "PingFang SC",
-      "Microsoft YaHei", sans-serif;
     font-size: 4.5em;
     color: aliceblue;
     line-height: 1.5;

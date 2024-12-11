@@ -19,7 +19,7 @@ const articleDel = async () => {
   await articleS.del();
   const article = articleS.item.value;
   fileS.del(article.image.substring(30, 70));
-  fileS.delAll(article.id);
+  fileS.delAll(article.id!);
   articletagS.update(article.id!);
   dialogVisible.value = false;
   articleListS.init();

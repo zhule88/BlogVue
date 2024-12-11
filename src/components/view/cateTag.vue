@@ -80,13 +80,15 @@ onMounted(async () => {
 }
 .tag {
   display: flex;
+  flex-wrap: wrap;
   .test {
     @extend center;
     margin: 0.5rem;
     border-radius: $border-radius;
     height: 2rem;
+    width: 3rem;
     user-select: none;
-    padding: 0 0.5rem;
+
     &:hover {
       color: white;
       background: var(--color);

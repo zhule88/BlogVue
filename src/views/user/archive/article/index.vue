@@ -73,7 +73,7 @@ onMounted(async () => {
     left: 25px;
     top: 0;
     bottom: 0;
-    width: 2px;
+    width: 1px;
     background-color: var(--text-color);
   }
   .timeline-item {
@@ -100,7 +100,7 @@ onMounted(async () => {
       border-radius: 50%;
     }
     &:hover {
-      filter: brightness(70%);
+      filter: brightness(90%);
       color: $sky-blue;
       &::before {
         background-color: $sky-blue;

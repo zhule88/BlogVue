@@ -7,7 +7,7 @@ export const fileList = (id:number) =>{
     }
   })
 }
-export const fileUpload = (file:any,id:number) =>{
+export const fileUpload = (file:any,id?:number) =>{
   return request.post('/file/add',file,{
     headers: {
       'Content-Type': 'multipart/form-data'

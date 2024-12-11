@@ -1,0 +1,123 @@
+<script setup lang="ts">
+import { File } from "@/service";
+const { copy } = useClipboard();
+const fileS = new File();
+const reader = new FileReader();
+const articleS = useArticle();
+const dialogVisible = ref(false);
+const isShow = ref(true);
+const isCover = ref(true);
+const file = ref();
+const image = ref();
+onMounted(() => {
+  if (articleS.item.id) {
+    fileS.init(articleS.item.id);
+  }
+});
+reader.onload = (e) => {
+  image.value = e.target!.result;
+};
+const paste = async (e: any) => {
+  const items = e.clipboardData.items;
+  for (const item of items) {
+    if (item.type.startsWith("image/")) {
+      file.value = item.getAsFile();
+      if (isCover.value) {
+        reader.readAsDataURL(file.value);
+      } else {
+        const res = await fileS.upload(file.value, articleS.item.id);
+        image.value = res.data;
+        const R = "<img src='" + res.data + "'>";
+        copy(R);
+        fileS.init(articleS.item.id!);
+      }
+      isShow.value = false;
+      break;
+    }
+  }
+};
+const confirm = async () => {
+  dialogVisible.value = false;
+  if (isCover.value) {
+    const res = await fileS.upload(file.value);
+    articleS.item.image = res.data;
+    articleS.update();
+  }
+};
+</script>
+<template>
+  <el-button
+    type="primary"
+    style="height: 100%"
+    @click="isCover = !isCover"
+    v-if="articleS.item.id != undefined"
+    >切换</el-button
+  >
+  <el-button
+    type="primary"
+    style="height: 100%"
+    @click="
+      isShow = true;
+      dialogVisible = true;
+    "
+    >{{ isCover == true ? "上传封面" : "上传文件" }}</el-button
+  >
+  <el-select
+    v-if="articleS.item.id != undefined"
+    v-model="fileS.filename.value"
+    style="width: 100px"
+    placeholder="删除文件"
+    size="large"
+  >
+    <el-option
+      v-for="item in fileS.list.value"
+      :label="item.filename"
+      :value="item.filename"
+    />
+  </el-select>
+  <el-button
+    type="primary"
+    style="height: 100%"
+    @click="
+      () => {
+        fileS.del();
+        fileS.init(articleS.item.id!);
+      }
+    "
+    >删除</el-button
+  >
+  <el-dialog
+    v-model="dialogVisible"
+    :title="isCover == true ? '上传封面' : '上传文件'"
+    width="600"
+  >
+    <div class="pastezone">
+      <div v-show="isShow" @paste="paste">在这里粘贴图片</div>
+      <img
+        v-show="!isShow"
+        :src="image"
+        alt="预览图片"
+        style="width: 100%; height: 100%"
+      />
+    </div>
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button @click="dialogVisible = false">取消</el-button>
+        <el-button type="primary" @click="confirm()"> 确定</el-button>
+      </div>
+    </template>
+  </el-dialog>
+</template>
+
+<style scoped lang="scss">
+.pastezone {
+  width: 400px;
+  height: 250px;
+  margin: 0 auto;
+  border: 2px dashed #ccc;
+  @extend center;
+  color: #ccc;
+  padding: 10px;
+  box-sizing: border-box;
+}
+</style>

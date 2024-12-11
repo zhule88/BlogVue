@@ -1,23 +1,21 @@
 
-
 import { fileList, fileUpload, fileDel,fileDelAll } from "@/api/modules/file";
 import type { file } from "@/types";
 
 export class File{
   list= ref<file[]>([]);
-  articleId = ref(0);
+
   filename = ref("");
-  async init(id?:number){
-    if(id != undefined){
-    this.articleId.value = id;
-  }
-    const res = await fileList(this.articleId.value);
+  async init(articleId:number){
+
+    const res = await fileList(articleId);
     this.list.value = res.data;
   }
-  async upload(file: any){
+
+  async upload(file: any,articleId?:number){
     const formData = new FormData();
     formData.append("file", file);
-    return await fileUpload(formData,  this.articleId.value);
+    return await fileUpload(formData, articleId);
   }
    del (filename?:string){
     if(filename!=undefined){
@@ -25,10 +23,7 @@ export class File{
     }
     fileDel(this.filename.value);
   }
-   delAll(articleId?:number){
-    if(articleId!=undefined){
-      this.articleId.value = articleId;
-    }
-    fileDelAll(this.articleId.value);
+   delAll(articleId:number){
+    fileDelAll(articleId);
   }
  }
