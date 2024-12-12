@@ -1,8 +1,10 @@
  export default interface article{
   id?: number,
-  categoryId?: number,
+
   title: string,
   image: string,
+  categoryId?: number,
+  tags?:number[],
   content: string,
   state?: number,
   top: number | boolean,

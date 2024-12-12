@@ -10,8 +10,6 @@ const tagS = useTag();
 const categoryListS = useCategoryList();
 const articleS = useArticle();
 
-const articletagS = new ArticleTag();
-
 const route = useRoute();
 const router = useRouter();
 
@@ -20,7 +18,6 @@ onMounted(async () => {
   const articleId = route.query.id as any;
   if (!isNaN(articleId)) {
     articleS.init(articleId);
-    articletagS.init(articleId);
   }
 });
 
@@ -33,16 +30,12 @@ const tablesubmit = async () => {
   } else {
     articleS.update();
   }
-  articletagS.update(articleS.item.id!);
 };
 
 const tagClose = (tagId: number) => {
-  articletagS.list.value = articletagS.list.value.filter(
-    (obj) => obj !== tagId
-  );
+  articleS.item.tags = articleS.item.tags!.filter((obj) => obj !== tagId);
 };
 const clear = () => {
-  articletagS.list.value = [];
   articleS.clear();
 };
 </script>
@@ -70,8 +63,8 @@ const clear = () => {
         />
       </el-select>
       <el-select
-        v-model="articletagS.list.value"
         v-if="articleS.item.id != undefined"
+        v-model="articleS.item.tags"
         placeholder="选择标签"
         multiple
         size="large"
@@ -84,7 +77,7 @@ const clear = () => {
         />
         <template #tag>
           <el-tag
-            v-for="item in articletagS.list.value"
+            v-for="item in articleS.item.tags"
             :key="item"
             closable
             @close="tagClose(item)"

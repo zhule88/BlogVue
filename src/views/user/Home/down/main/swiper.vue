@@ -36,10 +36,6 @@ onMounted(async () => {
         <div style="font-size: 30px">
           {{ item.title }}
         </div>
-        <div style="font-size: 15px">
-          <p>发布于:{{ item.createTime }}</p>
-          <p>更新于:{{ item.updateTime }}</p>
-        </div>
       </div>
       <el-image :src="item.image" />
     </swiper-slide>

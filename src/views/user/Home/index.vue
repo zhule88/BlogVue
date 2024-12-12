@@ -2,7 +2,6 @@
 import iimage from "@/views/user/Home/image.vue";
 import brand from "@/views/user/Home/up/brand.vue";
 import wave from "@/views/user/Home/up/wave.vue";
-import sidebar from "@/views/user/Home/down/sidebar/sidebar.vue";
 import mmain from "@/views/user/Home/down/main/main.vue";
 import { throttle } from "lodash";
 const { height } = useWindowSize();

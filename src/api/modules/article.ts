@@ -49,3 +49,11 @@ export const articleListByCateId= (id:number)=>{
   }
 })
 }
+export const articleListByTagId = (id:number) =>{
+  return request.get('/article/list/byTagId',{
+    params:{
+      id
+    }
+  })
+}
+

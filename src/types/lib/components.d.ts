@@ -33,7 +33,6 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     SideCard: typeof import('./../../components/data/sideCard.vue')['default']
     SvgIcon: typeof import('./../../components/data/svgIcon.vue')['default']
-    Tag: typeof import('./../../components/data/tag.vue')['default']
     Taxonomy: typeof import('../../components/view/cateTag.vue')['default']
   }
 }

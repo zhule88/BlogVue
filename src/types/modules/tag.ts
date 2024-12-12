@@ -3,7 +3,4 @@ export default interface tag{
   name:string,
 
 }
-export interface articletag{
-  articleId?:number,
-  tagId:number
-}
+

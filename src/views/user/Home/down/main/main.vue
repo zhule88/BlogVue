@@ -3,6 +3,7 @@ import swiper from "./swiper.vue";
 import { contentFilter } from "@/utils/filter";
 
 const categoryListS = useCategoryList();
+const tagS = useTag();
 const articleListS = new ArticleList();
 
 const colorI = new color();
@@ -41,7 +42,9 @@ const handleCurrentChange = (value: number) => {
             <div class="category" :style="colorI.normal('backgroundColor')">
               {{ categoryListS.map.get(article.categoryId!) }}
             </div>
-            <tag v-model:id="article.id"></tag>
+            <el-tag v-for="item in article.tags">
+              {{ tagS.map.get(item) }}
+            </el-tag>
           </div>
           <div class="text">
             <svgIcon name="火" class="svg" />
@@ -62,7 +65,6 @@ const handleCurrentChange = (value: number) => {
       </div>
       <div class="img">
         <img v-lazy="article.image" />
-        <!-- <el-image :src="article.image" /> -->
       </div>
     </card>
     <div style="display: flex; justify-content: center; align-items: center">

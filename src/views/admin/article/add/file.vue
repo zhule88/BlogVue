@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { File } from "@/service";
+
 const { copy } = useClipboard();
 const fileS = new File();
 const reader = new FileReader();
 const articleS = useArticle();
 const dialogVisible = ref(false);
 const isShow = ref(true);
-const isCover = ref(true);
+const isCover = ref(false);
 const file = ref();
 const image = ref();
 onMounted(() => {
@@ -17,20 +18,12 @@ onMounted(() => {
 reader.onload = (e) => {
   image.value = e.target!.result;
 };
-const paste = async (e: any) => {
-  const items = e.clipboardData.items;
+const paste = async (e: ClipboardEvent) => {
+  const items = e.clipboardData!.items;
   for (const item of items) {
     if (item.type.startsWith("image/")) {
       file.value = item.getAsFile();
-      if (isCover.value) {
-        reader.readAsDataURL(file.value);
-      } else {
-        const res = await fileS.upload(file.value, articleS.item.id);
-        image.value = res.data;
-        const R = "<img src='" + res.data + "'>";
-        copy(R);
-        fileS.init(articleS.item.id!);
-      }
+      reader.readAsDataURL(file.value);
       isShow.value = false;
       break;
     }
@@ -41,16 +34,15 @@ const confirm = async () => {
   if (isCover.value) {
     const res = await fileS.upload(file.value);
     articleS.item.image = res.data;
-    articleS.update();
+  } else {
+    const res = await fileS.upload(file.value, articleS.item.id);
+    copy("<img src='" + prefix + res.data + "'>");
+    fileS.init(articleS.item.id!);
   }
 };
 </script>
 <template>
-  <el-button
-    type="primary"
-    style="height: 100%"
-    @click="isCover = !isCover"
-    v-if="articleS.item.id != undefined"
+  <el-button type="primary" style="height: 100%" @click="isCover = !isCover"
     >切换</el-button
   >
   <el-button
@@ -78,6 +70,7 @@ const confirm = async () => {
   <el-button
     type="primary"
     style="height: 100%"
+    v-if="articleS.item.id != undefined"
     @click="
       () => {
         fileS.del();

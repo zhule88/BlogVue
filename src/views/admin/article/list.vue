@@ -6,7 +6,6 @@ const categoryListS = useCategoryList();
 const articleListS = new ArticleList();
 const articleS = new Article();
 const fileS = new File();
-const articletagS = new ArticleTag();
 
 const dialogVisible = ref(false);
 
@@ -18,12 +17,13 @@ onMounted(() => {
 const articleDel = async () => {
   await articleS.del();
   const article = articleS.item.value;
-  fileS.del(article.image.substring(30, 70));
+  fileS.del(article.image);
   fileS.delAll(article.id!);
-  articletagS.update(article.id!);
   dialogVisible.value = false;
   articleListS.init();
 };
+articleListS.state.value = 3;
+articleListS.init();
 </script>
 
 <template>
@@ -42,7 +42,9 @@ const articleDel = async () => {
     </el-table-column>
     <el-table-column label="标签">
       <template #default="scope">
-        <tag v-model:id="scope.row.id" v-model:tagS="tagS"></tag>
+        <el-tag v-for="item in scope.row.tags">
+          {{ tagS.map.get(item) }}
+        </el-tag>
       </template>
     </el-table-column>
     <el-table-column prop="state" label="状态" />

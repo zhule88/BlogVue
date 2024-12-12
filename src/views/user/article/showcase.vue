@@ -3,7 +3,6 @@ import { timeFilter } from "@/utils/filter";
 const articleS = useArticle();
 const tagS = useTag();
 const categoryListS = useCategoryList();
-const articletagS = new ArticleTag();
 const articleLength = ref<number>(0);
 
 onMounted(() => {
@@ -13,7 +12,6 @@ watch(articleS, () => {
   init();
 });
 const init = () => {
-  articletagS.init(articleS.item.id!);
   articleLength.value = contentFilter(articleS.item.content).length;
 };
 </script>
@@ -25,10 +23,7 @@ const init = () => {
           <div class="category">
             {{ categoryListS.map.get(articleS.item.categoryId!) }}
           </div>
-          <div
-            v-for="item in articletagS.list.value"
-            style="margin: 0 0 0 20px"
-          >
+          <div v-for="item in articleS.item.tags" style="margin: 0 0 0 20px">
             #{{ tagS.map.get(item) }}
           </div>
         </div>

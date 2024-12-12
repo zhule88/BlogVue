@@ -4,7 +4,6 @@ const tagS = useTag();
 const categoryListS = useCategoryList();
 const Id = ref(0);
 const type = ref("");
-const articleTagS = new ArticleTag();
 const articleListS = new ArticleList();
 const colorI = new color();
 const router = useRouter();
@@ -20,8 +19,7 @@ const init = async () => {
   Id.value = Number(route.params.id);
   type.value = route.params.type as string;
   if (type.value == "tag") {
-    const res = await articleTagS.articleList(Id.value);
-    articleListS.listByIds(res.data);
+    articleListS.listByTagId(Id.value);
   } else {
     articleListS.listByCateId(Id.value);
   }
