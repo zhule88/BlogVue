@@ -27,7 +27,9 @@ export class ArticleList {
     const res = await articlePage(this.current.value, this.size.value,this.state.value);
     this.total.value = res.data.total;
     this.list.value = res.data.records;
+
     this.addPrefix();
+
   }
 
   async around(id:number){

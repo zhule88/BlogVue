@@ -1,6 +1,6 @@
 
 import { fileList, fileUpload, fileDel,fileDelAll } from "@/api/modules/file";
-import type { file } from "@/types";
+import file from '@/types/modules/file'
 
 export class File{
   list= ref<file[]>([]);

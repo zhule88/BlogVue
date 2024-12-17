@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { article } from "@/types";
+
 const router = useRouter();
 const articleS = new ArticleList();
 const list = ref(new Map<number, article[]>());

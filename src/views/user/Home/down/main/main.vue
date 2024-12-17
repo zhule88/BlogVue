@@ -10,7 +10,7 @@ const colorI = new color();
 const isShow = ref<boolean[]>([]);
 const router = useRouter();
 onMounted(async () => {
-  articleListS.page();
+  await articleListS.page();
 });
 const handleCurrentChange = (value: number) => {
   articleListS.current.value = value;

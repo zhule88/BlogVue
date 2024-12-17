@@ -1,4 +1,5 @@
 import request from '@/api/request'
+import article from '@/types/modules/article';
 
 export const articlePage = (current : number, size : number,state:number) =>{
 return request.get('/article/page',{params:{
@@ -12,10 +13,10 @@ export const articleList = (state ?: number,top ?:number) =>{
     top
   }})
 }
-export const articleAdd = (data:any) =>{
+export const articleAdd = (data:article) =>{
   return request.post('/article/add',data)
 }
-export const articleUpdate = (data:any) =>{
+export const articleUpdate = (data:article) =>{
   return request.put('/article/update',data)
 }
 export const articleDel= (id:number) =>{

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import DayNightToggleButton from "@/layout/user/Header/DayNightToggle";
-import { Document, Files, ChatLineSquare } from "@element-plus/icons-vue";
+import { Document, Files, ChatLineSquare, Link } from "@element-plus/icons-vue";
 import "animate.css";
 const isHeader = ref(true);
 const mode = useColorMode();
@@ -40,6 +40,10 @@ addEventListener("wheel", (event) => {
         >
         <el-menu-item index="archive/article"
           ><el-icon><Files /></el-icon>归档</el-menu-item
+        >
+
+        <el-menu-item index="archive/article">
+          <el-icon><Link /></el-icon>友链</el-menu-item
         >
         <el-menu-item index="1">
           <el-icon><ChatLineSquare /></el-icon>留言</el-menu-item

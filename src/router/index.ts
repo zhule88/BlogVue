@@ -6,7 +6,7 @@ import admin from "@/router/admin"
 
 const routes : Array<RouteRecordRaw> = [
   {path:'/:pathMatch(.*)*',
-    redirect: '/user/home',},
+    redirect: '/user/home'},
  ...user,
  ...admin
 ]
@@ -22,7 +22,7 @@ const router = createRouter({
     window.scrollTo(0, 0)
 })
   }
-  next(); // 确保要调用 next()
+  next(); //
 }); */
 
 export default router

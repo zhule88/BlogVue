@@ -15,7 +15,6 @@ export const useArticle =  defineStore('article', ()=>{
     const res = await articleGet(id );
     item.value = res.data
     item.value.image = prefix+item.value.image
-
   }
   const add=()=>{
     articleAdd(item.value);

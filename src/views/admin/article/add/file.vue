@@ -52,7 +52,7 @@ const confirm = async () => {
       isShow = true;
       dialogVisible = true;
     "
-    >{{ isCover == true ? "上传封面" : "上传文件" }}</el-button
+    >{{ isCover == true ? "上传封面" : "上传图片" }}</el-button
   >
   <el-select
     v-if="articleS.item.id != undefined"
@@ -81,7 +81,7 @@ const confirm = async () => {
   >
   <el-dialog
     v-model="dialogVisible"
-    :title="isCover == true ? '上传封面' : '上传文件'"
+    :title="isCover == true ? '上传封面' : '上传图片'"
     width="600"
   >
     <div class="pastezone">
