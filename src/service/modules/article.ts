@@ -60,6 +60,7 @@ export class Article{
     image:'',
     content:'',
     top:0,
+    visitCount:0
   })
   async init (id:number){
     const res = await articleGet(id);
@@ -85,6 +86,7 @@ export class Article{
       image:'',
       content:'',
       top:0,
+      visitCount:0
     }
   }
 }

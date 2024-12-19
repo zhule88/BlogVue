@@ -27,6 +27,11 @@ const routes : Array<RouteRecordRaw> = [
         path: 'archive/article',
         name: 'ararticle',
         component: () => import('@/views/user/archive/article/index.vue')
+      },
+      {
+        path: 'link',
+        name: 'link',
+        component: () => import('@/views/user/link/index.vue')
       }
     ]
   }

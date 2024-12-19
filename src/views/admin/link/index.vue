@@ -1,0 +1,51 @@
+<script setup lang="ts"></script>
+<template>
+  <<!-- el-table :data="articleListS.list.value" stripe>
+    <el-table-column prop="id" label="id" />
+    <el-table-column prop="title" label="标题" />
+    <el-table-column label="封面">
+      <template #default="scope">
+        <img :src="scope.row.image" style="width: 60%" />
+      </template>
+    </el-table-column>
+    <el-table-column label="分类">
+      <template #default="scope">
+        <p>{{ categoryListS.map.get(scope.row.categoryId) }}</p>
+      </template>
+    </el-table-column>
+    <el-table-column label="标签">
+      <template #default="scope">
+        <el-tag v-for="item in scope.row.tags">
+          {{ tagS.map.get(item) }}
+        </el-tag>
+      </template>
+    </el-table-column>
+    <el-table-column prop="state" label="状态" />
+    <el-table-column prop="visitCount" label="浏览量" />
+    <el-table-column prop="top" label="是否置顶" />
+    <el-table-column prop="createTime" label="创建时间" />
+    <el-table-column prop="updateTime" label="修改时间" />
+    <el-table-column label="操作">
+      <template #default="scope">
+        <router-link :to="`/admin/add?id=${scope.row.id}`">
+          <el-button size="small" type="primary"> 修改 </el-button>
+        </router-link>
+        <el-button
+          size="small"
+          type="danger"
+          @click="
+            () => {
+              dialogVisible = true;
+              articleS.item.value.id = scope.row.id;
+              articleS.item.value.image = scope.row.image;
+            }
+          "
+        >
+          删除
+        </el-button>
+      </template>
+    </el-table-column>
+  </el-table> -->
+</template>
+
+<style scoped></style>

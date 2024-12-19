@@ -31,7 +31,9 @@ onMounted(() => {
         <div class="banner">
           <h2 class="title">{{ Title }}</h2>
         </div>
-        <slot></slot>
+        <card>
+          <slot></slot>
+        </card>
       </div>
     </div>
   </div>

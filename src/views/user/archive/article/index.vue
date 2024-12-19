@@ -26,40 +26,36 @@ onMounted(async () => {
 </script>
 <template>
   <layout Title="文章">
-    <card>
-      <div class="timeline">
+    <div class="timeline">
+      <div style="width: 100%; height: 75px; font-size: 30px; font-weight: 600">
+        全部文章—— {{ articleS.list.value.length }}
+      </div>
+      <div v-for="year in years">
         <div
-          style="width: 100%; height: 75px; font-size: 30px; font-weight: 600"
+          style="width: 100%; height: 75px; font-size: 25px; font-weight: 500"
         >
-          全部文章—— {{ articleS.list.value.length }}
+          {{ year }}
         </div>
-        <div v-for="year in years">
-          <div
-            style="width: 100%; height: 75px; font-size: 25px; font-weight: 500"
-          >
-            {{ year }}
+        <div
+          class="timeline-item"
+          v-for="item in list.get(year)"
+          @click="router.push(`/user/article/${item.id}`)"
+        >
+          <div class="img">
+            <img
+              :src="item.image"
+              style="height: 100%; width: 100%; object-fit: cover"
+            />
           </div>
-          <div
-            class="timeline-item"
-            v-for="item in list.get(year)"
-            @click="router.push(`/user/article/${item.id}`)"
-          >
-            <div class="img">
-              <img
-                :src="item.image"
-                style="height: 100%; width: 100%; object-fit: cover"
-              />
-            </div>
-            <div style="width: 100%">
-              <div class="item-content">{{ item.title }}</div>
-              <div class="item-content">
-                {{ item.createTime }}
-              </div>
+          <div style="width: 100%">
+            <div class="item-content">{{ item.title }}</div>
+            <div class="item-content">
+              {{ item.createTime }}
             </div>
           </div>
         </div>
       </div>
-    </card>
+    </div>
   </layout>
 </template>
 

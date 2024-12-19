@@ -42,10 +42,10 @@ addEventListener("wheel", (event) => {
           ><el-icon><Files /></el-icon>归档</el-menu-item
         >
 
-        <el-menu-item index="archive/article">
+        <el-menu-item index="link">
           <el-icon><Link /></el-icon>友链</el-menu-item
         >
-        <el-menu-item index="1">
+        <el-menu-item index="link">
           <el-icon><ChatLineSquare /></el-icon>留言</el-menu-item
         >
 

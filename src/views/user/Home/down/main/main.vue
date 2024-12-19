@@ -9,13 +9,20 @@ const articleListS = new ArticleList();
 const colorI = new color();
 const isShow = ref<boolean[]>([]);
 const router = useRouter();
-onMounted(async () => {
-  await articleListS.page();
+onMounted(() => {
+  articleListS.page();
+  tagType.value = isDark.value;
 });
 const handleCurrentChange = (value: number) => {
   articleListS.current.value = value;
   articleListS.page();
 };
+const tagType = ref(true);
+const isDark = useDark({
+  onChanged(dark: boolean) {
+    tagType.value = dark;
+  },
+});
 </script>
 
 <template>
@@ -42,7 +49,10 @@ const handleCurrentChange = (value: number) => {
             <div class="category" :style="colorI.normal('backgroundColor')">
               {{ categoryListS.map.get(article.categoryId!) }}
             </div>
-            <el-tag v-for="item in article.tags">
+            <el-tag
+              v-for="item in article.tags"
+              :type="tagType == true ? 'info' : 'primary'"
+            >
               {{ tagS.map.get(item) }}
             </el-tag>
           </div>
@@ -151,7 +161,6 @@ const handleCurrentChange = (value: number) => {
       height: 32px;
       width: 32px;
       border-radius: 32px;
-
       transform-origin: 50% 50%;
       transition: transform 0.35s ease-out;
     }

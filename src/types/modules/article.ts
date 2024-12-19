@@ -1,6 +1,5 @@
  export default interface article{
   id?: number,
-
   title: string,
   image: string,
   categoryId?: number,
@@ -8,7 +7,7 @@
   content: string,
   state?: number,
   top: number | boolean,
-  visitCount?:number,
+  visitCount:number,
   createTime?:string,
   updateTime?:string
 }

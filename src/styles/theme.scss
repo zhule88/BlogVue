@@ -14,6 +14,8 @@
    --text-color: #333333;
     // footer
   --color-footer: linear-gradient(135deg,#f6ceec,#d939cd);
+
+  --color-like:#3b82f6;
 }
 
 // 暗色模式下的主题色
@@ -31,4 +33,5 @@ html.dark {
    --text-color: #A0A0A0;
   //footer
   --color-footer: linear-gradient(135deg,#000c40,#607d8b);
+  --color-like:#2f2f2f;
 }

@@ -1,4 +1,3 @@
-
 import { fileList, fileUpload, fileDel,fileDelAll } from "@/api/modules/file";
 import file from '@/types/modules/file'
 

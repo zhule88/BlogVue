@@ -12,6 +12,8 @@ declare global {
   const CategoryList: typeof import('../../service/index')['CategoryList']
   const EffectScope: typeof import('vue')['EffectScope']
   const File: typeof import('../../service/index')['File']
+  const Link: typeof import('../../service/index')['Link']
+  const LinkList: typeof import('../../service/index')['LinkList']
   const Tag: typeof import('../../service/index')['Tag']
   const article: typeof import('../modules/article')['default']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']

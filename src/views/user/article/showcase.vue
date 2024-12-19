@@ -47,7 +47,7 @@ const init = () => {
           </div>
           <div>
             <svgIcon name="时间" color1="white" />
-            {{ Math.ceil(articleLength / 250) }}分钟
+            {{ Math.ceil(articleLength / 200) }}分钟
           </div>
         </div>
         <div class="text">
