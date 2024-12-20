@@ -8,7 +8,7 @@ const route = useRoute();
 const router = useRouter();
 const id = "article";
 const mode = useColorMode() as any;
-const articleListS = new ArticleList();
+const articleListS = reactive(new ArticleList());
 const env = import.meta.env;
 const scrollElement = document.documentElement;
 
@@ -63,24 +63,20 @@ const init = () => {
         </div>
         <div class="around">
           <div
-            v-if="articleListS.list.value[0]"
-            @click="
-              router.push(`/user/article/${articleListS.list.value[0].id}`)
-            "
+            v-if="articleListS.list[0]"
+            @click="router.push(`/user/article/${articleListS.list[0].id}`)"
           >
             <div class="text" style="left: 2rem">
               <div style="font-size: 15px; margin: 10px">上一篇</div>
               <div style="font-size: 20px; margin: 10px">
-                {{ articleListS.list.value[0].title }}
+                {{ articleListS.list[0].title }}
               </div>
             </div>
-            <el-image :src="articleListS.list.value[0].image" />
+            <el-image :src="articleListS.list[0].image" />
           </div>
           <div
-            v-if="articleListS.list.value[1]"
-            @click="
-              router.push(`/user/article/${articleListS.list.value[1].id}`)
-            "
+            v-if="articleListS.list[1]"
+            @click="router.push(`/user/article/${articleListS.list[1].id}`)"
           >
             <div class="text" style="right: 2rem">
               <div
@@ -101,10 +97,10 @@ const init = () => {
                   justify-content: flex-end;
                 "
               >
-                {{ articleListS.list.value[1].title }}
+                {{ articleListS.list[1].title }}
               </div>
             </div>
-            <el-image :src="articleListS.list.value[1].image" />
+            <el-image :src="articleListS.list[1].image" />
           </div>
         </div>
       </card>

@@ -5,12 +5,12 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-const articleListS = new ArticleList();
+const articleListS = reactive(new ArticleList());
 const modules = ref([Navigation, Pagination, Autoplay]);
 const router = useRouter();
 const isSwiper = ref(false);
 onMounted(async () => {
-  articleListS.top.value = 1;
+  articleListS.top = 1;
   await articleListS.init();
   isSwiper.value = true;
 });
@@ -27,7 +27,7 @@ onMounted(async () => {
     v-if="isSwiper"
   >
     <swiper-slide
-      v-for="item in articleListS.list.value"
+      v-for="item in articleListS.list"
       :key="item.id"
       @click="router.push(`/user/article/${item.id}`)"
       class="swiper-item"

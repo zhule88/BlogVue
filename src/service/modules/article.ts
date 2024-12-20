@@ -1,4 +1,3 @@
-import { ref} from 'vue'
 import type {article} from '@/types'
 import {articleGet, articleAdd, articleList, articleDel,
    articleUpdate,articlePage,articleAround,
@@ -6,27 +5,27 @@ import {articleGet, articleAdd, articleList, articleDel,
 
 
 export class ArticleList {
-  list = ref<article[]>([]);
-  state = ref(2);
-  top= ref(3);
-  total = ref(0)
-  current = ref(1);
-  size = ref(10);
+  list:article[] =[];
+  state = 2;
+  top= 3;
+  total = 0
+  current = 1;
+  size = 10;
 
   addPrefix(){
-    this.list.value.forEach(item =>{
+    this.list.forEach(item =>{
       item.image = prefix+item.image
     })
   }
   async init (){
-    const res = await articleList(this.state.value,this.top.value);
-    this.list.value = res.data
+    const res = await articleList(this.state,this.top);
+    this.list = res.data;
     this.addPrefix();
   }
   async page (){
-    const res = await articlePage(this.current.value, this.size.value,this.state.value);
-    this.total.value = res.data.total;
-    this.list.value = res.data.records;
+    const res = await articlePage(this.current, this.size,this.state);
+    this.total = res.data.total;
+    this.list = res.data.records;
 
     this.addPrefix();
 
@@ -34,54 +33,54 @@ export class ArticleList {
 
   async around(id:number){
     const res = await articleAround(id)
-    this.list.value = res.data;
+    this.list = res.data;
     this.addPrefix();
   }
   async listByIds(ids:number[]){
     const res = await articleListByIds(ids)
-    this.list.value = res.data;
+    this.list = res.data;
     this.addPrefix();
   }
   async listByCateId(id:number){
     const res = await articleListByCateId(id)
-    this.list.value = res.data;
+    this.list = res.data;
     this.addPrefix();
   }
   async listByTagId(id:number){
     const res = await articleListByTagId(id)
-    this.list.value = res.data;
+    this.list = res.data;
     this.addPrefix();
   }
 }
 
 export class Article{
-  item = ref<article>({
+  item: article= {
     title:'',
     image:'',
     content:'',
     top:0,
     visitCount:0
-  })
+  }
   async init (id:number){
     const res = await articleGet(id);
-    this.item.value = res.data
-    this.item.value.image = prefix+this.item.value.image
+    this.item = res.data
+    this.item.image = prefix+this.item.image
 
   }
     add(){
-     articleAdd(this.item .value);
+     articleAdd(this.item );
   }
     update(){
-    articleUpdate(this.item .value);
+    articleUpdate(this.item );
   }
   async del() {
-   await articleDel(this.item .value.id! )
+   await articleDel(this.item.id! )
   }
 
 
 
   clear(){
-  this.item .value = {
+  this.item  = {
       title:'',
       image:'',
       content:'',

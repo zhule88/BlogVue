@@ -7,7 +7,7 @@ const list = ref(new Map<number, article[]>());
 const years = ref();
 onMounted(async () => {
   await articleS.init();
-  articleS.list.value.forEach((item) => {
+  articleS.list.forEach((item) => {
     const year = new Date(item.createTime!).getFullYear();
     if (list.value.has(year)) {
       list.value.get(year)!.push(item);
@@ -28,7 +28,7 @@ onMounted(async () => {
   <layout Title="文章">
     <div class="timeline">
       <div style="width: 100%; height: 75px; font-size: 30px; font-weight: 600">
-        全部文章—— {{ articleS.list.value.length }}
+        全部文章—— {{ articleS.list.length }}
       </div>
       <div v-for="year in years">
         <div

@@ -2,7 +2,7 @@
 import { File } from "@/service";
 
 const { copy } = useClipboard();
-const fileS = new File();
+const fileS = reactive(new File());
 const reader = new FileReader();
 const articleS = useArticle();
 const dialogVisible = ref(false);
@@ -10,11 +10,15 @@ const isShow = ref(true);
 const isCover = ref(false);
 const file = ref();
 const image = ref();
-onMounted(() => {
-  if (articleS.item.id) {
-    fileS.init(articleS.item.id);
+
+watch(
+  () => articleS.item.id,
+  (newId) => {
+    if (newId) {
+      fileS.init(newId);
+    }
   }
-});
+);
 reader.onload = (e) => {
   image.value = e.target!.result;
 };
@@ -56,13 +60,13 @@ const confirm = async () => {
   >
   <el-select
     v-if="articleS.item.id != undefined"
-    v-model="fileS.filename.value"
+    v-model="fileS.filename"
     style="width: 100px"
     placeholder="删除文件"
     size="large"
   >
     <el-option
-      v-for="item in fileS.list.value"
+      v-for="item in fileS.list"
       :label="item.filename"
       :value="item.filename"
     />

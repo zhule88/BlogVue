@@ -3,31 +3,29 @@ import { File } from "@/service";
 
 const tagS = useTag();
 const categoryListS = useCategoryList();
-const articleListS = new ArticleList();
-const articleS = new Article();
+const articleListS = reactive(new ArticleList());
+const articleS = reactive(new Article());
 const fileS = new File();
 
 const dialogVisible = ref(false);
 
 onMounted(() => {
-  articleListS.state.value = 3;
+  articleListS.state = 3;
   articleListS.init();
 });
 
 const articleDel = async () => {
   await articleS.del();
-  const article = articleS.item.value;
+  const article = articleS.item;
   fileS.del(article.image);
   fileS.delAll(article.id!);
   dialogVisible.value = false;
   articleListS.init();
 };
-articleListS.state.value = 3;
-articleListS.init();
 </script>
 
 <template>
-  <el-table :data="articleListS.list.value" stripe>
+  <el-table :data="articleListS.list" stripe>
     <el-table-column prop="id" label="id" />
     <el-table-column prop="title" label="标题" />
     <el-table-column label="封面">
@@ -63,8 +61,8 @@ articleListS.init();
           @click="
             () => {
               dialogVisible = true;
-              articleS.item.value.id = scope.row.id;
-              articleS.item.value.image = scope.row.image;
+              articleS.item.id = scope.row.id;
+              articleS.item.image = scope.row.image;
             }
           "
         >

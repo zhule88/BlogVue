@@ -15,10 +15,10 @@ const route = useRoute();
 const router = useRouter();
 
 onMounted(async () => {
-  clear();
+  articleS.clear();
   const articleId = route.query.id as any;
   if (!isNaN(articleId)) {
-    articleS.init(articleId);
+    await articleS.init(articleId);
   }
 });
 
@@ -38,9 +38,6 @@ const tablesubmit = async () => {
 
 const tagClose = (tagId: number) => {
   articleS.item.tags = articleS.item.tags!.filter((obj) => obj !== tagId);
-};
-const clear = () => {
-  articleS.clear();
 };
 const onUploadImg = async (file: any) => {
   const res = await fileS.upload(file[0]);

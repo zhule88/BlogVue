@@ -38,7 +38,7 @@ const init = async () => {
         <div class="contain">
           <card
             v-animate
-            v-for="article in articleListS.list.value"
+            v-for="article in articleListS.list"
             @click="router.push(`/user/article/${article.id}`)"
           >
             <div style="height: 80%; position: relative">

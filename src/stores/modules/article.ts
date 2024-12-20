@@ -5,34 +5,36 @@ import {articleGet, articleAdd, articleDel,
   } from "@/api/modules/article";
 
 export const useArticle =  defineStore('article', ()=>{
-  const item = ref<article>({
+  let item = reactive<article>({
     title:'',
     image:'',
     content:'',
     top:0,
+    visitCount:0
   })
   const init = async(id:number)=>{
-    const res = await articleGet(id );
-    item.value = res.data
-    item.value.image = prefix+item.value.image
+    const res = await articleGet(id);
+    Object.assign(item, res.data);
+
+    item.image = prefix+item.image
   }
   const add=()=>{
-    articleAdd(item.value);
+    articleAdd(item);
  }
  const update =()=>{
-   articleUpdate(item .value);
+   articleUpdate(item );
  }
  const del =()=>{
- articleDel(item .value.id! )
+ articleDel(item.id! )
  }
  const clear = ()=>{
-  item .value = {
-     title:'',
-     image:'',
-     content:'',
-     top:0,
-   }
- }
+ item.title = '';
+ item.image = '';
+ item.content = '';
+ item.top = 0;
+ item.visitCount = 0;
+};
+
 
   return{
     item ,

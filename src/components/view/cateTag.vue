@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const tagS = useTag();
 const categoryListS = useCategoryList();
-const categoryListI = new CategoryList();
 const colorI = new color();
 interface Map {
   [key: string]: any;
@@ -10,7 +9,7 @@ const map = ref<Map>({});
 const count = ref([]);
 const router = useRouter();
 onMounted(async () => {
-  const res = await categoryListI.count();
+  const res = await categoryListS.count();
   count.value = res.data;
   count.value.forEach((item) => {
     const key = Object.keys(item)[0];

@@ -4,7 +4,7 @@ import { contentFilter } from "@/utils/filter";
 
 const categoryListS = useCategoryList();
 const tagS = useTag();
-const articleListS = new ArticleList();
+const articleListS = reactive(new ArticleList());
 
 const colorI = new color();
 const isShow = ref<boolean[]>([]);
@@ -14,7 +14,7 @@ onMounted(() => {
   tagType.value = isDark.value;
 });
 const handleCurrentChange = (value: number) => {
-  articleListS.current.value = value;
+  articleListS.current = value;
   articleListS.page();
 };
 const tagType = ref(true);
@@ -33,7 +33,7 @@ const isDark = useDark({
       @mouseenter="isShow[index] = true"
       @mouseleave="isShow[index] = false"
       @click="router.push(`/user/article/${article.id}`)"
-      v-for="(article, index) in articleListS.list.value"
+      v-for="(article, index) in articleListS.list"
       v-animate
       :class="[(index & 1) == 0 ? 'cardright' : 'cardleft']"
     >
@@ -81,9 +81,9 @@ const isDark = useDark({
       <el-pagination
         background
         layout="prev, pager, next"
-        :total="articleListS.total.value"
-        :current-page="articleListS.current.value"
-        :page-size="articleListS.size.value"
+        :total="articleListS.total"
+        :current-page="articleListS.current"
+        :page-size="articleListS.size"
         @current-change="handleCurrentChange"
       />
     </div>

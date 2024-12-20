@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { ElMessage } from "element-plus";
+import "element-plus/theme-chalk/index.css";
 const baseURL = 'http://localhost:8000/'
 const instance = axios.create({
   baseURL,
@@ -7,10 +9,11 @@ const instance = axios.create({
 
 // 添加请求拦截器
 instance.interceptors.request.use(
-  function (config) {
+   (config)=> {
     return config
   },
-  function (error) {
+   (error)=> {
+    ElMessage.error(error)
     return Promise.reject(error)
   }
 )
@@ -18,14 +21,17 @@ instance.interceptors.request.use(
 // 添加响应拦截器
 instance.interceptors.response.use(
 
-  function (response) {
+   (response) =>{
     if (response.data.code == 1) {
-      return response.data
+      return response.data;
     }
-
+    if (response.data.code != 1) {
+      ElMessage.error(response.data.data)
+    }
     return Promise.reject(response.data)
   },
-  function (error) {
+   (error) =>{
+    ElMessage.error(error)
     return Promise.reject(error)
   }
 )

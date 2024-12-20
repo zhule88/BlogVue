@@ -2,11 +2,11 @@ import type {category} from '@/types'
 import {categoryList,categoryArticleCount} from "@/api/modules/category"
 
 export class CategoryList{
-  list= ref<category[]>([])
+  list = reactive<category[]>([])
   map = new nameMap();
   async init (){
     const res = await categoryList();
-    this.list.value = res.data
+    this.list = res.data
     this.map.init(res.data)
   }
 

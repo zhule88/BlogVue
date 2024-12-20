@@ -2,13 +2,14 @@ import { fileList, fileUpload, fileDel,fileDelAll } from "@/api/modules/file";
 import file from '@/types/modules/file'
 
 export class File{
-  list= ref<file[]>([]);
+  list:file[] = [];
 
-  filename = ref("");
+  filename = '';
   async init(articleId:number){
 
     const res = await fileList(articleId);
-    this.list.value = res.data;
+    this.list = res.data;
+
   }
 
   async upload(file: any,articleId?:number){
@@ -18,9 +19,9 @@ export class File{
   }
    del (filename?:string){
     if(filename!=undefined){
-      this.filename.value = filename;
+      this.filename = filename;
     }
-    fileDel(this.filename.value);
+    fileDel(this.filename);
   }
    delAll(articleId:number){
     fileDelAll(articleId);

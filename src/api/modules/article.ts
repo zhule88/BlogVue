@@ -11,7 +11,7 @@ export const articleList = (state ?: number,top ?:number) =>{
   return request.get('/article/list',{params:{
     state,
     top
-  }})
+  }});
 }
 export const articleAdd = (data:article) =>{
   return request.post('/article/add',data)
