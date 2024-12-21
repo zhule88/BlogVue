@@ -13,6 +13,7 @@ const routes : Array<RouteRecordRaw> = [
         name: 'home',
         component: () => import('@/views/user/Home/index.vue')
       },
+
       {
         path: 'article/:id',
         name: 'article',
@@ -30,9 +31,10 @@ const routes : Array<RouteRecordRaw> = [
       },
       {
         path: 'link',
-        name: 'link',
+        name: 'linkU',
         component: () => import('@/views/user/link/index.vue')
-      }
+      },
+
     ]
   }
 ]

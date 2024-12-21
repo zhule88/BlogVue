@@ -59,11 +59,9 @@ const articleDel = async () => {
           size="small"
           type="danger"
           @click="
-            () => {
-              dialogVisible = true;
-              articleS.item.id = scope.row.id;
-              articleS.item.image = scope.row.image;
-            }
+            dialogVisible = true;
+            articleS.item.id = scope.row.id;
+            articleS.item.image = scope.row.image;
           "
         >
           删除

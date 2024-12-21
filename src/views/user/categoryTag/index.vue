@@ -4,7 +4,7 @@ const tagS = useTag();
 const categoryListS = useCategoryList();
 const Id = ref(0);
 const type = ref("");
-const articleListS = new ArticleList();
+const articleListS = reactive(new ArticleList());
 const colorI = new color();
 const router = useRouter();
 

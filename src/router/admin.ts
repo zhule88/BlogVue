@@ -18,6 +18,11 @@ const routes : Array<RouteRecordRaw> = [
         name: 'add',
         component: () => import('@/views/admin/article/add/index.vue'),
       },
+      {
+        path: 'link',
+        name: 'linkA',
+        component: () => import('@/views/admin/link/index.vue'),
+      },
     ]
   }
 ]

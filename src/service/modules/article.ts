@@ -49,6 +49,7 @@ export class ArticleList {
   async listByTagId(id:number){
     const res = await articleListByTagId(id)
     this.list = res.data;
+    console.log(this.list );
     this.addPrefix();
   }
 }

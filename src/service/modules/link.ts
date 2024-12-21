@@ -22,7 +22,7 @@ email:''
   update(){
   linkUpdate(this.item);
   }
-  del(id:number){
-    linkDel(id)
+  del(){
+    linkDel(this.item.id!)
   }
 }

@@ -1,51 +1,56 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const linkListS = reactive(new LinkList());
+const linkS = new Link();
+const dialogVisible = ref(false);
+onMounted(() => {
+  linkListS.init();
+});
+</script>
 <template>
-  <<!-- el-table :data="articleListS.list.value" stripe>
+  <el-table :data="linkListS.list" stripe>
     <el-table-column prop="id" label="id" />
-    <el-table-column prop="title" label="标题" />
-    <el-table-column label="封面">
+    <el-table-column prop="nickname" label="昵称" />
+    <el-table-column label="头像">
       <template #default="scope">
-        <img :src="scope.row.image" style="width: 60%" />
+        <img :src="scope.row.avatar" style="width: 60%" />
       </template>
     </el-table-column>
-    <el-table-column label="分类">
-      <template #default="scope">
-        <p>{{ categoryListS.map.get(scope.row.categoryId) }}</p>
-      </template>
-    </el-table-column>
-    <el-table-column label="标签">
-      <template #default="scope">
-        <el-tag v-for="item in scope.row.tags">
-          {{ tagS.map.get(item) }}
-        </el-tag>
-      </template>
-    </el-table-column>
+    <el-table-column prop="description" label="简介" />
+    <el-table-column prop="email" label="邮箱" />
+    <el-table-column prop="address" label="网址" />
     <el-table-column prop="state" label="状态" />
-    <el-table-column prop="visitCount" label="浏览量" />
-    <el-table-column prop="top" label="是否置顶" />
     <el-table-column prop="createTime" label="创建时间" />
-    <el-table-column prop="updateTime" label="修改时间" />
     <el-table-column label="操作">
       <template #default="scope">
-        <router-link :to="`/admin/add?id=${scope.row.id}`">
-          <el-button size="small" type="primary"> 修改 </el-button>
-        </router-link>
+        <el-button
+          size="small"
+          type="primary"
+          @click="
+            linkS.item.state = scope.row.state == 0 ? 1 : 0;
+            linkS.update();
+          "
+          >通过
+        </el-button>
         <el-button
           size="small"
           type="danger"
           @click="
-            () => {
-              dialogVisible = true;
-              articleS.item.value.id = scope.row.id;
-              articleS.item.value.image = scope.row.image;
-            }
+            dialogVisible = true;
+            linkS.item.id = scope.row.id;
           "
         >
           删除
         </el-button>
       </template>
     </el-table-column>
-  </el-table> -->
+  </el-table>
+  <el-dialog v-model="dialogVisible" title="提示" width="500">
+    <span>确认删除</span>
+    <template #footer>
+      <el-button @click="dialogVisible = false">取消</el-button>
+      <el-button type="primary" @click="linkS.del()"> 确认 </el-button>
+    </template>
+  </el-dialog>
 </template>
 
 <style scoped></style>
