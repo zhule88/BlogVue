@@ -9,7 +9,7 @@
       </el-sub-menu>
       <el-menu-item index="/admin/link">友联</el-menu-item>
       <el-menu-item
-        ><a href="http://localhost:8000/doc.html#/home" target="_blank"
+        ><a href="http://localhost:8001/doc.html#/home" target="_blank"
           >接口文档</a
         ></el-menu-item
       >

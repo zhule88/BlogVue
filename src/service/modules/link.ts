@@ -19,8 +19,8 @@ email:''
   add(){
     linkAdd(this.item);
   }
-  update(){
-  linkUpdate(this.item);
+  update(id:number,email:string){
+  linkUpdate(id,email);
   }
   del(){
     linkDel(this.item.id!)

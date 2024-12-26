@@ -1,1 +1,1 @@
-export const prefix = 'http://localhost:9000/article/';
+export const prefix = 'http://192.168.88.130:9000/article/';

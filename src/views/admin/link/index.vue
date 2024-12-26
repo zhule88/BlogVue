@@ -18,17 +18,18 @@ onMounted(() => {
     <el-table-column prop="description" label="简介" />
     <el-table-column prop="email" label="邮箱" />
     <el-table-column prop="address" label="网址" />
-    <el-table-column prop="state" label="状态" />
+    <el-table-column prop="state" label="状态">
+      <template #default="scope">
+        {{ scope.row.state == 0 ? "待通过" : "通过" }}
+      </template>
+    </el-table-column>
     <el-table-column prop="createTime" label="创建时间" />
     <el-table-column label="操作">
       <template #default="scope">
         <el-button
           size="small"
           type="primary"
-          @click="
-            linkS.item.state = scope.row.state == 0 ? 1 : 0;
-            linkS.update();
-          "
+          @click="linkS.update(scope.row.id, scope.row.email)"
           >通过
         </el-button>
         <el-button

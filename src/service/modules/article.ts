@@ -14,7 +14,7 @@ export class ArticleList {
 
   addPrefix(){
     this.list.forEach(item =>{
-      item.image = prefix+item.image
+      item.image = prefix+item.image;
     })
   }
   async init (){
@@ -26,7 +26,6 @@ export class ArticleList {
     const res = await articlePage(this.current, this.size,this.state);
     this.total = res.data.total;
     this.list = res.data.records;
-
     this.addPrefix();
 
   }
@@ -34,7 +33,12 @@ export class ArticleList {
   async around(id:number){
     const res = await articleAround(id)
     this.list = res.data;
-    this.addPrefix();
+    if(this.list[0] != null){
+      this.list[0].image =  prefix+ this.list[0].image;
+    }
+    if(this.list[1] != null){
+      this.list[1].image =  prefix+ this.list[1].image;
+    }
   }
   async listByIds(ids:number[]){
     const res = await articleListByIds(ids)
@@ -49,7 +53,6 @@ export class ArticleList {
   async listByTagId(id:number){
     const res = await articleListByTagId(id)
     this.list = res.data;
-    console.log(this.list );
     this.addPrefix();
   }
 }

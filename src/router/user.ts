@@ -34,8 +34,12 @@ const routes : Array<RouteRecordRaw> = [
         name: 'linkU',
         component: () => import('@/views/user/link/index.vue')
       },
-
     ]
+  },
+  {
+    path: '/welcome',
+    name: 'welcome',
+    component: () => import('@/views/user/welcome/index.vue')
   }
 ]
 

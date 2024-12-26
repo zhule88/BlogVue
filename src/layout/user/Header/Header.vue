@@ -1,29 +1,17 @@
 <script setup lang="ts">
-import DayNightToggleButton from "@/layout/user/Header/DayNightToggle";
-import { Document, Files, ChatLineSquare, Link } from "@element-plus/icons-vue";
+import { Files, ChatLineSquare, Link } from "@element-plus/icons-vue";
+import toggle from "./toggle.vue";
 import "animate.css";
 const isHeader = ref(true);
-const mode = useColorMode();
-onMounted(() => {
-  customElements.define("toggle-button", DayNightToggleButton);
-});
-function changeToggle({ detail }: any) {
-  mode.value = detail;
-}
 addEventListener("wheel", (event) => {
   if (event.deltaY > 0) {
-    // 向下滚动
-    // console.log('向下滚动');
     isHeader.value = false;
   } else if (event.deltaY < 0) {
-    // 向上滚动
-    // console.log('向上滚动');
     isHeader.value = true;
   }
 });
 </script>
 <template>
-  <!-- Animate.css 实现 -->
   <transition
     enter-active-class="animate__animated animate__fadeInDown"
     leave-active-class="animate__animated animate__fadeOutUp"
@@ -45,15 +33,23 @@ addEventListener("wheel", (event) => {
         <el-menu-item index="/user/link">
           <el-icon><Link /></el-icon>友链</el-menu-item
         >
-        <el-menu-item index="link">
+        <el-menu-item>
           <el-icon><ChatLineSquare /></el-icon>留言</el-menu-item
         >
-
-        <!-- 日夜切换 -->
-        <div style="margin-left: 5rem">
-          <toggle-button @change="changeToggle" size="1"></toggle-button>
-        </div>
       </el-menu>
+      <div
+        style="
+          height: 100%;
+          margin-left: auto;
+          margin-right: 1.5rem;
+          display: flex;
+          align-items: center;
+        "
+      >
+        <toggle style="margin-right: 1rem"></toggle>
+
+        <router-link to="welcome"><el-avatar>登录</el-avatar></router-link>
+      </div>
     </header>
   </transition>
 </template>

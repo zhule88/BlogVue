@@ -26,6 +26,9 @@ const submit = () => {
 onMounted(() => {
   linkListS.init();
 });
+const go = (address: string) => {
+  window.location.href = address;
+};
 </script>
 
 <template>
@@ -110,7 +113,11 @@ onMounted(() => {
     </div>
 
     <div class="blog_contain">
-      <div class="blog" v-for="item in linkListS.list">
+      <div
+        class="blog"
+        v-for="item in linkListS.list"
+        @click="go(item.address)"
+      >
         <div class="img">
           <img src="../../../assets/xiubi.jpg" />
         </div>

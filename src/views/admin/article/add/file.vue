@@ -94,7 +94,12 @@ const confirm = async () => {
         v-show="!isShow"
         :src="image"
         alt="预览图片"
-        style="width: 100%; height: 100%"
+        style="
+          width: 100%;
+          height: 100%;
+          object-position: center;
+          object-fit: cover;
+        "
       />
     </div>
     <template #footer>
@@ -108,6 +113,7 @@ const confirm = async () => {
 
 <style scoped lang="scss">
 .pastezone {
+  overflow: hidden;
   width: 400px;
   height: 250px;
   margin: 0 auto;

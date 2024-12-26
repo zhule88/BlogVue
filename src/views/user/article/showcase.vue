@@ -32,7 +32,7 @@ const init = () => {
         </div>
         <div class="text">
           <div>
-            <svgIcon name="火" color1="white" />
+            <svgIcon name="火" color="white" />
             {{ articleS.item.visitCount }}
           </div>
           <div>

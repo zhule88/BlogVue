@@ -9,7 +9,7 @@ defineProps({
   // 提供使用的图标的名字
   name: String,
   // 接收父组件传递的颜色
-  color1: {
+  color: {
     type: String,
     default: "",
   },
@@ -24,15 +24,7 @@ defineProps({
     default: "16px",
   },
 });
-const color2 = ref("");
-const isDark = useDark({
-  onChanged(dark: boolean) {
-    color2.value = dark ? "#808080" : "";
-  },
-});
-onMounted(() => {
-  color2.value = isDark.value ? "#808080" : "";
-});
+const themeS = useTheme();
 </script>
 <template>
   <!-- svg：图标外层容器节点，内部需要与 use 标签结合使用 -->
@@ -41,7 +33,7 @@ onMounted(() => {
     <!-- use 标签 fill 属性可以设置图标的颜色 -->
     <use
       :xlink:href="prefix + name"
-      :fill="color1 == '' ? color2 : color1"
+      :fill="color == '' ? (themeS.isdark ? '#808080' : '') : color"
     ></use>
   </svg>
 </template>

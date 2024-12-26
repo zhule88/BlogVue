@@ -1,24 +1,18 @@
 <script setup lang="ts">
-import darkk from "../../assets/image/莫娜.jpg";
-import light from "../../assets/image/蓝天.jpg";
 defineProps<{
   Two?: boolean;
   Title?: string;
 }>();
-const bg = ref();
-const isDark = useDark({
-  onChanged(dark: boolean) {
-    bg.value = dark ? darkk : light;
-  },
-});
+const themeS = useTheme();
+const bg = computed(() => (themeS.isdark ? "dark" : "light"));
 onMounted(() => {
-  bg.value = isDark.value ? darkk : light;
+  document.documentElement.classList.toggle("dark", themeS.isdark);
 });
 </script>
 
 <template>
   <div style="width: 100%">
-    <div class="layout" :style="{ 'background-image': 'url(' + bg + ')' }">
+    <div class="layout" :class="bg">
       <div style="width: 77%; display: flex" v-if="Two">
         <div class="main">
           <slot name="main"></slot>
@@ -29,7 +23,9 @@ onMounted(() => {
       </div>
       <div style="width: 80%" v-else>
         <div class="banner">
-          <h2 class="title">{{ Title }}</h2>
+          <h2 class="title">
+            {{ Title }}
+          </h2>
         </div>
         <card>
           <slot></slot>
@@ -40,6 +36,12 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
+.dark {
+  background-image: url("../../assets/image/莫娜.jpg");
+}
+.light {
+  background-image: url("../../assets/image/蓝天.jpg");
+}
 .layout {
   display: flex;
   justify-content: center;
@@ -48,6 +50,7 @@ onMounted(() => {
   background-size: cover;
   background-position: center;
   width: 100%;
+
   .main {
     width: 75%;
     /*  @media screen and (max-width: 1000px) {
@@ -66,7 +69,7 @@ onMounted(() => {
     height: 50vh;
     width: 100%;
     .title {
-      color: white;
+      /*  color: white; */
       font-size: 4.6rem;
       font-weight: normal;
     }
