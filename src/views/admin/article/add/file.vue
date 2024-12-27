@@ -1,16 +1,28 @@
 <script setup lang="ts">
 import { File } from "@/service";
-
+import { ElMessage } from "element-plus";
+import "element-plus/theme-chalk/index.css";
 const { copy } = useClipboard();
 const fileS = reactive(new File());
 const reader = new FileReader();
 const articleS = useArticle();
 const dialogVisible = ref(false);
+
 const isShow = ref(true);
 const isCover = ref(false);
-const file = ref();
-const image = ref();
-
+const file = ref<globalThis.File>();
+const input = ref<HTMLInputElement>();
+const image = ref<string>();
+const allowe = [
+  "image/jpeg",
+  "image/png",
+  "image/gif",
+  "image/webp",
+  "video/mp4",
+  "audio/mpeg",
+  "audio/ogg",
+];
+const imageType = ["image/jpeg", "image/webp", "image/png", "image/gif"];
 watch(
   () => articleS.item.id,
   (newId) => {
@@ -20,19 +32,30 @@ watch(
   }
 );
 reader.onload = (e) => {
-  image.value = e.target!.result;
+  image.value = e.target!.result as string;
 };
 const paste = async (e: ClipboardEvent) => {
-  const items = e.clipboardData!.items;
-  for (const item of items) {
-    if (item.type.startsWith("image/")) {
-      file.value = item.getAsFile();
+  fileHandle(e.clipboardData!.items[0].getAsFile()!);
+};
+const drop = (e: DragEvent) => {
+  e.preventDefault();
+  fileHandle(e.dataTransfer?.files[0]!);
+};
+const click = (e: any) => {
+  fileHandle(e.target?.files[0]);
+};
+const fileHandle = (f: globalThis.File) => {
+  if (allowe.includes(f.type)) {
+    file.value = f;
+    if (imageType.includes(f.type)) {
       reader.readAsDataURL(file.value);
-      isShow.value = false;
-      break;
     }
+    isShow.value = false;
+  } else {
+    ElMessage.error("只支持视频，图片，音频格式的文件");
   }
 };
+
 const confirm = async () => {
   dialogVisible.value = false;
   if (isCover.value) {
@@ -85,22 +108,44 @@ const confirm = async () => {
   >
   <el-dialog
     v-model="dialogVisible"
-    :title="isCover == true ? '上传封面' : '上传图片'"
+    :title="isCover == true ? '上传封面' : '上传文件'"
     width="600"
   >
-    <div class="pastezone">
-      <div v-show="isShow" @paste="paste">在这里粘贴图片</div>
-      <img
-        v-show="!isShow"
-        :src="image"
-        alt="预览图片"
-        style="
-          width: 100%;
-          height: 100%;
-          object-position: center;
-          object-fit: cover;
-        "
+    <div class="contain">
+      <div
+        v-show="isShow"
+        @paste="paste"
+        @dragenter.prevent
+        @dragover.prevent
+        @drop="drop"
+        @click="input?.click()"
+        class="upload"
+        @mouseover.stop="ElMessage.success('进入文件上传区域,可以粘贴或释放')"
+      >
+        支持点击，拖拽，粘贴上传
+      </div>
+      <input
+        type="file"
+        id="fileInput"
+        @change="click"
+        ref="input"
+        style="display: none"
+        accept="*"
       />
+      <div class="display" v-show="!isShow">
+        <img
+          v-show="image"
+          :src="image"
+          alt="预览图片"
+          style="
+            width: 100%;
+            height: 100%;
+            object-position: center;
+            object-fit: cover;
+          "
+        />
+        <div v-show="!image">视频/音频已上传</div>
+      </div>
     </div>
     <template #footer>
       <div class="dialog-footer">
@@ -112,8 +157,7 @@ const confirm = async () => {
 </template>
 
 <style scoped lang="scss">
-.pastezone {
-  overflow: hidden;
+.contain {
   width: 400px;
   height: 250px;
   margin: 0 auto;
@@ -122,5 +166,14 @@ const confirm = async () => {
   color: #ccc;
   padding: 10px;
   box-sizing: border-box;
+  .upload {
+    @extend center;
+    @extend full;
+  }
+  .display {
+    @extend center;
+    @extend full;
+    overflow: hidden;
+  }
 }
 </style>

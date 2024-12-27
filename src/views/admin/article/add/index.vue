@@ -5,12 +5,11 @@ import { File } from "@/service";
 import { ElMessage } from "element-plus";
 import "element-plus/theme-chalk/index.css";
 import file from "./file.vue";
-const fileS = new File();
 
 const tagS = useTag();
 const categoryListS = useCategoryList();
 const articleS = useArticle();
-const { copy } = useClipboard();
+
 const route = useRoute();
 const router = useRouter();
 
@@ -38,11 +37,6 @@ const tablesubmit = async () => {
 
 const tagClose = (tagId: number) => {
   articleS.item.tags = articleS.item.tags!.filter((obj) => obj !== tagId);
-};
-const onUploadImg = async (file: any) => {
-  const res = await fileS.upload(file[0]);
-  copy(res.data);
-  fileS.init(articleS.item.id!);
 };
 </script>
 
@@ -114,7 +108,6 @@ const onUploadImg = async (file: any) => {
       v-if="articleS.item.id != undefined"
       v-model="articleS.item.content"
       style="bottom: 0; position: relative; height: 100%"
-      :onUploadImg="onUploadImg"
     />
   </div>
 </template>
