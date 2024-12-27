@@ -11,18 +11,13 @@ const isShow = ref<boolean[]>([]);
 const router = useRouter();
 onMounted(() => {
   articleListS.page();
-  tagType.value = isDark.value;
 });
 const handleCurrentChange = (value: number) => {
   articleListS.current = value;
   articleListS.page();
 };
-const tagType = ref(true);
-const isDark = useDark({
-  onChanged(dark: boolean) {
-    tagType.value = dark;
-  },
-});
+
+const themeS = useTheme();
 </script>
 
 <template>
@@ -51,7 +46,7 @@ const isDark = useDark({
             </div>
             <el-tag
               v-for="item in article.tags"
-              :type="tagType == true ? 'info' : 'primary'"
+              :type="themeS.isdark ? 'info' : 'primary'"
             >
               {{ tagS.map.get(item) }}
             </el-tag>
@@ -121,7 +116,6 @@ const isDark = useDark({
   .content {
     display: flex;
     position: relative;
-    background-color: var(--color-card);
     width: 53%;
     height: 100%;
     border-radius: $border-radius;
@@ -162,7 +156,8 @@ const isDark = useDark({
       width: 32px;
       border-radius: 32px;
       transform-origin: 50% 50%;
-      transition: transform 0.35s ease-out;
+      /* transition: transform 0.35s ease-out; */
+      transition: $transition;
     }
   }
 }

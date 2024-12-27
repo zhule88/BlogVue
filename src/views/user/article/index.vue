@@ -7,7 +7,8 @@ const articleS = useArticle();
 const route = useRoute();
 const router = useRouter();
 const id = "article";
-const mode = useColorMode() as any;
+
+const themeS = useTheme();
 const articleListS = reactive(new ArticleList());
 const env = import.meta.env;
 const scrollElement = document.documentElement;
@@ -33,7 +34,7 @@ const init = () => {
         <MdPreview
           :editorId="id"
           v-model:model-value="articleS.item.content"
-          :theme="mode"
+          :theme="themeS.isdark ? 'dark' : 'light'"
           style="border-radius: 10px"
         />
 

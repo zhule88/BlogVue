@@ -68,7 +68,7 @@ const init = () => {
 
 <style scoped lang="scss">
 .contain {
-  width: 100%;
+  width: 100vw;
   height: 50vh;
   overflow: hidden;
   position: relative;
@@ -86,9 +86,9 @@ const init = () => {
   .img {
     z-index: -5;
     width: 100%;
-    height: auto;
     position: absolute;
     top: 50%;
+    /* scale: (1.1); */
     transform: translateY(-50%);
     filter: brightness(50%);
   }

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import iimage from "@/views/user/Home/image.vue";
 import brand from "@/views/user/Home/up/brand.vue";
-import wave from "@/views/user/Home/up/wave.vue";
 import mmain from "@/views/user/Home/down/main/main.vue";
 import { throttle } from "lodash";
 const { height } = useWindowSize();
@@ -17,7 +16,6 @@ onMounted(() => {
   <iimage></iimage>
   <div class="up" :style="{ opacity: isShow ? 1 : 0 }">
     <brand></brand>
-    <!-- <wave></wave> -->
   </div>
   <Layout Two>
     <template #main>

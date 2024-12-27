@@ -87,7 +87,7 @@ const go = (address: string) => {
           <el-input
             v-model="linkS.item.email"
             placeholder="填写邮箱地址"
-            maxlength="20"
+            maxlength="30"
             show-word-limit
           >
             <template #prepend> 邮箱 </template>

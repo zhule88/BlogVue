@@ -1,7 +1,7 @@
 html,
-body/* ,
+body,
 div,
-span */
+span
  {
   font: inherit;
   font-size: 100%;
@@ -13,7 +13,7 @@ span */
 
 body {
   font-family: cartoon;
-  transition: all 2s ease !important;
+
   color:var( --text-color);
 }
 

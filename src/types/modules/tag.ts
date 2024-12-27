@@ -1,6 +1,6 @@
 export default interface tag{
-  id: number,
-  name:string,
+  id: number
+  name:string
 
 }
 

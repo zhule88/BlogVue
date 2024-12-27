@@ -48,7 +48,7 @@ addEventListener("wheel", (event) => {
       >
         <toggle style="margin-right: 1rem"></toggle>
 
-        <router-link to="welcome"><el-avatar>登录</el-avatar></router-link>
+        <router-link to="/welcome"><el-avatar>登录</el-avatar></router-link>
       </div>
     </header>
   </transition>

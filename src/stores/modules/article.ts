@@ -5,7 +5,7 @@ import {articleGet, articleAdd, articleDel,
   } from "@/api/modules/article";
 
 export const useArticle =  defineStore('article', ()=>{
-  let item = reactive<article>({
+  const item = reactive<article>({
     title:'',
     image:'',
     content:'',

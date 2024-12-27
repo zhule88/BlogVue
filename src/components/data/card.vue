@@ -12,5 +12,6 @@
   width: 100%;
   margin: $margin 0;
   box-shadow: $box-shadow;
+  transition: $transition;
 }
 </style>

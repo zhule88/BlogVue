@@ -10,6 +10,7 @@ footer {
   box-shadow: 0 0 10px 10px rgba(147, 136, 136, 0.1);
   width: 100%;
   height: 100px;
+  transition: $transition;
   background: var(--color-footer);
 }
 </style>

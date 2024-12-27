@@ -50,7 +50,7 @@ onMounted(() => {
   background-size: cover;
   background-position: center;
   width: 100%;
-
+  transition: $transition;
   .main {
     width: 75%;
     /*  @media screen and (max-width: 1000px) {
@@ -69,7 +69,7 @@ onMounted(() => {
     height: 50vh;
     width: 100%;
     .title {
-      /*  color: white; */
+      color: white;
       font-size: 4.6rem;
       font-weight: normal;
     }
