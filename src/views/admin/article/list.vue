@@ -45,9 +45,17 @@ const articleDel = async () => {
         </el-tag>
       </template>
     </el-table-column>
-    <el-table-column prop="state" label="状态" />
+    <el-table-column label="状态">
+      <template #default="scope">
+        <p>{{ scope.row.state == 0 ? "草稿" : "发布" }}</p>
+      </template>
+    </el-table-column>
     <el-table-column prop="visitCount" label="浏览量" />
-    <el-table-column prop="top" label="是否置顶" />
+    <el-table-column prop="top" label="是否置顶">
+      <template #default="scope">
+        <p>{{ scope.row.top == 0 ? "未置顶" : "已置顶" }}</p>
+      </template>
+    </el-table-column>
     <el-table-column prop="createTime" label="创建时间" />
     <el-table-column prop="updateTime" label="修改时间" />
     <el-table-column label="操作">

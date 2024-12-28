@@ -5,16 +5,21 @@ export class File{
   list:file[] = [];
 
   filename = '';
-  async init(articleId:number){
 
+  file:globalThis.File|undefined = undefined;
+  async init(articleId:number){
     const res = await fileList(articleId);
     this.list = res.data;
 
   }
 
-  async upload(file: any,articleId?:number){
+  async upload(file?: globalThis.File,articleId?:number){
+    if(file!=undefined){
+      this.file = file;
+    }
     const formData = new FormData();
-    formData.append("file", file);
+    formData.append("file", this.file! );
+    this.file = undefined;
     return await fileUpload(formData, articleId);
   }
    del (filename?:string){

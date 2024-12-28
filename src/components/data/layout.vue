@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps<{
-  Two?: boolean;
-  Title?: string;
+  two?: boolean;
+  title?: string;
 }>();
 const themeS = useTheme();
 const bg = computed(() => (themeS.isdark ? "dark" : "light"));
@@ -13,7 +13,7 @@ onMounted(() => {
 <template>
   <div style="width: 100%">
     <div class="layout" :class="bg">
-      <div style="width: 77%; display: flex" v-if="Two">
+      <div style="width: 77%; display: flex" v-if="two">
         <div class="main">
           <slot name="main"></slot>
         </div>
@@ -24,7 +24,7 @@ onMounted(() => {
       <div style="width: 80%" v-else>
         <div class="banner">
           <h2 class="title">
-            {{ Title }}
+            {{ title }}
           </h2>
         </div>
         <card>

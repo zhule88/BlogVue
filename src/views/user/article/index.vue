@@ -28,7 +28,7 @@ const init = () => {
 </script>
 <template>
   <showcase></showcase>
-  <Layout Two>
+  <Layout two>
     <template #main>
       <card style="display: flex; flex-direction: column">
         <MdPreview

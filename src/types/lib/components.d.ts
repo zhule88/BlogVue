@@ -28,6 +28,7 @@ declare module 'vue' {
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTag: typeof import('element-plus/es')['ElTag']
+    File: typeof import('./../../components/data/file.vue')['default']
     InfoCard: typeof import('./../../components/view/infoCard.vue')['default']
     Layout: typeof import('./../../components/data/layout.vue')['default']
     Notice: typeof import('./../../components/view/notice.vue')['default']

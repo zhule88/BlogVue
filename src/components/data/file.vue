@@ -1,19 +1,18 @@
 <script setup lang="ts">
-import { File } from "@/service";
 import { ElMessage } from "element-plus";
 import "element-plus/theme-chalk/index.css";
-const { copy } = useClipboard();
-const fileS = reactive(new File());
+const props = defineProps<{
+  title: string;
+  image?: boolean;
+}>();
+const emit = defineEmits(["confirm"]);
 const reader = new FileReader();
-const articleS = useArticle();
 const dialogVisible = ref(false);
-
 const isShow = ref(true);
-const isCover = ref(false);
 const file = ref<globalThis.File>();
 const input = ref<HTMLInputElement>();
 const image = ref<string>();
-const allowe = [
+let allowe = [
   "image/jpeg",
   "image/png",
   "image/gif",
@@ -23,14 +22,6 @@ const allowe = [
   "audio/ogg",
 ];
 const imageType = ["image/jpeg", "image/webp", "image/png", "image/gif"];
-watch(
-  () => articleS.item.id,
-  (newId) => {
-    if (newId) {
-      fileS.init(newId);
-    }
-  }
-);
 reader.onload = (e) => {
   image.value = e.target!.result as string;
 };
@@ -45,6 +36,9 @@ const click = (e: any) => {
   fileHandle(e.target?.files[0]);
 };
 const fileHandle = (f: globalThis.File) => {
+  if (props.image) {
+    allowe = imageType;
+  }
   if (allowe.includes(f.type)) {
     file.value = f;
     if (imageType.includes(f.type)) {
@@ -52,26 +46,15 @@ const fileHandle = (f: globalThis.File) => {
     }
     isShow.value = false;
   } else {
-    ElMessage.error("只支持视频，图片，音频格式的文件");
+    ElMessage.error("格式错误");
   }
 };
-
 const confirm = async () => {
   dialogVisible.value = false;
-  if (isCover.value) {
-    const res = await fileS.upload(file.value);
-    articleS.item.image = res.data;
-  } else {
-    const res = await fileS.upload(file.value, articleS.item.id);
-    copy("<img src='" + prefix + res.data + "'>");
-    fileS.init(articleS.item.id!);
-  }
+  emit("confirm", file.value);
 };
 </script>
 <template>
-  <el-button type="primary" style="height: 100%" @click="isCover = !isCover"
-    >切换</el-button
-  >
   <el-button
     type="primary"
     style="height: 100%"
@@ -79,38 +62,9 @@ const confirm = async () => {
       isShow = true;
       dialogVisible = true;
     "
-    >{{ isCover == true ? "上传封面" : "上传图片" }}</el-button
+    >{{ title }}</el-button
   >
-  <el-select
-    v-if="articleS.item.id != undefined"
-    v-model="fileS.filename"
-    style="width: 100px"
-    placeholder="删除文件"
-    size="large"
-  >
-    <el-option
-      v-for="item in fileS.list"
-      :label="item.filename"
-      :value="item.filename"
-    />
-  </el-select>
-  <el-button
-    type="primary"
-    style="height: 100%"
-    v-if="articleS.item.id != undefined"
-    @click="
-      () => {
-        fileS.del();
-        fileS.init(articleS.item.id!);
-      }
-    "
-    >删除</el-button
-  >
-  <el-dialog
-    v-model="dialogVisible"
-    :title="isCover == true ? '上传封面' : '上传文件'"
-    width="600"
-  >
+  <el-dialog v-model="dialogVisible" :title="title" width="600">
     <div class="contain">
       <div
         v-show="isShow"
@@ -144,7 +98,7 @@ const confirm = async () => {
             object-fit: cover;
           "
         />
-        <div v-show="!image">视频/音频已上传</div>
+        <div v-show="!image">视频/音频已接收</div>
       </div>
     </div>
     <template #footer>

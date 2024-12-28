@@ -2,8 +2,10 @@
 import Header from "@/layout/admin/Header.vue";
 </script>
 <template>
-  <Header></Header>
-  <RouterView />
+  <div style="height: 100vh; display: flex; flex-direction: column">
+    <Header></Header>
+    <RouterView style="flex-grow: 1" />
+  </div>
 </template>
 
 <style lang="scss" scoped>

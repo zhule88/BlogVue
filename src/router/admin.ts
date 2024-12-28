@@ -16,7 +16,7 @@ const routes : Array<RouteRecordRaw> = [
       {
         path: 'add',
         name: 'add',
-        component: () => import('@/views/admin/article/add/index.vue'),
+        component: () => import('@/views/admin/article/add.vue'),
       },
       {
         path: 'link',

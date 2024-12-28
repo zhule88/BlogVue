@@ -1,5 +1,5 @@
 export default interface file {
-  id: number;
-  articleId: string;
+  id: number
+  articleId: string
   filename:string
 }

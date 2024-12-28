@@ -17,7 +17,7 @@ onMounted(() => {
   <div class="up" :style="{ opacity: isShow ? 1 : 0 }">
     <brand></brand>
   </div>
-  <Layout Two>
+  <Layout two>
     <template #main>
       <mmain></mmain>
     </template>
