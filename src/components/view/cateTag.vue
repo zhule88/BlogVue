@@ -86,7 +86,6 @@ onMounted(async () => {
     border-radius: $border-radius;
     height: 2rem;
     width: 3rem;
-    user-select: none;
 
     &:hover {
       color: white;

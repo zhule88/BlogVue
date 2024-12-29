@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import card from "@/components/data/card.vue";
+import card from "@/components/container/card.vue";
 import svgIcon from "@/components/data/svgIcon.vue";
 defineProps<{
   title: string;

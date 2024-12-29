@@ -25,7 +25,7 @@ onMounted(async () => {
 });
 </script>
 <template>
-  <layout Title="文章">
+  <layout title="文章">
     <div class="timeline">
       <div style="width: 100%; height: 75px; font-size: 30px; font-weight: 600">
         全部文章—— {{ articleS.list.length }}
@@ -62,8 +62,9 @@ onMounted(async () => {
 <style lang="scss" scoped>
 .timeline {
   position: relative;
-  padding: 20px 60px 0;
+  padding: 20px 60px 20px;
   list-style: none;
+
   &::before {
     content: "";
     position: absolute;
@@ -79,6 +80,7 @@ onMounted(async () => {
     display: flex;
     position: relative;
     padding: 10px 0;
+    transition: $transition;
     background: var(--color-card);
     .img {
       height: 100%;

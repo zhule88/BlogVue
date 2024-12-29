@@ -12,16 +12,9 @@ const isShow = ref(true);
 const file = ref<globalThis.File>();
 const input = ref<HTMLInputElement>();
 const image = ref<string>();
-let allowe = [
-  "image/jpeg",
-  "image/png",
-  "image/gif",
-  "image/webp",
-  "video/mp4",
-  "audio/mpeg",
-  "audio/ogg",
-];
 const imageType = ["image/jpeg", "image/webp", "image/png", "image/gif"];
+let allowe = [...imageType, "video/mp4", "audio/mpeg", "audio/ogg"];
+
 reader.onload = (e) => {
   image.value = e.target!.result as string;
 };
@@ -74,7 +67,8 @@ const confirm = async () => {
         @drop="drop"
         @click="input?.click()"
         class="upload"
-        @mouseover.stop="ElMessage.success('进入文件上传区域,可以粘贴或释放')"
+        @mouseover.stop=""
+        :close-on-click-modal="false"
       >
         支持点击，拖拽，粘贴上传
       </div>
@@ -86,7 +80,7 @@ const confirm = async () => {
         style="display: none"
         accept="*"
       />
-      <div class="display" v-show="!isShow">
+      <div class="upload" v-show="!isShow">
         <img
           v-show="image"
           :src="image"
@@ -118,13 +112,14 @@ const confirm = async () => {
   border: 2px dashed #ccc;
   @extend center;
   color: #ccc;
+  background: #ffffff;
   padding: 10px;
   box-sizing: border-box;
-  .upload {
-    @extend center;
-    @extend full;
+  transition: all 0.5s;
+  &:hover {
+    filter: brightness(90%);
   }
-  .display {
+  .upload {
     @extend center;
     @extend full;
     overflow: hidden;

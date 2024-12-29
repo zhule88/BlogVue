@@ -6,7 +6,7 @@ import {articleGet, articleAdd, articleList, articleDel,
 
 export class ArticleList {
   list:article[] =[];
-  state = 2;
+  state = 1;
   top= 3;
   total = 0
   current = 1;

@@ -56,6 +56,9 @@ const tablesubmit = async () => {
     articleS.add();
     router.back();
   } else {
+    if (articleS.item.image.startsWith(prefix)) {
+      articleS.item.image = articleS.item.image.slice(prefix.length);
+    }
     if (fileS.file && articleS.item.image) {
       fileS.del(articleS.item.image);
       const res = await fileS.upload();

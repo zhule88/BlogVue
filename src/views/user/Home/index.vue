@@ -30,7 +30,10 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
-:deep(.layout) {
+:deep(.dark) {
+  background-image: none !important;
+}
+:deep(.light) {
   background-image: none !important;
 }
 

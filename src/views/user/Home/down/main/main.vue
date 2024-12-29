@@ -44,12 +44,7 @@ const themeS = useTheme();
             <div class="category" :style="colorI.normal('backgroundColor')">
               {{ categoryListS.map.get(article.categoryId!) }}
             </div>
-            <el-tag
-              v-for="item in article.tags"
-              :type="themeS.isdark ? 'info' : 'primary'"
-            >
-              {{ tagS.map.get(item) }}
-            </el-tag>
+            <el tag v-for="item in article.tags"> {{ tagS.map.get(item) }}</el>
           </div>
           <div class="text">
             <svgIcon name="火" class="svg" />
@@ -95,7 +90,6 @@ const themeS = useTheme();
 
     height: 100%;
     overflow: hidden;
-    /* .el-image  */
     img {
       width: 100%;
       height: 100%;
@@ -164,7 +158,6 @@ const themeS = useTheme();
 $open-left: $border-radius 0 0 $border-radius;
 $open-right: 0 $border-radius $border-radius 0;
 .cardleft {
-  .el-image,
   .img {
     border-radius: $open-right;
   }
@@ -177,7 +170,7 @@ $open-right: 0 $border-radius $border-radius 0;
 }
 .cardright {
   flex-direction: row-reverse;
-  .el-image,
+
   .img {
     border-radius: $open-left;
   }

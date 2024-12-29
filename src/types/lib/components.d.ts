@@ -7,8 +7,9 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    Card: typeof import('./../../components/data/card.vue')['default']
+    Card: typeof import('./../../components/container/card.vue')['default']
     CateTag: typeof import('./../../components/view/cateTag.vue')['default']
+    El: typeof import('./../../components/container/el.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
@@ -30,11 +31,11 @@ declare module 'vue' {
     ElTag: typeof import('element-plus/es')['ElTag']
     File: typeof import('./../../components/data/file.vue')['default']
     InfoCard: typeof import('./../../components/view/infoCard.vue')['default']
-    Layout: typeof import('./../../components/data/layout.vue')['default']
+    Layout: typeof import('./../../components/container/layout.vue')['default']
     Notice: typeof import('./../../components/view/notice.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    SideCard: typeof import('./../../components/data/sideCard.vue')['default']
+    SideCard: typeof import('./../../components/container/sideCard.vue')['default']
     SvgIcon: typeof import('./../../components/data/svgIcon.vue')['default']
   }
 }

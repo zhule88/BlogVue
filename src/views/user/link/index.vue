@@ -15,8 +15,8 @@ const rules = reactive<FormRules<any>>({
 const submit = () => {
   form.value?.validate((valid, fields) => {
     if (valid) {
-      ElMessage.success("提交成功，通过后会通过邮箱通知您");
       linkS.add();
+      ElMessage.success("提交成功，通过后会通过邮箱通知您");
       dialogVisible.value = false;
     } else {
       ElMessage.error(fields);
@@ -37,6 +37,7 @@ const go = (address: string) => {
     title="申请友链"
     width="35%"
     style="border-radius: 10px"
+    :close-on-click-modal="false"
   >
     <div class="form">
       <div
@@ -94,21 +95,19 @@ const go = (address: string) => {
           </el-input>
         </el-form-item>
         <div style="width: 100%; display: flex; flex-direction: row-reverse">
-          <el-button plain @click="submit()">提交申请</el-button>
-          <el-button @click="dialogVisible = false">取消</el-button>
+          <el button @click="submit()">提交申请 </el>
+          <el button @click="dialogVisible = false">取消 </el>
         </div>
       </el-form>
     </div>
   </el-dialog>
-  <layout Title="友链">
+  <layout title="友链">
     <div
       style="width: 95%; height: 40px; display: flex; padding: 20px 2.5% 0 2.5%"
     >
       <div style="font-size: 30px; font-weight: 500">小伙伴~</div>
       <div style="margin-left: auto; height: 100%">
-        <el-button type="primary" @click="dialogVisible = true" size="large"
-          >申请友链</el-button
-        >
+        <el button large @click="dialogVisible = true">申请友链 </el>
       </div>
     </div>
 
