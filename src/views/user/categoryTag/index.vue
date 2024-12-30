@@ -26,12 +26,11 @@ const init = async () => {
 };
 </script>
 <template>
-  <Layout Two>
+  <Layout two>
     <template #main>
       <div style="margin-top: 45px">
         <div class="header" :style="colorI.normal('backgroundColor')">
           <span v-if="type == 'tag'">{{ tagS.map.get(Id) }}</span>
-
           <span v-else> {{ categoryListS.map.get(Id) }}</span>
         </div>
 

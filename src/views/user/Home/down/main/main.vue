@@ -16,8 +16,6 @@ const handleCurrentChange = (value: number) => {
   articleListS.current = value;
   articleListS.page();
 };
-
-const themeS = useTheme();
 </script>
 
 <template>

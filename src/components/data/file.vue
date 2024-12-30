@@ -18,15 +18,13 @@ let allowe = [...imageType, "video/mp4", "audio/mpeg", "audio/ogg"];
 reader.onload = (e) => {
   image.value = e.target!.result as string;
 };
-const paste = async (e: ClipboardEvent) => {
+const paste = (e: ClipboardEvent) => {
   fileHandle(e.clipboardData!.items[0].getAsFile()!);
 };
+
 const drop = (e: DragEvent) => {
   e.preventDefault();
   fileHandle(e.dataTransfer?.files[0]!);
-};
-const click = (e: any) => {
-  fileHandle(e.target?.files[0]);
 };
 const fileHandle = (f: globalThis.File) => {
   if (props.image) {
@@ -48,34 +46,35 @@ const confirm = async () => {
 };
 </script>
 <template>
-  <el-button
-    type="primary"
-    style="height: 100%"
+  <el
+    button
+    large
     @click="
       isShow = true;
       dialogVisible = true;
     "
-    >{{ title }}</el-button
+    >{{ title }}</el
   >
+
   <el-dialog v-model="dialogVisible" :title="title" width="600">
     <div class="contain">
       <div
         v-show="isShow"
+        @click="input?.click()"
+        @drop="drop"
         @paste="paste"
         @dragenter.prevent
         @dragover.prevent
-        @drop="drop"
-        @click="input?.click()"
         class="upload"
-        @mouseover.stop=""
         :close-on-click-modal="false"
       >
         支持点击，拖拽，粘贴上传
       </div>
       <input
         type="file"
-        id="fileInput"
-        @change="click"
+        @change="(e:any)=>{
+          fileHandle(e.target?.files[0]);
+        }"
         ref="input"
         style="display: none"
         accept="*"
@@ -112,17 +111,20 @@ const confirm = async () => {
   border: 2px dashed #ccc;
   @extend center;
   color: #ccc;
-  background: #ffffff;
-  padding: 10px;
+  padding: 0;
+
   box-sizing: border-box;
   transition: all 0.5s;
-  &:hover {
-    filter: brightness(90%);
-  }
+
   .upload {
     @extend center;
-    @extend full;
+    height: 100%;
+    width: 100%;
     overflow: hidden;
+    background: #ffffff;
+    &:hover {
+      filter: brightness(90%);
+    }
   }
 }
 </style>

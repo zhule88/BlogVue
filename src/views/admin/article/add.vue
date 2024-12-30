@@ -23,14 +23,12 @@ onMounted(async () => {
     fileS.init(articleId);
   }
 });
-const cover = (f: globalThis.File) => {
-  fileS.file = f;
-};
+
 const fileUpload = async (f: globalThis.File) => {
-  if (f == undefined) {
+  /*   if (f == undefined) {
     ElMessage.error("没有选择文件");
     return;
-  }
+  } */
   const res = await fileS.upload(f, articleS.item.id);
   const url = prefix + res.data;
   if (["image/jpeg", "image/png", "image/gif", "image/webp"].includes(f.type)) {
@@ -83,7 +81,15 @@ const tagClose = (tagId: number) => {
         clearable
         style="width: 100px"
       />
-      <file title="上传封面" image @confirm="cover"></file>
+      <file
+        title="上传封面"
+        image
+        @confirm="
+          (f) => {
+            fileS.file = f;
+          }
+        "
+      ></file>
       <el-select
         v-if="articleS.item.id != undefined"
         v-model="fileS.filename"

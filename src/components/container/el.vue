@@ -4,6 +4,7 @@ defineProps<{
   tag?: boolean;
   button?: boolean;
   large?: boolean;
+  Style?: Record<string, string | number>;
 }>();
 </script>
 <template>
@@ -15,6 +16,7 @@ defineProps<{
     <el-button
       :color="themeS.isdark ? '#2f2f2f' : '#3b82f6'"
       :size="large ? 'large' : 'default'"
+      :style="Style"
       v-if="button"
     >
       <slot></slot

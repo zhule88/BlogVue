@@ -39,7 +39,20 @@ const routes : Array<RouteRecordRaw> = [
   {
     path: '/welcome',
     name: 'welcome',
-    component: () => import('@/views/user/welcome/index.vue')
+    component: () => import('@/views/user/welcome/index.vue'),
+    redirect: '/welcome/login',
+    children:[
+      {
+        path: 'login',
+        name: 'login',
+        component: () => import('@/views/user/welcome/login.vue')
+      },
+      {
+        path: 'register',
+        name: 'register',
+        component: () => import('@/views/user/welcome/register.vue')
+      },
+    ]
   }
 ]
 
