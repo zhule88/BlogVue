@@ -3,8 +3,8 @@ import {linkList,linkAdd,linkUpdate,linkDel} from '@/api/modules/link'
 export class LinkList{
   list:link[]  = [];
   async init(){
-    const res = await linkList()
-    this.list = res.data;
+    this.list = await linkList()
+
   }
 }
 export class Link{
@@ -17,7 +17,7 @@ description:'',
 email:''
   })
   add(){
-    linkAdd(this.item);
+    return linkAdd(this.item);
   }
   update(id:number,email:string){
   linkUpdate(id,email);

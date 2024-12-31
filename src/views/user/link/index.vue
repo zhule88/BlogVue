@@ -13,10 +13,11 @@ const rules = reactive<FormRules<any>>({
   email: [{ required: true, message: "不能为空", trigger: "blur" }],
 });
 const submit = () => {
-  form.value?.validate((valid, fields) => {
+  form.value?.validate(async (valid, fields) => {
     if (valid) {
-      linkS.add();
-      ElMessage.success("提交成功，通过后会通过邮箱通知您");
+      if (!((await linkS.add()) == "error")) {
+        ElMessage.success("提交成功，通过后会通过邮箱通知您");
+      }
       dialogVisible.value = false;
     } else {
       ElMessage.error(fields);

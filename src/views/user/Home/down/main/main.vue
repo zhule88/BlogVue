@@ -168,7 +168,6 @@ $open-right: 0 $border-radius $border-radius 0;
 }
 .cardright {
   flex-direction: row-reverse;
-
   .img {
     border-radius: $open-left;
   }

@@ -8,8 +8,8 @@ export const useCategoryList =  defineStore('categoryList', ()=>{
 
   const init = async () =>{
     const res = await categoryList();
-    list.push(... res.data)
-    map.init(res.data)
+    list.push(... res)
+    map.init(res)
   }
    const count = ()=>{
       return categoryArticleCount();

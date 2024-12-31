@@ -16,8 +16,8 @@ export const userEmail = (email:string) =>{
     }
   })
 }
-export const userAvatar = (file:any,email:string) =>{
-  return request.post('/file/add',file,{
+export const userAvatar = (file:any,email?:string) =>{
+  return request.post(prefix+'avatar',file,{
     headers: {
       'Content-Type': 'multipart/form-data'
     },

@@ -29,8 +29,8 @@ const fileUpload = async (f: globalThis.File) => {
     ElMessage.error("没有选择文件");
     return;
   } */
-  const res = await fileS.upload(f, articleS.item.id);
-  const url = prefix + res.data;
+  await fileS.upload(f, articleS.item.id);
+  const url = prefix + fileS.filename;
   if (["image/jpeg", "image/png", "image/gif", "image/webp"].includes(f.type)) {
     copy("<img src='" + url + "'>");
   } else if (f.type == "video/mp4") {
@@ -48,8 +48,8 @@ const tablesubmit = async () => {
   articleS.item.top = articleS.item.top == true ? 1 : 0;
   if (articleS.item.id == undefined) {
     if (fileS.file) {
-      const res = await fileS.upload();
-      articleS.item.image = res.data;
+      await fileS.upload();
+      articleS.item.image = fileS.filename;
     }
     articleS.add();
     router.back();
@@ -59,8 +59,8 @@ const tablesubmit = async () => {
     }
     if (fileS.file && articleS.item.image) {
       fileS.del(articleS.item.image);
-      const res = await fileS.upload();
-      articleS.item.image = res.data;
+      await fileS.upload();
+      articleS.item.image = fileS.filename;
     }
     articleS.update();
   }

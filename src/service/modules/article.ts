@@ -18,22 +18,22 @@ export class ArticleList {
     })
   }
   async init (){
-    const res = await articleList(this.state,this.top);
-    this.list = res.data;
+    this.list  = await articleList(this.state,this.top);
+
+
     this.addPrefix();
   }
   async page (){
     const res = await articlePage(this.current, this.size,this.state);
-    console.log(res.code);
-    this.total = res.data.total;
-    this.list = res.data.records;
+
+    this.total = res.total;
+    this.list = res.records;
     this.addPrefix();
 
   }
 
   async around(id:number){
-    const res = await articleAround(id)
-    this.list = res.data;
+    this.list  = await articleAround(id)
     if(this.list[0] != null){
       this.list[0].image =  prefix+ this.list[0].image;
     }
@@ -42,23 +42,20 @@ export class ArticleList {
     }
   }
   async listByIds(ids:number[]){
-    const res = await articleListByIds(ids)
-    this.list = res.data;
+    this.list = await articleListByIds(ids);
     this.addPrefix();
   }
   async listByCateId(id:number){
-    const res = await articleListByCateId(id)
-    this.list = res.data;
+    this.list  = await articleListByCateId(id)
     this.addPrefix();
   }
   async listByTagId(id:number){
-    const res = await articleListByTagId(id)
-    this.list = res.data;
+    this.list = await articleListByTagId(id)
     this.addPrefix();
   }
 }
 
-export class Article{
+/* export class Article{
   item: article= {
     title:'',
     image:'',
@@ -93,4 +90,4 @@ export class Article{
       visitCount:0
     }
   }
-}
+} */

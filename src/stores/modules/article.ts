@@ -13,8 +13,7 @@ export const useArticle =  defineStore('article', ()=>{
     visitCount:0
   })
   const init = async(id:number)=>{
-    const res = await articleGet(id);
-    Object.assign(item, res.data);
+    Object.assign(item, await articleGet(id));
 
     item.image = prefix+item.image
   }

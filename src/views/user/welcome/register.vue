@@ -8,7 +8,6 @@ const rules = reactive<FormRules<any>>({
   username: [{ required: true, message: "不能为空", trigger: "blur" }],
   password: [{ required: true, message: "不能为空", trigger: "blur" }],
   email: [{ required: true, message: "不能为空", trigger: "blur" }],
-
   code: [{ required: true, message: "不能为空", trigger: "blur" }],
   repassword: [
     { required: true, message: "不能为空", trigger: "blur" },
@@ -27,9 +26,9 @@ const rules = reactive<FormRules<any>>({
 const submit = () => {
   form.value?.validate(async (valid) => {
     if (valid) {
-      const res = await userS.register();
-      console.log(res.status);
-      isSuccess.value = true;
+      if (!((await userS.register()) == "error")) {
+        isSuccess.value = true;
+      }
     }
   });
 };

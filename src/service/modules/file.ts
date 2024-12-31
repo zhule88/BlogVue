@@ -20,7 +20,7 @@ export class File{
     const formData = new FormData();
     formData.append("file", this.file! );
     this.file = undefined;
-    return await fileUpload(formData, articleId);
+    this.filename = await fileUpload(formData, articleId);
   }
    del (filename?:string){
     if(filename!=undefined){
@@ -28,6 +28,7 @@ export class File{
     }
     fileDel(this.filename);
   }
+
    delAll(articleId:number){
     fileDelAll(articleId);
   }
