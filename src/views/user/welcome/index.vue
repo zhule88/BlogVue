@@ -4,9 +4,11 @@ import Header from "@/layout/user/Header/Header.vue";
 <template>
   <Header></Header>
   <div style="width: 100vw; display: flex">
-    <img src="@/assets/image/休比.png" style="width: 65%; height: 100vh" />
+    <img src="@/assets/image/休比.png" style="width: 70%; height: 100vh" />
     <card>
-      <RouterView />
+      <div class="card_small">
+        <RouterView />
+      </div>
     </card>
   </div>
 </template>
@@ -18,5 +20,9 @@ import Header from "@/layout/user/Header/Header.vue";
   height: 100vh;
   margin: 0;
   @extend center;
+  .card_small {
+    @extend center;
+    width: 80%;
+  }
 }
 </style>

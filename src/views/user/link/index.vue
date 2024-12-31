@@ -6,11 +6,11 @@ const linkListS = reactive(new LinkList());
 const dialogVisible = ref(false);
 const form = ref<FormInstance>();
 const rules = reactive<FormRules<any>>({
-  nickname: [{ required: true, message: "不能为空", trigger: "blur" }],
-  address: [{ required: true, message: "不能为空", trigger: "blur" }],
-  description: [{ required: true, message: "不能为空", trigger: "blur" }],
-  avatar: [{ required: true, message: "不能为空", trigger: "blur" }],
-  email: [{ required: true, message: "不能为空", trigger: "blur" }],
+  nickname: [required],
+  address: [required],
+  description: [required],
+  avatar: [required],
+  email: [required],
 });
 const submit = () => {
   form.value?.validate(async (valid, fields) => {

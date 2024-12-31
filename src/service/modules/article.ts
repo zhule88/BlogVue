@@ -55,7 +55,7 @@ export class ArticleList {
   }
 }
 
-/* export class Article{
+export class Article{
   item: article= {
     title:'',
     image:'',
@@ -64,8 +64,7 @@ export class ArticleList {
     visitCount:0
   }
   async init (id:number){
-    const res = await articleGet(id);
-    this.item = res.data
+    this.item = await articleGet(id);
     this.item.image = prefix+this.item.image
 
   }
@@ -90,4 +89,4 @@ export class ArticleList {
       visitCount:0
     }
   }
-} */
+}

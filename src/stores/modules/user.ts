@@ -18,13 +18,13 @@ export const useUser =  defineStore('user', ()=>{
    })
 
 
-   const register= async ()=>{
+   const register=  ()=>{
    return  userRegister(auth)
    }
 
 
    const login =()=>{
-    userLogin(item)
+    return  userLogin(auth)
    }
 
    const email = ()=>{

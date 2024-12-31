@@ -46,21 +46,3 @@ interface res {
   data: any
 }
 
-const get =  (url: string, params: object = {}): Promise<AxiosResponse<res>>=> {
-  return  instance.get(url, { params })
-}
-const post =  (url: string, data: object): Promise<AxiosResponse<res>> => {
-  return  instance.post(url, data)
-}
-const put =  (url: string, data: object): Promise<AxiosResponse<res>> => {
-  return  instance.put(url, data)
-}
-const del =  (url: string, params: object = {}) : Promise<AxiosResponse<res>>=> {
-  return  instance.delete(url, { params })
-}
-export  {
-  get,
-  post,
-  put,
-  del
-}
