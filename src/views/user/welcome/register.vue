@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { FormInstance, FormRules } from "element-plus";
-
 const userS = useUser();
 const form = ref<FormInstance>();
 const router = useRouter();
@@ -8,7 +7,6 @@ const isSuccess = ref(false);
 const rules = reactive<FormRules<any>>({
   username: [required],
   password: [required],
-  email: [required],
   repassword: [
     required,
     {
@@ -65,7 +63,6 @@ const submit = () => {
         "
       >
         <div style="font-size: 25px; font-weight: 600">注册</div>
-
         <el-link
           style="font-size: 15px"
           :underline="false"

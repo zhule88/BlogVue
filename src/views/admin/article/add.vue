@@ -2,7 +2,7 @@
 import { MdEditor } from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
 import { File } from "@/service";
-import file from "@/components/data/file.vue";
+import file from "@/components/data/fileUpload.vue";
 import { ElMessage } from "element-plus";
 import "element-plus/theme-chalk/index.css";
 const { copy } = useClipboard();

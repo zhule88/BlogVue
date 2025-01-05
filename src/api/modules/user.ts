@@ -9,6 +9,10 @@ export const userLogin = (data:user) =>{
 export const userRegister = (data:any) =>{
   return request.post(prefix+'register',data)
 }
+
+export const userInfo = () =>{
+  return request.get(prefix+'userInfo')
+}
 export const userEmail = (email:string) =>{
   return request.get(prefix+'email',{
     params:{

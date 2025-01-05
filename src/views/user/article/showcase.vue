@@ -36,7 +36,7 @@ const init = () => {
             {{ articleS.item.visitCount }}
           </div>
           <div>
-            <svgIcon name="文章" color1="white" />
+            <svgIcon name="文章" color="white" />
             <span v-if="articleLength >= 1000">
               {{ (articleLength / 1000).toFixed(1) }}k
             </span>
@@ -46,17 +46,17 @@ const init = () => {
             字
           </div>
           <div>
-            <svgIcon name="时间" color1="white" />
+            <svgIcon name="时间" color="white" />
             {{ Math.ceil(articleLength / 200) }}分钟
           </div>
         </div>
         <div class="text">
           <div>
-            <svgIcon name="日历更新" color1="white" />
+            <svgIcon name="日历更新" color="white" />
             {{ timeFilter(articleS.item.createTime) }}
           </div>
           <div>
-            <svgIcon name="更新" color1="white" />
+            <svgIcon name="更新" color="white" />
             {{ timeFilter(articleS.item.updateTime) }}
           </div>
         </div>

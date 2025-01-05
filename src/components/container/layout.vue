@@ -5,9 +5,6 @@ defineProps<{
 }>();
 const themeS = useTheme();
 const bg = computed(() => (themeS.isdark ? "dark" : "light"));
-onMounted(() => {
-  document.documentElement.classList.toggle("dark", themeS.isdark);
-});
 </script>
 
 <template>

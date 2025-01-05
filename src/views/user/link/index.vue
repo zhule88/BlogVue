@@ -19,8 +19,6 @@ const submit = () => {
         ElMessage.success("提交成功，通过后会通过邮箱通知您");
       }
       dialogVisible.value = false;
-    } else {
-      ElMessage.error(fields);
     }
   });
 };

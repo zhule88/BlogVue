@@ -6,14 +6,15 @@ const persist = ref(true);
 const isEmailLogin = ref(false);
 const router = useRouter();
 const rules = reactive<FormRules<any>>({
-  email: [required],
-  usename: [required],
+  username: [required],
   password: [required],
 });
 const submit = () => {
   form.value?.validate(async (valid) => {
+    console.log(valid);
     if (valid) {
-      if ((await userS.login()) != "error") {
+      if (await userS.login()) {
+        userS.info();
         router.push("/");
       }
     }
@@ -38,12 +39,12 @@ const submit = () => {
         >立即注册</el-link
       >
     </div>
-    <el-form :model="userS.item" ref="form" :rules="rules">
-      <div v-show="!isEmailLogin">
-        <el-form-item prop="email" label="邮箱" size="large">
+    <el-form :model="userS.auth" ref="form" :rules="rules">
+      <div v-if="!isEmailLogin">
+        <el-form-item prop="username" label="昵称" size="large">
           <el-input
-            v-model="userS.auth.email"
-            placeholder="输入邮箱"
+            v-model="userS.auth.username"
+            placeholder="输入用户名"
             maxlength="30"
             show-word-limit
           ></el-input>
@@ -58,7 +59,7 @@ const submit = () => {
           ></el-input>
         </el-form-item>
       </div>
-      <emailCode :form="form!" v-show="isEmailLogin"></emailCode>
+      <emailCode :form="form!" v-else></emailCode>
     </el-form>
     <div style="display: flex; justify-content: space-between">
       <el-checkbox v-model="persist" label="勿忘我" />

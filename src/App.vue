@@ -1,9 +1,14 @@
 <script setup lang="ts">
 const tagS = useTag();
 const categoryListS = useCategoryList();
+const userS = useUser();
+const themeS = useTheme();
+
 onMounted(() => {
   tagS.init();
   categoryListS.init();
+  userS.info();
+  document.documentElement.classList.toggle("dark", themeS.isdark);
 });
 </script>
 <template>

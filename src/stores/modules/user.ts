@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import type user from '@/types/modules/user'
-import  {userLogin,userRegister,userEmail,userAvatar} from '@/api/modules/user'
+import  {userLogin,userRegister,userEmail,userAvatar,userInfo} from '@/api/modules/user'
 
 export const useUser =  defineStore('user', ()=>{
    const item = reactive<user>({
@@ -21,10 +21,18 @@ export const useUser =  defineStore('user', ()=>{
    const register=  ()=>{
    return  userRegister(auth)
    }
+   const login =async ()=>{
+    const token = await userLogin(auth)
+    if(token != 'error'){
+      localStorage.setItem("token", token);
+      return true;
+    }
+    return  false
+   }
 
+   const info = async ()=>{
+    Object.assign(item, await userInfo());
 
-   const login =()=>{
-    return  userLogin(auth)
    }
 
    const email = ()=>{
@@ -37,6 +45,6 @@ export const useUser =  defineStore('user', ()=>{
   }
 
   return{
-    item,auth,login,email,register,avatar
+    item,auth,login,email,register,avatar,info
   }
 })
