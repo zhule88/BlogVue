@@ -10,13 +10,11 @@ export const useUser =  defineStore('user', ()=>{
     email: '',
    })
 
-
    const auth = reactive({
     ...item,
     repassword:'',
     code:''
    })
-
 
    const register=  ()=>{
    return  userRegister(auth)
@@ -31,8 +29,12 @@ export const useUser =  defineStore('user', ()=>{
    }
 
    const info = async ()=>{
-    Object.assign(item, await userInfo());
-
+    if( localStorage.getItem("token")){
+      Object.assign(item, await userInfo());
+      if(item.username == '筑乐'){
+        localStorage.setItem("admin", 'true');
+      }
+    }
    }
 
    const email = ()=>{
@@ -43,8 +45,18 @@ export const useUser =  defineStore('user', ()=>{
     formData.append("file",file);
     userAvatar(formData,auth.email)
   }
+  const clear = ()=>{
+    localStorage.removeItem("token");
+    item.username = '';
+    item.password = '';
+    item.avatar = '';
+    item.email = '';
+    item.id = undefined;
+   };
 
   return{
-    item,auth,login,email,register,avatar,info
+    item,auth,login,email,register,avatar,info,clear
   }
 })
+
+

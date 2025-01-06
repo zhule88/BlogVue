@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 import { ElMessage } from "element-plus";
 import "element-plus/theme-chalk/index.css";
 

@@ -19,7 +19,7 @@ const { resume, pause } = useIntervalFn(() => {
 const codeRule: FormItemRule[] = [
   required,
   {
-    validator: (rule, value, callback) => {
+    validator: (_rule, _value, callback) => {
       if (!isEmail(userS.auth.email)) {
         callback(new Error("邮箱格式错误"));
       } else {

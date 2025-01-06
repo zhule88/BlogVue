@@ -2,6 +2,8 @@
 import { Files, ChatLineSquare, Link } from "@element-plus/icons-vue";
 import toggle from "./toggle.vue";
 import "animate.css";
+
+const userS = useUser();
 const isHeader = ref(true);
 addEventListener("wheel", (event) => {
   if (event.deltaY > 0) {
@@ -48,7 +50,23 @@ addEventListener("wheel", (event) => {
       >
         <toggle style="margin-right: 1rem"></toggle>
 
-        <router-link to="/welcome/login"
+        <el-dropdown trigger="click" v-if="userS.item.avatar">
+          <el-avatar
+            ><img :src="'http://192.168.88.130:9000/user/' + userS.item.avatar"
+          /></el-avatar>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item
+                ><fileUpload title="修改头像"></fileUpload
+              ></el-dropdown-item>
+              <el-dropdown-item @click="userS.clear()"
+                ><el button large>退出登录</el>
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+
+        <router-link to="/welcome/login" v-else
           ><el-avatar>登录</el-avatar></router-link
         >
       </div>

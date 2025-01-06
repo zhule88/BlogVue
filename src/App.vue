@@ -3,7 +3,6 @@ const tagS = useTag();
 const categoryListS = useCategoryList();
 const userS = useUser();
 const themeS = useTheme();
-
 onMounted(() => {
   tagS.init();
   categoryListS.init();

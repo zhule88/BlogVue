@@ -22,3 +22,5 @@ export const useCategoryList =  defineStore('categoryList', ()=>{
     count
   }
 })
+
+

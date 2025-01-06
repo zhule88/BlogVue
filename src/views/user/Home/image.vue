@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const imageList: Ref<string[]> = ref([
+const imageList = ref([
   "/src/assets/凯文1.webp",
   "/src/assets/凯文2.webp",
   "/src/assets/凯文3.webp",

@@ -13,3 +13,4 @@ export const useTheme =  defineStore('theme', ()=>{
     isdark,toggle
   }
 })
+

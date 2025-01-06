@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { FormRules, FormInstance, ElMessage } from "element-plus";
 import "element-plus/theme-chalk/index.css";
-const linkS = new Link();
+const linkS = reactive(new Link());
 const linkListS = reactive(new LinkList());
 const dialogVisible = ref(false);
 const form = ref<FormInstance>();

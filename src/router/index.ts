@@ -2,6 +2,8 @@ import {createRouter , createWebHistory} from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import user from "@/router/user"
 import admin from "@/router/admin"
+import { ElMessage } from "element-plus";
+import "element-plus/theme-chalk/index.css";
 
 
 const routes : Array<RouteRecordRaw> = [
@@ -16,13 +18,17 @@ const router = createRouter({
   routes
 })
 
-/* router.beforeEach((to, from, next) => {
-  if (to.name == 'article' ) {
-  router.afterEach(() => {
-    window.scrollTo(0, 0)
-})
+router.beforeEach((to, _from, next) => {
+  if (to.path.startsWith('/admin') ) {
+    if(localStorage.getItem('admin')){
+      next();
+    }else{
+      ElMessage.error("只有管理员才能进入")
+      next('/');
+    }
+  }else{
+    next();
   }
-  next(); //
-}); */
+});
 
 export default router

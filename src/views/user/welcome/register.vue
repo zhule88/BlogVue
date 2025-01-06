@@ -10,7 +10,7 @@ const rules = reactive<FormRules<any>>({
   repassword: [
     required,
     {
-      validator: (rule, value, callback) => {
+      validator: (_rule, value, callback) => {
         if (value !== userS.auth.password) {
           callback(new Error("输入密码不一致"));
         } else {
