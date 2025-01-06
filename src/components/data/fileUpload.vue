@@ -10,7 +10,8 @@ const reader = new FileReader();
 const dialogVisible = ref(false);
 const isShow = ref(true);
 const file = ref<globalThis.File>();
-const input = ref<HTMLInputElement>();
+const inputClick = ref<HTMLInputElement>();
+const inputPaste = ref<HTMLInputElement>();
 const image = ref<string>();
 const imageType = ["image/jpeg", "image/webp", "image/png", "image/gif"];
 let allowe = [...imageType, "video/mp4", "audio/mpeg", "audio/ogg"];
@@ -18,14 +19,12 @@ let allowe = [...imageType, "video/mp4", "audio/mpeg", "audio/ogg"];
 reader.onload = (e) => {
   image.value = e.target!.result as string;
 };
-const paste = (e: ClipboardEvent) => {
-  fileHandle(e.clipboardData!.items[0].getAsFile()!);
-};
 
 const drop = (e: DragEvent) => {
   e.preventDefault();
   fileHandle(e.dataTransfer?.files[0]!);
 };
+
 const fileHandle = (f: globalThis.File) => {
   if (props.image) {
     allowe = imageType;
@@ -44,6 +43,12 @@ const confirm = async () => {
   dialogVisible.value = false;
   emit("confirm", file.value);
 };
+watch(dialogVisible, async (newValue) => {
+  if (newValue) {
+    await nextTick();
+    inputPaste.value?.focus();
+  }
+});
 </script>
 <template>
   <el
@@ -56,26 +61,37 @@ const confirm = async () => {
     >{{ title }}</el
   >
 
-  <el-dialog v-model="dialogVisible" :title="title" width="600">
+  <el-dialog
+    v-model="dialogVisible"
+    :title="title"
+    width="600"
+    :close-on-click-modal="false"
+  >
     <div class="contain">
       <div
         v-show="isShow"
-        @click="input?.click()"
+        @click="inputClick?.click()"
         @drop="drop"
-        @paste="paste"
         @dragenter.prevent
         @dragover.prevent
         class="upload"
-        :close-on-click-modal="false"
       >
         支持点击，拖拽，粘贴上传
       </div>
+      <input
+        ref="inputPaste"
+        @paste="(e: ClipboardEvent)=>{
+          fileHandle(e.clipboardData!.items[0].getAsFile()!);
+        }"
+        @blur="inputPaste?.focus()"
+        style="opacity: 0; position: absolute"
+      />
       <input
         type="file"
         @change="(e:any)=>{
           fileHandle(e.target?.files[0]);
         }"
-        ref="input"
+        ref="inputClick"
         style="display: none"
         accept="*"
       />
