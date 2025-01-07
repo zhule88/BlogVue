@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { FormInstance, FormItemRule } from "element-plus";
 import { isEmail } from "validator";
+import { required } from "@/utils/content";
 const prop = defineProps<{
   form: FormInstance;
 }>();
@@ -32,7 +33,7 @@ const codeRule: FormItemRule[] = [
 const submit = () => {
   prop.form.validateField("email", (valid) => {
     if (valid) {
-      userS.email();
+      userS.userEmail(userS.auth.email);
       timer.value = 60;
       resume();
     }
@@ -45,12 +46,11 @@ const submit = () => {
       <el-input
         v-model="userS.auth.email"
         placeholder="输入邮箱"
-        maxlength="30"
         show-word-limit
       ></el-input>
     </el-form-item>
     <div style="display: flex">
-      <el-form-item prop="code" label="验证码" size="large">
+      <el-form-item prop="code" label="验证码" size="large" :rules="[required]">
         <el-input
           v-model="userS.auth.code"
           placeholder="输入邮箱验证码"

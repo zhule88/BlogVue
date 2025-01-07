@@ -50,15 +50,22 @@ addEventListener("wheel", (event) => {
       >
         <toggle style="margin-right: 1rem"></toggle>
 
-        <el-dropdown trigger="click" v-if="userS.item.avatar">
+        <el-dropdown
+          v-if="userS.item.avatar"
+          :hide-on-click="false"
+          trigger="click"
+        >
           <el-avatar
             ><img :src="'http://192.168.88.130:9000/user/' + userS.item.avatar"
           /></el-avatar>
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item
-                ><fileUpload title="修改头像"></fileUpload
-              ></el-dropdown-item>
+                ><fileUpload
+                  title="修改头像"
+                  @confirm="userS.avatar"
+                ></fileUpload>
+              </el-dropdown-item>
               <el-dropdown-item @click="userS.clear()"
                 ><el button large>退出登录</el>
               </el-dropdown-item>

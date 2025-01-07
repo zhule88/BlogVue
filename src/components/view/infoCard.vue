@@ -44,6 +44,7 @@
   height: 114px;
   background: var(--color-card);
   border-radius: 100%;
+  transition: $transition;
   @extend center;
   top: calc(50% - 57px);
 

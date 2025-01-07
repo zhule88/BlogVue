@@ -54,12 +54,7 @@ const go = (address: string) => {
           </el-input>
         </el-form-item>
         <el-form-item prop="address">
-          <el-input
-            v-model="linkS.item.address"
-            placeholder="填写网站地址"
-            maxlength="50"
-            show-word-limit
-          >
+          <el-input v-model="linkS.item.address" placeholder="填写网站地址">
             <template #prepend> 地址 </template>
           </el-input>
         </el-form-item>
@@ -74,22 +69,12 @@ const go = (address: string) => {
           </el-input>
         </el-form-item>
         <el-form-item prop="avatar">
-          <el-input
-            v-model="linkS.item.avatar"
-            placeholder="填写头像地址"
-            maxlength="100"
-            show-word-limit
-          >
+          <el-input v-model="linkS.item.avatar" placeholder="填写头像地址">
             <template #prepend> 头像 </template>
           </el-input>
         </el-form-item>
         <el-form-item prop="email">
-          <el-input
-            v-model="linkS.item.email"
-            placeholder="填写邮箱地址"
-            maxlength="30"
-            show-word-limit
-          >
+          <el-input v-model="linkS.item.email" placeholder="填写邮箱地址">
             <template #prepend> 邮箱 </template>
           </el-input>
         </el-form-item>

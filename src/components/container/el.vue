@@ -3,6 +3,7 @@ const themeS = useTheme();
 defineProps<{
   tag?: boolean;
   button?: boolean;
+  link?: boolean;
   large?: boolean;
   Style?: Record<string, string | number>;
 }>();
@@ -21,6 +22,9 @@ defineProps<{
     >
       <slot></slot
     ></el-button>
+    <el-link style="font-size: 15px" :underline="false" v-if="link">
+      <slot></slot
+    ></el-link>
   </div>
 </template>
 

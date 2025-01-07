@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import type user from '@/types/modules/user'
-import  {userLogin,userRegister,userEmail,userAvatar,userInfo} from '@/api/modules/user'
+import  {userLogin,userRegister,userEmail,userAvatar,userInfo,userReset} from '@/api/modules/user'
 
 export const useUser =  defineStore('user', ()=>{
    const item = reactive<user>({
@@ -16,9 +16,6 @@ export const useUser =  defineStore('user', ()=>{
     code:''
    })
 
-   const register=  ()=>{
-   return  userRegister(auth)
-   }
    const login =async ()=>{
     const token = await userLogin(auth)
     if(token != 'error'){
@@ -32,18 +29,18 @@ export const useUser =  defineStore('user', ()=>{
     if( localStorage.getItem("token")){
       Object.assign(item, await userInfo());
       if(item.username == '筑乐'){
-        localStorage.setItem("admin", 'true');
+        sessionStorage.setItem("admin", 'true');
+
       }
     }
    }
-
-   const email = ()=>{
-    userEmail(auth.email);
-   }
-  const avatar =(file:globalThis.File)=>{
+  const avatar =async (file:globalThis.File)=>{
     const formData = new FormData();
     formData.append("file",file);
-    userAvatar(formData,auth.email)
+   if(auth.email == ''){
+    auth.email = item.email
+   }
+   item.avatar = await  userAvatar(formData,auth.email)
   }
   const clear = ()=>{
     localStorage.removeItem("token");
@@ -55,7 +52,7 @@ export const useUser =  defineStore('user', ()=>{
    };
 
   return{
-    item,auth,login,email,register,avatar,info,clear
+    item,auth,login,userEmail,userRegister,avatar,info,clear,userReset
   }
 })
 

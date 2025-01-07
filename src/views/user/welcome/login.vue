@@ -23,29 +23,23 @@ const submit = () => {
 </script>
 <template>
   <div style="width: 100%">
-    <div
-      style="
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-      "
-    >
+    <div class="title">
       <div style="font-size: 25px; font-weight: 600">登录</div>
-      <el-link
-        style="font-size: 15px"
-        :underline="false"
-        @click="router.push('/welcome/register')"
-        >立即注册</el-link
-      >
+      <el link @click="router.push('/welcome/register')">立即注册</el>
     </div>
-    <el-form :model="userS.auth" ref="form" :rules="rules">
+    <el-form
+      :model="userS.auth"
+      ref="form"
+      :rules="rules"
+      label-width="80px"
+      label-position="left"
+    >
       <div v-if="!isEmailLogin">
-        <el-form-item prop="username" label="昵称" size="large">
+        <el-form-item prop="username" label="用户名" size="large">
           <el-input
             v-model="userS.auth.username"
             placeholder="输入用户名"
-            maxlength="30"
+            maxlength="10"
             show-word-limit
           ></el-input>
         </el-form-item>
@@ -61,15 +55,23 @@ const submit = () => {
       </div>
       <emailCode :form="form!" v-else></emailCode>
     </el-form>
-    <div style="display: flex; justify-content: space-between">
-      <el-checkbox v-model="persist" label="勿忘我" />
-      <el-link style="font-size: 15px" @click="isEmailLogin = !isEmailLogin">{{
+    <div
+      style="display: flex; justify-content: space-between; margin-bottom: 20px"
+    >
+      <el link @click="router.push('/welcome/reset')">忘记密码?</el>
+      <el link @click="isEmailLogin = !isEmailLogin">{{
         isEmailLogin ? "密码登录" : "验证码登录"
-      }}</el-link>
+      }}</el>
     </div>
-
     <el button large :Style="{ width: '100%' }" @click="submit()">登录</el>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+</style>

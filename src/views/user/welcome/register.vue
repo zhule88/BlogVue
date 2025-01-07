@@ -25,7 +25,7 @@ const rules = reactive<FormRules<any>>({
 const submit = () => {
   form.value?.validate(async (valid) => {
     if (valid) {
-      if (!((await userS.register()) == "error")) {
+      if (!((await userS.userRegister(userS.auth)) == "error")) {
         isSuccess.value = true;
       }
     }
@@ -47,21 +47,14 @@ const submit = () => {
             >
             <file
               title="上传头像"
-              @confirm="userS.avatar, router.push('/welcome/login')"
+              @confirm="(e: File)=>{ userS.avatar(e);router.push('/welcome/login')}"
             ></file>
           </div>
         </template>
       </el-result>
     </div>
     <div v-else>
-      <div
-        style="
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 20px;
-        "
-      >
+      <div class="title">
         <div style="font-size: 25px; font-weight: 600">注册</div>
         <el-link
           style="font-size: 15px"
@@ -80,7 +73,7 @@ const submit = () => {
         <el-form-item prop="username" label="用户名" size="large">
           <el-input
             v-model="userS.auth.username"
-            placeholder="用户名"
+            placeholder="输入用户名"
             maxlength="10"
             show-word-limit
           ></el-input>
@@ -89,8 +82,6 @@ const submit = () => {
           <el-input
             v-model="userS.auth.password"
             placeholder="输入密码"
-            maxlength="20"
-            show-word-limit
             show-password
           ></el-input>
         </el-form-item>
@@ -98,8 +89,6 @@ const submit = () => {
           <el-input
             v-model="userS.auth.repassword"
             placeholder="再次输入"
-            maxlength="20"
-            show-word-limit
             show-password
           ></el-input>
         </el-form-item>
@@ -111,4 +100,11 @@ const submit = () => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+</style>

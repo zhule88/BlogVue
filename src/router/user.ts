@@ -52,6 +52,11 @@ const routes : Array<RouteRecordRaw> = [
         name: 'register',
         component: () => import('@/views/user/welcome/register.vue')
       },
+      {
+        path: 'reset',
+        name: 'reset',
+        component: () => import('@/views/user/welcome/reset.vue')
+      },
     ]
   }
 ]

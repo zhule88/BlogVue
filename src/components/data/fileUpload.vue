@@ -60,7 +60,6 @@ watch(dialogVisible, async (newValue) => {
     "
     >{{ title }}</el
   >
-
   <el-dialog
     v-model="dialogVisible"
     :title="title"
@@ -111,9 +110,14 @@ watch(dialogVisible, async (newValue) => {
       </div>
     </div>
     <template #footer>
-      <div class="dialog-footer">
-        <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="confirm()"> 确定</el-button>
+      <div style="display: flex">
+        <el
+          button
+          @click="dialogVisible = false"
+          style="margin-left: auto; padding: 0 10px"
+          >取消</el
+        >
+        <el button @click="confirm()"> 确定</el>
       </div>
     </template>
   </el-dialog>
@@ -124,9 +128,10 @@ watch(dialogVisible, async (newValue) => {
   width: 400px;
   height: 250px;
   margin: 0 auto;
-  border: 2px dashed #ccc;
+  border: 2px dashed var(--color-text);
   @extend center;
   color: #ccc;
+  background: var(--color-background);
   padding: 0;
 
   box-sizing: border-box;
@@ -137,7 +142,7 @@ watch(dialogVisible, async (newValue) => {
     height: 100%;
     width: 100%;
     overflow: hidden;
-    background: #ffffff;
+    background: var(--color-card);
     &:hover {
       filter: brightness(90%);
     }
