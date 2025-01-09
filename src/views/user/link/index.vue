@@ -13,7 +13,7 @@ const rules = reactive<FormRules<any>>({
   email: [required],
 });
 const submit = () => {
-  form.value?.validate(async (valid, fields) => {
+  form.value?.validate(async (valid) => {
     if (valid) {
       if (!((await linkS.add()) == "error")) {
         ElMessage.success("提交成功，通过后会通过邮箱通知您");

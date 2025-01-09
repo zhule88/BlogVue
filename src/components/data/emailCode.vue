@@ -21,7 +21,7 @@ const codeRule: FormItemRule[] = [
   required,
   {
     validator: (_rule, _value, callback) => {
-      if (!isEmail(userS.auth.email)) {
+      if (!isEmail(userS.item.email)) {
         callback(new Error("邮箱格式错误"));
       } else {
         callback();
@@ -33,7 +33,7 @@ const codeRule: FormItemRule[] = [
 const submit = () => {
   prop.form.validateField("email", (valid) => {
     if (valid) {
-      userS.userEmail(userS.auth.email);
+      userS.userEmail(userS.item.email);
       timer.value = 60;
       resume();
     }
@@ -44,7 +44,7 @@ const submit = () => {
   <div>
     <el-form-item prop="email" label="邮箱" size="large" :rules="codeRule">
       <el-input
-        v-model="userS.auth.email"
+        v-model="userS.item.email"
         placeholder="输入邮箱"
         show-word-limit
       ></el-input>
@@ -52,13 +52,20 @@ const submit = () => {
     <div style="display: flex">
       <el-form-item prop="code" label="验证码" size="large" :rules="[required]">
         <el-input
-          v-model="userS.auth.code"
+          v-model="userS.item.code"
           placeholder="输入邮箱验证码"
         ></el-input>
       </el-form-item>
-      <el button large style="margin-left: 10px; width: 120px">
-        <div @click="submit()" v-show="!timer">发送验证码</div>
-        <div v-show="timer">{{ timer }} 秒可发送</div></el
+      <el
+        button
+        style="margin-left: 10px; flex-grow: 1"
+        @click="submit()"
+        v-show="!timer"
+      >
+        <div>发送验证码</div>
+      </el>
+      <el button large style="margin-left: 10px; flex-grow: 1" v-show="timer">
+        <div>{{ timer }} 秒可发送</div></el
       >
     </div>
   </div>

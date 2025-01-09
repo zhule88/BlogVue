@@ -4,6 +4,8 @@ export default interface user{
   password: string
   avatar:string
   email: string
+  repassword:string;
+  code:string;
   createTime?:string
 }
 

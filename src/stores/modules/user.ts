@@ -8,16 +8,14 @@ export const useUser =  defineStore('user', ()=>{
     password: '',
     avatar:'',
     email: '',
-   })
-
-   const auth = reactive({
-    ...item,
-    repassword:'',
+     repassword:'',
     code:''
    })
 
+
+
    const login =async ()=>{
-    const token = await userLogin(auth)
+    const token = await userLogin(item)
     if(token != 'error'){
       localStorage.setItem("token", token);
       return true;
@@ -30,17 +28,13 @@ export const useUser =  defineStore('user', ()=>{
       Object.assign(item, await userInfo());
       if(item.username == '筑乐'){
         sessionStorage.setItem("admin", 'true');
-
       }
     }
    }
-  const avatar =async (file:globalThis.File)=>{
+  const avatar =async (file:File)=>{
     const formData = new FormData();
     formData.append("file",file);
-   if(auth.email == ''){
-    auth.email = item.email
-   }
-   item.avatar = await  userAvatar(formData,auth.email)
+   item.avatar = await  userAvatar(formData,item.email)
   }
   const clear = ()=>{
     localStorage.removeItem("token");
@@ -48,11 +42,12 @@ export const useUser =  defineStore('user', ()=>{
     item.password = '';
     item.avatar = '';
     item.email = '';
-    item.id = undefined;
+   item.code = '';
+   item.repassword = '';
    };
 
   return{
-    item,auth,login,userEmail,userRegister,avatar,info,clear,userReset
+    item,login,userEmail,userRegister,avatar,info,clear,userReset
   }
 })
 

@@ -41,7 +41,9 @@ const fileHandle = (f: globalThis.File) => {
 };
 const confirm = async () => {
   dialogVisible.value = false;
-  emit("confirm", file.value);
+  if (file.value != undefined) {
+    emit("confirm", file.value);
+  }
 };
 watch(dialogVisible, async (newValue) => {
   if (newValue) {
@@ -53,7 +55,6 @@ watch(dialogVisible, async (newValue) => {
 <template>
   <el
     button
-    large
     @click="
       isShow = true;
       dialogVisible = true;

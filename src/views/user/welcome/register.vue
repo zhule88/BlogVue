@@ -11,7 +11,7 @@ const rules = reactive<FormRules<any>>({
     required,
     {
       validator: (_rule, value, callback) => {
-        if (value !== userS.auth.password) {
+        if (value !== userS.item.password) {
           callback(new Error("输入密码不一致"));
         } else {
           callback();
@@ -25,7 +25,7 @@ const rules = reactive<FormRules<any>>({
 const submit = () => {
   form.value?.validate(async (valid) => {
     if (valid) {
-      if (!((await userS.userRegister(userS.auth)) == "error")) {
+      if (!((await userS.userRegister(userS.item)) == "error")) {
         isSuccess.value = true;
       }
     }
@@ -39,8 +39,7 @@ const submit = () => {
         <template #extra>
           <div style="width: 100%; display: flex">
             <el
-              large
-              button
+              link
               @click="router.push('/welcome/login')"
               style="margin-right: 10px"
               >返回登录</el
@@ -64,7 +63,7 @@ const submit = () => {
         >
       </div>
       <el-form
-        :model="userS.auth"
+        :model="userS.item"
         ref="form"
         label-width="80px"
         label-position="left"
@@ -72,7 +71,7 @@ const submit = () => {
       >
         <el-form-item prop="username" label="用户名" size="large">
           <el-input
-            v-model="userS.auth.username"
+            v-model="userS.item.username"
             placeholder="输入用户名"
             maxlength="10"
             show-word-limit
@@ -80,14 +79,14 @@ const submit = () => {
         </el-form-item>
         <el-form-item prop="password" label="密码" size="large">
           <el-input
-            v-model="userS.auth.password"
+            v-model="userS.item.password"
             placeholder="输入密码"
             show-password
           ></el-input>
         </el-form-item>
         <el-form-item prop="repassword" label="确认密码" size="large">
           <el-input
-            v-model="userS.auth.repassword"
+            v-model="userS.item.repassword"
             placeholder="再次输入"
             show-password
           ></el-input>

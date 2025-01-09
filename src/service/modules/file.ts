@@ -1,4 +1,4 @@
-import { fileList, fileUpload, fileDel,fileDelAll } from "@/api/modules/file";
+import { fileList, fileUpload, fileDel } from "@/api/modules/file";
 import file from '@/types/modules/file'
 
 export class File{
@@ -8,11 +8,9 @@ export class File{
 
   file:globalThis.File|undefined = undefined;
   async init(articleId:number){
-    const res = await fileList(articleId);
-    this.list = res.data;
+    this.list = await fileList(articleId);
 
   }
-
   async upload(file?: globalThis.File,articleId?:number){
     if(file!=undefined){
       this.file = file;
@@ -29,7 +27,4 @@ export class File{
     fileDel(this.filename);
   }
 
-   delAll(articleId:number){
-    fileDelAll(articleId);
-  }
  }

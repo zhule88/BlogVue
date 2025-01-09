@@ -62,7 +62,7 @@ const handleCurrentChange = (value: number) => {
         </div>
       </div>
       <div class="img">
-        <img v-lazy="article.image" />
+        <img :src="article.image" />
       </div>
     </card>
     <div style="display: flex; justify-content: center; align-items: center">
@@ -82,10 +82,10 @@ const handleCurrentChange = (value: number) => {
 .card {
   display: flex;
   height: 250px;
+
   .img {
     width: 47%;
     position: relative;
-
     height: 100%;
     overflow: hidden;
     img {
@@ -148,7 +148,6 @@ const handleCurrentChange = (value: number) => {
       width: 32px;
       border-radius: 32px;
       transform-origin: 50% 50%;
-      /* transition: transform 0.35s ease-out; */
       transition: $transition;
     }
   }

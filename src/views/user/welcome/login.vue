@@ -2,7 +2,7 @@
 import { FormInstance, FormRules } from "element-plus";
 const userS = useUser();
 const form = ref<FormInstance>();
-const persist = ref(true);
+
 const isEmailLogin = ref(false);
 const router = useRouter();
 const rules = reactive<FormRules<any>>({
@@ -11,7 +11,6 @@ const rules = reactive<FormRules<any>>({
 });
 const submit = () => {
   form.value?.validate(async (valid) => {
-    console.log(valid);
     if (valid) {
       if (await userS.login()) {
         userS.info();
@@ -28,7 +27,7 @@ const submit = () => {
       <el link @click="router.push('/welcome/register')">立即注册</el>
     </div>
     <el-form
-      :model="userS.auth"
+      :model="userS.item"
       ref="form"
       :rules="rules"
       label-width="80px"
@@ -37,7 +36,7 @@ const submit = () => {
       <div v-if="!isEmailLogin">
         <el-form-item prop="username" label="用户名" size="large">
           <el-input
-            v-model="userS.auth.username"
+            v-model="userS.item.username"
             placeholder="输入用户名"
             maxlength="10"
             show-word-limit
@@ -45,7 +44,7 @@ const submit = () => {
         </el-form-item>
         <el-form-item prop="password" label="密码" size="large">
           <el-input
-            v-model="userS.auth.password"
+            v-model="userS.item.password"
             placeholder="输入密码"
             maxlength="20"
             show-word-limit
@@ -63,7 +62,7 @@ const submit = () => {
         isEmailLogin ? "密码登录" : "验证码登录"
       }}</el>
     </div>
-    <el button large :Style="{ width: '100%' }" @click="submit()">登录</el>
+    <el button :Style="{ width: '100%' }" @click="submit()">登录</el>
   </div>
 </template>
 

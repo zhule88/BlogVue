@@ -20,7 +20,7 @@ const router = createRouter({
 
 router.beforeEach((to, _from, next) => {
   if (to.path.startsWith('/admin') ) {
-    if(localStorage.getItem('admin')){
+    if(sessionStorage.getItem('admin')){
       next();
     }else{
       ElMessage.error("只有管理员才能进入")

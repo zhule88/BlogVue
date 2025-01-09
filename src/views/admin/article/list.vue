@@ -1,11 +1,8 @@
 <script setup lang="ts">
-import { File } from "@/service";
-
 const tagS = useTag();
 const categoryListS = useCategoryList();
 const articleListS = reactive(new ArticleList());
 const articleS = reactive(new Article());
-const fileS = new File();
 
 const dialogVisible = ref(false);
 
@@ -15,10 +12,8 @@ onMounted(() => {
 });
 
 const articleDel = async () => {
-  await articleS.del();
-  const article = articleS.item;
-  fileS.del(article.image);
-  fileS.delAll(article.id!);
+  articleS.del();
+
   dialogVisible.value = false;
   articleListS.init();
 };
@@ -53,7 +48,7 @@ const articleDel = async () => {
     <el-table-column prop="visitCount" label="浏览量" />
     <el-table-column prop="top" label="是否置顶">
       <template #default="scope">
-        <p>{{ scope.row.top == 0 ? "未置顶" : "已置顶" }}</p>
+        <p>{{ scope.row.top == 0 ? "否" : "是" }}</p>
       </template>
     </el-table-column>
     <el-table-column prop="createTime" label="创建时间" />

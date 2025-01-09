@@ -15,7 +15,6 @@ export const useArticle =  defineStore('article', ()=>{
   const init = async(id:number)=>{
     Object.assign(item, await articleGet(id));
 
-    item.image = prefix+item.image
   }
   const add=()=>{
     articleAdd(item);

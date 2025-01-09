@@ -24,11 +24,5 @@ export const fileDel = (filename:string) =>{
     }
   })
 }
-export const fileDelAll = (id:number) =>{
-  return request.delete('/file/delall',{
-    params:{
-    id
-    }
-  })
-}
+
 

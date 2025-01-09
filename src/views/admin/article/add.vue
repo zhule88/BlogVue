@@ -54,9 +54,6 @@ const tablesubmit = async () => {
     articleS.add();
     router.back();
   } else {
-    if (articleS.item.image.startsWith(prefix)) {
-      articleS.item.image = articleS.item.image.slice(prefix.length);
-    }
     if (fileS.file && articleS.item.image) {
       fileS.del(articleS.item.image);
       await fileS.upload();
@@ -71,7 +68,6 @@ const tagClose = (tagId: number) => {
   articleS.item.tags = articleS.item.tags!.filter((obj) => obj !== tagId);
 };
 </script>
-
 <template>
   <div style="display: flex; flex-direction: column">
     <div style="display: flex; height: 40px; width: 100%">
@@ -103,12 +99,12 @@ const tagClose = (tagId: number) => {
           :value="item.filename"
         />
       </el-select>
-      <el-button
-        type="primary"
+      <el
+        button
         style="height: 100%"
         v-if="articleS.item.id != undefined"
         @click="fileS.del(), fileS.init(articleS.item.id!)"
-        >删除</el-button
+        >删除</el
       >
       <el-select
         v-model="articleS.item.categoryId"
@@ -163,7 +159,7 @@ const tagClose = (tagId: number) => {
       </div>
 
       <file title="上传文件" @confirm="fileUpload"> </file>
-      <el-button @click="tablesubmit()" style="height: 100%">保存</el-button>
+      <el button @click="tablesubmit()" style="height: 100%">保存</el>
     </div>
 
     <MdEditor

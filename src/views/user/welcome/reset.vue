@@ -2,7 +2,6 @@
 import { FormInstance, FormRules } from "element-plus";
 const userS = useUser();
 const form = ref<FormInstance>();
-
 const router = useRouter();
 const rules = reactive<FormRules<any>>({
   password: [required],
@@ -10,7 +9,7 @@ const rules = reactive<FormRules<any>>({
     required,
     {
       validator: (_rule, value, callback) => {
-        if (value !== userS.auth.password) {
+        if (value !== userS.item.password) {
           callback(new Error("输入密码不一致"));
         } else {
           callback();
@@ -23,7 +22,8 @@ const rules = reactive<FormRules<any>>({
 const submit = () => {
   form.value?.validate(async (valid) => {
     if (valid) {
-      if (!((await userS.userReset(userS.auth)) == "error")) {
+      if (!((await userS.userReset(userS.item)) == "error")) {
+        userS.clear();
         router.push("/welcome/login");
       }
     }
@@ -37,7 +37,7 @@ const submit = () => {
       <el link @click="router.push('/welcome/login')">返回登录</el>
     </div>
     <el-form
-      :model="userS.auth"
+      :model="userS.item"
       ref="form"
       :rules="rules"
       label-width="80px"
@@ -45,14 +45,14 @@ const submit = () => {
     >
       <el-form-item prop="password" label="新密码" size="large">
         <el-input
-          v-model="userS.auth.password"
+          v-model="userS.item.password"
           placeholder="输入新密码"
           show-password
         ></el-input>
       </el-form-item>
       <el-form-item prop="repassword" label="确认密码" size="large">
         <el-input
-          v-model="userS.auth.repassword"
+          v-model="userS.item.repassword"
           placeholder="再次输入"
           show-password
         ></el-input>

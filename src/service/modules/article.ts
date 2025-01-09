@@ -12,23 +12,16 @@ export class ArticleList {
   current = 1;
   size = 10;
 
-  addPrefix(){
-    this.list.forEach(item =>{
-      item.image = prefix+item.image;
-    })
-  }
   async init (){
     this.list  = await articleList(this.state,this.top);
 
-
-    this.addPrefix();
   }
   async page (){
     const res = await articlePage(this.current, this.size,this.state);
 
     this.total = res.total;
     this.list = res.records;
-    this.addPrefix();
+
 
   }
 
@@ -43,15 +36,15 @@ export class ArticleList {
   }
   async listByIds(ids:number[]){
     this.list = await articleListByIds(ids);
-    this.addPrefix();
+
   }
   async listByCateId(id:number){
     this.list  = await articleListByCateId(id)
-    this.addPrefix();
+
   }
   async listByTagId(id:number){
     this.list = await articleListByTagId(id)
-    this.addPrefix();
+
   }
 }
 
@@ -65,7 +58,7 @@ export class Article{
   }
   async init (id:number){
     this.item = await articleGet(id);
-    this.item.image = prefix+this.item.image
+
 
   }
     add(){
@@ -77,9 +70,6 @@ export class Article{
   async del() {
    await articleDel(this.item.id! )
   }
-
-
-
   clear(){
   this.item  = {
       title:'',

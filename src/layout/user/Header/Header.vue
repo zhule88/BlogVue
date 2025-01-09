@@ -55,9 +55,7 @@ addEventListener("wheel", (event) => {
           :hide-on-click="false"
           trigger="click"
         >
-          <el-avatar
-            ><img :src="'http://192.168.88.130:9000/user/' + userS.item.avatar"
-          /></el-avatar>
+          <el-avatar><img :src="userS.item.avatar" /></el-avatar>
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item
@@ -67,7 +65,7 @@ addEventListener("wheel", (event) => {
                 ></fileUpload>
               </el-dropdown-item>
               <el-dropdown-item @click="userS.clear()"
-                ><el button large>退出登录</el>
+                ><el button>退出登录</el>
               </el-dropdown-item>
             </el-dropdown-menu>
           </template>
@@ -97,6 +95,7 @@ header {
     text-align: left;
     margin: 20px;
     font-weight: 500;
+    transition: $transition;
     color: var(--text-color);
     &:hover {
       color: $sky-blue;
