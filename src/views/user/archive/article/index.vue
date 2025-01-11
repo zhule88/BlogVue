@@ -68,7 +68,7 @@ onMounted(async () => {
   &::before {
     content: "";
     position: absolute;
-    left: 25px;
+    left: 26px;
     top: 0;
     bottom: 0;
     width: 1px;
@@ -93,8 +93,8 @@ onMounted(async () => {
       position: absolute;
       left: -39px;
       top: 45%;
-      width: 10px;
-      height: 10px;
+      width: 11px;
+      height: 11px;
       background-color: var(--text-color);
       border-radius: 50%;
     }

@@ -44,7 +44,7 @@ const init = async () => {
               <div class="title">
                 {{ article.title }}
               </div>
-              <img v-lazy="article.image" />
+              <img :src="article.image" />
             </div>
             <div class="text">
               <div>

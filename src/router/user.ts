@@ -34,6 +34,11 @@ const routes : Array<RouteRecordRaw> = [
         name: 'linkU',
         component: () => import('@/views/user/link/index.vue')
       },
+      {
+        path: 'message',
+        name: 'message',
+        component: () => import('@/views/user/message/index.vue')
+      },
     ]
   },
   {

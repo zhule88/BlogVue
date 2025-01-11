@@ -24,7 +24,17 @@ const drop = (e: DragEvent) => {
   e.preventDefault();
   fileHandle(e.dataTransfer?.files[0]!);
 };
-
+const paste = (e: ClipboardEvent) => {
+  const items = e.clipboardData!.items;
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
+    if (item.kind == "file") {
+      const file = item.getAsFile();
+      fileHandle(file!);
+      break;
+    }
+  }
+};
 const fileHandle = (f: globalThis.File) => {
   if (props.image) {
     allowe = imageType;
@@ -80,9 +90,7 @@ watch(dialogVisible, async (newValue) => {
       </div>
       <input
         ref="inputPaste"
-        @paste="(e: ClipboardEvent)=>{
-          fileHandle(e.clipboardData!.items[0].getAsFile()!);
-        }"
+        @paste="paste"
         @blur="inputPaste?.focus()"
         style="opacity: 0; position: absolute"
       />

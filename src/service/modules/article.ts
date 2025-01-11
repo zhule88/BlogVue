@@ -27,16 +27,9 @@ export class ArticleList {
 
   async around(id:number){
     this.list  = await articleAround(id)
-    if(this.list[0] != null){
-      this.list[0].image =  prefix+ this.list[0].image;
-    }
-    if(this.list[1] != null){
-      this.list[1].image =  prefix+ this.list[1].image;
-    }
   }
   async listByIds(ids:number[]){
     this.list = await articleListByIds(ids);
-
   }
   async listByCateId(id:number){
     this.list  = await articleListByCateId(id)

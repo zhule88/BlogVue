@@ -35,7 +35,7 @@ addEventListener("wheel", (event) => {
         <el-menu-item index="/user/link">
           <el-icon><Link /></el-icon>友链</el-menu-item
         >
-        <el-menu-item>
+        <el-menu-item index="/user/message">
           <el-icon><ChatLineSquare /></el-icon>留言</el-menu-item
         >
       </el-menu>
@@ -51,11 +51,20 @@ addEventListener("wheel", (event) => {
         <toggle style="margin-right: 1rem"></toggle>
 
         <el-dropdown
-          v-if="userS.item.avatar"
+          v-if="userS.item.id"
           :hide-on-click="false"
           trigger="click"
         >
-          <el-avatar><img :src="userS.item.avatar" /></el-avatar>
+          <el-avatar
+            v-if="userS.item.avatar"
+            fit="cover"
+            :src="userS.item.avatar"
+          />
+          <el-avatar
+            src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
+            v-else
+          />
+
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item

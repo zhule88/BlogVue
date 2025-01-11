@@ -32,7 +32,6 @@ header {
     justify-content: flex-end;
     background-color: rgba(28, 124, 220, 0.926);
     font-weight: bold;
-
     height: 45px;
   }
 }

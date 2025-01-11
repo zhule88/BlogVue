@@ -30,17 +30,20 @@ const fileUpload = async (f: globalThis.File) => {
     return;
   } */
   await fileS.upload(f, articleS.item.id);
-  const url = prefix + fileS.filename;
   if (["image/jpeg", "image/png", "image/gif", "image/webp"].includes(f.type)) {
-    copy("<img src='" + url + "'>");
+    copy("<img src='" + fileS.filename + "'>");
   } else if (f.type == "video/mp4") {
     copy(
       "<video width='100%' height='300px' controls><source src='" +
-        url +
+        fileS.filename +
         "'  type='video/mp4'></video>"
     );
   } else {
-    copy("<audio controls><source src='" + url + "' type='audio/aac'></audio>");
+    copy(
+      "<audio controls><source src='" +
+        fileS.filename +
+        "' type='audio/aac'></audio>"
+    );
   }
 };
 
