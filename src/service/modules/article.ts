@@ -1,4 +1,4 @@
-import type {article} from '@/types'
+import type article from '@/types/modules/article'
 import {articleGet, articleAdd, articleList, articleDel,
    articleUpdate,articlePage,articleAround,
    articleListByIds,articleListByCateId,articleListByTagId} from "@/api/modules/article";
@@ -14,15 +14,12 @@ export class ArticleList {
 
   async init (){
     this.list  = await articleList(this.state,this.top);
-
   }
+
   async page (){
     const res = await articlePage(this.current, this.size,this.state);
-
     this.total = res.total;
     this.list = res.records;
-
-
   }
 
   async around(id:number){

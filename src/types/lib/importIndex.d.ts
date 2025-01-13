@@ -1,5 +1,3 @@
-declare module 'mui-player'
-
 
 import axios from 'axios';
 declare module 'axios' {

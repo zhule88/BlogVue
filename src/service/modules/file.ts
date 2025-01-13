@@ -1,5 +1,5 @@
 import { fileList, fileUpload, fileDel } from "@/api/modules/file";
-import file from '@/types/modules/file'
+import type file from '@/types/modules/file'
 
 export class File{
   list:file[] = [];

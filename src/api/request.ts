@@ -41,9 +41,5 @@ export default instance
 
 export { baseURL }
 
-interface res {
-  code: number
-  message: string
-  data: any
-}
+
 

@@ -1,4 +1,4 @@
-
+/*
 import { ArticleList,Article } from "@/service/modules/article";
 
 import {File } from "@/service/modules/file";
@@ -8,3 +8,4 @@ export {ArticleList,Article}
 
 export {File }
 export {LinkList,Link }
+ */
