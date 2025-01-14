@@ -54,7 +54,6 @@ onMounted(async () => {
     align-items: center;
     justify-content: space-between;
     height: 3rem;
-    user-select: none;
     width: 100%;
     font-size: 17px;
     border-radius: 10px;

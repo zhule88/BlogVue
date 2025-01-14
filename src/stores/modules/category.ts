@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type {category} from '@/types'
+import type category from '@/types/modules/category'
 import {categoryList,categoryArticleCount} from "@/api/modules/category"
 import nameMap from "@/utils/nameMap"
 export const useCategoryList =  defineStore('categoryList', ()=>{

@@ -5,7 +5,7 @@ export default interface comment {
     parentId?:number
     replyId?:number
     content:string
-    bowser:string
+    browser:string
     location:string
     createTime:string;
 }

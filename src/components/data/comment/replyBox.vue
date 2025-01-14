@@ -2,16 +2,22 @@
 import axios from "axios";
 import { emojis } from "./emojis";
 import bowser from "bowser";
-
+const prop = defineProps<{
+  articleId: number;
+  parentId?: number;
+  replyId?: number;
+}>();
 const userAgent = window.navigator.userAgent;
 const browser = bowser.getParser(userAgent);
 const commentS = reactive(new COmment());
+const userS = useUser();
 const popRef = ref();
+const router = useRouter();
 
 const submit = async () => {
-  commentS.item.bowser = `${browser.getBrowserName()} ${browser.getBrowserVersion()}`;
+  commentS.item.browser = `${browser.getBrowserName()} ${browser.getBrowserVersion()}`;
   const res = await axios.get("https://ip.useragentinfo.com/json");
-  if (!(res.status == 200)) {
+  if (res.status == 200) {
     commentS.item.location = res.data.province;
   } else {
     axios.get("https://myip.ipip.net/s").then(async (res) => {
@@ -22,9 +28,16 @@ const submit = async () => {
         });
     });
   }
+  commentS.item.userId = userS.item.id;
   commentS.item.location == "" ? "未知" : commentS.item.location;
-  console.log(commentS.item);
-  /* commentS.add(); */
+  commentS.item.articleId = prop.articleId;
+  if (prop.parentId) {
+    commentS.item.parentId = prop.parentId;
+  }
+  if (prop.replyId) {
+  }
+  commentS.add();
+  commentS.clear();
 };
 </script>
 <template>
@@ -37,7 +50,7 @@ const submit = async () => {
       <div
         style="
           display: flex;
-          width: 70%;
+          width: 100%;
           justify-content: space-between;
           align-items: center;
           margin-top: 5px;
@@ -73,7 +86,8 @@ const submit = async () => {
             </el-scrollbar>
           </div>
         </el-popover>
-        <el button small @click="submit"> 发布</el>
+        <el button small @click="submit" v-if="userS.item.id"> 发布</el>
+        <el button small @click="router.push('/welcome/login')" v-else>登陆</el>
       </div>
     </div>
   </div>
@@ -86,10 +100,11 @@ const submit = async () => {
   flex-direction: column;
 }
 textarea {
-  width: 70%;
+  width: 100%;
   height: 100px;
   padding: 1rem;
   border-radius: $border-radius;
+  box-sizing: border-box;
   resize: none;
 }
 .emoji {

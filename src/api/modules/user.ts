@@ -34,3 +34,6 @@ export const userAvatar = (file:any,email?:string) =>{
   })
 }
 
+export const userListByIds = (ids:number[])=>{
+  return request.post(prefix+'list/byIds',ids)
+}

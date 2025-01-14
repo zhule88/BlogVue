@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
-
-import type {tag} from '@/types'
+import type tag from '@/types/modules/tag'
 import {tagList} from '@/api/modules/tag'
 import nameMap from "@/utils/nameMap"
 

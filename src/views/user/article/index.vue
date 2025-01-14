@@ -19,10 +19,10 @@ onMounted(() => {
 watch(route, () => {
   init();
 });
-const init = () => {
+const init = async () => {
   window.scrollTo(0, 0);
   const articleId = route.params.id as any;
-  articleS.init(articleId);
+  await articleS.init(articleId);
   articleListS.around(articleId);
 };
 </script>
@@ -104,6 +104,11 @@ const init = () => {
             <el-image :src="articleListS.list[1].image" />
           </div>
         </div>
+        <comment
+          :articleId="articleS.item.id!"
+          v-if="articleS.item.id"
+          style="width: 90%; margin: 20px auto"
+        ></comment>
       </card>
     </template>
     <template #sidebar>

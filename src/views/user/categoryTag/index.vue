@@ -67,7 +67,7 @@ const init = async () => {
     <template #sidebar>
       <div style="margin-top: 45px">
         <infoCard></infoCard>
-        <notice></notice>
+        <notice> </notice>
         <cateTag></cateTag>
       </div>
     </template>

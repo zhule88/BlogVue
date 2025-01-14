@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type {article} from '@/types'
+import type article from '@/types/modules/article'
 import {articleGet, articleAdd, articleDel,
   articleUpdate,
   } from "@/api/modules/article";

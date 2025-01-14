@@ -17,6 +17,7 @@ declare global {
   const Link: typeof import('../../service/modules/link')['Link']
   const LinkList: typeof import('../../service/modules/link')['LinkList']
   const Tag: typeof import('../../service/index')['Tag']
+  const User: typeof import('../../service/modules/user')['User']
   const article: typeof import('../modules/article')['default']
   const articleS: typeof import('../../stores/modules/article')['articleS']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']

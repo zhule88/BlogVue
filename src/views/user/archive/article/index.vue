@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { article } from "@/types";
+import article from "@/types/modules/article";
 
 const router = useRouter();
 const articleS = new ArticleList();

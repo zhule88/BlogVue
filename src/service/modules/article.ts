@@ -34,7 +34,6 @@ export class ArticleList {
   }
   async listByTagId(id:number){
     this.list = await articleListByTagId(id)
-
   }
 }
 

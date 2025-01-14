@@ -38,12 +38,13 @@ export const useUser =  defineStore('user', ()=>{
   }
   const clear = ()=>{
     localStorage.removeItem("token");
+    item.id = undefined;
     item.username = '';
     item.password = '';
     item.avatar = '';
     item.email = '';
-   item.code = '';
-   item.repassword = '';
+    item.code = '';
+    item.repassword = '';
    };
 
   return{
