@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import showcase from "./showcase.vue";
-import { MdPreview } from "md-editor-v3";
-import { MdCatalog } from "md-editor-v3";
+import { MdPreview, MdCatalog } from "md-editor-v3";
+
 import "md-editor-v3/lib/style.css";
 const articleS = useArticle();
 const route = useRoute();
@@ -33,7 +33,7 @@ const init = async () => {
       <card style="display: flex; flex-direction: column">
         <MdPreview
           :editorId="id"
-          v-model:model-value="articleS.item.content"
+          v-model="articleS.item.content"
           :theme="themeS.isdark ? 'dark' : 'light'"
           style="border-radius: 10px"
         />
@@ -166,6 +166,7 @@ const init = async () => {
 }
 
 :deep(.md-editor-preview) {
+  font-family: cartoon;
   h2:hover,
   h1:hover,
   h3:hover {

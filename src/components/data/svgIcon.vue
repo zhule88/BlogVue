@@ -14,12 +14,7 @@ defineProps({
     default: "",
   },
   // 接收父组件传递过来的图标宽度
-  width: {
-    type: String,
-    default: "16px",
-  },
-  // 接收父组件传递过来的图标高度
-  height: {
+  size: {
     type: String,
     default: "16px",
   },
@@ -28,12 +23,13 @@ const themeS = useTheme();
 </script>
 <template>
   <!-- svg：图标外层容器节点，内部需要与 use 标签结合使用 -->
-  <svg :style="{ width, height }" class="svg">
+  <svg :style="{ width: size, height: size }" class="svg">
     <!-- xlink:href执行用哪一个图标，属性值务必#icon-图标名字 -->
     <!-- use 标签 fill 属性可以设置图标的颜色 -->
     <use
       :xlink:href="prefix + name"
       :fill="color == '' ? (themeS.isdark ? '#808080' : '') : color"
+      class="icon"
     ></use>
   </svg>
 </template>
@@ -41,5 +37,10 @@ const themeS = useTheme();
 <style scoped lang="scss">
 .svg {
   transform: translateY(10%);
+  &:hover {
+    .icon {
+      fill: var(--color-like);
+    }
+  }
 }
 </style>

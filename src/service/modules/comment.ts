@@ -13,13 +13,12 @@ export class COmment {
   async init(){
     this.list = await commentListByArticle(this.item.articleId!);
   }
-  add(){
-    commentAdd(this.item)
+  async add(){
+    await commentAdd(this.item)
   }
   del(id:number){
     commentdel(id)
   }
-
   clear(){
     this.item={
       content:'',

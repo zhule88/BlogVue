@@ -44,10 +44,10 @@ const submit = () => {
               style="margin-right: 10px"
               >返回登录</el
             >
-            <file
+            <fileUpload
               title="上传头像"
               @confirm="(e: File)=>{ userS.avatar(e);router.push('/welcome/login')}"
-            ></file>
+            ></fileUpload>
           </div>
         </template>
       </el-result>

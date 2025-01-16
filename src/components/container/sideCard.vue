@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import card from "@/components/container/card.vue";
-import svgIcon from "@/components/data/svgIcon.vue";
 defineProps<{
   title: string;
   icon: string;
@@ -10,7 +8,7 @@ defineProps<{
   <card>
     <div class="title">
       <div class="title_text">
-        <svgIcon :name="icon" width="30" height="30" class="animation" />
+        <svgIcon :name="icon" class="animation" size="30px" />
         <span style="margin-left: 10px">{{ title }}</span>
       </div>
     </div>
@@ -43,7 +41,6 @@ defineProps<{
 .animation {
   animation: scale 1s infinite;
   transform-origin: center;
-
   @keyframes scale {
     0% {
       transform: scale(1);

@@ -6,6 +6,7 @@ const props = defineProps<{
   image?: boolean;
 }>();
 const emit = defineEmits(["confirm"]);
+
 const reader = new FileReader();
 const dialogVisible = ref(false);
 const isShow = ref(true);
