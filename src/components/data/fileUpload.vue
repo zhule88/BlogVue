@@ -143,7 +143,6 @@ watch(dialogVisible, async (newValue) => {
   color: #ccc;
   background: var(--color-background);
   padding: 0;
-
   box-sizing: border-box;
   transition: all 0.5s;
 

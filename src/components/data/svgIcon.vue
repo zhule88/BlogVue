@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// 接收父组件传递过来的参数
 defineProps({
   // xlink:href 属性值的前缀
   prefix: {
@@ -8,12 +7,10 @@ defineProps({
   },
   // 提供使用的图标的名字
   name: String,
-  // 接收父组件传递的颜色
   color: {
     type: String,
     default: "",
   },
-  // 接收父组件传递过来的图标宽度
   size: {
     type: String,
     default: "16px",

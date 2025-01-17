@@ -1,6 +1,6 @@
-import { App } from 'vue';
-const components = import.meta.glob('./components/**/*.vue');
-
+//import { App } from 'vue';
+//const components = import.meta.glob('./components/**/*.vue');
+/*
 export default {
     install(app: App) {
         Object.keys(components).forEach(async (key) => {
@@ -9,4 +9,4 @@ export default {
             app.component(componentName , component.default );
         });
     }
-};
+}; */

@@ -9,7 +9,8 @@ declare module 'vue' {
   export interface GlobalComponents {
     Card: typeof import('./../../components/container/card.vue')['default']
     CateTag: typeof import('./../../components/view/cateTag.vue')['default']
-    Comment: typeof import('./../../components/data/comment/comment.vue')['default']
+    CommentArea: typeof import('./../../components/data/commentArea/commentArea.vue')['default']
+    CommentCard: typeof import('./../../components/data/commentArea/commentCard.vue')['default']
     El: typeof import('./../../components/container/el.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
@@ -43,7 +44,7 @@ declare module 'vue' {
     InfoCard: typeof import('./../../components/view/infoCard.vue')['default']
     Layout: typeof import('./../../components/container/layout.vue')['default']
     Notice: typeof import('./../../components/view/notice.vue')['default']
-    ReplyBox: typeof import('./../../components/data/comment/replyBox.vue')['default']
+    ReplyBox: typeof import('./../../components/data/commentArea/replyBox.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SideCard: typeof import('./../../components/container/sideCard.vue')['default']

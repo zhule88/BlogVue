@@ -1,4 +1,4 @@
-import type user from '@/types/modules/user'
+/* import type user from '@/types/modules/user'
 import {userListByIds} from "@/api/modules/user"
 export class User{
   list:user[]  = [];
@@ -13,3 +13,4 @@ export class User{
   }
 }
 
+ */

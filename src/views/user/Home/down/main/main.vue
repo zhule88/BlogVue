@@ -129,7 +129,6 @@ const handleCurrentChange = (value: number) => {
       color: rgba(255, 254, 255);
       border-radius: $border-radius;
       width: 5rem;
-
       font-size: 15px;
       @extend center;
     }

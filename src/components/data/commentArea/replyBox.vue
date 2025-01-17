@@ -73,12 +73,7 @@ const submit = async () => {
           ref="popRef"
         >
           <template #reference>
-            <SvgIcon
-              name="笑"
-              height="20px"
-              width="20px"
-              style="cursor: pointer"
-            />
+            <SvgIcon name="笑" size="25px" style="cursor: pointer" />
           </template>
           <div>
             <el-scrollbar height="200px">
@@ -100,7 +95,7 @@ const submit = async () => {
           button
           small
           @click="isPreview = !isPreview"
-          style="margin-left: auto"
+          style="margin-left: auto; margin-right: 5px"
         >
           预览</el
         >

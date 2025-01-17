@@ -7,5 +7,7 @@ export default interface comment {
     content:string
     browser:string
     location:string
+    avatar?:string
+    username?:string
     createTime:string;
 }

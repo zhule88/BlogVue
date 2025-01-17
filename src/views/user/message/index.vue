@@ -6,7 +6,7 @@
         <div>欢迎来到我的博客</div>
         <div>在这里留下自己的足迹吧~</div>
       </div>
-      <comment :articleId="0"></comment>
+      <commentArea :articleId="0"></commentArea>
     </div>
   </layout>
 </template>
