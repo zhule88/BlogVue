@@ -11,7 +11,7 @@
   border-radius: $border-radius;
   width: 100%;
   margin: $margin 0;
-  box-shadow: $box-shadow;
+  box-shadow: var(--box-shadow);
   transition: $transition;
 }
 </style>

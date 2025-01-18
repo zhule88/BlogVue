@@ -8,16 +8,26 @@ const prop = defineProps<{
   articleId: number;
   parentId?: number;
   replyId?: number;
+  userName?: string;
+  isShow?: boolean;
 }>();
+const emit = defineEmits(["submit"]);
 const userAgent = window.navigator.userAgent;
 const browser = bowser.getParser(userAgent);
 const commentS = reactive(new COmment());
+const commentListS = useCommentList();
 const userS = useUser();
 const popRef = ref();
+const textRef = ref();
 const router = useRouter();
 const themeS = useTheme();
 const isPreview = ref(false);
-const emit = defineEmits(["submit"]);
+const textHeight = ref(50);
+
+const input = (e: Event) => {
+  const target = e.target as HTMLTextAreaElement;
+  textHeight.value = target.scrollHeight;
+};
 
 const submit = async () => {
   commentS.item.browser = `${browser.getBrowserName()} ${browser.getBrowserVersion()}`;
@@ -35,36 +45,40 @@ const submit = async () => {
       commentS.item.location = "未知";
     }
   }
+  if (commentS.item.location != "未知") {
+    commentS.item.location = commentS.item.location.slice(0, -1);
+  }
   commentS.item.userId = userS.item.id;
   commentS.item.articleId = prop.articleId;
   if (prop.parentId) {
     commentS.item.parentId = prop.parentId;
   }
   if (prop.replyId) {
-    commentS.item.parentId = prop.replyId;
+    commentS.item.replyId = prop.replyId;
   }
   await commentS.add();
   commentS.clear();
+  commentListS.count++;
+  commentListS.replyUpdate(prop.articleId);
   emit("submit");
 };
+watch(prop, async () => {
+  await nextTick();
+  textRef.value?.focus();
+});
 </script>
 <template>
   <div style="width: 100%">
     <div class="contain">
       <textarea
-        placeholder="留下足迹~"
+        :placeholder="userName ? `回复@${userName}:` : '支持mark语法'"
         v-model="commentS.item.content"
-        style="transition: all 0.4s ease-out"
+        ref="textRef"
+        :style="{ height: textHeight + 'px' }"
+        @input="input"
       ></textarea>
-
       <div
-        style="
-          display: flex;
-          width: 100%;
-
-          align-items: center;
-          margin-top: 5px;
-        "
+        style="display: flex; width: 100%; align-items: center; margin-top: 5px"
       >
         <el-popover
           placement="bottom-end"
@@ -113,11 +127,19 @@ const submit = async () => {
 </template>
 
 <style scoped lang="scss">
+@import "./md.scss";
 .contain {
   width: 100%;
   @extend center;
   flex-direction: column;
 }
+textarea {
+  transition: background-color 0.4s ease-out;
+  overflow: hidden;
+  font-family: cartoon;
+  color: var(--text-color);
+}
+
 textarea {
   width: 100%;
   height: 100px;
@@ -132,42 +154,6 @@ textarea {
   &:hover {
     background: var(--color-card);
     filter: brightness(80%);
-  }
-}
-:deep(#md-editor-v3) {
-  font-family: cartoon;
-  color: var(--text-color);
-  transition: $transition;
-  margin: 5px 0;
-  common {
-    margin: 0;
-    color: var(--text-color);
-  }
-  h1 {
-    font-size: 25px;
-    @extend common;
-  }
-  h2 {
-    font-size: 23px;
-    @extend common;
-  }
-  h3 {
-    font-size: 21px;
-    @extend common;
-  }
-  h4 {
-    font-size: 19px;
-    @extend common;
-  }
-  h5 {
-    font-size: 17px;
-
-    @extend common;
-  }
-  h6,
-  p {
-    font-size: 15px;
-    @extend common;
   }
 }
 </style>

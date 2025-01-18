@@ -57,13 +57,7 @@ const fetchData = () => {
       </div>
     </div>
     <!-- 向下按钮 -->
-    <svgIcon
-      class="arrow-down"
-      name="下箭头"
-      width="50px"
-      height="50x"
-      @click="scrollDown"
-    />
+    <svgIcon class="arrow-down" name="下箭头" size="50px" @click="scrollDown" />
   </div>
 </template>
 
@@ -77,7 +71,6 @@ const fetchData = () => {
   width: 100%;
   height: 100vh;
   min-height: 10rem;
-  color: var(--header-text-color);
 }
 
 .brand {

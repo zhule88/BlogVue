@@ -104,11 +104,11 @@ const init = async () => {
             <el-image :src="articleListS.list[1].image" />
           </div>
         </div>
-        <comment
+        <CommentArea
           :articleId="articleS.item.id!"
           v-if="articleS.item.id"
           style="width: 90%; margin: 20px auto"
-        ></comment>
+        ></CommentArea>
       </card>
     </template>
     <template #sidebar>

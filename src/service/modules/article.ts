@@ -1,7 +1,5 @@
 import type article from '@/types/modules/article'
-import {articleGet, articleAdd, articleList, articleDel,
-   articleUpdate,articlePage,articleAround,
-   articleListByIds,articleListByCateId,articleListByTagId} from "@/api/modules/article";
+
 
 
 export class ArticleList {

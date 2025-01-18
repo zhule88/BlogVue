@@ -2,12 +2,15 @@ import request from '@/api/request'
 import type comment from "@/types/modules/comment"
 
 const prefix = '/comment/'
-export const commentListByArticle = (id:number,current:number) =>{
-  return request.get(prefix+ 'list/byArticle',{
+export const commentPage = (id:number,current:number,size:number) =>{
+  return request.get(prefix+ 'page',{
     params: {
-      id,current
+      id,current,size
     }
   })
+}
+export const commentList = (ids:number[]) =>{
+  return request.post(prefix+ 'list',ids)
 }
 
 export const commentCount = (id:number) =>{

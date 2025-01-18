@@ -45,15 +45,15 @@ const handleCurrentChange = (value: number) => {
             <el tag v-for="item in article.tags"> {{ tagS.map.get(item) }}</el>
           </div>
           <div class="text">
-            <svgIcon name="火" class="svg" />
+            <svgIcon name="火" />
             浏览量:{{ article.visitCount }}
           </div>
           <div class="text">
-            <svgIcon name="日历更新" class="svg" />
+            <svgIcon name="日历更新" />
             发布于:{{ article.createTime }}
           </div>
           <div class="text">
-            <svgIcon name="更新" class="svg" />
+            <svgIcon name="更新" />
             更新于:{{ article.updateTime }}
           </div>
         </div>

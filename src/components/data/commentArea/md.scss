@@ -1,0 +1,34 @@
+:deep(#md-editor-v3) {
+  font-family: cartoon;
+
+  transition: $transition;
+  common {
+    margin: 0;
+    color: var(--text-color);
+  }
+  h1 {
+    font-size: 25px;
+    @extend common;
+  }
+  h2 {
+    font-size: 23px;
+    @extend common;
+  }
+  h3 {
+    font-size: 21px;
+    @extend common;
+  }
+  h4 {
+    font-size: 19px;
+    @extend common;
+  }
+  h5 {
+    font-size: 17px;
+    @extend common;
+  }
+  h6,
+  p {
+    font-size: 15px;
+    @extend common;
+  }
+}
