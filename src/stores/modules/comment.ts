@@ -4,12 +4,12 @@ export const useCommentList =  defineStore('commentList', ()=>{
   const parentList = reactive<comment[]>([]);
   const childList = reactive(new Map<number,comment[]>());
   const current = ref(1);
-
+const articleId = ref(0)
   const isMore = ref(true);
   const count = ref(0)
 
-  const init =  async (articleId:number)=>{
-      const res:comment[] = await commentPage(articleId,current.value,10);
+  const init =  async ()=>{
+      const res:comment[] = await commentPage(articleId.value,current.value,10);
       parentList.push(...res);
       if(res.length<10){
         isMore.value = false;
@@ -17,15 +17,15 @@ export const useCommentList =  defineStore('commentList', ()=>{
       childGet(res);
 }
 
-const replyUpdate = async (articleId:number)=>{
-  const res:comment[] = await commentPage(articleId,1,current.value * 10);
+const replyUpdate = async ()=>{
+  const res:comment[] = await commentPage(articleId.value,1,current.value * 10);
   parentList.length = 0;
   parentList.push(...res);
   childList.clear();
   childGet(res);
 }
-const countGet = async (id: number)=>{
-  count.value  = await commentCount(id)
+const countGet = async ()=>{
+  count.value  = await commentCount(articleId.value)
 }
 
 const childGet = async (parents:comment[])=>{
@@ -60,6 +60,6 @@ return{
   init,
   replyUpdate
   ,countGet,
-  count
+  count,articleId
 }
 })

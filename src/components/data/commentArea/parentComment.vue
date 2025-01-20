@@ -7,6 +7,22 @@ import type comment from "@/types/modules/comment";
 const commentListS = useCommentList();
 const likeS = useLike();
 const userS = useUser();
+
+const isLike = reactive<boolean[]>([]);
+const isChild = reactive<boolean[]>([]);
+const isReply = reactive<boolean[]>([]);
+onMounted(() => {
+  userLikeGet();
+});
+
+watch(
+  [commentListS.parentList, likeS.commentList],
+  () => {
+    userLikeGet();
+  },
+  { deep: false }
+);
+
 const like = async (coommentId: number, index: number, item: comment) => {
   if (userS.item.id) {
     likeS.change(userS.item.id, coommentId);
@@ -20,20 +36,9 @@ const like = async (coommentId: number, index: number, item: comment) => {
     ElMessage.error("点赞请登录");
   }
 };
-defineProps<{
-  articleId: number;
-}>();
-const isLike = reactive<boolean[]>([]);
-const isChild = reactive<boolean[]>([]);
-const isReply = reactive<boolean[]>([]);
-onMounted(() => {
-  userLikeGet();
-});
-
-watch(likeS.commentList, () => {
-  userLikeGet();
-});
 const userLikeGet = () => {
+  isLike.length = 0;
+
   commentListS.parentList.forEach((element, index) => {
     if (likeS.commentList.includes(element.id!)) {
       isLike[index] = true;
@@ -62,11 +67,10 @@ const userLikeGet = () => {
       <el tag style="margin-right: 5px"> {{ item.location }}</el>
       <el tag>{{ item.browser }}</el>
       <div style="display: flex; margin-left: auto">
-        <div class="icon">
+        <div class="icon" @click="isChild[index] = !isChild[index]">
           <svgIcon
             name="查看回复"
             size="20px"
-            @click="isChild[index] = !isChild[index]"
             v-if=" commentListS.childList?.get(item.id!)"
           />
           <span class="number">
@@ -77,51 +81,35 @@ const userLikeGet = () => {
             }}
           </span>
         </div>
-        <div class="icon">
-          <svgIcon
-            name="点赞"
-            size="20px"
-            @click="like(item.id!, index, item)"
-            v-show="!isLike[index]"
-          />
+        <div class="icon" @click="like(item.id!, index, item)">
+          <svgIcon name="点赞" size="20px" v-show="!isLike[index]" />
           <svgIcon
             name="已点赞"
             size="20px"
             color="#3b82f6 "
-            @click="like(item.id!, index, item)"
             v-show="isLike[index]"
           />
-
           <span class="number">{{ item.like == 0 ? "" : item.like }}</span>
         </div>
-        <div class="icon">
-          <svgIcon
-            name="回复"
-            size="20px"
-            @click="isReply[index] = !isReply[index]"
-          />
+        <div class="icon" @click="isReply[index] = !isReply[index]">
+          <svgIcon name="回复" size="20px" />
         </div>
       </div>
     </div>
     <reply-box
       ref="replyRef"
-      :articleId="articleId!"
       :parentId="item.id"
       :userName="item.username"
       :isShow="isReply[index]"
       @submit="isReply[index] = !isReply[index]"
       v-show="isReply[index]"
     ></reply-box>
-    <ChildComment
-      :article-id="articleId"
-      :parentId="item.id!"
-      v-if="isChild[index]"
-    ></ChildComment>
+    <ChildComment :parentId="item.id!" v-if="isChild[index]"></ChildComment>
   </card>
 </template>
 
 <style scoped lang="scss">
-@import "./md.scss";
+@import "./common.scss";
 
 :deep(#md-editor-v3) {
   background-color: var(--color-card);

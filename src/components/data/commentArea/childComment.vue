@@ -6,6 +6,16 @@ import "element-plus/theme-chalk/index.css";
 import type comment from "@/types/modules/comment";
 const likeS = useLike();
 const userS = useUser();
+const commentListS = useCommentList();
+const isReply = reactive<boolean[]>([]);
+const isLike = reactive<boolean[]>([]);
+const prop = defineProps<{
+  parentId: number;
+}>();
+
+onMounted(() => {
+  userLikeGet();
+});
 
 const like = async (coommentId: number, index: number, item: comment) => {
   if (userS.item.id) {
@@ -20,21 +30,6 @@ const like = async (coommentId: number, index: number, item: comment) => {
     ElMessage.error("点赞请登录");
   }
 };
-
-const commentListS = useCommentList();
-const isReply = reactive<boolean[]>([]);
-const isLike = reactive<boolean[]>([]);
-const prop = defineProps<{
-  articleId: number;
-  parentId: number;
-}>();
-
-onMounted(() => {
-  userLikeGet();
-});
-/* watch(likeS.commentList, () => {
-  userLikeGet
-}); */
 const userLikeGet = () => {
   commentListS.childList.get(prop.parentId)?.forEach((element, index) => {
     if (likeS.commentList.includes(element.id!)) {
@@ -90,7 +85,6 @@ const userLikeGet = () => {
       </div>
     </div>
     <reply-box
-      :articleId="articleId"
       :parentId="parentId"
       :replyId="item.id"
       :userName="item.username"
@@ -102,7 +96,7 @@ const userLikeGet = () => {
 </template>
 
 <style scoped lang="scss">
-@import "./md.scss";
+@import "./common.scss";
 :deep(#md-editor-v3) {
   background-color: var(--color-card);
 }

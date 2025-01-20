@@ -5,7 +5,6 @@ import bowser from "bowser";
 import { MdPreview } from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
 const prop = defineProps<{
-  articleId: number;
   parentId?: number;
   replyId?: number;
   userName?: string;
@@ -23,6 +22,7 @@ const router = useRouter();
 const themeS = useTheme();
 const isPreview = ref(false);
 const textHeight = ref(50);
+const likeS = useLike();
 
 const input = (e: Event) => {
   const target = e.target as HTMLTextAreaElement;
@@ -49,7 +49,7 @@ const submit = async () => {
     commentS.item.location = commentS.item.location.slice(0, -1);
   }
   commentS.item.userId = userS.item.id;
-  commentS.item.articleId = prop.articleId;
+  commentS.item.articleId = commentListS.articleId;
   if (prop.parentId) {
     commentS.item.parentId = prop.parentId;
   }
@@ -57,9 +57,12 @@ const submit = async () => {
     commentS.item.replyId = prop.replyId;
   }
   await commentS.add();
+  if (userS.item.id) {
+    likeS.user(userS.item.id);
+  }
   commentS.clear();
   commentListS.count++;
-  commentListS.replyUpdate(prop.articleId);
+  commentListS.replyUpdate();
   emit("submit");
 };
 watch(prop, async () => {
@@ -129,7 +132,7 @@ watch(prop, async () => {
 </template>
 
 <style scoped lang="scss">
-@import "./md.scss";
+@import "./common.scss";
 .contain {
   width: 100%;
   @extend center;
