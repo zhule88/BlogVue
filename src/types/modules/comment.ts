@@ -6,6 +6,7 @@ export default interface comment {
     replyId?:number
     content:string
     browser:string
+    like?:number
     location:string
     avatar?:string
     username?:string

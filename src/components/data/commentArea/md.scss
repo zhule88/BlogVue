@@ -1,6 +1,5 @@
 :deep(#md-editor-v3) {
   font-family: cartoon;
-
   transition: $transition;
   common {
     margin: 0;
@@ -30,5 +29,21 @@
   p {
     font-size: 15px;
     @extend common;
+  }
+}
+.card {
+  box-sizing: border-box;
+  min-height: 50px;
+  margin: 5px 0;
+  padding: 0.5rem 1rem;
+
+  .number {
+    font-size: 20px;
+    font-weight: 500;
+    transform: translateY(-10%);
+  }
+  .icon {
+    height: 20px;
+    width: 40px;
   }
 }

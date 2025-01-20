@@ -1,7 +1,4 @@
 import type article from '@/types/modules/article'
-
-
-
 export class ArticleList {
   list:article[] =[];
   state = 1;

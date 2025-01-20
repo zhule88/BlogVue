@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const commentS = reactive(new COmment());
 const commentListS = useCommentList();
+const likeS = useLike();
+const userS = useUser();
 const prop = defineProps<{
   articleId: number;
 }>();
@@ -9,11 +11,16 @@ onMounted(async () => {
   commentS.item.articleId = prop.articleId;
   commentListS.init(prop.articleId);
   commentListS.countGet(prop.articleId);
+  if (userS.item.id) {
+    likeS.user(userS.item.id);
+  }
 });
+
 const throttledFn = useThrottleFn(async () => {
   commentListS.current++;
   commentListS.init(prop.articleId);
 }, 1000);
+
 window.addEventListener("scroll", () => {
   if (
     window.innerHeight + window.scrollY >=
@@ -34,7 +41,7 @@ window.addEventListener("scroll", () => {
       <parent-comment :articleId="articleId"></parent-comment>
       <div v-if="!commentListS.isMore" class="text">到底了~</div>
     </div>
-    <div v-else class="text">无人区 期待留言</div>
+    <div v-else class="text">无人区</div>
   </div>
 </template>
 

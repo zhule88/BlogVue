@@ -1,12 +1,47 @@
 <script setup lang="ts">
 import { MdPreview } from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
-defineProps<{
+import { ElMessage } from "element-plus";
+import "element-plus/theme-chalk/index.css";
+import type comment from "@/types/modules/comment";
+const likeS = useLike();
+const userS = useUser();
+
+const like = async (coommentId: number, index: number, item: comment) => {
+  if (userS.item.id) {
+    likeS.change(userS.item.id, coommentId);
+    if (isLike[index]) {
+      item.like!--;
+    } else {
+      item.like!++;
+    }
+    isLike[index] = !isLike[index];
+  } else {
+    ElMessage.error("点赞请登录");
+  }
+};
+
+const commentListS = useCommentList();
+const isReply = reactive<boolean[]>([]);
+const isLike = reactive<boolean[]>([]);
+const prop = defineProps<{
   articleId: number;
   parentId: number;
 }>();
-const commentListS = useCommentList();
-const isReply = reactive<boolean[]>([]);
+
+onMounted(() => {
+  userLikeGet();
+});
+/* watch(likeS.commentList, () => {
+  userLikeGet
+}); */
+const userLikeGet = () => {
+  commentListS.childList.get(prop.parentId)?.forEach((element, index) => {
+    if (likeS.commentList.includes(element.id!)) {
+      isLike[index] = true;
+    }
+  });
+};
 </script>
 <template>
   <card v-for="(item, index) in commentListS.childList.get(parentId)" v-animate>
@@ -29,12 +64,29 @@ const isReply = reactive<boolean[]>([]);
     <div style="width: 100%; display: flex; align-items: center">
       <MdPreview v-model="item.content" />
       <div style="margin-bottom: 1.3rem; margin-top: auto; display: flex">
-        <svgIcon name="点赞" style="margin: 0 10px" size="20px" alt="" />
-        <svgIcon
-          name="回复"
-          size="20px"
-          @click="isReply[index] = !isReply[index]"
-        />
+        <div class="icon">
+          <svgIcon
+            name="点赞"
+            size="20px"
+            @click="like(item.id!, index, item)"
+            v-show="!isLike[index]"
+          />
+          <svgIcon
+            name="已点赞"
+            size="20px"
+            color="#3b82f6 "
+            @click="like(item.id!, index, item)"
+            v-show="isLike[index]"
+          />
+          <span class="number">{{ item.like == 0 ? "" : item.like }}</span>
+        </div>
+        <div class="icon">
+          <svgIcon
+            name="回复"
+            size="20px"
+            @click="isReply[index] = !isReply[index]"
+          />
+        </div>
       </div>
     </div>
     <reply-box
@@ -51,12 +103,6 @@ const isReply = reactive<boolean[]>([]);
 
 <style scoped lang="scss">
 @import "./md.scss";
-.card {
-  box-sizing: border-box;
-  min-height: 50px;
-  margin: 5px 0;
-  padding: 0.5rem 1rem;
-}
 :deep(#md-editor-v3) {
   background-color: var(--color-card);
 }

@@ -71,7 +71,9 @@ watch(prop, async () => {
   <div style="width: 100%">
     <div class="contain">
       <textarea
-        :placeholder="userName ? `回复@${userName}:` : '支持mark语法'"
+        :placeholder="
+          userName ? `回复@${userName}:` : '期待您的留言(支持markdown语法)'
+        "
         v-model="commentS.item.content"
         ref="textRef"
         :style="{ height: textHeight + 'px' }"

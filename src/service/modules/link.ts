@@ -1,5 +1,4 @@
 import type link from '@/types/modules/link'
-import {linkList,linkAdd,linkUpdate,linkDel} from '@/api/modules/link'
 export class LinkList{
   list:link[]  = [];
   async init(){

@@ -2,6 +2,8 @@ import request from '@/api/request'
 import type comment from "@/types/modules/comment"
 
 const prefix = '/comment/'
+
+
 export const commentPage = (id:number,current:number,size:number) =>{
   return request.get(prefix+ 'page',{
     params: {
