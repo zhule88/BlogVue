@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { MdEditor } from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
-import { File } from "@/service";
+import { File } from "@/service/modules/file";
 import file from "@/components/data/fileUpload.vue";
 import { ElMessage } from "element-plus";
 import "element-plus/theme-chalk/index.css";
@@ -31,7 +31,7 @@ const fileUpload = async (f: globalThis.File) => {
   } */
   await fileS.upload(f, articleS.item.id);
   if (["image/jpeg", "image/png", "image/gif", "image/webp"].includes(f.type)) {
-    copy("<img src='" + fileS.filename + "'>");
+    copy("<img src='" + fileS.filename + "' style='height:200px' >");
   } else if (f.type == "video/mp4") {
     copy(
       "<video width='100%' height='300px' controls><source src='" +

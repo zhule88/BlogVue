@@ -4,7 +4,7 @@ export const useCommentList =  defineStore('commentList', ()=>{
   const parentList = reactive<comment[]>([]);
   const childList = reactive(new Map<number,comment[]>());
   const current = ref(1);
-const articleId = ref(0)
+  const articleId = ref(0)
   const isMore = ref(true);
   const count = ref(0)
 
@@ -52,6 +52,9 @@ const childGet = async (parents:comment[])=>{
     })
   }
 }
+  const del = (id:number)=>{
+    commentdel(id)
+  }
 return{
   parentList,
   childList,
@@ -60,6 +63,6 @@ return{
   init,
   replyUpdate
   ,countGet,
-  count,articleId
+  count,articleId,del
 }
 })

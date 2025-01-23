@@ -2,8 +2,7 @@
 const tagS = useTag();
 const categoryListS = useCategoryList();
 const articleListS = reactive(new ArticleList());
-const articleS = reactive(new Article());
-
+const articleS = useArticle();
 const dialogVisible = ref(false);
 
 onMounted(() => {
@@ -76,8 +75,10 @@ const articleDel = async () => {
   <el-dialog v-model="dialogVisible" title="提示" width="500">
     <span>确认删除</span>
     <template #footer>
-      <el-button @click="dialogVisible = false">取消</el-button>
-      <el-button type="primary" @click="articleDel()"> 确认 </el-button>
+      <div style="width: 100%; display: flex; flex-direction: row-reverse">
+        <el button @click="dialogVisible = false">取消</el>
+        <el button @click="articleDel()"> 确认 </el>
+      </div>
     </template>
   </el-dialog>
 </template>

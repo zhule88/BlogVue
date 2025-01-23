@@ -56,6 +56,9 @@ dependencies:
   vue-router:
     specifier: ^4.4.5
     version: 4.4.5(vue@3.5.11)
+  vue3-danmaku:
+    specifier: ^1.6.1
+    version: 1.6.1(vue@3.5.11)
   vue3-lazy:
     specifier: 1.0.0-alpha.1
     version: 1.0.0-alpha.1(vue@3.5.11)
@@ -4041,6 +4044,14 @@ packages:
       semver: 7.6.3
       typescript: 5.6.2
     dev: true
+
+  /vue3-danmaku@1.6.1(vue@3.5.11):
+    resolution: {integrity: sha512-v7KqMV5WK3mqRSotSuJfnJldsIpilh72nLKKebWGCO7HM4k330QV1f4oje410GfwSx+SrJ+YLeTG8QLJYuKwYg==}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      vue: 3.5.11(typescript@5.6.2)
+    dev: false
 
   /vue3-lazy@1.0.0-alpha.1(vue@3.5.11):
     resolution: {integrity: sha512-dpjpKK4DC5q+wZVtS/VY3X6pYBJHxRmYanr20s39RB6o6fvbneQ/DNuz37bipYfEdrEvbSZ95Y2SCexuznQNrQ==}

@@ -11,6 +11,9 @@ const userS = useUser();
 const isLike = reactive<boolean[]>([]);
 const isChild = reactive<boolean[]>([]);
 const isReply = reactive<boolean[]>([]);
+const dialogVisible = ref(false);
+const adminItem = window.sessionStorage.getItem("admin");
+const delComId = ref(0);
 onMounted(() => {
   userLikeGet();
 });
@@ -38,7 +41,6 @@ const like = async (coommentId: number, index: number, item: comment) => {
 };
 const userLikeGet = () => {
   isLike.length = 0;
-
   commentListS.parentList.forEach((element, index) => {
     if (likeS.commentList.includes(element.id!)) {
       isLike[index] = true;
@@ -67,12 +69,19 @@ const userLikeGet = () => {
       <el tag style="margin-right: 5px"> {{ item.location }}</el>
       <el tag>{{ item.browser }}</el>
       <div style="display: flex; margin-left: auto">
-        <div class="icon" @click="isChild[index] = !isChild[index]">
-          <svgIcon
-            name="查看回复"
-            size="20px"
-            v-if=" commentListS.childList?.get(item.id!)"
-          />
+        <div
+          class="icon"
+          @click="(dialogVisible = true), (delComId = item.id!)"
+          v-if="adminItem"
+        >
+          <svgIcon name="删除" size="20px" />
+        </div>
+        <div
+          class="icon"
+          @click="isChild[index] = !isChild[index]"
+          v-if=" commentListS.childList?.get(item.id!)"
+        >
+          <svgIcon name="查看回复" size="20px" />
           <span class="number">
             {{
               commentListS.childList?.get(item.id!)
@@ -106,6 +115,24 @@ const userLikeGet = () => {
     ></reply-box>
     <ChildComment :parentId="item.id!" v-if="isChild[index]"></ChildComment>
   </card>
+  <el-dialog v-model="dialogVisible" title="提示" width="500">
+    <span>确认删除</span>
+    <template #footer>
+      <div style="width: 100%; display: flex; flex-direction: row-reverse">
+        <el button @click="dialogVisible = false">取消</el>
+        <el
+          button
+          @click="
+            commentListS.del(delComId),
+              (dialogVisible = false),
+              commentListS.replyUpdate()
+          "
+        >
+          确认
+        </el>
+      </div>
+    </template>
+  </el-dialog>
 </template>
 
 <style scoped lang="scss">

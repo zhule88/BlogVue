@@ -8,12 +8,12 @@ export class LinkList{
 }
 export class Link{
   item = reactive<link>({
-nickname:'',
-address:'',
-state:0,
-avatar:'',
-description:'',
-email:''
+  nickname:'',
+  address:'',
+  state:0,
+  avatar:'',
+  description:'',
+  email:''
   })
   add(){
     return linkAdd(this.item);

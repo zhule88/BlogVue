@@ -12,9 +12,7 @@ export class COmment {
   async add(){
     await commentAdd(this.item)
   }
-  del(id:number){
-    commentdel(id)
-  }
+
   clear(){
     this.item={
       content:'',

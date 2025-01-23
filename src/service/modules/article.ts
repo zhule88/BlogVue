@@ -31,7 +31,7 @@ export class ArticleList {
     this.list = await articleListByTagId(id)
   }
 }
-
+/*
 export class Article{
   item: article= {
     title:'',
@@ -42,8 +42,6 @@ export class Article{
   }
   async init (id:number){
     this.item = await articleGet(id);
-
-
   }
     add(){
      articleAdd(this.item );
@@ -63,4 +61,4 @@ export class Article{
       visitCount:0
     }
   }
-}
+} */

@@ -37,6 +37,7 @@ export const useUser =  defineStore('user', ()=>{
    item.avatar = await  userAvatar(formData,item.email)
   }
   const clear = ()=>{
+    sessionStorage.removeItem('admin')
     localStorage.removeItem("token");
     item.id = undefined;
     item.username = '';

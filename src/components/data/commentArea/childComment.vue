@@ -9,6 +9,9 @@ const userS = useUser();
 const commentListS = useCommentList();
 const isReply = reactive<boolean[]>([]);
 const isLike = reactive<boolean[]>([]);
+const dialogVisible = ref(false);
+const delComId = ref(0);
+const adminItem = window.sessionStorage.getItem("admin");
 const prop = defineProps<{
   parentId: number;
 }>();
@@ -58,7 +61,16 @@ const userLikeGet = () => {
     </div>
     <div style="width: 100%; display: flex; align-items: center">
       <MdPreview v-model="item.content" />
-      <div style="margin-bottom: 1.3rem; margin-top: auto; display: flex">
+      <div
+        style="margin-bottom: 1.3rem; margin-top: auto; display: flex"
+        v-if="adminItem"
+      >
+        <div
+          class="icon"
+          @click="(dialogVisible = true), (delComId = item.id!)"
+        >
+          <svgIcon name="删除" size="20px" />
+        </div>
         <div class="icon">
           <svgIcon
             name="点赞"
@@ -93,6 +105,24 @@ const userLikeGet = () => {
       v-show="isReply[index]"
     ></reply-box>
   </card>
+  <el-dialog v-model="dialogVisible" title="提示" width="500">
+    <span>确认删除</span>
+    <template #footer>
+      <div style="width: 100%; display: flex; flex-direction: row-reverse">
+        <el button @click="dialogVisible = false">取消</el>
+        <el
+          button
+          @click="
+            commentListS.del(delComId),
+              (dialogVisible = false),
+              commentListS.replyUpdate()
+          "
+        >
+          确认
+        </el>
+      </div>
+    </template>
+  </el-dialog>
 </template>
 
 <style scoped lang="scss">
