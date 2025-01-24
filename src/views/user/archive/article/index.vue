@@ -45,6 +45,7 @@ onMounted(async () => {
             <img
               :src="item.image"
               style="height: 100%; width: 100%; object-fit: cover"
+              loading="lazy"
             />
           </div>
           <div style="width: 100%">

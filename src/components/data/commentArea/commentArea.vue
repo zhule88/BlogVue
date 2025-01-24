@@ -16,18 +16,22 @@ onMounted(async () => {
 });
 
 const throttledFn = useThrottleFn(async () => {
-  commentListS.current++;
-  commentListS.init();
-}, 1000);
-
-window.addEventListener("scroll", () => {
   if (
     window.innerHeight + window.scrollY >=
       (document.body.offsetHeight / 5) * 4 &&
     commentListS.isMore
   ) {
-    throttledFn();
+    commentListS.current++;
+    commentListS.init();
   }
+}, 1000);
+
+onMounted(() => {
+  window.addEventListener("scroll", throttledFn);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("scroll", throttledFn);
 });
 </script>
 <template>

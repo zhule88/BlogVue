@@ -1,6 +1,24 @@
 import type article from '@/types/modules/article'
 export class ArticleList {
-  list:article[] =[];
+  list:article[] =[{
+    title: '',
+    image: '',
+    content: '',
+    top: 0,
+    visitCount: 0
+  },{
+    title: '',
+    image: '',
+    content: '',
+    top: 0,
+    visitCount: 0
+  },{
+    title: '',
+    image: '',
+    content: '',
+    top: 0,
+    visitCount: 0
+  }];
   state = 1;
   top= 3;
   total = 0

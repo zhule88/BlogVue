@@ -5,6 +5,36 @@ defineProps<{
 }>();
 const themeS = useTheme();
 const bg = computed(() => (themeS.isdark ? "dark" : "light"));
+const current = ref(0);
+const style = { height: "40px", width: "40px" };
+const top = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
+const botton = () => {
+  const total = document.documentElement.scrollHeight - window.innerHeight;
+  window.scrollTo({
+    top: total,
+    behavior: "smooth",
+  });
+};
+document.body.offsetHeight;
+const scrollPercentage = computed(() => {
+  const total = document.documentElement.scrollHeight - window.innerHeight;
+  return Math.round((current.value / total) * 100) || 0;
+});
+
+const throttledFn = useThrottleFn(() => {
+  current.value = window.scrollY;
+}, 50);
+onMounted(() => {
+  window.addEventListener("scroll", throttledFn);
+});
+onBeforeUnmount(() => {
+  window.removeEventListener("scroll", throttledFn);
+});
 </script>
 
 <template>
@@ -28,6 +58,15 @@ const bg = computed(() => (themeS.isdark ? "dark" : "light"));
           <slot></slot>
         </card>
       </div>
+    </div>
+    <div style="position: fixed; right: 20px; bottom: 50px">
+      <el button small @click="top()" :Style="style"><svgIcon name="上" /></el>
+      <el button small style="margin: 10px 0" :Style="style"
+        >{{ scrollPercentage }}
+      </el>
+      <el button small @click="botton()" :Style="style"
+        ><svgIcon name="下"
+      /></el>
     </div>
   </div>
 </template>

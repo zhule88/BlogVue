@@ -9,62 +9,119 @@ const articleListS = reactive(new ArticleList());
 const colorI = new color();
 const isShow = ref<boolean[]>([]);
 const router = useRouter();
-onMounted(() => {
-  articleListS.page();
+const loading = ref(true);
+onMounted(async () => {
+  await articleListS.page();
+
+  loading.value = false;
 });
-const handleCurrentChange = (value: number) => {
+const handleCurrentChange = async (value: number) => {
   articleListS.current = value;
-  articleListS.page();
+  loading.value = true;
+  await articleListS.page();
+  loading.value = false;
 };
 </script>
 
 <template>
   <div>
     <swiper></swiper>
+
     <card
-      style="z-index: 2"
       @mouseenter="isShow[index] = true"
       @mouseleave="isShow[index] = false"
       @click="router.push(`/user/article/${article.id}`)"
       v-for="(article, index) in articleListS.list"
       v-animate
-      :class="[(index & 1) == 0 ? 'cardright' : 'cardleft']"
     >
-      <div class="content" :style="{ '--color': colorI.random() }">
-        <div
-          style="display: flex; flex-direction: column"
-          v-show="!isShow[index]"
-        >
-          <div style="font-size: 25px; margin: 10px">
-            {{ article.title }}
-          </div>
-          <div style="margin: 10px; display: flex; height: 25px">
-            <div class="category" :style="colorI.normal('backgroundColor')">
-              {{ categoryListS.map.get(article.categoryId!) }}
+      <el-skeleton :loading="loading" animated>
+        <template #template>
+          <div style="display: flex; height: 100%">
+            <div
+              style="
+                width: 53%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 20px;
+              "
+            >
+              <div style="width: 50%; height: 30px">
+                <el-skeleton-item
+                  variant="h3"
+                  style="width: 90%; height: 100%"
+                />
+              </div>
+              <el-skeleton-item
+                variant="text"
+                style="width: 50%; height: 20px"
+              />
+              <div style="width: 50%; height: 15px">
+                <el-skeleton-item
+                  variant="text"
+                  style="height: 100%; width: 25%"
+                />
+              </div>
+              <el-skeleton-item
+                variant="text"
+                style="width: 50%; height: 15px"
+              />
+              <el-skeleton-item
+                variant="text"
+                style="width: 50%; height: 15px"
+              />
             </div>
-            <el tag v-for="item in article.tags"> {{ tagS.map.get(item) }}</el>
+            <div class="img" style="width: 47%; height: 100%">
+              <el-skeleton-item
+                variant="image"
+                style="height: 100%; width: 100%"
+              />
+            </div>
           </div>
-          <div class="text">
-            <svgIcon name="火" />
-            浏览量:{{ article.visitCount }}
+        </template>
+        <template #default>
+          <div class="content" :style="{ '--color': colorI.random() }">
+            <div
+              style="display: flex; flex-direction: column"
+              v-show="!isShow[index]"
+            >
+              <div style="font-size: 25px; margin: 10px">
+                {{ article.title }}
+              </div>
+              <div style="margin: 10px; display: flex; height: 25px">
+                <div class="category" :style="colorI.normal('backgroundColor')">
+                  {{ categoryListS.map.get(article.categoryId!) }}
+                </div>
+                <el tag v-for="item in article.tags">
+                  {{ tagS.map.get(item) }}</el
+                >
+              </div>
+              <div class="text">
+                <svgIcon name="火" />
+                浏览量:{{ article.visitCount }}
+              </div>
+              <div class="text">
+                <svgIcon name="日历更新" />
+                发布于:{{ article.createTime }}
+              </div>
+              <div class="text">
+                <svgIcon name="更新" />
+                更新于:{{ article.updateTime }}
+              </div>
+            </div>
+            <div v-show="isShow[index]" class="content-text">
+              {{ contentFilter(article.content).substring(0, 100) + "..." }}
+            </div>
           </div>
-          <div class="text">
-            <svgIcon name="日历更新" />
-            发布于:{{ article.createTime }}
+          <div class="img">
+            <img :src="article.image" />
           </div>
-          <div class="text">
-            <svgIcon name="更新" />
-            更新于:{{ article.updateTime }}
-          </div>
-        </div>
-        <div v-show="isShow[index]" class="content-text">
-          {{ contentFilter(article.content).substring(0, 100) + "..." }}
-        </div>
-      </div>
-      <div class="img">
-        <img :src="article.image" />
-      </div>
+        </template>
+      </el-skeleton>
     </card>
+
     <div style="display: flex; justify-content: center; align-items: center">
       <el-pagination
         background
@@ -153,7 +210,20 @@ const handleCurrentChange = (value: number) => {
 }
 $open-left: $border-radius 0 0 $border-radius;
 $open-right: 0 $border-radius $border-radius 0;
-.cardleft {
+
+.card:nth-child(even) {
+  .img {
+    border-radius: $open-left;
+    order: -1;
+  }
+  .content:before {
+    right: -16px;
+  }
+  .content {
+    border-radius: $open-right;
+  }
+}
+.card:nth-child(odd) {
   .img {
     border-radius: $open-right;
   }
@@ -162,18 +232,6 @@ $open-right: 0 $border-radius $border-radius 0;
   }
   .content {
     border-radius: $open-left;
-  }
-}
-.cardright {
-  flex-direction: row-reverse;
-  .img {
-    border-radius: $open-left;
-  }
-  .content:before {
-    right: -16px;
-  }
-  .content {
-    border-radius: $open-right;
   }
 }
 </style>

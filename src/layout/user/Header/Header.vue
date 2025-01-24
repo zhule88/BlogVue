@@ -12,11 +12,6 @@ addEventListener("wheel", (event) => {
     isHeader.value = true;
   }
 });
-/* onMounted(()=>{
-if(!userS.item.avatar){
-  userS.item.avatar="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
-}
-}) */
 </script>
 <template>
   <transition
