@@ -8,7 +8,7 @@ export const useUser =  defineStore('user', ()=>{
     password: '',
     avatar:'',
     email: '',
-     repassword:'',
+    repassword:'',
     code:''
    })
 
@@ -26,18 +26,14 @@ export const useUser =  defineStore('user', ()=>{
    const info = async ()=>{
     if( localStorage.getItem("token")){
       Object.assign(item, await userInfo());
-      if(item.username == '筑乐'){
-        sessionStorage.setItem("admin", 'true');
-      }
     }
    }
   const avatar =async (file:File)=>{
     const formData = new FormData();
     formData.append("file",file);
-   item.avatar = await  userAvatar(formData,item.email)
+    item.avatar = await userAvatar(formData,item.email)
   }
   const clear = ()=>{
-    sessionStorage.removeItem('admin')
     localStorage.removeItem("token");
     item.id = undefined;
     item.username = '';

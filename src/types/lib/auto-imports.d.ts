@@ -248,6 +248,7 @@ declare global {
   const useLastChanged: typeof import('@vueuse/core')['useLastChanged']
   const useLike: typeof import('../../stores/modules/like')['useLike']
   const useLink: typeof import('vue-router')['useLink']
+  const useLoad: typeof import('../../stores/modules/load')['useLoad']
   const useLocalStorage: typeof import('@vueuse/core')['useLocalStorage']
   const useMagicKeys: typeof import('@vueuse/core')['useMagicKeys']
   const useManualRefHistory: typeof import('@vueuse/core')['useManualRefHistory']

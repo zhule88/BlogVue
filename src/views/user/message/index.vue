@@ -4,7 +4,7 @@ const commentListS = useCommentList();
 </script>
 <template>
   <layout title="留言">
-    <vue-danmaku
+    <!--  <vue-danmaku
       v-model:danmus="commentListS.parentList"
       class="danmu"
       loop
@@ -23,7 +23,7 @@ const commentListS = useCommentList();
           </div>
         </div>
       </template>
-    </vue-danmaku>
+    </vue-danmaku> -->
 
     <div style="width: 80%; margin: 0 auto">
       <!--  <div class="greet">

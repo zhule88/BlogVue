@@ -12,7 +12,6 @@ const router = useRouter();
 const loading = ref(true);
 onMounted(async () => {
   await articleListS.page();
-
   loading.value = false;
 });
 const handleCurrentChange = async (value: number) => {
@@ -35,7 +34,8 @@ const handleCurrentChange = async (value: number) => {
       v-animate
     >
       <el-skeleton :loading="loading" animated>
-        <template #template>
+        <template #template
+          ><!-- 骨架多次一举了 -->
           <div style="display: flex; height: 100%">
             <div
               style="
@@ -51,12 +51,12 @@ const handleCurrentChange = async (value: number) => {
               <div style="width: 50%; height: 30px">
                 <el-skeleton-item
                   variant="h3"
-                  style="width: 90%; height: 100%"
+                  style="width: 80%; height: 100%"
                 />
               </div>
               <el-skeleton-item
                 variant="text"
-                style="width: 50%; height: 20px"
+                style="width: 50%; height: 23px"
               />
               <div style="width: 50%; height: 15px">
                 <el-skeleton-item

@@ -12,7 +12,7 @@ const isLike = reactive<boolean[]>([]);
 const isChild = reactive<boolean[]>([]);
 const isReply = reactive<boolean[]>([]);
 const dialogVisible = ref(false);
-const adminItem = window.sessionStorage.getItem("admin");
+
 const delComId = ref(0);
 onMounted(() => {
   userLikeGet();
@@ -72,7 +72,10 @@ const userLikeGet = () => {
         <div
           class="icon"
           @click="(dialogVisible = true), (delComId = item.id!)"
-          v-if="adminItem"
+          v-if="
+            userS.item.username == '筑乐' ||
+            userS.item.username == item.username
+          "
         >
           <svgIcon name="删除" size="20px" />
         </div>
@@ -110,7 +113,7 @@ const userLikeGet = () => {
       :parentId="item.id"
       :userName="item.username"
       :isShow="isReply[index]"
-      @submit="isReply[index] = !isReply[index]"
+      @submit="(isReply[index] = !isReply[index]), (isChild[index] = true)"
       v-show="isReply[index]"
     ></reply-box>
     <ChildComment :parentId="item.id!" v-if="isChild[index]"></ChildComment>
@@ -118,7 +121,14 @@ const userLikeGet = () => {
   <el-dialog v-model="dialogVisible" title="提示" width="500">
     <span>确认删除</span>
     <template #footer>
-      <div style="width: 100%; display: flex; flex-direction: row-reverse">
+      <div
+        style="
+          width: 100%;
+          display: flex;
+          flex-direction: row-reverse;
+          gap: 10px;
+        "
+      >
         <el button @click="dialogVisible = false">取消</el>
         <el
           button

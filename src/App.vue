@@ -3,6 +3,7 @@ const tagS = useTag();
 const categoryListS = useCategoryList();
 const userS = useUser();
 const themeS = useTheme();
+const loadS = useLoad();
 onMounted(() => {
   tagS.init();
   categoryListS.init();
@@ -11,16 +12,8 @@ onMounted(() => {
 });
 </script>
 <template>
-  <!-- <Suspense>
-    <template #default>
-      <RouterView />
-    </template>
-    <template #fallback>
-      <h1>加载中...</h1>
-    </template>
-  </Suspense> -->
-
-  <RouterView />
+  <RouterView v-show="!loadS.isLoading" />
+  <load v-show="loadS.isLoading" />
 </template>
 
 <style scoped></style>

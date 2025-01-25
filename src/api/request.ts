@@ -7,10 +7,14 @@ const instance = axios.create({
   baseURL,
   timeout: 10000
 })
+let count = 0;
 
 // 添加请求拦截器
 instance.interceptors.request.use(
    (config)=> {
+    if (config.method === 'get') {
+      count++;
+    }
     config.headers.Authorization= localStorage.getItem('token');
     return config
   },
@@ -23,6 +27,13 @@ instance.interceptors.request.use(
 // 添加响应拦截器
 instance.interceptors.response.use(
    (response) =>{
+    if (response.config.method === 'get' ) {
+      count--;
+      if(count == 0){
+        const loadS = useLoad();
+        loadS.hide();
+      }
+    }
     if (response.data.code == 1) {
       return response.data.data;
     }

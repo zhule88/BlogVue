@@ -14,6 +14,7 @@ export const useCommentList =  defineStore('commentList', ()=>{
       if(res.length<10){
         isMore.value = false;
       }
+      childList.clear();
       childGet(res);
 }
 

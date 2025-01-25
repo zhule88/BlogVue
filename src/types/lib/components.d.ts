@@ -46,6 +46,7 @@ declare module 'vue' {
     FileUpload: typeof import('./../../components/data/fileUpload.vue')['default']
     InfoCard: typeof import('./../../components/view/infoCard.vue')['default']
     Layout: typeof import('./../../components/container/layout.vue')['default']
+    Load: typeof import('./../../components/view/load.vue')['default']
     Notice: typeof import('./../../components/view/notice.vue')['default']
     ParentComment: typeof import('./../../components/data/commentArea/parentComment.vue')['default']
     ReplyBox: typeof import('./../../components/data/commentArea/replyBox.vue')['default']

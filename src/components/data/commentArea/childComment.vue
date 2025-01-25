@@ -11,7 +11,7 @@ const isReply = reactive<boolean[]>([]);
 const isLike = reactive<boolean[]>([]);
 const dialogVisible = ref(false);
 const delComId = ref(0);
-const adminItem = window.sessionStorage.getItem("admin");
+
 const prop = defineProps<{
   parentId: number;
 }>();
@@ -63,7 +63,9 @@ const userLikeGet = () => {
       <MdPreview v-model="item.content" />
       <div
         style="margin-bottom: 1.3rem; margin-top: auto; display: flex"
-        v-if="adminItem"
+        v-if="
+          userS.item.username == '筑乐' || userS.item.username == item.username
+        "
       >
         <div
           class="icon"
@@ -108,7 +110,14 @@ const userLikeGet = () => {
   <el-dialog v-model="dialogVisible" title="提示" width="500">
     <span>确认删除</span>
     <template #footer>
-      <div style="width: 100%; display: flex; flex-direction: row-reverse">
+      <div
+        style="
+          width: 100%;
+          display: flex;
+          flex-direction: row-reverse;
+          gap: 10px;
+        "
+      >
         <el button @click="dialogVisible = false">取消</el>
         <el
           button

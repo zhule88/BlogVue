@@ -2,6 +2,7 @@ import {createRouter , createWebHistory} from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import user from "@/router/user"
 import admin from "@/router/admin"
+import {useLoad} from "@/stores/modules/load"
 import { ElMessage } from "element-plus";
 import "element-plus/theme-chalk/index.css";
 
@@ -18,9 +19,25 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, _from, next) => {
+
+  const hide = () =>{
+  const loadS = useLoad()
+  loadS.hide();
+}
+
+const show = () =>{
+  const loadS = useLoad()
+  loadS.show();
+}
+const isAdmin=async ()=>{
+  const userS = useUser();
+  await userS.info()
+  return userS.item.username=='筑乐'
+}
+router.beforeEach(async (to, _from, next) => {
+  show()
   if (to.path.startsWith('/admin') ) {
-    if(sessionStorage.getItem('admin')){
+    if(await isAdmin()){
       next();
     }else{
       ElMessage.error("只有管理员才能进入")
@@ -30,5 +47,10 @@ router.beforeEach((to, _from, next) => {
     next();
   }
 });
+
+
+/* router.afterEach(() => {
+  hide();
+}) */
 
 export default router
