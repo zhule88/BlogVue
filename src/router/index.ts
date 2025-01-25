@@ -20,10 +20,6 @@ const router = createRouter({
 })
 
 
-  const hide = () =>{
-  const loadS = useLoad()
-  loadS.hide();
-}
 
 const show = () =>{
   const loadS = useLoad()
@@ -36,6 +32,7 @@ const isAdmin=async ()=>{
 }
 router.beforeEach(async (to, _from, next) => {
   show()
+  window.document.title = to.meta.title as string
   if (to.path.startsWith('/admin') ) {
     if(await isAdmin()){
       next();
@@ -49,8 +46,6 @@ router.beforeEach(async (to, _from, next) => {
 });
 
 
-/* router.afterEach(() => {
-  hide();
-}) */
+
 
 export default router

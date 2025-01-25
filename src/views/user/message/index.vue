@@ -1,30 +1,35 @@
 <script setup lang="ts">
 import vueDanmaku from "vue3-danmaku";
 const commentListS = useCommentList();
+onMounted(() => {
+  console.log(commentListS.parentList);
+  commentListS.parentList.length = 0;
+});
 </script>
 <template>
   <layout title="留言">
-    <!--  <vue-danmaku
-      v-model:danmus="commentListS.parentList"
-      class="danmu"
-      loop
-      :speeds="75"
-      useSlot
-      :top="20"
-      :right="10"
-      randomChannel
-      :debounce="5000"
-    >
-      <template v-slot:dm="{ danmu }">
-        <div>
-          <div class="danmu_item">
-            <el-avatar :src="danmu.avatar" />{{ danmu.username }}:
-            {{ danmu.content }}
+    <div v-if="commentListS.parentList.length > 0">
+      <vue-danmaku
+        v-model:danmus="commentListS.parentList"
+        class="danmu"
+        loop
+        :speeds="75"
+        useSlot
+        :top="20"
+        :right="10"
+        randomChannel
+        :debounce="5000"
+      >
+        <template v-slot:dm="{ danmu }">
+          <div>
+            <div class="danmu_item">
+              <el-avatar :src="danmu.avatar" />{{ danmu.username }}:
+              {{ danmu.content }}
+            </div>
           </div>
-        </div>
-      </template>
-    </vue-danmaku> -->
-
+        </template>
+      </vue-danmaku>
+    </div>
     <div style="width: 80%; margin: 0 auto">
       <!--  <div class="greet">
           <div>欢迎来到我的博客</div>
@@ -43,7 +48,7 @@ const commentListS = useCommentList();
 } */
 .danmu {
   margin-top: 50px;
-  width: 100%;
+  width: 100vw;
   height: 400px;
   .danmu_item {
     @extend center;

@@ -22,8 +22,9 @@ export default {
     (el as any)._observer = observer;
   },
    beforeUnmount(el: HTMLElement) {
-    (el as any)._observer .unobserve(el);
+    (el as any)._observer.unobserve(el);
   }
 };
+
 
 

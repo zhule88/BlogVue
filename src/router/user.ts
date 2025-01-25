@@ -11,33 +11,40 @@ const routes : Array<RouteRecordRaw> = [
       {
         path: 'home',
         name: 'home',
-        component: () => import('@/views/user/Home/index.vue')
+        component: () => import('@/views/user/Home/index.vue'),
+        meta: { title: '首页' }
       },
 
       {
         path: 'article/:id',
         name: 'article',
         component: () => import('@/views/user/article/index.vue')
+
       },
       {
         path: ':type/:id',
         name: 'categoryTag',
-        component: () => import('@/views/user/categoryTag/index.vue')
+        component: () => import('@/views/user/categoryTag/index.vue'),
+        meta: { title: '分类与标签' }
       },
       {
         path: 'archive/article',
         name: 'ararticle',
-        component: () => import('@/views/user/archive/article/index.vue')
+        component: () => import('@/views/user/archive/article/index.vue'),
+        meta: { title: '文章归档' }
+
       },
       {
         path: 'link',
         name: 'linkU',
-        component: () => import('@/views/user/link/index.vue')
+        component: () => import('@/views/user/link/index.vue'),
+        meta: { title: '友链' }
       },
       {
         path: 'message',
         name: 'message',
-        component: () => import('@/views/user/message/index.vue')
+        component: () => import('@/views/user/message/index.vue'),
+        meta: { title: '留言' }
       },
     ]
   },
@@ -50,17 +57,21 @@ const routes : Array<RouteRecordRaw> = [
       {
         path: 'login',
         name: 'login',
-        component: () => import('@/views/user/welcome/login.vue')
+        component: () => import('@/views/user/welcome/login.vue'),
+        meta: { title: '登录' }
+
       },
       {
         path: 'register',
         name: 'register',
-        component: () => import('@/views/user/welcome/register.vue')
+        component: () => import('@/views/user/welcome/register.vue'),
+        meta: { title: '注册' }
       },
       {
         path: 'reset',
         name: 'reset',
-        component: () => import('@/views/user/welcome/reset.vue')
+        component: () => import('@/views/user/welcome/reset.vue'),
+        meta: { title: '重置密码' }
       },
     ]
   }

@@ -10,32 +10,31 @@ const colorI = new color();
 const isShow = ref<boolean[]>([]);
 const router = useRouter();
 const loading = ref(true);
-onMounted(async () => {
+
+const articleLoad = async () => {
   await articleListS.page();
   loading.value = false;
-});
-const handleCurrentChange = async (value: number) => {
+};
+const currentChange = async (value: number) => {
   articleListS.current = value;
   loading.value = true;
-  await articleListS.page();
-  loading.value = false;
+  articleLoad();
 };
 </script>
 
 <template>
   <div>
     <swiper></swiper>
-
     <card
       @mouseenter="isShow[index] = true"
       @mouseleave="isShow[index] = false"
       @click="router.push(`/user/article/${article.id}`)"
       v-for="(article, index) in articleListS.list"
       v-animate
+      v-lazy="{ callback: articleLoad }"
     >
       <el-skeleton :loading="loading" animated>
-        <template #template
-          ><!-- 骨架多次一举了 -->
+        <template #template>
           <div style="display: flex; height: 100%">
             <div
               style="
@@ -116,7 +115,7 @@ const handleCurrentChange = async (value: number) => {
             </div>
           </div>
           <div class="img">
-            <img :src="article.image" />
+            <img :src="article.image" loading="lazy" />
           </div>
         </template>
       </el-skeleton>
@@ -129,7 +128,7 @@ const handleCurrentChange = async (value: number) => {
         :total="articleListS.total"
         :current-page="articleListS.current"
         :page-size="articleListS.size"
-        @current-change="handleCurrentChange"
+        @current-change="currentChange"
       />
     </div>
   </div>

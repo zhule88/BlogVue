@@ -12,16 +12,19 @@ const routes : Array<RouteRecordRaw> = [
         path: 'list',
         name: 'list',
         component: () => import('@/views/admin/article/list.vue'),
+        meta: { title: '文章列表' }
       },
       {
         path: 'add',
         name: 'add',
         component: () => import('@/views/admin/article/add.vue'),
+        meta: { title: '文章添加' }
       },
       {
         path: 'link',
         name: 'linkA',
         component: () => import('@/views/admin/link/index.vue'),
+        meta: { title: '友链管理' }
       },
     ]
   }

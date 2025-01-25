@@ -9,12 +9,10 @@ import 'virtual:svg-icons-register'
 
 import lazyPlugin from 'vue3-lazy'
 import animate from "./directive/animate";
-
+import lazy from "@/directive/lazy"
 
 createApp(App).use(router).use(pinia)
-.use(lazyPlugin, {
-  loading: './assets/image/小埋.gif',
-  error:'./assets/xiubi.jpg'
-})
+
 .directive('animate', animate)
+.directive('lazy', lazy)
 .mount("#app");

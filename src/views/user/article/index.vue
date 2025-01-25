@@ -2,6 +2,7 @@
 import showcase from "./showcase.vue";
 import { MdPreview, MdCatalog } from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
+
 const commentListS = useCommentList();
 const articleS = useArticle();
 const route = useRoute();
@@ -21,8 +22,10 @@ watch(route, () => {
 });
 const init = async () => {
   commentListS.parentList.length = 0;
+
   const articleId = route.params.id as any;
   await articleS.init(articleId);
+  useTitle(articleS.item.title);
   articleListS.around(articleId);
   window.scrollTo(0, 0);
 };
