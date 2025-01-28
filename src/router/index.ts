@@ -2,7 +2,7 @@ import {createRouter , createWebHistory} from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import user from "@/router/user"
 import admin from "@/router/admin"
-import {useLoad} from "@/stores/modules/load"
+import {useLoad} from "@/stores/load"
 import { ElMessage } from "element-plus";
 import "element-plus/theme-chalk/index.css";
 

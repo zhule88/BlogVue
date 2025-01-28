@@ -20,7 +20,7 @@ const botton = () => {
     behavior: "smooth",
   });
 };
-document.body.offsetHeight;
+
 const scrollPercentage = computed(() => {
   const total = document.documentElement.scrollHeight - window.innerHeight;
   return Math.round((current.value / total) * 100) || 0;
@@ -59,7 +59,7 @@ onBeforeUnmount(() => {
         </card>
       </div>
     </div>
-    <div style="position: fixed; right: 20px; bottom: 50px">
+    <div style="position: fixed; right: 30px; bottom: 60px">
       <el button small @click="top()" :Style="style"><svgIcon name="上" /></el>
       <el button small style="margin: 10px 0" :Style="style"
         >{{ scrollPercentage }}

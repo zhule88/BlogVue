@@ -65,11 +65,9 @@ const init = async () => {
       </div>
     </template>
     <template #sidebar>
-      <div style="margin-top: 45px">
-        <infoCard></infoCard>
-        <notice> </notice>
-        <cateTag></cateTag>
-      </div>
+      <infoCard style="margin-top: 45px"></infoCard>
+      <notice> </notice>
+      <cateTag></cateTag>
     </template>
   </Layout>
 </template>

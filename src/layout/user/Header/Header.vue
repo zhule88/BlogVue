@@ -18,16 +18,12 @@ addEventListener("wheel", (event) => {
     enter-active-class="animate__animated animate__fadeInDown"
     leave-active-class="animate__animated animate__fadeOutUp"
   >
-    <!-- 第二种实现菜单滑入滑出的方法 name="el-zoom-in-top" element-plus实现 -->
     <header v-show="isHeader">
       <router-link to="/" style="text-decoration: none"
         ><div class="name">筑乐</div>
       </router-link>
 
       <el-menu style="border: none" mode="horizontal" :ellipsis="false" router>
-        <!--  <el-menu-item index="1">
-          <el-icon><Document /></el-icon><img />文章</el-menu-item
-        > -->
         <el-menu-item index="/user/archive/article"
           ><el-icon><Files /></el-icon>归档</el-menu-item
         >

@@ -49,7 +49,7 @@ const init = async () => {
           <div>
             <strong>本文链接： </strong>
             <a :href="env.VITE_FRONTEND_URL + route.path">
-              http://localhost:5173{{
+              http://120.227.239.138:5173{{
                 /* env.VITE_FRONTEND_URL + */ route.path
               }}</a
             >

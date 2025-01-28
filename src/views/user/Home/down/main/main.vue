@@ -20,6 +20,11 @@ const currentChange = async (value: number) => {
   loading.value = true;
   articleLoad();
 };
+const click = (article: any) => {
+  if (typeof article.id === "number") {
+    router.push(`/user/article/${article.id}`);
+  }
+};
 </script>
 
 <template>
@@ -28,7 +33,7 @@ const currentChange = async (value: number) => {
     <card
       @mouseenter="isShow[index] = true"
       @mouseleave="isShow[index] = false"
-      @click="router.push(`/user/article/${article.id}`)"
+      @click="click(article)"
       v-for="(article, index) in articleListS.list"
       v-animate
       v-lazy="{ callback: articleLoad }"

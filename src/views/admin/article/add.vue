@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { MdEditor } from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
-import { File } from "@/service/modules/file";
-import file from "@/components/data/fileUpload.vue";
+import { File } from "@/service/file.ts";
 import { ElMessage } from "element-plus";
 import "element-plus/theme-chalk/index.css";
 const { copy } = useClipboard();
@@ -68,7 +67,9 @@ const tablesubmit = async () => {
 };
 
 const tagClose = (tagId: number) => {
-  articleS.item.tags = articleS.item.tags!.filter((obj) => obj !== tagId);
+  articleS.item.tags = articleS.item.tags!.filter(
+    (obj: number) => obj !== tagId
+  );
 };
 </script>
 <template>
@@ -80,7 +81,7 @@ const tagClose = (tagId: number) => {
         clearable
         style="width: 100px"
       />
-      <file
+      <FileUpload
         title="上传封面"
         image
         @confirm="
@@ -88,7 +89,7 @@ const tagClose = (tagId: number) => {
             fileS.file = f;
           }
         "
-      ></file>
+      ></FileUpload>
       <el-select
         v-if="articleS.item.id != undefined"
         v-model="fileS.filename"

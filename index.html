@@ -9,31 +9,28 @@
     <script src="/node_modules/aplayer/dist/APlayer.min.js"></script>
     <!-- require MetingJS -->
     <script src="/node_modules/@xizeyoupan/meting/dist/Meting.min.js"></script>
-    <!-- <style>
-      img {
-        height: 100vh;
-        width: 100vw;
+    <style>
+      .click-effect {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.7);
+        transform: scale(0);
+        animation: expand 0.7s forwards;
+        pointer-events: none; /* 防止特效干扰点击事件 */
+        z-index: 1000;
       }
-    </style> -->
-    <!--  <script src="https://unpkg.com/oh-my-live2d@latest"></script>
-    <script>
-      OML2D.loadOml2d({
-        models: [
-          {
-            path: "https://model.oml2d.com/HK416-1-normal/model.json",
-            position: [0, 60],
-            scale: 0.08,
-            stageStyle: {
-              height: 450,
-            },
-          },
-        ],
-      });
-    </script> -->
+
+      @keyframes expand {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+    </style>
   </head>
   <body>
     <!-- 播放器 -->
-    <!--  <meting-js
+    <meting-js
       server="netease"
       type="playlist"
       id="12696492979"
@@ -41,11 +38,23 @@
       fixed="true"
       theme="#FF0000"
     >
-    </meting-js> -->
-    <div id="app">
-      <!--  <img src="/src/assets/image/小埋.gif" alt="" />
-      小埋正在滑向你 -->
-    </div>
+    </meting-js>
+    <!--  <script>
+      document.addEventListener("click", (event) => {
+        const effect = document.createElement("div");
+        effect.classList.add("click-effect");
+        const X = window.scrollX || document.documentElement.scrollLeft;
+        const Y = window.scrollY || document.documentElement.scrollTop;
+        effect.style.width = effect.style.height = "50px";
+        effect.style.left = `${event.clientX - 25 + scrollX}px`;
+        effect.style.top = `${event.clientY - 25 + scrollY}px`;
+        document.body.appendChild(effect);
+        effect.addEventListener("animationend", () => {
+          effect.remove();
+        });
+      });
+    </script> -->
+    <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
