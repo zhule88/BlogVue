@@ -22,9 +22,11 @@ watch(route, () => {
 });
 const init = async () => {
   commentListS.parentList.length = 0;
-
   const articleId = route.params.id as any;
   await articleS.init(articleId);
+  if (articleS.item.state == 0) {
+    router.back();
+  }
   useTitle(articleS.item.title);
   articleListS.around(articleId);
   window.scrollTo(0, 0);
@@ -49,9 +51,7 @@ const init = async () => {
           <div>
             <strong>本文链接： </strong>
             <a :href="env.VITE_FRONTEND_URL + route.path">
-              http://120.227.239.138:5173{{
-                /* env.VITE_FRONTEND_URL + */ route.path
-              }}</a
+              http://120.27.202.144:80{{ route.path }}</a
             >
           </div>
           <div>

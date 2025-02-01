@@ -24,17 +24,14 @@ export class ArticleList {
   total = 0
   current = 1;
   size = 10;
-
   async init (){
     this.list  = await articleList(this.state,this.top);
   }
-
   async page (){
     const res = await articlePage(this.current, this.size,this.state);
     this.total = res.total;
     this.list = res.records;
   }
-
   async around(id:number){
     this.list  = await articleAround(id)
   }
@@ -43,7 +40,6 @@ export class ArticleList {
   }
   async listByCateId(id:number){
     this.list  = await articleListByCateId(id)
-
   }
   async listByTagId(id:number){
     this.list = await articleListByTagId(id)

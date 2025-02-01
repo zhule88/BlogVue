@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { FormRules, FormInstance, ElMessage } from "element-plus";
 import "element-plus/theme-chalk/index.css";
+
 const linkS = reactive(new Link());
 const linkListS = reactive(new LinkList());
 const dialogVisible = ref(false);
@@ -102,7 +103,10 @@ const go = (address: string) => {
         @click="go(item.address)"
       >
         <div class="img">
-          <img src="../../../assets/xiubi.jpg" />
+          <img
+            :src="item.avatar"
+            @error="item.avatar = '../../../assets/image/默认头像'"
+          />
         </div>
         <div style="width: 60%; z-index: 1">
           <div class="item-content" style="font-size: 30px; font-weight: 500">

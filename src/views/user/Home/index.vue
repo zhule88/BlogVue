@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import iimage from "@/views/user/Home/image.vue";
 import brand from "@/views/user/Home/up/brand.vue";
-import mmain from "@/views/user/Home/down/main/main.vue";
+import mmain from "@/views/user/Home/down/main.vue";
 import { throttle } from "lodash";
 const { height } = useWindowSize();
 const isShow = ref(true);

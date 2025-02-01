@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Files, ChatLineSquare, Link } from "@element-plus/icons-vue";
+import { Files, ChatLineSquare, Link, House } from "@element-plus/icons-vue";
 import toggle from "./toggle.vue";
 import "animate.css";
 
@@ -24,6 +24,9 @@ addEventListener("wheel", (event) => {
       </router-link>
 
       <el-menu style="border: none" mode="horizontal" :ellipsis="false" router>
+        <el-menu-item index="/user/home"
+          ><el-icon><House /></el-icon>首页</el-menu-item
+        >
         <el-menu-item index="/user/archive/article"
           ><el-icon><Files /></el-icon>归档</el-menu-item
         >

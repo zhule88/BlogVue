@@ -34,9 +34,11 @@ const articleDel = async () => {
     </el-table-column>
     <el-table-column label="标签">
       <template #default="scope">
-        <el-tag v-for="item in scope.row.tags">
-          {{ tagS.map.get(item) }}
-        </el-tag>
+        <div style="display: flex; gap: 5px">
+          <el tag v-for="item in scope.row.tags">
+            {{ tagS.map.get(item) }}
+          </el>
+        </div>
       </template>
     </el-table-column>
     <el-table-column label="状态">

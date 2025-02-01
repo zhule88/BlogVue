@@ -9,9 +9,9 @@ import 'virtual:svg-icons-register'
 import animate from "./directive/animate";
 import lazy from "@/directive/lazy"
 
+
 const pinia = createPinia()
 createApp(App).use(router).use(pinia)
-
 .directive('animate', animate)
 .directive('lazy', lazy)
 .mount("#app");

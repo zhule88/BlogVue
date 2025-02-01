@@ -29,14 +29,13 @@ const click = (article: any) => {
 
 <template>
   <div>
-    <swiper></swiper>
+    <swiper v-lazy="{ callback: articleLoad }"></swiper>
     <card
       @mouseenter="isShow[index] = true"
       @mouseleave="isShow[index] = false"
       @click="click(article)"
       v-for="(article, index) in articleListS.list"
       v-animate
-      v-lazy="{ callback: articleLoad }"
     >
       <el-skeleton :loading="loading" animated>
         <template #template>

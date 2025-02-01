@@ -1,11 +1,11 @@
 <script setup lang="ts">
 const imageList = ref([
-  "/src/assets/凯文1.webp",
-  "/src/assets/凯文2.webp",
-  "/src/assets/凯文3.webp",
-  "/src/assets/英桀1.jpg",
-  "/src/assets/英桀2.webp",
-  "/src/assets/英桀3.jpg",
+  "/src/assets/image/凯文1.webp",
+  "/src/assets/image/凯文2.webp",
+  "/src/assets/image/凯文3.webp",
+  "/src/assets/image/英桀1.jpg",
+  "/src/assets/image/英桀2.webp",
+  "/src/assets/image/英桀3.jpg",
 ]);
 </script>
 <template>

@@ -5,10 +5,10 @@
       style="height: 210px; width: 100%; display: flex; justify-content: center"
     >
       <div class="card__img">
-        <img src="../../assets/你的名字.jpg" />
+        <img src="../../assets/image/你的名字.jpg" />
       </div>
       <div class="card__avatar">
-        <img src="../../assets/xiubi.jpg" />
+        <img src="../../assets/image/xiubi.jpg" />
       </div>
     </div>
     <div

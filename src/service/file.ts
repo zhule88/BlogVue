@@ -1,6 +1,6 @@
 import type file from '@/types/modules/file'
 
-export class File{
+export class FIle{
   list:file[] = [];
 
   filename = '';

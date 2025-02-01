@@ -9,7 +9,7 @@
       </el-sub-menu>
       <el-menu-item index="/admin/link">友联</el-menu-item>
       <el-menu-item
-        ><a href="http://localhost:8001/doc.html#/home" target="_blank"
+        ><a href="http://120.27.202.144:8001/doc.html#/home" target="_blank"
           >接口文档</a
         ></el-menu-item
       >
@@ -23,14 +23,14 @@ header {
   box-sizing: border-box;
   z-index: 999;
   top: 0;
-  background-color: rgba(28, 124, 220, 0.926);
+  background-color: var(--color-like);
   display: flex;
   align-items: center;
   height: 45px;
   .el-menu {
     display: flex;
     justify-content: flex-end;
-    background-color: rgba(28, 124, 220, 0.926);
+    background-color: var(--color-like);
     font-weight: bold;
     height: 45px;
   }

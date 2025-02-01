@@ -1,16 +1,14 @@
 <script setup lang="ts">
 import { MdEditor } from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
-import { File } from "@/service/file.ts";
+
 import { ElMessage } from "element-plus";
 import "element-plus/theme-chalk/index.css";
 const { copy } = useClipboard();
-const fileS = reactive(new File());
-
+const fileS = reactive(new FIle());
 const tagS = useTag();
 const categoryListS = useCategoryList();
 const articleS = useArticle();
-
 const route = useRoute();
 const router = useRouter();
 
@@ -24,10 +22,10 @@ onMounted(async () => {
 });
 
 const fileUpload = async (f: globalThis.File) => {
-  /*   if (f == undefined) {
+  if (f == undefined) {
     ElMessage.error("没有选择文件");
     return;
-  } */
+  }
   await fileS.upload(f, articleS.item.id);
   if (["image/jpeg", "image/png", "image/gif", "image/webp"].includes(f.type)) {
     copy("<img src='" + fileS.filename + "' style='height:200px' >");
@@ -65,7 +63,6 @@ const tablesubmit = async () => {
   }
   ElMessage.success("保存成功");
 };
-
 const tagClose = (tagId: number) => {
   articleS.item.tags = articleS.item.tags!.filter(
     (obj: number) => obj !== tagId
@@ -162,7 +159,7 @@ const tagClose = (tagId: number) => {
         <el-switch v-model="articleS.item.top" />
       </div>
 
-      <file title="上传文件" @confirm="fileUpload"> </file>
+      <FileUpload title="上传文件" @confirm="fileUpload"> </FileUpload>
       <el button @click="tablesubmit()" style="height: 100%">保存</el>
     </div>
 
