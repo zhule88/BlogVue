@@ -26,6 +26,12 @@ const routes : Array<RouteRecordRaw> = [
         component: () => import('@/views/admin/link/index.vue'),
         meta: { title: '友链管理' }
       },
+      {
+        path: 'cover',
+        name: 'cover',
+        component: () => import('@/views/admin/cover/index.vue'),
+        meta: { title: '背景图管理' }
+      },
     ]
   }
 ]

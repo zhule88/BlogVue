@@ -1,5 +1,5 @@
 import request from '@/api/request'
-
+const prefix = '/file/'
 export const fileList = (id:number) =>{
   return request.get('/file/list',{
     params:{
@@ -7,8 +7,8 @@ export const fileList = (id:number) =>{
     }
   })
 }
-export const fileUpload = (file:any,id?:number) =>{
-  return request.post('/file/add',file,{
+export const fileUpload = (file:FormData,id?:number) =>{
+  return request.post(prefix+'add',file,{
     headers: {
       'Content-Type': 'multipart/form-data'
     },
@@ -18,7 +18,7 @@ export const fileUpload = (file:any,id?:number) =>{
   })
 }
 export const fileDel = (filename:string) =>{
-  return request.delete('/file/del',{
+  return request.delete(prefix+'del',{
     params:{
      filename
     }

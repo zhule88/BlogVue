@@ -51,7 +51,7 @@ const init = async () => {
           <div>
             <strong>本文链接： </strong>
             <a :href="env.VITE_FRONTEND_URL + route.path">
-              http://120.27.202.144:80{{ route.path }}</a
+              http://47.97.100.212:80{{ route.path }}</a
             >
           </div>
           <div>

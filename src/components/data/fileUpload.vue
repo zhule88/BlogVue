@@ -152,6 +152,10 @@ watch(dialogVisible, async (newValue) => {
     width: 100%;
     overflow: hidden;
     background: var(--color-card);
+    -webkit-user-select: none; /* For Safari 3+ and Chrome */
+    -moz-user-select: none; /* For Firefox */
+    -ms-user-select: none; /* For Internet Explorer/Edge */
+    user-select: none;
     &:hover {
       filter: brightness(90%);
     }

@@ -8,6 +8,7 @@
         <el-menu-item index="/admin/add">新增</el-menu-item>
       </el-sub-menu>
       <el-menu-item index="/admin/link">友联</el-menu-item>
+      <el-menu-item index="/admin/cover">背景图</el-menu-item>
       <el-menu-item
         ><a href="http://120.27.202.144:8001/doc.html#/home" target="_blank"
           >接口文档</a

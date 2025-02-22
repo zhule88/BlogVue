@@ -1,25 +1,24 @@
 <script setup lang="ts">
-const imageList = ref([
-  "/src/assets/image/凯文1.webp",
-  "/src/assets/image/凯文2.webp",
-  "/src/assets/image/凯文3.webp",
-  "/src/assets/image/英桀1.jpg",
-  "/src/assets/image/英桀2.webp",
-  "/src/assets/image/英桀3.jpg",
-]);
+const coverS = reactive(new Cover());
+const imageDuration = 7;
+onMounted(() => {
+  coverS.init(1);
+});
+const totalDuration = computed(() => coverS.list.length * imageDuration);
 </script>
 <template>
   <div class="imgs">
-    <ul>
-      <li
+    <div class="container">
+      <div
         class="item"
-        v-for="(image, index) in imageList"
+        v-for="(item, index) in coverS.list"
         :key="index"
         :style="{
-          'background-image': 'url(' + image + ')',
+          'background-image': 'url(' + item.url + ')',
+          'animation-delay': `${index * imageDuration}s`,
         }"
-      ></li>
-    </ul>
+      ></div>
+    </div>
   </div>
 </template>
 
@@ -28,56 +27,43 @@ const imageList = ref([
   position: fixed;
   top: 0;
   left: 0;
+  z-index: -2;
   width: 100%;
   height: 100%;
-  z-index: -2;
   background-color: #363636;
-  overflow: hidden;
-
-  .item {
-    position: absolute;
-    top: 0;
-    left: 0;
+  .container {
+    position: relative;
     width: 100%;
     height: 100%;
-    background: no-repeat 50% 50% / cover;
-    opacity: 0;
-    // 一张图片 6s
-    animation: imageAnimation 30s linear infinite 0s;
-
-    &:nth-child(2) {
-      animation-delay: 6s;
+    .item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: no-repeat center center / cover;
+      opacity: 0;
+      animation: imageAnimation v-bind("totalDuration + 's'") linear infinite;
+      animation-fill-mode: forwards;
     }
 
-    &:nth-child(3) {
-      animation-delay: 12s;
+    @keyframes imageAnimation {
+      0% {
+        opacity: 0;
+        transform: scale(1);
+      }
+      10% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      35% {
+        opacity: 0;
+        transform: scale(1.1);
+      }
+      100% {
+        opacity: 0;
+      }
     }
-
-    &:nth-child(4) {
-      animation-delay: 18s;
-    }
-
-    &:nth-child(5) {
-      animation-delay: 24s;
-    }
-
-    &:nth-child(6) {
-      animation-delay: 30s;
-    }
-  }
-}
-
-@keyframes imageAnimation {
-  0% {
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-    transform: scale(1.05);
-  }
-  25% {
-    opacity: 0;
-    transform: scale(1.1);
   }
 }
 </style>

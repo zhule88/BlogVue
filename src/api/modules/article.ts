@@ -1,33 +1,33 @@
 import request from '@/api/request'
 import article from '@/types/modules/article';
-
+const prefix = '/article/'
 export const articlePage = (current : number, size : number,state:number) =>{
-return request.get('/article/page',{params:{
+return request.get(prefix+'page',{params:{
   current,size,state
 }})
 }
 
 export const articleList = (state ?: number,top ?:number) =>{
-  return request.get('/article/list',{params:{
+  return request.get(prefix+'list',{params:{
     state,
     top
   }});
 }
 export const articleAdd = (data:article) =>{
-  return request.post('/article/add',data)
+  return request.post(prefix+'add',data)
 }
 export const articleUpdate = (data:article) =>{
-  return request.put('/article/update',data)
+  return request.put(prefix+'update',data)
 }
 export const articleDel= (id:number) =>{
-  return request.delete('/article/del',{
+  return request.delete(prefix+'del',{
     params:{
       id
     }
   })
 }
 export const articleGet = (id:number) =>{
-  return request.get('/article/get',{params:{
+  return request.get(prefix+'get',{params:{
       id
     }
   })
@@ -35,23 +35,23 @@ export const articleGet = (id:number) =>{
 
 
 export const articleAround = (id:number)=>{
-  return request.get('/article/around',{params:{
+  return request.get(prefix+'around',{params:{
     id
   }
 })
 }
 
 export const articleListByIds = (ids:number[])=>{
-  return request.post('/article/list/byIds',ids)
+  return request.post(prefix+'list/byIds',ids)
 }
 export const articleListByCateId= (id:number)=>{
-  return request.get('/article/list/byCateId',{params:{
+  return request.get(prefix+'list/byCateId',{params:{
     id
   }
 })
 }
 export const articleListByTagId = (id:number) =>{
-  return request.get('/article/list/byTagId',{
+  return request.get(prefix+'list/byTagId',{
     params:{
       id
     }
